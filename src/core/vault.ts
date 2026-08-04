@@ -33,6 +33,7 @@ import {
 } from './crypto/keys'
 import { defaultKdfParams } from './crypto/kdf'
 import {
+  listKeys,
   openDatabase,
   read,
   requestPersistentStorage,
@@ -67,6 +68,20 @@ import {
 const INDEX_KEY = 'index'
 const indexContext = () => `index/${INDEX_KEY}`
 const docContext = (id: DocId) => `docs/${id}`
+const blobContext = (id: string) => `blobs/${id}`
+
+/**
+ * A file kept in the vault.
+ *
+ * Bytes travel as a plain array because that is what survives being encrypted,
+ * stored and exported without a second representation to keep in step.
+ */
+export type StoredBlob = {
+  readonly id: string
+  readonly name: string
+  readonly type: string
+  readonly bytes: readonly number[]
+}
 
 /** Content of a fresh document: an empty paragraph, ready for the caret. */
 const EMPTY_CONTENT: JsonValue = []
@@ -76,6 +91,8 @@ export type VaultExport = {
   readonly version: 1
   readonly exportedAt: string
   readonly docs: readonly Doc[]
+  /** Absent in exports written before files were supported. */
+  readonly blobs?: readonly StoredBlob[]
 }
 
 /**
@@ -110,6 +127,10 @@ function upgraded(stored: StoredIndex): VaultIndex {
     facets: stored.schema === 2 ? stored.facets : {},
     positions: {},
   }
+}
+
+function contextFor(store: string, key: string): string {
+  return store === 'blobs' ? blobContext(key) : docContext(key)
 }
 
 function withFacets(index: VaultIndex, id: DocId, facets: DocFacets): VaultIndex {
@@ -320,13 +341,54 @@ export class Vault {
     return removed
   }
 
+  /**
+   * Stores a file, encrypted like everything else.
+   *
+   * Images live in the vault rather than on a server, so a note with a picture
+   * in it is as private as a note without one. The cost is that the file is in
+   * the export and in the backup, which is the correct trade for a notebook
+   * that promises nothing leaves the machine.
+   */
+  async putBlob(file: { name: string; type: string; bytes: Uint8Array }): Promise<string> {
+    const id = newId()
+    const record: StoredBlob = {
+      id,
+      name: file.name,
+      type: file.type,
+      bytes: [...file.bytes],
+    }
+    await writeBatch(this.#db, [
+      {
+        op: 'put',
+        store: 'blobs',
+        key: id,
+        value: await sealJson(this.#key, record as unknown as JsonValue, blobContext(id)),
+      },
+    ])
+    return id
+  }
+
+  async readBlob(id: string): Promise<StoredBlob | undefined> {
+    const stored = await read<Envelope>(this.#db, 'blobs', id)
+    if (!stored) return undefined
+    return openJson<StoredBlob>(this.#key, stored, blobContext(id))
+  }
+
   async exportAll(): Promise<VaultExport> {
     const docs = await Promise.all(Object.keys(this.#index.docs).map((id) => this.readDoc(id)))
+    // Files are exported too. An export that silently dropped the images would
+    // look complete and restore a notebook full of holes.
+    const ids = await listKeys(this.#db, 'blobs')
+    const blobs = (await Promise.all(ids.map((id) => this.readBlob(id)))).filter(
+      (blob): blob is StoredBlob => blob !== undefined,
+    )
+
     return {
       format: 'nook-export',
       version: 1,
       exportedAt: new Date().toISOString(),
       docs,
+      blobs,
     }
   }
 
@@ -359,6 +421,13 @@ export class Vault {
       const summary: DocSummary = { ...rest, id, parentId }
       index = withFacets(upsert(index, summary), id, buildFacets(summary.title, content))
       writes.push({ op: 'put', store: 'docs', key: id, value: { ...summary, content } })
+    }
+
+    for (const blob of data.blobs ?? []) {
+      // Passed unsealed: `#commit` encrypts every entry it is given, binding
+      // each to its own store. Sealing here as well produced an envelope
+      // wrapped twice, the outer one bound to the wrong place.
+      writes.push({ op: 'put', store: 'blobs', key: blob.id, value: blob })
     }
 
     await this.#commit(index, writes)
@@ -415,6 +484,20 @@ export class Vault {
         value: await sealJson(nextKey, doc as unknown as JsonValue, docContext(id)),
       })
     }
+    // Files are encrypted with the same key, so they rotate with everything
+    // else. Leaving them behind would produce a vault whose notes open and
+    // whose pictures do not.
+    for (const id of await listKeys(this.#db, 'blobs')) {
+      const blob = await this.readBlob(id)
+      if (!blob) continue
+      entries.push({
+        op: 'put',
+        store: 'blobs',
+        key: id,
+        value: await sealJson(nextKey, blob as unknown as JsonValue, blobContext(id)),
+      })
+    }
+
     entries.push({
       op: 'put',
       store: 'index',
@@ -462,7 +545,14 @@ export class Vault {
           ? write
           : {
               ...write,
-              value: await sealJson(this.#key, write.value as JsonValue, docContext(write.key)),
+              value: await sealJson(
+                this.#key,
+                write.value as JsonValue,
+                // Each record is bound to its own store. Using one context for
+                // everything would let a file be read as a document, which is
+                // exactly what binding an envelope to its location prevents.
+                contextFor(write.store, write.key),
+              ),
             },
       )
     }

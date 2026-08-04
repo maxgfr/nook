@@ -213,3 +213,64 @@ describe('coffre', () => {
     })
   })
 })
+
+describe('files', () => {
+  const bytes = new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10, 1, 2, 3])
+
+  it('stores a file and hands it back unchanged', async () => {
+    const vault = await freshVault()
+
+    const id = await vault.putBlob({ name: 'diagram.png', type: 'image/png', bytes })
+    const stored = await vault.readBlob(id)
+
+    expect(stored?.name).toBe('diagram.png')
+    expect(stored?.type).toBe('image/png')
+    expect([...(stored?.bytes ?? [])]).toEqual([...bytes])
+  })
+
+  it('returns nothing for a file that is not there', async () => {
+    const vault = await freshVault()
+
+    expect(await vault.readBlob('missing')).toBeUndefined()
+  })
+
+  it('writes files to disk encrypted, like everything else', async () => {
+    const name = `nook-vault-files-${++counter}`
+    const vault = await Vault.open(name)
+    const id = await vault.putBlob({ name: 'secret-plan.png', type: 'image/png', bytes })
+    vault.close()
+
+    const raw = await openDatabase(name)
+    const onDisk = await read(raw, 'blobs', id)
+
+    expect(isEnvelope(onDisk)).toBe(true)
+    expect(JSON.stringify(onDisk)).not.toContain('secret-plan')
+  })
+
+  it('carries files through an export and back', async () => {
+    const source = await freshVault()
+    const id = await source.putBlob({ name: 'photo.png', type: 'image/png', bytes })
+
+    const exported = await source.exportAll()
+    const target = await freshVault()
+    await target.importAll(exported, 'replace')
+
+    // An export that silently dropped the images would look complete and
+    // restore a notebook full of holes.
+    expect([...((await target.readBlob(id))?.bytes ?? [])]).toEqual([...bytes])
+  })
+
+  it('re-encrypts files when the protection changes', async () => {
+    const name = `nook-vault-files-rotate-${++counter}`
+    const vault = await Vault.open(name)
+    const id = await vault.putBlob({ name: 'photo.png', type: 'image/png', bytes })
+
+    await vault.enablePassphrase('a sentence I will remember')
+    vault.close()
+
+    // Leaving files behind would produce a vault whose notes open and whose
+    // pictures do not.
+    const reopened = await Vault.unlock('a sentence I will remember', name)
+    expect([...((await reopened.readBlob(id))?.bytes ?? [])]).toEqual([...bytes])
+  }, 30_000)
+})

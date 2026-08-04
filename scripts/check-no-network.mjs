@@ -81,6 +81,12 @@ const ALLOWED = [
     reason: 'A URL quoted inside the text of a Workbox `console.warn`.',
   },
   {
+    file: 'assets/php-*.js',
+    match: 'fetch(',
+    reason:
+      'Alternations inside TextMate regex patterns, listing PHP database function names (mysqli_fetch_*, oci_fetch_*, imap_fetch*). Grammar data for the syntax highlighter, never executed as code.',
+  },
+  {
     file: 'sw.js',
     match: 'importScripts(',
     reason:

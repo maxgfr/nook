@@ -169,6 +169,119 @@ try {
     (await evaluate(`document.querySelector('.bn-editor').innerText`)).includes('survive'),
   )
 
+  // --- Editor: Markdown, code blocks, menus ------------------------------
+  //
+  // Real key events, not `Input.insertText`: ProseMirror's input rules (``` for
+  // a code block, / for the menu) never fire on spliced-in text, so a test that
+  // assigns text proves nothing about typing.
+  const pressKey = async (ch) => {
+    await send('Input.dispatchKeyEvent', { type: 'keyDown', text: ch, key: ch, unmodifiedText: ch })
+    await send('Input.dispatchKeyEvent', { type: 'keyUp', key: ch })
+  }
+  const typeKeys = async (text) => {
+    for (const ch of text) await pressKey(ch)
+  }
+
+  // Run here, right after typing, because the caret is demonstrably in the
+  // editor at this point. Restoring focus later proved unreliable, and a test
+  // that depends on focus it did not establish is a flaky test.
+  await pressKey('\r')
+  await pressKey('/')
+  await sleep(1000)
+  const menu = await evaluate(`
+    (() => {
+      const found = [...document.querySelectorAll('body *')].find(
+        (el) => el.offsetHeight > 80 && el.offsetWidth > 120 &&
+          /menu|suggestion|dropdown|popover/i.test(el.className + ' ' + el.id),
+      )
+      if (!found) return { found: false }
+      const box = found.getBoundingClientRect()
+      return { found: true, clipped: box.bottom > innerHeight + 1 || box.top < -1 }
+    })()
+  `)
+  check('the slash menu opens fully inside the viewport', menu.found && !menu.clipped)
+
+  await send('Input.dispatchKeyEvent', {
+    type: 'keyDown',
+    key: 'Escape',
+    code: 'Escape',
+    windowsVirtualKeyCode: 27,
+  })
+  await send('Input.dispatchKeyEvent', {
+    type: 'keyUp',
+    key: 'Escape',
+    code: 'Escape',
+    windowsVirtualKeyCode: 27,
+  })
+  await send('Input.dispatchKeyEvent', {
+    type: 'rawKeyDown',
+    key: 'Backspace',
+    code: 'Backspace',
+    windowsVirtualKeyCode: 8,
+    nativeVirtualKeyCode: 8,
+  })
+  await send('Input.dispatchKeyEvent', {
+    type: 'keyUp',
+    key: 'Backspace',
+    code: 'Backspace',
+    windowsVirtualKeyCode: 8,
+    nativeVirtualKeyCode: 8,
+  })
+  await sleep(400)
+
+  await typeKeys('``` ')
+  await sleep(600)
+  await typeKeys('def greet(name):')
+  await pressKey('\r')
+  await typeKeys('  print("hello")')
+  await sleep(3000)
+
+  check(
+    'a code block picks its own language',
+    await evaluate(
+      `document.querySelector('[data-content-type=codeBlock]')?.dataset.language === 'python'`,
+    ),
+  )
+  check(
+    'the code is syntax highlighted',
+    await evaluate(`document.querySelectorAll('.bn-editor span[style*="color"]').length > 3`),
+  )
+
+  await evaluate(`
+    (() => {
+      const editable = document.querySelector('.bn-editor[contenteditable=true]')
+      const data = new DataTransfer()
+      data.setData('text/plain', '## Pasted heading\\n\\n- one\\n- two')
+      editable.dispatchEvent(new ClipboardEvent('paste', { clipboardData: data, bubbles: true, cancelable: true }))
+    })()
+  `)
+  await sleep(2000)
+  check(
+    'pasted Markdown becomes real blocks',
+    await evaluate(
+      `[...document.querySelectorAll('[data-content-type]')].map((e) => e.dataset.contentType).join() .includes('heading')`,
+    ),
+  )
+
+  await evaluate(`
+    (() => {
+      window.__downloaded = null
+      const click = HTMLAnchorElement.prototype.click
+      HTMLAnchorElement.prototype.click = function () {
+        if (this.download) window.__downloaded = this.download
+        return click.call(this)
+      }
+    })()
+  `)
+  await evaluate(
+    `[...document.querySelectorAll('button')].find((b) => b.textContent.includes('Export as Markdown')).click()`,
+  )
+  await sleep(1000)
+  check(
+    'a page exports as Markdown',
+    (await evaluate(`window.__downloaded`))?.endsWith?.('.md') === true,
+  )
+
   // Let autosave fire.
   await sleep(1500)
 
