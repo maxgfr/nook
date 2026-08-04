@@ -1,80 +1,105 @@
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
+import { VaultProvider, useVault, useVaultIndex, type BootState } from './VaultProvider'
+import { useNavigate, useOpenDocId } from './router'
 import { applyTheme, readTheme, type Theme } from './theme'
+import { Sidebar } from '../sidebar/Sidebar'
+import { Button } from '../design/Button'
+import { Icon } from '../design/Icon'
 
 /**
- * Coquille de la phase 0.
- *
- * Elle ne prétend pas être l'application : elle vérifie que les fondations
- * tiennent — les jetons de design s'appliquent, le thème bascule, et le
- * navigateur nous accorde bien un stockage persistant. L'éditeur et la
- * sidebar arrivent en phase 2 et remplaceront ce fichier.
+ * L'éditeur pèse à lui seul l'essentiel du poids de l'application. Le sortir
+ * du chargement initial fait apparaître la barre latérale immédiatement, et
+ * son morceau n'est cherché qu'à l'ouverture d'une page. Le service worker
+ * l'ayant précaché, l'application reste utilisable hors connexion.
  */
+const DocEditor = lazy(() =>
+  import('../editor/DocEditor').then((module) => ({ default: module.DocEditor })),
+)
+
 export function App() {
   const [theme, setTheme] = useState<Theme>(readTheme)
-  const [persistence, setPersistence] = useState<'inconnu' | 'accordé' | 'refusé'>('inconnu')
-
-  useEffect(() => {
-    applyTheme(theme)
-  }, [theme])
-
-  useEffect(() => {
-    let cancelled = false
-    // Demandé une seule fois au démarrage : sans stockage persistant, Safari
-    // peut évincer les notes après quelques semaines sans visite.
-    navigator.storage
-      ?.persist?.()
-      .then((granted) => {
-        if (!cancelled) setPersistence(granted ? 'accordé' : 'refusé')
-      })
-      .catch(() => {
-        if (!cancelled) setPersistence('refusé')
-      })
-    return () => {
-      cancelled = true
-    }
-  }, [])
+  useEffect(() => applyTheme(theme), [theme])
 
   return (
-    <div className="flex min-h-full flex-col bg-surface text-ink">
-      <header className="flex items-center justify-between border-b border-line px-5 py-3">
-        <div className="flex items-baseline gap-2">
-          <span className="text-md font-semibold tracking-tight">Nook</span>
-          <span className="text-xs text-ink-faint">phase 0 — fondations</span>
-        </div>
-        <ThemePicker value={theme} onChange={setTheme} />
-      </header>
+    <VaultProvider fallback={Boot}>
+      <Workspace theme={theme} onThemeChange={setTheme} />
+    </VaultProvider>
+  )
+}
 
-      <main className="mx-auto w-full max-w-(--nook-measure) flex-1 px-5 py-12">
-        <h1 className="text-2xl font-semibold tracking-tight">Vos notes, sur votre machine.</h1>
-        <p className="mt-3 text-base text-ink-muted">
-          Nook est une application entièrement locale. Aucune donnée ne sort du navigateur, et la
-          politique de sécurité de la page interdit purement et simplement toute requête sortante.
-        </p>
+function Workspace({ theme, onThemeChange }: { theme: Theme; onThemeChange: (t: Theme) => void }) {
+  const openId = useOpenDocId()
+  const navigate = useNavigate()
+  const index = useVaultIndex()
 
-        <dl className="mt-10 grid gap-px overflow-hidden rounded-lg border border-line bg-line">
-          <Row label="Stockage" value="IndexedDB, sur cet appareil" />
-          <Row label="Réseau" value="Aucune requête sortante autorisée" />
-          <Row
-            label="Persistance accordée"
-            value={
-              persistence === 'inconnu'
-                ? 'vérification…'
-                : persistence === 'accordé'
-                  ? 'oui — le navigateur ne videra pas vos notes'
-                  : 'non — pensez à exporter régulièrement'
-            }
-          />
-        </dl>
+  // Une page supprimée dans un autre onglet, ou une adresse partagée qui ne
+  // correspond à rien : on retombe sur l'accueil plutôt que d'afficher une
+  // erreur pour un identifiant qui n'existe simplement plus.
+  const current = openId && index.docs[openId] ? openId : null
+
+  return (
+    <div className="flex h-full">
+      <Sidebar openId={current} onOpen={navigate} />
+      <main className="flex min-w-0 flex-1 flex-col">
+        {current ? (
+          <Suspense fallback={<div className="flex-1" aria-busy="true" />}>
+            <DocEditor docId={current} />
+          </Suspense>
+        ) : (
+          <Welcome />
+        )}
       </main>
+      <ThemePicker value={theme} onChange={onThemeChange} />
     </div>
   )
 }
 
-function Row({ label, value }: { label: string; value: string }) {
+/**
+ * État vide de l'application.
+ *
+ * Il enseigne l'interface au lieu de constater son vide : la seule action
+ * utile est proposée, et la promesse du produit est rappelée là où elle se
+ * vérifie — au premier lancement, quand on décide de faire confiance.
+ */
+function Welcome() {
+  const vault = useVault()
+  const navigate = useNavigate()
+
   return (
-    <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 bg-surface px-4 py-3">
-      <dt className="text-sm text-ink-muted">{label}</dt>
-      <dd className="text-sm">{value}</dd>
+    <div className="flex flex-1 flex-col items-center justify-center px-6 text-center">
+      <Icon name="page" className="size-7 text-ink-faint" />
+      <h1 className="mt-4 text-lg font-semibold tracking-tight">Aucune page ouverte</h1>
+      <p className="mt-2 max-w-sm text-sm text-ink-muted">
+        Vos pages sont chiffrées et rangées sur cet appareil. Rien n'est envoyé nulle part — la page
+        s'interdit toute requête sortante.
+      </p>
+      <Button
+        tone="primary"
+        className="mt-6"
+        onClick={() => void vault.createDoc().then((doc) => navigate(doc.id))}
+      >
+        Nouvelle page
+      </Button>
+    </div>
+  )
+}
+
+function Boot({ state }: { state: BootState }) {
+  return (
+    <div className="flex h-full items-center justify-center px-6 text-center">
+      {state.status === 'opening' ? (
+        // Volontairement muet : ouvrir le coffre prend quelques millisecondes,
+        // et un message de chargement qui clignote est pire que rien.
+        <span className="sr-only">Ouverture du coffre…</span>
+      ) : (
+        <div className="max-w-md">
+          <h1 className="text-md font-semibold tracking-tight">Le coffre n'a pas pu s'ouvrir</h1>
+          <p className="mt-2 text-sm text-ink-muted">{state.error.message}</p>
+          <p className="mt-4 text-xs text-ink-faint">
+            Si une autre fenêtre de Nook est ouverte, fermez-la puis rechargez.
+          </p>
+        </div>
+      )}
     </div>
   )
 }
@@ -90,25 +115,23 @@ function ThemePicker({ value, onChange }: { value: Theme; onChange: (theme: Them
     <div
       role="radiogroup"
       aria-label="Thème"
-      className="flex items-center gap-0.5 rounded-lg border border-line bg-sunken p-0.5"
+      className="fixed right-3 bottom-3 flex items-center gap-0.5 rounded-lg border border-line bg-raised/90 p-0.5 backdrop-blur-sm"
     >
-      {THEMES.map((theme) => {
-        const selected = theme.value === value
+      {THEMES.map((option) => {
+        const selected = option.value === value
         return (
           <button
-            key={theme.value}
+            key={option.value}
             type="button"
             role="radio"
             aria-checked={selected}
-            onClick={() => onChange(theme.value)}
+            onClick={() => onChange(option.value)}
             className={[
-              'rounded-sm px-2.5 py-1 text-xs transition-colors duration-(--nook-dur-fast) ease-nook',
-              selected
-                ? 'bg-raised text-ink shadow-menu'
-                : 'text-ink-muted hover:bg-hover hover:text-ink',
+              'rounded-sm px-2 py-1 text-2xs transition-colors duration-(--nook-dur-fast) ease-nook',
+              selected ? 'bg-hover text-ink' : 'text-ink-faint hover:text-ink',
             ].join(' ')}
           >
-            {theme.label}
+            {option.label}
           </button>
         )
       })}

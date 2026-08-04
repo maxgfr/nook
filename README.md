@@ -54,14 +54,26 @@ Nook se construit par phases, et chaque phase laisse un dépôt déployable.
 | :---: | --------------------------------------------------------------------------------- | ------- |
 |  P0   | Fondations, CI, déploiement Pages, garde-fou réseau, jetons de design             | ✅ fait |
 |  P1   | Coffre chiffré : stockage, enveloppes AES-GCM, cycle de vie de la clé, effacement | ✅ fait |
-|  P2   | Éditeur à blocs, arbre de pages, sauvegarde automatique                           | à venir |
+|  P2   | Éditeur à blocs, arbre de pages, sauvegarde automatique                           | ✅ fait |
 |  P3   | Wikilinks, backlinks, tags, recherche, palette de commandes, notes du jour        | à venir |
 |  P4   | Passphrase, verrouillage automatique, export chiffré                              | à venir |
 |  P5   | Bases de données : propriétés typées, vues table / kanban / calendrier            | à venir |
 |  P6   | Vue graphe, historique de versions, images, impression                            | à venir |
 
-**L'éditeur n'existe pas encore.** L'application déployée montre aujourd'hui
-l'état des fondations, pas un outil utilisable au quotidien.
+Aujourd'hui, Nook sait donc créer des pages, les imbriquer, les écrire et les
+retrouver. Il ne sait pas encore les relier entre elles, les chercher, ni les
+protéger par une passphrase.
+
+### Une fonctionnalité retirée volontairement
+
+Le sélecteur d'emoji de l'éditeur télécharge ses données **et ses images**
+depuis un CDN, à l'exécution. La CSP les bloquerait, et le menu serait
+silencieusement vide — le pire des deux mondes. Plutôt que de le désactiver par
+une option, la bibliothèque est [remplacée à la compilation][stub] : le code
+réseau n'est pas seulement inatteignable, il n'est pas servi du tout. Les emoji
+tapés au clavier système fonctionnent normalement.
+
+[stub]: src/ui/editor/emoji-mart-absent.ts
 
 ## Architecture
 
@@ -83,8 +95,9 @@ navigateur, et de refaire l'interface sans toucher aux données.
 ```bash
 pnpm install
 pnpm dev        # serveur de développement
-pnpm test       # tests du core
+pnpm test       # tests du core, sans navigateur
 pnpm verify     # types, lint, tests, build, garde-fou réseau
+pnpm smoke      # écrit une note dans un vrai navigateur, recharge, vérifie
 ```
 
 `pnpm verify` est exactement ce que la CI exécute.

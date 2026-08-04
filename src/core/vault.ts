@@ -19,7 +19,13 @@
 
 import { openJson, sealJson, type Envelope } from './crypto/envelope'
 import { createVault, openVault } from './crypto/keys'
-import { openDatabase, read, writeBatch, type BatchEntry } from './storage/idb'
+import {
+  openDatabase,
+  read,
+  requestPersistentStorage,
+  writeBatch,
+  type BatchEntry,
+} from './storage/idb'
 import { surveyStorage, wipeEverything, type StorageSurvey } from './storage/wipe'
 import {
   childrenOf,
@@ -80,6 +86,10 @@ export class Vault {
 
   /** Ouvre le coffre de cet appareil, ou le crée au tout premier lancement. */
   static async open(databaseName?: string): Promise<Vault> {
+    // Demandée dès l'ouverture, avant toute écriture : un refus n'empêche rien,
+    // il rend seulement les notes évinçables après une longue inactivité.
+    void requestPersistentStorage()
+
     const db = await openDatabase(databaseName)
     const key = (await openVault(db)) ?? (await createVault(db))
 

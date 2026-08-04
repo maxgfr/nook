@@ -58,8 +58,23 @@ function contentSecurityPolicy(): Plugin {
   }
 }
 
+/**
+ * Modules retirés du bundle parce qu'ils émettent des requêtes réseau.
+ *
+ * Les désactiver par configuration ne les empêcherait pas d'être servis ;
+ * l'alias garantit qu'ils n'existent pas dans ce que le navigateur reçoit.
+ * Voir `src/ui/editor/emoji-mart-absent.ts` pour le raisonnement complet.
+ */
+const OFFLINE_STUB = new URL('./src/ui/editor/emoji-mart-absent.ts', import.meta.url).pathname
+
 export default defineConfig({
   base: BASE,
+  resolve: {
+    alias: {
+      'emoji-mart': OFFLINE_STUB,
+      '@emoji-mart/data': OFFLINE_STUB,
+    },
+  },
   plugins: [
     react(),
     tailwindcss(),

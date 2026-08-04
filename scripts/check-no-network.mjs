@@ -66,6 +66,18 @@ const ALLOWED = [
     reason: 'Bannière de licence, dans un commentaire CSS.',
   },
   {
+    file: 'assets/*.js',
+    match: 'https://prosemirror.net/docs/guide/',
+    reason:
+      'Lien vers la documentation, à l’intérieur du texte d’une erreur de schéma levée par ProseMirror.',
+  },
+  {
+    file: 'assets/*.js',
+    match: 'https://mantine.dev/theming/colors/',
+    reason:
+      'Lien vers la documentation, à l’intérieur du texte d’un avertissement de configuration de Mantine.',
+  },
+  {
     file: 'workbox-*.js',
     match: 'https://bit.ly/wb-precache',
     reason: 'URL citée dans le texte d’un `console.warn` de Workbox.',

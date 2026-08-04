@@ -20,9 +20,13 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "check:network": "node scripts/check-no-network.mjs",
+    "smoke": "node scripts/smoke.mjs",
     "verify": "pnpm typecheck && pnpm lint && pnpm test && pnpm build && pnpm check:network"
   },
   "dependencies": {
+    "@blocknote/core": "^0.52.1",
+    "@blocknote/mantine": "^0.52.1",
+    "@blocknote/react": "^0.52.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },

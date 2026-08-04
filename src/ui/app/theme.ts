@@ -25,6 +25,24 @@ export function readTheme(): Theme {
   }
 }
 
+/**
+ * Le thème réellement peint, une fois « système » résolu.
+ *
+ * Les jetons CSS n'ont pas besoin de cette information — `light-dark()` s'en
+ * charge. Elle sert aux composants tiers qui, eux, réclament un mot : c'est le
+ * cas de l'éditeur, qui attend `"light"` ou `"dark"` en propriété.
+ */
+export function resolveTheme(theme: Theme): 'light' | 'dark' {
+  if (theme !== 'system') return theme
+  return globalThis.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+}
+
+export function subscribeToSystemTheme(onChange: () => void): () => void {
+  const query = globalThis.matchMedia?.('(prefers-color-scheme: dark)')
+  query?.addEventListener('change', onChange)
+  return () => query?.removeEventListener('change', onChange)
+}
+
 export function applyTheme(theme: Theme): void {
   const root = document.documentElement
   if (theme === 'system') root.removeAttribute('data-theme')

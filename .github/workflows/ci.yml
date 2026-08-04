@@ -44,3 +44,26 @@ jobs:
       # sortante y est entré, ou si la CSP a disparu de index.html.
       - name: Zéro réseau
         run: pnpm check:network
+
+  # Séparé de `verify` volontairement : ce test pilote un vrai navigateur et
+  # comporte des attentes temporelles. Un aléa d'ordonnancement sur le runner
+  # ne doit pas masquer le signal des types, du lint et des tests unitaires.
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+
+      # Écrit une note dans un vrai navigateur, recharge, et vérifie qu'elle
+      # est toujours là — et que le disque ne contient que du chiffré.
+      - name: Bout en bout
+        run: pnpm smoke
+        env:
+          CHROME_PATH: /usr/bin/google-chrome

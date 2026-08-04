@@ -190,6 +190,23 @@ export async function clearStore(db: IDBDatabase, store: StoreName): Promise<voi
   return settled(tx, `Vidage de ${store}`)
 }
 
+/**
+ * Demande au navigateur de ne pas évincer nos données.
+ *
+ * Sans cela, Safari efface le stockage d'une origine restée inactive quelques
+ * semaines — un carnet de notes qu'on n'ouvre pas pendant les vacances peut
+ * donc disparaître. La demande peut être refusée sans explication ; l'appelant
+ * doit s'en servir pour inciter à l'export, pas pour paniquer.
+ */
+export async function requestPersistentStorage(): Promise<boolean> {
+  try {
+    if (await navigator.storage?.persisted?.()) return true
+    return (await navigator.storage?.persist?.()) ?? false
+  } catch {
+    return false
+  }
+}
+
 export function deleteDatabase(name: string = DB_NAME): Promise<void> {
   return new Promise((resolve, reject) => {
     const req = indexedDB.deleteDatabase(name)
