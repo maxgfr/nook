@@ -62,8 +62,9 @@ Nook is built in phases, and each one leaves a deployable repository.
 
 Today Nook can create pages, nest them, write in them, link them with
 `[[wikilinks]]`, tag them, find any of them from `⌘K` — including by a word
-buried in the text — lock the whole vault behind a passphrase, and erase itself
-in a way you can check.
+buried in the text — lock the whole vault behind a passphrase, keep structured
+databases with table, board and calendar views, and erase itself in a way you
+can check.
 
 ### A feature removed on purpose
 

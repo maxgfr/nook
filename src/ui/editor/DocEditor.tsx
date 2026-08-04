@@ -13,6 +13,8 @@ import { ancestorsOf } from '../../core/model/tree'
 import { useVault, useVaultIndex } from '../app/VaultProvider'
 import { useAutosave, type SaveState } from './useAutosave'
 import { Backlinks } from './Backlinks'
+import { CollectionView } from '../collection/CollectionView'
+import { isCollection, type CollectionContent } from '../../core/model/collection'
 import { useNavigate } from '../app/router'
 
 /**
@@ -61,24 +63,15 @@ export function DocEditor({ docId }: { docId: DocId }) {
 }
 
 type DocPatch = { title: string; content: JsonValue }
+export type { CollectionContent }
 type BlockNoteViewEditor = ComponentProps<typeof BlockNoteView>['editor']
 
 function LoadedEditor({ doc }: { doc: Doc }) {
   const vault = useVault()
   const index = useVaultIndex()
   const navigate = useNavigate()
-  const editorHost = useRef<HTMLDivElement>(null)
 
   const { state, schedule } = useAutosave<DocPatch>((patch) => vault.saveDoc(doc.id, patch))
-
-  // BlockNote refuses an empty document: it needs at least one block. The key
-  // is omitted rather than passed as `undefined` — with
-  // `exactOptionalPropertyTypes`, the two are not the same thing — and it
-  // then creates the initial paragraph itself.
-  const initialContent = toInitialContent(doc.content)
-  const editor = useCreateBlockNote(
-    initialContent ? { initialContent, dictionary: en } : { dictionary: en },
-  )
 
   const trail = ancestorsOf(index, doc.id)
   const title = index.docs[doc.id]?.title ?? doc.title
@@ -100,38 +93,98 @@ function LoadedEditor({ doc }: { doc: Doc }) {
           <input
             value={title}
             onChange={(event) => schedule({ title: event.target.value })}
-            onKeyDown={(event) => {
-              // Enter from the title moves down into the body,
-              // as in any document editor.
-              if (event.key === 'Enter') {
-                event.preventDefault()
-                editorHost.current?.querySelector<HTMLElement>('[contenteditable=true]')?.focus()
-              }
-            }}
             placeholder={UNTITLED}
             aria-label="Page title"
             className="w-full border-0 bg-transparent p-0 text-3xl font-semibold tracking-tight text-ink outline-none placeholder:text-ink-faint"
           />
 
-          <div ref={editorHost} className="mt-6">
-            <BlockNoteView
-              // BlockNote's schema generics do not satisfy
-              // `exactOptionalPropertyTypes`, which the rest of the project keeps
-              // enabled. The cast is confined to this single boundary
-              // with the library rather than paid for by all the code.
-              editor={editor as unknown as BlockNoteViewEditor}
-              // Our tokens already drive the colours of both schemes; this
-              // fixed choice only avoids a pointless recalculation inside the library.
-              theme="light"
-              // Removed from the bundle: see `emoji-mart-absent.ts`.
-              emojiPicker={false}
-              onChange={() => schedule({ content: editor.document as JsonValue })}
+          {isCollection(doc.content) ? (
+            <CollectionBody
+              initial={doc.content}
+              onChange={(next) => schedule({ content: next as unknown as JsonValue })}
             />
-          </div>
+          ) : (
+            <RichTextBody content={doc.content} onChange={(content) => schedule({ content })} />
+          )}
 
           <Backlinks docId={doc.id} onOpen={navigate} />
         </div>
       </div>
+    </div>
+  )
+}
+
+/**
+ * A database body.
+ *
+ * It owns its rows while the page is open. The saved copy is the destination,
+ * not the source: reading back from it would mean every keystroke waited for a
+ * debounce, an encryption and a round trip through IndexedDB before appearing
+ * — which looks exactly like a table that has stopped responding.
+ *
+ * The rich-text editor never needed this because ProseMirror already keeps its
+ * own document; this is the same arrangement, made explicit.
+ */
+function CollectionBody({
+  initial,
+  onChange,
+}: {
+  initial: CollectionContent
+  onChange: (next: CollectionContent) => void
+}) {
+  const [collection, setCollection] = useState(initial)
+
+  return (
+    <CollectionView
+      collection={collection}
+      onChange={(next) => {
+        setCollection(next)
+        onChange(next)
+      }}
+    />
+  )
+}
+
+/**
+ * The prose body.
+ *
+ * Split out so the editor's hooks only run for pages that actually have prose:
+ * a database page must not pay for building a ProseMirror instance it will
+ * never show.
+ */
+function RichTextBody({
+  content,
+  onChange,
+}: {
+  content: JsonValue
+  onChange: (content: JsonValue) => void
+}) {
+  const editorHost = useRef<HTMLDivElement>(null)
+
+  // BlockNote refuses an empty document: it needs at least one block. The key
+  // is omitted rather than passed as `undefined` — with
+  // `exactOptionalPropertyTypes`, the two are not the same thing — and it then
+  // creates the initial paragraph itself.
+  const initialContent = toInitialContent(content)
+  const editor = useCreateBlockNote(
+    initialContent ? { initialContent, dictionary: en } : { dictionary: en },
+  )
+
+  return (
+    <div ref={editorHost} className="mt-6">
+      <BlockNoteView
+        // BlockNote's schema generics do not satisfy
+        // `exactOptionalPropertyTypes`, which the rest of the project keeps
+        // enabled. The cast is confined to this single boundary with the
+        // library rather than paid for by all the code.
+        editor={editor as unknown as BlockNoteViewEditor}
+        // Our tokens already drive the colours of both schemes; this fixed
+        // choice only avoids a pointless recalculation inside the library.
+        theme="light"
+        // Removed from the bundle: see `emoji-mart-absent.ts`.
+        emojiPicker={false}
+        onChange={() => onChange(editor.document as JsonValue)}
+      />
     </div>
   )
 }

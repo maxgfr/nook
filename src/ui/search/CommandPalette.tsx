@@ -2,6 +2,8 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { search, type SearchHit } from '../../core/search/query'
 import { UNTITLED, type DocId } from '../../core/model/types'
 import { dailyNoteTitle, findDailyNote } from '../../core/model/daily'
+import { newCollection } from '../../core/model/collection'
+import { newId, type JsonValue } from '../../core/model/types'
 import { useVault, useVaultIndex } from '../app/VaultProvider'
 import { Icon } from '../design/Icon'
 
@@ -63,6 +65,21 @@ export function CommandPalette({
         hint: 'Action',
         run: async () => {
           const created = await vault.createDoc(query.trim() === '' ? {} : { title: query.trim() })
+          onOpenDoc(created.id)
+        },
+      },
+      {
+        kind: 'action',
+        id: 'database',
+        label: query.trim() === '' ? 'New database' : `Create database “${query.trim()}”`,
+        hint: 'Action',
+        run: async () => {
+          const created = await vault.createDoc(query.trim() === '' ? {} : { title: query.trim() })
+          // A database is a document whose content has a different shape, so
+          // it is created and then given that shape — no special store.
+          await vault.saveDoc(created.id, {
+            content: newCollection(newId) as unknown as JsonValue,
+          })
           onOpenDoc(created.id)
         },
       },
