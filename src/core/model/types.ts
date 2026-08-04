@@ -40,7 +40,18 @@ export type DocSummary = {
  * secret as the text they hold, and they travel with an export without any
  * extra plumbing.
  */
-export type Snapshot = { readonly at: string; readonly content: JsonValue }
+export type Snapshot = {
+  readonly at: string
+  readonly content: JsonValue
+  /**
+   * Present only on a snapshot someone asked for by pressing the button.
+   *
+   * Absent means the automatic rule filed it, which is also what every
+   * snapshot taken before this field existed means — so old vaults read
+   * correctly with no migration.
+   */
+  readonly by?: 'hand'
+}
 
 /** A complete document, content included. Loaded on open, one at a time. */
 export type Doc = DocSummary & {
@@ -59,38 +70,79 @@ export type Doc = DocSummary & {
 export const HISTORY_LIMIT = 20
 
 /**
- * How long before an edit earns its own snapshot.
+ * How long before an edit earns its own snapshot, by default.
  *
- * Without this, autosave would file one every few seconds and the twenty slots
- * would all hold the same afternoon. With it, they span days.
+ * Without a rule of this kind, autosave would file one every few seconds and
+ * the twenty slots would all hold the same afternoon. It used to be five
+ * minutes, which was short enough that twenty snapshots covered under two
+ * hours of work — the slots were spent before the day was. An hour makes the
+ * automatic history span a week of ordinary use, and anyone who wants a
+ * particular moment kept can press the button rather than hope the clock
+ * agrees with them.
  */
-export const HISTORY_INTERVAL_MS = 5 * 60_000
+export const DEFAULT_SNAPSHOT_INTERVAL_MINUTES = 60
+
+export const MINUTE_MS = 60_000
+
+/**
+ * - `auto`   — file one only if the last is older than `intervalMs`.
+ * - `never`  — automatic snapshots are switched off in Settings.
+ * - `always` — a deliberate act: pressing the button, or restoring.
+ */
+export type SnapshotMode = 'auto' | 'never' | 'always'
 
 /**
  * Decides what history a save should leave behind.
  *
- * Pure, so the coalescing rule is testable without a database or a clock.
+ * Pure, so the rule is testable without a database or a clock.
  *
- * `always` overrides the coalescing, and exists for exactly one caller:
- * restoring an old version. Coalescing is right for autosave, where the edits
- * being merged are a continuous act of typing — but a restore replaces the
- * whole page in one deliberate step, and merging that into the previous
- * snapshot would drop the text that was on the page a moment earlier with no
- * way to get it back. Changing your mind about changing your mind has to work.
+ * `always` exists because coalescing is right for autosave — the merged edits
+ * are one continuous act of typing — and wrong for anything deliberate. A
+ * restore replaces the whole page in one step, and merging that into the
+ * snapshot before it would drop the text that was on the page a moment earlier
+ * with no way to get it back. Changing your mind about changing your mind has
+ * to work.
  */
 export function nextHistory(
   previous: readonly Snapshot[] | undefined,
   supersededContent: JsonValue,
   now: Date,
-  always = false,
+  options: { mode?: SnapshotMode; intervalMs?: number } = {},
 ): Snapshot[] {
+  const mode = options.mode ?? 'auto'
+  if (mode === 'never') return [...(previous ?? [])]
+
+  const intervalMs = options.intervalMs ?? DEFAULT_SNAPSHOT_INTERVAL_MINUTES * MINUTE_MS
   const history = previous ?? []
   const last = history[0]
-  const recent =
-    last !== undefined && now.getTime() - new Date(last.at).getTime() < HISTORY_INTERVAL_MS
+  const recent = last !== undefined && now.getTime() - new Date(last.at).getTime() < intervalMs
 
-  if (recent && !always) return [...history]
+  if (recent && mode !== 'always') return [...history]
   return [{ at: now.toISOString(), content: supersededContent }, ...history].slice(0, HISTORY_LIMIT)
+}
+
+/**
+ * Records the content as it stands, because someone asked for it.
+ *
+ * Distinct from `nextHistory`, and the difference matters: that one keeps what
+ * an edit is about to replace, this one keeps what is on the page now. Pressing
+ * "Snapshot" to mark a good version and getting the *previous* version filed
+ * instead would be the opposite of the intent.
+ *
+ * Returns `null` when the newest snapshot already holds exactly this content,
+ * so pressing the button twice does not spend two of the twenty slots on the
+ * same text.
+ */
+export function snapshotNow(
+  previous: readonly Snapshot[] | undefined,
+  content: JsonValue,
+  now: Date,
+): Snapshot[] | null {
+  const history = previous ?? []
+  if (history[0] && JSON.stringify(history[0].content) === JSON.stringify(content)) return null
+
+  const kept: Snapshot = { at: now.toISOString(), content, by: 'hand' }
+  return [kept, ...history].slice(0, HISTORY_LIMIT)
 }
 
 /**

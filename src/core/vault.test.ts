@@ -248,6 +248,53 @@ describe('history', () => {
   })
 })
 
+describe('keeping a version by hand', () => {
+  it('keeps the page as it stands and marks who asked', async () => {
+    const vault = await freshVault()
+    const doc = await vault.createDoc({ title: SURVIVING_TITLE })
+    await vault.saveDoc(doc.id, { content: SURVIVING_CONTENT })
+
+    expect(await vault.snapshot(doc.id)).toBe(true)
+
+    const [newest] = await vault.history(doc.id)
+    expect(newest?.content).toEqual(SURVIVING_CONTENT)
+    expect(newest?.by).toBe('hand')
+  })
+
+  it('works however recently the automatic rule last fired', async () => {
+    const vault = await freshVault()
+    const doc = await vault.createDoc({ title: SURVIVING_TITLE })
+    // The automatic snapshot lands here, moments ago and well inside any
+    // interval. Pressing the button must not be silently ignored because of it.
+    await vault.saveDoc(doc.id, { content: SURVIVING_CONTENT })
+
+    expect(await vault.snapshot(doc.id)).toBe(true)
+    expect(await vault.history(doc.id)).toHaveLength(2)
+  })
+
+  it('says so rather than filing a duplicate', async () => {
+    const vault = await freshVault()
+    const doc = await vault.createDoc({ title: SURVIVING_TITLE })
+    await vault.saveDoc(doc.id, { content: SURVIVING_CONTENT })
+    await vault.snapshot(doc.id)
+
+    // The interface turns this into "Nothing new to keep" instead of
+    // pretending it did something.
+    expect(await vault.snapshot(doc.id)).toBe(false)
+    expect(await vault.history(doc.id)).toHaveLength(2)
+  })
+
+  it('is kept even when automatic snapshots are switched off', async () => {
+    const vault = await freshVault()
+    const doc = await vault.createDoc({ title: SURVIVING_TITLE })
+    await vault.saveDoc(doc.id, { content: SURVIVING_CONTENT }, { snapshot: 'never' })
+
+    expect(await vault.history(doc.id)).toEqual([])
+    expect(await vault.snapshot(doc.id)).toBe(true)
+    expect(await vault.history(doc.id)).toHaveLength(1)
+  })
+})
+
 describe('preparing a page to be shared', () => {
   const bytes = new Uint8Array([137, 80, 78, 71, 1, 2, 3])
 

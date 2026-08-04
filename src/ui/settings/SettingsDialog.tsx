@@ -4,6 +4,8 @@ import { MIN_PASSPHRASE_LENGTH } from '../../core/crypto/kdf'
 import type { StorageSurvey } from '../../core/storage/wipe'
 import { isEmpty } from '../../core/storage/wipe'
 import { EMBED_PROVIDERS, type WebAccess } from '../../core/policy'
+import { HISTORY_LIMIT } from '../../core/model/types'
+import { readSnapshotPolicy, writeSnapshotPolicy, type SnapshotPolicy } from '../app/snapshots'
 import { readWebAccess, writeWebAccess } from '../app/webAccess'
 import { Button } from '../design/Button'
 import { ConfirmDialog } from '../design/ConfirmDialog'
@@ -167,6 +169,8 @@ export function SettingsDialog({ open, onClose }: { open: boolean; onClose: () =
           )}
         </Section>
 
+        <SnapshotSection />
+
         <WebSection />
 
         <Section title="Your data">
@@ -250,6 +254,74 @@ export function SettingsDialog({ open, onClose }: { open: boolean; onClose: () =
       </div>
     </dialog>
   )
+}
+
+/**
+ * How often a page keeps a version of itself.
+ *
+ * Twenty versions are kept per page, so the interval decides what span they
+ * cover rather than how many there are: every five minutes spends the lot on
+ * an afternoon, every hour covers a week of ordinary use. Neither is right for
+ * everyone, which is why it is here and not a constant.
+ *
+ * Applies from the next save, with no reload — unlike the web switches, this
+ * one changes nothing about what the page is allowed to do.
+ */
+function SnapshotSection() {
+  const [policy, setPolicy] = useState<SnapshotPolicy>(readSnapshotPolicy)
+
+  const update = (next: SnapshotPolicy) => {
+    setPolicy(next)
+    writeSnapshotPolicy(next)
+  }
+
+  return (
+    <Section title="Snapshots">
+      <p>
+        A page keeps up to {HISTORY_LIMIT} past versions, inside its own encrypted record. You can
+        keep one at any moment with the <strong className="text-ink">Snapshot</strong> button above
+        a page — that one is never dropped in favour of an automatic one.
+      </p>
+
+      <div className="mt-2 -ml-2">
+        <Switch
+          checked={policy.automatic}
+          onChange={(automatic) => update({ ...policy, automatic })}
+          label="Keep versions automatically"
+        >
+          Off, only the snapshots you ask for are kept. On, an edit files one whenever the newest is
+          older than the interval below — so a burst of typing produces one version, not fifty.
+        </Switch>
+      </div>
+
+      <label className="mt-2 flex flex-wrap items-center gap-2">
+        <span className="text-sm">Not more often than every</span>
+        <input
+          type="number"
+          min={1}
+          max={7 * 24 * 60}
+          value={policy.everyMinutes}
+          disabled={!policy.automatic}
+          onChange={(event) => update({ ...policy, everyMinutes: Number(event.target.value) })}
+          aria-label="Minutes between automatic snapshots"
+          className="h-8 w-24 rounded-sm border border-line bg-surface px-2.5 text-sm outline-none disabled:opacity-45"
+        />
+        <span className="text-sm">minutes</span>
+      </label>
+      <p className="mt-1 text-xs text-ink-faint">
+        {describeInterval(policy.everyMinutes)} Nothing is ever deleted to make this faster — the
+        interval only decides how far back {HISTORY_LIMIT} versions reach.
+      </p>
+    </Section>
+  )
+}
+
+function describeInterval(minutes: number): string {
+  if (minutes >= 60 && minutes % 60 === 0) {
+    const hours = minutes / 60
+    return `That is every ${hours} hour${hours > 1 ? 's' : ''}.`
+  }
+  return `That is every ${minutes} minute${minutes > 1 ? 's' : ''}.`
 }
 
 /**

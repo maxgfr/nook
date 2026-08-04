@@ -59,12 +59,14 @@ import {
   INDEX_SCHEMA,
   newId,
   nextHistory,
+  snapshotNow,
   UNTITLED,
   type Doc,
   type DocId,
   type DocSummary,
   type JsonValue,
   type Snapshot,
+  type SnapshotMode,
   type VaultIndex,
 } from './model/types'
 
@@ -273,11 +275,11 @@ export class Vault {
     id: DocId,
     patch: { title?: string; icon?: string | null; content?: JsonValue },
     /**
-     * `alwaysSnapshot` defeats the coalescing that autosave relies on. Only
-     * `restore` sets it — see `nextHistory` for why a restore must not be
-     * merged into the snapshot before it.
+     * How this save should treat the history. Defaults to the automatic rule
+     * at its default interval; the interface passes whatever the reader chose
+     * in Settings, and `restore` forces a snapshot — see `nextHistory`.
      */
-    options: { alwaysSnapshot?: boolean } = {},
+    options: { snapshot?: SnapshotMode; intervalMs?: number } = {},
   ): Promise<DocSummary> {
     const current = await this.readDoc(id)
     const now = new Date()
@@ -294,12 +296,10 @@ export class Vault {
       ...(patch.content === undefined ? {} : { content: patch.content }),
       ...(contentChanged
         ? {
-            history: nextHistory(
-              current.history,
-              current.content,
-              now,
-              options.alwaysSnapshot ?? false,
-            ),
+            history: nextHistory(current.history, current.content, now, {
+              ...(options.snapshot === undefined ? {} : { mode: options.snapshot }),
+              ...(options.intervalMs === undefined ? {} : { intervalMs: options.intervalMs }),
+            }),
           }
         : {}),
       updatedAt: now.toISOString(),
@@ -321,6 +321,44 @@ export class Vault {
   }
 
   /**
+   * Keeps the page as it stands right now, because someone asked.
+   *
+   * The automatic rule can only ever be a guess about which moments matter.
+   * This is the answer to that: the one moment somebody actually chose. It
+   * ignores the interval entirely — waiting out a clock is not a thing to ask
+   * of someone who has just decided this version is worth keeping.
+   *
+   * Returns `false` when nothing has changed since the newest snapshot, so
+   * pressing twice does not spend two of the twenty slots on the same text.
+   */
+  async snapshot(id: DocId): Promise<boolean> {
+    const doc = await this.readDoc(id)
+    const now = new Date()
+    const history = snapshotNow(doc.history, doc.content, now)
+    if (!history) return false
+
+    /*
+     * The summary is rewritten too, and it has to be.
+     *
+     * Keeping a version really does change the stored document, so `updatedAt`
+     * moves with it — and that is also the signal the interface watches. A
+     * commit that wrote the document but left the index untouched would put a
+     * snapshot on disk that nothing on screen could see until the next reload,
+     * which is precisely the defect this feature was added to answer.
+     *
+     * The facets are not recomputed: the content is unchanged, so what the
+     * page says and what it links to are unchanged.
+     */
+    const updated: Doc = { ...doc, history, updatedAt: now.toISOString() }
+    const { content: _content, history: _history, ...summary } = updated
+
+    await this.#commit(upsert(this.#index, summary), [
+      { op: 'put', store: 'docs', key: id, value: updated },
+    ])
+    return true
+  }
+
+  /**
    * Puts a past state back.
    *
    * Restoring is an ordinary edit, so the state being replaced is itself
@@ -330,7 +368,7 @@ export class Vault {
     const doc = await this.readDoc(id)
     const snapshot = doc.history?.find((candidate) => candidate.at === at)
     if (!snapshot) throw new Error('That version is no longer available.')
-    await this.saveDoc(id, { content: snapshot.content }, { alwaysSnapshot: true })
+    await this.saveDoc(id, { content: snapshot.content }, { snapshot: 'always' })
   }
 
   /** Remembers where a page was dragged to on the canvas. */

@@ -1,12 +1,21 @@
 import { describe, expect, it } from 'vitest'
-import { HISTORY_LIMIT, nextHistory, type Snapshot } from './types'
+import { HISTORY_LIMIT, MINUTE_MS, nextHistory, snapshotNow, type Snapshot } from './types'
 import { Vault } from '../vault'
 
 const at = (minutes: number) => new Date(2026, 7, 4, 12, minutes, 0)
 
+/**
+ * The interval these tests are about.
+ *
+ * Stated here rather than taken from the default, because the default is now
+ * a setting: a test written against it would change meaning the day someone
+ * changed the default, and would then be asserting something nobody chose.
+ */
+const EVERY_FIVE_MINUTES = { intervalMs: 5 * MINUTE_MS }
+
 describe('deciding what to remember', () => {
   it('records the first edit', () => {
-    const history = nextHistory(undefined, [{ text: 'first' }], at(0))
+    const history = nextHistory(undefined, [{ text: 'first' }], at(0), EVERY_FIVE_MINUTES)
 
     expect(history).toHaveLength(1)
     expect(history[0]?.content).toEqual([{ text: 'first' }])
@@ -15,15 +24,15 @@ describe('deciding what to remember', () => {
   it('coalesces edits made minutes apart', () => {
     // Autosave fires every few seconds; without this the twenty slots would
     // all hold the same afternoon.
-    const first = nextHistory(undefined, [{ text: 'a' }], at(0))
-    const second = nextHistory(first, [{ text: 'b' }], at(2))
+    const first = nextHistory(undefined, [{ text: 'a' }], at(0), EVERY_FIVE_MINUTES)
+    const second = nextHistory(first, [{ text: 'b' }], at(2), EVERY_FIVE_MINUTES)
 
     expect(second).toEqual(first)
   })
 
   it('records again once enough time has passed', () => {
-    const first = nextHistory(undefined, [{ text: 'a' }], at(0))
-    const second = nextHistory(first, [{ text: 'b' }], at(6))
+    const first = nextHistory(undefined, [{ text: 'a' }], at(0), EVERY_FIVE_MINUTES)
+    const second = nextHistory(first, [{ text: 'b' }], at(6), EVERY_FIVE_MINUTES)
 
     expect(second).toHaveLength(2)
     expect(second[0]?.content).toEqual([{ text: 'b' }])
@@ -32,7 +41,7 @@ describe('deciding what to remember', () => {
   it('keeps the newest first', () => {
     let history: Snapshot[] = []
     for (const minute of [0, 10, 20]) {
-      history = nextHistory(history, [{ text: `v${minute}` }], at(minute))
+      history = nextHistory(history, [{ text: `v${minute}` }], at(minute), EVERY_FIVE_MINUTES)
     }
 
     expect(history.map((snapshot) => snapshot.content)).toEqual([
@@ -45,13 +54,62 @@ describe('deciding what to remember', () => {
   it('forgets the oldest beyond the limit', () => {
     let history: Snapshot[] = []
     for (let index = 0; index <= HISTORY_LIMIT + 5; index++) {
-      history = nextHistory(history, [{ text: `v${index}` }], at(index * 10))
+      history = nextHistory(history, [{ text: `v${index}` }], at(index * 10), EVERY_FIVE_MINUTES)
     }
 
     // Unbounded history would grow the record decrypted on every open, so old
     // states would slow down the thing they exist to protect.
     expect(history).toHaveLength(HISTORY_LIMIT)
     expect(history.at(-1)?.content).toEqual([{ text: `v${5 + 1}` }])
+  })
+
+  it('files nothing at all when automatic snapshots are switched off', () => {
+    const first = nextHistory(undefined, [{ text: 'a' }], at(0), { mode: 'never' })
+    expect(first).toEqual([])
+
+    // And an existing history is left exactly as it was, not emptied: turning
+    // the setting off must not destroy what was already kept.
+    const existing = nextHistory(undefined, [{ text: 'a' }], at(0), EVERY_FIVE_MINUTES)
+    expect(nextHistory(existing, [{ text: 'b' }], at(600), { mode: 'never' })).toEqual(existing)
+  })
+
+  it('defaults to an hour, so twenty versions span a week of work', () => {
+    // Five minutes spent the twenty slots on a single afternoon.
+    const first = nextHistory(undefined, [{ text: 'a' }], at(0))
+    expect(nextHistory(first, [{ text: 'b' }], at(30))).toEqual(first)
+    expect(nextHistory(first, [{ text: 'b' }], at(61))).toHaveLength(2)
+  })
+})
+
+describe('keeping a version because someone asked', () => {
+  it('keeps the content as it stands, not what an edit replaced', () => {
+    // The distinction is the whole point: pressing the button to mark a good
+    // version and getting the *previous* one filed would be the opposite.
+    const kept = snapshotNow(undefined, [{ text: 'the good version' }], at(0))
+
+    expect(kept?.[0]?.content).toEqual([{ text: 'the good version' }])
+    expect(kept?.[0]?.by).toBe('hand')
+  })
+
+  it('ignores the interval entirely', () => {
+    const first = snapshotNow(undefined, [{ text: 'a' }], at(0)) ?? []
+    // Seconds later, deliberately. Waiting out a clock is not a thing to ask
+    // of someone who has just decided this version is worth keeping.
+    expect(snapshotNow(first, [{ text: 'b' }], at(0))).toHaveLength(2)
+  })
+
+  it('refuses to keep the same text twice', () => {
+    const first = snapshotNow(undefined, [{ text: 'a' }], at(0)) ?? []
+    // Pressing twice must not spend two of the twenty slots on one version.
+    expect(snapshotNow(first, [{ text: 'a' }], at(10))).toBeNull()
+  })
+
+  it('still forgets the oldest beyond the limit', () => {
+    let history: Snapshot[] = []
+    for (let index = 0; index <= HISTORY_LIMIT + 5; index++) {
+      history = snapshotNow(history, [{ text: `v${index}` }], at(index)) ?? history
+    }
+    expect(history).toHaveLength(HISTORY_LIMIT)
   })
 })
 

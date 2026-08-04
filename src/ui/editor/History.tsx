@@ -4,11 +4,16 @@ import { useVault, useVaultIndex } from '../app/VaultProvider'
 import { Button } from '../design/Button'
 
 /**
- * Past states of this page.
+ * Past versions of this page.
  *
- * Collapsed by default and empty until an edit has actually replaced
- * something: a history panel that is always open, always empty, teaches people
- * to stop looking at it.
+ * Called "snapshots" rather than "history" throughout, so the list and the
+ * button that adds to it share a word. "History" suggested something
+ * continuous and complete; twenty kept versions are neither, and the name was
+ * quietly promising more than the feature does.
+ *
+ * Collapsed by default and empty until something has actually been kept: a
+ * panel that is always open and always empty teaches people to stop looking
+ * at it.
  */
 export function History({ docId }: { docId: DocId }) {
   const vault = useVault()
@@ -51,7 +56,7 @@ export function History({ docId }: { docId: DocId }) {
         onClick={() => setOpen((current) => !current)}
         className="text-xs font-medium tracking-wide text-ink-faint uppercase transition-colors duration-(--nook-dur-fast) ease-nook hover:text-ink"
       >
-        {open ? 'Hide' : 'Show'} history ({snapshots.length})
+        {open ? 'Hide' : 'Show'} snapshots ({snapshots.length})
       </button>
 
       {open && (
@@ -61,12 +66,25 @@ export function History({ docId }: { docId: DocId }) {
               key={snapshot.at}
               className="flex items-center justify-between gap-3 rounded-sm px-2 py-1.5 text-sm hover:bg-hover"
             >
-              <time dateTime={snapshot.at} className="text-ink-muted">
-                {new Date(snapshot.at).toLocaleString('en', {
-                  dateStyle: 'medium',
-                  timeStyle: 'short',
-                })}
-              </time>
+              <span className="flex min-w-0 items-baseline gap-2">
+                <time dateTime={snapshot.at} className="text-ink-muted">
+                  {new Date(snapshot.at).toLocaleString('en', {
+                    dateStyle: 'medium',
+                    timeStyle: 'short',
+                  })}
+                </time>
+                {/*
+                  Which ones you asked for, and which ones the clock filed.
+                  Without it, the version you deliberately kept is
+                  indistinguishable from the nineteen taken on a timer — and
+                  the one you meant to come back to is the whole point.
+                */}
+                {snapshot.by === 'hand' && (
+                  <span className="shrink-0 rounded-xs border border-line px-1 text-2xs text-ink-faint">
+                    Kept by hand
+                  </span>
+                )}
+              </span>
               <Button
                 size="sm"
                 onClick={() =>
