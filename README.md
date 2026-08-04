@@ -39,11 +39,12 @@ browser in a form JavaScript cannot read.
 backup gets nothing but unusable bytes.
 
 **What it does not protect:** anyone who opens _your_ browser with _your_
-unlocked session gets exactly the rights you have. Passphrase protection, which
-answers that threat, is phase 4.
+unlocked session gets exactly the rights you have.
 
-We would rather say so plainly than imply a guarantee the product does not give
-yet.
+**Turning on a passphrase closes that gap.** Everything is re-encrypted under a
+new key derived with Argon2id, the old key is destroyed, and the vault locks
+itself after 15 idle minutes. There is no recovery — no server holds a copy —
+so Nook makes you export before it will let you switch.
 
 ## Project status
 
@@ -60,8 +61,9 @@ Nook is built in phases, and each one leaves a deployable repository.
 |  P6   | Graph view, version history, images, printing                      | planned |
 
 Today Nook can create pages, nest them, write in them, link them with
-`[[wikilinks]]`, tag them, and find any of them from `⌘K` — including by a word
-buried in the text. It cannot yet lock them behind a passphrase.
+`[[wikilinks]]`, tag them, find any of them from `⌘K` — including by a word
+buried in the text — lock the whole vault behind a passphrase, and erase itself
+in a way you can check.
 
 ### A feature removed on purpose
 

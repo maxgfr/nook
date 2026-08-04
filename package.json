@@ -27,6 +27,7 @@
     "@blocknote/core": "^0.52.1",
     "@blocknote/mantine": "^0.52.1",
     "@blocknote/react": "^0.52.1",
+    "hash-wasm": "^4.12.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },

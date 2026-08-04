@@ -183,6 +183,11 @@ if (!/http-equiv=["']Content-Security-Policy["']/i.test(index)) {
   for (const directive of ["connect-src 'none'", "default-src 'self'", "object-src 'none'"]) {
     if (!index.includes(directive)) cspProblems.push(`the CSP does not contain "${directive}"`)
   }
+  // `wasm-unsafe-eval` is deliberate and narrow; `unsafe-eval` would also
+  // switch on `eval()` and `new Function()`, and nothing here needs those.
+  if (/script-src[^;]*'unsafe-eval'/.test(index)) {
+    cspProblems.push("script-src allows 'unsafe-eval'; only 'wasm-unsafe-eval' is intended")
+  }
 }
 
 // An inline script would be blocked by `script-src 'self'` anyway, but

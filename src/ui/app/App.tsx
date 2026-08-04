@@ -1,5 +1,13 @@
 import { lazy, Suspense, useEffect, useState } from 'react'
-import { VaultProvider, useVault, useVaultIndex, type BootState } from './VaultProvider'
+import {
+  VaultProvider,
+  useVault,
+  useVaultIndex,
+  type BootState,
+  type LockControls,
+} from './VaultProvider'
+import { UnlockScreen } from '../lock/UnlockScreen'
+import { SettingsDialog } from '../settings/SettingsDialog'
 import { useNavigate, useOpenDocId } from './router'
 import { applyTheme, readTheme, type Theme } from './theme'
 import { Sidebar } from '../sidebar/Sidebar'
@@ -33,6 +41,7 @@ function Workspace({ theme, onThemeChange }: { theme: Theme; onThemeChange: (t: 
   const navigate = useNavigate()
   const index = useVaultIndex()
   const [paletteOpen, setPaletteOpen] = useState(false)
+  const [settingsOpen, setSettingsOpen] = useState(false)
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -63,11 +72,13 @@ function Workspace({ theme, onThemeChange }: { theme: Theme; onThemeChange: (t: 
           <Welcome />
         )}
       </main>
-      <ThemePicker
-        value={theme}
-        onChange={onThemeChange}
+      <BottomBar
+        theme={theme}
+        onThemeChange={onThemeChange}
         onOpenPalette={() => setPaletteOpen(true)}
+        onOpenSettings={() => setSettingsOpen(true)}
       />
+      <SettingsDialog open={settingsOpen} onClose={() => setSettingsOpen(false)} />
       <CommandPalette
         open={paletteOpen}
         onClose={() => setPaletteOpen(false)}
@@ -107,7 +118,11 @@ function Welcome() {
   )
 }
 
-function Boot({ state }: { state: BootState }) {
+function Boot({ state, controls }: { state: BootState; controls: LockControls }) {
+  if (state.status === 'locked') {
+    return <UnlockScreen controls={controls} {...(state.error ? { error: state.error } : {})} />
+  }
+
   return (
     <div className="flex h-full items-center justify-center px-6 text-center">
       {state.status === 'opening' ? (
@@ -133,14 +148,16 @@ const THEMES: readonly { value: Theme; label: string }[] = [
   { value: 'dark', label: 'Dark' },
 ]
 
-function ThemePicker({
-  value,
-  onChange,
+function BottomBar({
+  theme,
+  onThemeChange,
   onOpenPalette,
+  onOpenSettings,
 }: {
-  value: Theme
-  onChange: (theme: Theme) => void
+  theme: Theme
+  onThemeChange: (theme: Theme) => void
   onOpenPalette: () => void
+  onOpenSettings: () => void
 }) {
   return (
     <div className="fixed right-3 bottom-3 flex items-center gap-1">
@@ -152,20 +169,27 @@ function ThemePicker({
         Search
         <kbd className="rounded-xs border border-line px-1 font-sans">⌘K</kbd>
       </button>
+      <button
+        type="button"
+        onClick={onOpenSettings}
+        className="flex h-7 items-center rounded-lg border border-line bg-raised/90 px-2.5 text-2xs text-ink-faint backdrop-blur-sm transition-colors duration-(--nook-dur-fast) ease-nook hover:text-ink"
+      >
+        Settings
+      </button>
       <div
         role="radiogroup"
         aria-label="Theme"
         className="flex items-center gap-0.5 rounded-lg border border-line bg-raised/90 p-0.5 backdrop-blur-sm"
       >
         {THEMES.map((option) => {
-          const selected = option.value === value
+          const selected = option.value === theme
           return (
             <button
               key={option.value}
               type="button"
               role="radio"
               aria-checked={selected}
-              onClick={() => onChange(option.value)}
+              onClick={() => onThemeChange(option.value)}
               className={[
                 'rounded-sm px-2 py-1 text-2xs transition-colors duration-(--nook-dur-fast) ease-nook',
                 selected ? 'bg-hover text-ink' : 'text-ink-faint hover:text-ink',

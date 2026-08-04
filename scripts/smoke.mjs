@@ -272,6 +272,73 @@ try {
     ),
   )
 
+  // --- Phase 4: passphrase and locking -----------------------------------
+  //
+  // Argon2id is deliberately slow, so these steps wait seconds rather than
+  // milliseconds. That cost is the feature.
+  const PASSPHRASE = 'a sentence I will remember'
+  const setInput = (selector, value) =>
+    evaluate(`
+      (() => {
+        const input = document.querySelector(${JSON.stringify(selector)})
+        const setValue = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set
+        setValue.call(input, ${JSON.stringify(value)})
+        input.dispatchEvent(new Event('input', { bubbles: true }))
+      })()
+    `)
+
+  await evaluate(
+    `[...document.querySelectorAll('button')].find((b) => b.textContent.trim() === 'Settings').click()`,
+  )
+  await sleep(700)
+  check(
+    'locking is offered only once a copy exists',
+    await evaluate(
+      `[...document.querySelectorAll('dialog[aria-label="Settings"] button')].find((b) => b.textContent.includes('Protect with a passphrase')).disabled`,
+    ),
+  )
+
+  await evaluate(
+    `[...document.querySelectorAll('dialog[aria-label="Settings"] button')].find((b) => b.textContent.includes('Export everything')).click()`,
+  )
+  await sleep(1200)
+  await setInput('input[aria-label="New passphrase"]', PASSPHRASE)
+  await sleep(300)
+  await evaluate(
+    `[...document.querySelectorAll('dialog[aria-label="Settings"] button')].find((b) => b.textContent.includes('Protect with a passphrase')).click()`,
+  )
+  await sleep(8000)
+
+  await goto(BASE)
+  check(
+    'a reload lands on the lock screen',
+    await evaluate(`document.body.innerText.includes('Nook is locked')`),
+  )
+  check(
+    'no page title leaks while locked',
+    await evaluate(`!document.body.innerText.includes('Recipe note')`),
+  )
+
+  await setInput('input[aria-label="Passphrase"]', 'wrong one entirely')
+  await evaluate(
+    `[...document.querySelectorAll('button')].find((b) => b.textContent.trim() === 'Unlock').click()`,
+  )
+  await sleep(6000)
+  check(
+    'a wrong passphrase is refused',
+    await evaluate(`document.body.innerText.includes('Wrong passphrase')`),
+  )
+
+  await setInput('input[aria-label="Passphrase"]', PASSPHRASE)
+  await evaluate(
+    `[...document.querySelectorAll('button')].find((b) => b.textContent.trim() === 'Unlock').click()`,
+  )
+  await sleep(8000)
+  check(
+    'the right passphrase opens the vault again',
+    await evaluate(`document.body.innerText.includes('Recipe note')`),
+  )
+
   socket.close()
 } finally {
   chrome.kill()

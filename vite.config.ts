@@ -30,7 +30,14 @@ const CSP = [
   "frame-ancestors 'none'",
   "form-action 'none'",
   "connect-src 'none'",
-  "script-src 'self'",
+  // `wasm-unsafe-eval` allows compiling WebAssembly, and nothing else — it
+  // does NOT permit `eval()` or `new Function()`. Argon2id, which turns the
+  // passphrase into a key, is a WebAssembly module, and Chrome refuses to
+  // compile it under `script-src 'self'` alone. The alternative was to fall
+  // back on PBKDF2, trading real resistance to GPU cracking for a directive
+  // that buys nothing here: the no-network promise rests on `connect-src`,
+  // which is untouched.
+  "script-src 'self' 'wasm-unsafe-eval'",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "media-src 'self' blob:",

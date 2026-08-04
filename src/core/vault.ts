@@ -18,7 +18,20 @@
  */
 
 import { openJson, sealJson, type Envelope } from './crypto/envelope'
-import { createVault, openVault } from './crypto/keys'
+import {
+  createVault,
+  generateMasterKey,
+  generateMasterMaterial,
+  importMasterKey,
+  openVault,
+  passphraseProtection,
+  readVaultMeta,
+  replaceProtection,
+  unlockVault,
+  type Protection,
+  type VaultMeta,
+} from './crypto/keys'
+import { defaultKdfParams } from './crypto/kdf'
 import {
   openDatabase,
   read,
@@ -98,14 +111,42 @@ export class Vault {
   // code at runtime and therefore cannot simply be erased by a transpiler
   // transpiler that only strips types.
   readonly #db: IDBDatabase
-  readonly #key: CryptoKey
+  #key: CryptoKey
+  #meta: VaultMeta
   #index: VaultIndex
   readonly #listeners = new Set<() => void>()
 
-  private constructor(db: IDBDatabase, key: CryptoKey, index: VaultIndex) {
+  private constructor(db: IDBDatabase, key: CryptoKey, meta: VaultMeta, index: VaultIndex) {
     this.#db = db
     this.#key = key
+    this.#meta = meta
     this.#index = index
+  }
+
+  /**
+   * Says how this device's vault is protected, without opening it.
+   *
+   * The interface needs this before it can decide what to show: a passphrase
+   * vault must ask for the secret, and there is nothing to ask when no vault
+   * exists yet.
+   */
+  static async inspect(databaseName?: string): Promise<Protection | null> {
+    const db = await openDatabase(databaseName)
+    try {
+      return (await readVaultMeta(db))?.protection ?? null
+    } finally {
+      db.close()
+    }
+  }
+
+  static async unlock(passphrase: string, databaseName?: string): Promise<Vault> {
+    const db = await openDatabase(databaseName)
+    const key = await unlockVault(db, passphrase)
+    return Vault.#load(db, key)
+  }
+
+  get protection(): Protection {
+    return this.#meta.protection
   }
 
   /** Opens this device's vault, or creates it on the very first launch. */
@@ -116,11 +157,17 @@ export class Vault {
 
     const db = await openDatabase(databaseName)
     const key = (await openVault(db)) ?? (await createVault(db))
+    return Vault.#load(db, key)
+  }
+
+  static async #load(db: IDBDatabase, key: CryptoKey): Promise<Vault> {
+    const meta = await readVaultMeta(db)
+    if (!meta) throw new Error('The vault record disappeared while opening.')
 
     const stored = await read<Envelope>(db, 'index', INDEX_KEY)
     const onDisk = stored ? await openJson<StoredIndex>(key, stored, indexContext()) : EMPTY_INDEX
 
-    const vault = new Vault(db, key, upgraded(onDisk))
+    const vault = new Vault(db, key, meta, upgraded(onDisk))
     // Facets are derived data, so an older vault is repaired by recomputing
     // them rather than by a migration that could get them wrong.
     if (onDisk.schema !== INDEX_SCHEMA) await vault.#rebuildFacets()
@@ -263,6 +310,72 @@ export class Vault {
 
     await this.#commit(index, writes)
     return data.docs.length
+  }
+
+  /**
+   * Puts the vault behind a passphrase.
+   *
+   * Everything is re-encrypted under a brand-new key, so the key that was
+   * usable without a secret stops being able to open anything. A backup taken
+   * before this call cannot be read with the passphrase, and vice versa —
+   * which is the point.
+   */
+  async enablePassphrase(passphrase: string): Promise<void> {
+    if (this.#meta.protection.kind === 'passphrase') {
+      throw new Error('This vault is already protected by a passphrase.')
+    }
+
+    const material = generateMasterMaterial()
+    try {
+      const protection = await passphraseProtection(passphrase, material, defaultKdfParams())
+      await this.#rotate(await importMasterKey(material), protection)
+    } finally {
+      material.fill(0)
+    }
+  }
+
+  /** Goes back to device protection, rotating the key just the same. */
+  async disablePassphrase(): Promise<void> {
+    if (this.#meta.protection.kind !== 'passphrase') {
+      throw new Error('This vault is not protected by a passphrase.')
+    }
+    const deviceKey = await generateMasterKey()
+    await this.#rotate(deviceKey, { kind: 'device' }, deviceKey)
+  }
+
+  /**
+   * Re-encrypts the whole vault under `nextKey` and swaps the protection.
+   *
+   * Every record and the protection itself are written in a single
+   * transaction. Splitting them would allow a state where the data is
+   * encrypted with a key the vault record does not describe — that is, notes
+   * nobody can ever open again.
+   */
+  async #rotate(nextKey: CryptoKey, protection: Protection, deviceKey?: CryptoKey): Promise<void> {
+    const entries: BatchEntry[] = []
+    for (const id of Object.keys(this.#index.docs)) {
+      const doc = await this.readDoc(id)
+      entries.push({
+        op: 'put',
+        store: 'docs',
+        key: id,
+        value: await sealJson(nextKey, doc as unknown as JsonValue, docContext(id)),
+      })
+    }
+    entries.push({
+      op: 'put',
+      store: 'index',
+      key: INDEX_KEY,
+      value: await sealJson(nextKey, this.#index as unknown as JsonValue, indexContext()),
+    })
+
+    const meta: VaultMeta = { ...this.#meta, protection }
+    await writeBatch(this.#db, entries)
+    await replaceProtection(this.#db, meta, deviceKey ? { deviceKey } : {})
+
+    this.#key = nextKey
+    this.#meta = meta
+    this.#emit()
   }
 
   /** Destroys everything, then returns an inventory of what actually remains. */
