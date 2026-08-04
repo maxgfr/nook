@@ -1,0 +1,39 @@
+{
+ "schemaVersion": 1,
+ "batchId": "012",
+ "batchDigest": "f6df008e016ad269",
+ "items": [
+  {
+   "id": "g_330524829955",
+   "text": "A keystroke during the write may have refilled the queue: do not"
+  },
+  {
+   "id": "g_33c8221a152f",
+   "text": "The core talks to IndexedDB and WebCrypto. Node 20+ provides WebCrypto on\n`globalThis.crypto`; IndexedDB, it does not. `fake-indexeddb/auto` installs\na spec-compliant implementation, which lets us test the real storage rather\nthan a test double that would lie about its behaviour."
+  },
+  {
+   "id": "g_343705407ffa",
+   "text": "suggest a passing incident."
+  },
+  {
+   "id": "g_3455fa212550",
+   "text": "The interface arrives in phase 2; until then there is nothing to check."
+  },
+  {
+   "id": "g_35b7d5f093c8",
+   "text": "We re-import into the original vault: every identifier already exists."
+  },
+  {
+   "id": "g_3692d057b9c0",
+   "text": "End to end"
+  },
+  {
+   "id": "g_36e30ca3677d",
+   "text": "Thursday, without fail."
+  },
+  {
+   "id": "g_3778bea16185",
+   "text": "One deployment at a time, without cancelling the one in flight: cutting"
+  }
+ ]
+}

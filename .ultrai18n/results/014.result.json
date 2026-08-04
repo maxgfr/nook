@@ -1,0 +1,39 @@
+{
+ "schemaVersion": 1,
+ "batchId": "014",
+ "batchDigest": "95dce823b7742a3e",
+ "items": [
+  {
+   "id": "g_3b82c69ee825",
+   "text": "Every descendant, depth first. Does not include `id`."
+  },
+  {
+   "id": "g_3c13d94a2022",
+   "text": "This text must survive a reload."
+  },
+  {
+   "id": "g_3cd98316329a",
+   "text": "draws a fresh nonce on every write"
+  },
+  {
+   "id": "g_3ceeec080e10",
+   "text": "is omitted rather than passed as `undefined` — with"
+  },
+  {
+   "id": "g_3e51f83920df",
+   "text": "The real scenario: you export, you erase, you re-import."
+  },
+  {
+   "id": "g_3eda46704e4b",
+   "text": "code at runtime and therefore cannot simply be erased by a transpiler"
+  },
+  {
+   "id": "g_3f9b2151c407",
+   "text": "a sessionStorage key"
+  },
+  {
+   "id": "g_406abfaed601",
+   "text": "refuses to move a page into its own subtree"
+  }
+ ]
+}

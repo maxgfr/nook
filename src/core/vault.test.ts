@@ -6,6 +6,17 @@ import { openDatabase, read } from './storage/idb'
 let counter = 0
 const freshVault = () => Vault.open(`nook-vault-${++counter}`)
 
+/**
+ * Textes d'essai nommés une seule fois. Les répéter dans la donnée puis dans
+ * l'assertion laisse les deux diverger en silence — et rend impossible de
+ * distinguer une chaîne affichée d'un identifiant.
+ */
+const SECRET_TITLE = 'code de la porte'
+const SECRET_BODY = 'le code est 4271'
+const IMPORTED_TITLE = 'Carnet importé'
+const SURVIVING_TITLE = 'Survit au rechargement'
+const SURVIVING_CONTENT = [{ type: 'paragraph', text: 'contenu' }]
+
 describe('coffre', () => {
   it('démarre vide', async () => {
     const vault = await freshVault()
@@ -61,23 +72,21 @@ describe('coffre', () => {
   it('retrouve tout après fermeture et réouverture', async () => {
     const name = `nook-vault-persistance-${++counter}`
     const first = await Vault.open(name)
-    const created = await first.createDoc({ title: 'Survit au rechargement' })
-    await first.saveDoc(created.id, { content: [{ type: 'paragraph', text: 'contenu' }] })
+    const created = await first.createDoc({ title: SURVIVING_TITLE })
+    await first.saveDoc(created.id, { content: SURVIVING_CONTENT })
     first.close()
 
     const second = await Vault.open(name)
 
-    expect(second.index.docs[created.id]?.title).toBe('Survit au rechargement')
-    expect((await second.readDoc(created.id)).content).toEqual([
-      { type: 'paragraph', text: 'contenu' },
-    ])
+    expect(second.index.docs[created.id]?.title).toBe(SURVIVING_TITLE)
+    expect((await second.readDoc(created.id)).content).toEqual(SURVIVING_CONTENT)
   })
 
   it('n’écrit sur le disque que des enveloppes chiffrées', async () => {
     const name = `nook-vault-chiffre-${++counter}`
     const vault = await Vault.open(name)
-    const created = await vault.createDoc({ title: 'code de la porte' })
-    await vault.saveDoc(created.id, { content: [{ text: 'le code est 4271' }] })
+    const created = await vault.createDoc({ title: SECRET_TITLE })
+    await vault.saveDoc(created.id, { content: [{ text: SECRET_BODY }] })
     vault.close()
 
     // On relit la base sans passer par le coffre : c'est ce que verrait
@@ -88,8 +97,8 @@ describe('coffre', () => {
 
     expect(isEnvelope(storedDoc)).toBe(true)
     expect(isEnvelope(storedIndex)).toBe(true)
-    expect(JSON.stringify(storedDoc)).not.toContain('4271')
-    expect(JSON.stringify(storedIndex)).not.toContain('code de la porte')
+    expect(JSON.stringify(storedDoc)).not.toContain(SECRET_BODY)
+    expect(JSON.stringify(storedIndex)).not.toContain(SECRET_TITLE)
   })
 
   it('prévient ses abonnés à chaque modification', async () => {
@@ -176,7 +185,7 @@ describe('coffre', () => {
 
     it('fusionne en réattribuant les identifiants en collision', async () => {
       const source = await freshVault()
-      const parent = await source.createDoc({ title: 'Carnet importé' })
+      const parent = await source.createDoc({ title: IMPORTED_TITLE })
       await source.createDoc({ parentId: parent.id, title: 'Page importée' })
       const exported = await source.exportAll()
 
@@ -188,7 +197,7 @@ describe('coffre', () => {
 
       // Le point qui compte : la copie du parent a bien récupéré la copie de
       // l'enfant, et non l'enfant d'origine.
-      const parents = Object.values(source.index.docs).filter((d) => d.title === 'Carnet importé')
+      const parents = Object.values(source.index.docs).filter((d) => d.title === IMPORTED_TITLE)
       expect(parents).toHaveLength(2)
       for (const p of parents) {
         expect(source.children(p.id)).toHaveLength(1)

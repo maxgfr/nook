@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "batchId": "004",
+  "batchDigest": "c1d0ba01d2671487",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_11cec9f00ab1",
+      "text": "✖ Aucun navigateur Chromium trouvé pour rastériser les icônes.",
+      "role": "paragraph"
+    },
+    {
+      "id": "g_1386f61595bd",
+      "text": "Un autre onglet garde une version antérieure ouverte. Sans ce message,",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_13a53623b373",
+      "text": "Attend qu'une URL réponde, plutôt que de parier sur un délai fixe.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_13b840fa6bbd",
+      "text": "Lie l'enveloppe à son emplacement. La version fait partie de la donnée\nauthentifiée : un futur changement de format ne pourra pas être présenté\ncomme un enregistrement de l'ancien.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_1406645de654",
+      "text": "Cycle de vie de la clé maîtresse.\n*\nToutes les données de l'utilisateur sont chiffrées avec une unique clé\nmaîtresse AES-GCM-256. Ce module décide comment cette clé est protégée au\nrepos, et rien d'autre.\n*\nUne décision structurante : **la clé maîtresse n'est jamais extractible**.\nLe navigateur la manipule sans jamais laisser JavaScript lire ses octets.\nLe prix à payer est explicite — on ne peut pas la ré-enrober pour passer\nd'un mode de protection à un autre. Changer de protection imposera donc de\ngénérer une nouvelle clé et de rechiffrer les données (phase 4). Ce n'est\npas un contournement : faire tourner la clé quand la protection change est\nexactement ce qu'on veut, puisque l'ancienne clé disparaît avec elle.\n*\nCe que le mode « device » protège, et ce qu'il ne protège pas :\n  ✔ la copie brute du profil ou du disque — les enregistrements sont\n    inexploitables sans la clé, qui n'existe nulle part sous forme lisible ;\n  ✘ quelqu'un qui lance *votre* navigateur avec *votre* session — il obtient\n    la même clé que vous. Seule une passphrase répond à cette menace.\nL'interface doit dire les deux, sans arrondir.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_159fc131d9da",
+      "text": "BlockNote refuse un document vide : il lui faut au moins un bloc. La clé",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_15babbc525a9",
+      "text": "vide un magasin sans toucher aux autres",
+      "role": "label",
+      "max": 57
+    },
+    {
+      "id": "g_15c0249a914b",
+      "text": "------------------------------------------------------------ Typographie\nUne seule famille pour tout : titres, labels, corps, données. Pile\nsystème, qui est le choix natif en UI produit et le seul qui garantisse\nzéro octet chargé depuis le réseau.\n\nÉchelle en rem fixes, ratio ~1.12. Pas de `clamp()` : l'utilisateur lit à\nune densité constante, et un titre fluide qui rétrécit dans un panneau\nétroit est un défaut, pas une adaptation.",
+      "role": "doc-prose"
+    }
+  ]
+}

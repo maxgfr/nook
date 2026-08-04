@@ -168,11 +168,11 @@ export async function writeBatch(db: IDBDatabase, entries: readonly BatchEntry[]
       case 'delete':
         objectStore.delete(entry.key)
         break
-      default:
+      default: {
+        const unknown = entry as BatchEntry
         tx.abort()
-        throw new StorageError(
-          `Opération inconnue « ${String((entry as { op: unknown }).op)} » sur ${(entry as BatchEntry).store}.`,
-        )
+        throw new StorageError(`Opération inconnue « ${String(unknown.op)} » sur ${unknown.store}.`)
+      }
     }
   }
   return settled(tx, `Écriture groupée de ${entries.length} enregistrement(s)`)

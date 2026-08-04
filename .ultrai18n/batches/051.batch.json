@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "batchId": "051",
+  "batchDigest": "617a745639bc1b7a",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_d0ef39d1114f",
+      "text": "Un clic sur le fond ferme. `<dialog>` reçoit l'événement pour toute",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_d336fe809d0e",
+      "text": "le code est 4271",
+      "role": "label",
+      "max": 26
+    },
+    {
+      "id": "g_d3a9785ab5f2",
+      "text": "futures non déchiffrables.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_d596fe0e90df",
+      "text": "Demandée dès l'ouverture, avant toute écriture : un refus n'empêche rien,",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_d5c074cfb584",
+      "text": "déplacement",
+      "role": "label",
+      "max": 19
+    },
+    {
+      "id": "g_d5e81c3955dd",
+      "text": "qu'elle contient",
+      "role": "button",
+      "max": 26
+    },
+    {
+      "id": "g_d62b5bc55c3b",
+      "text": "Contenu d'un document neuf : un paragraphe vide, prêt à recevoir le curseur.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_d6db55516bf9",
+      "text": "Le sélecteur d'emoji de l'éditeur télécharge ses données **et ses images**",
+      "role": "doc-prose"
+    }
+  ]
+}

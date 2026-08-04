@@ -1,0 +1,39 @@
+{
+ "schemaVersion": 1,
+ "batchId": "016",
+ "batchDigest": "221f21fea16eb8be",
+ "items": [
+  {
+   "id": "g_43c144f04524",
+   "text": "deletes a key"
+  },
+  {
+   "id": "g_4403dd57bb84",
+   "text": "Nobody disabled it by accident"
+  },
+  {
+   "id": "g_449d3393e948",
+   "text": "refuses a parent that does not exist"
+  },
+  {
+   "id": "g_4520d30e89b9",
+   "text": "Encrypted vault: storage, AES-GCM envelopes, key lifecycle, wiping"
+  },
+  {
+   "id": "g_4541692e8016",
+   "text": "enabled. The cast is confined to this single boundary"
+  },
+  {
+   "id": "g_460ad0ab07de",
+   "text": "a publication half-way through would leave the site inconsistent."
+  },
+  {
+   "id": "g_465866c97e06",
+   "text": "per key with 96-bit nonces drawn at random; a notebook will never"
+  },
+  {
+   "id": "g_469b5b15dc0f",
+   "text": "as in any document editor."
+  }
+ ]
+}

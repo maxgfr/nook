@@ -1,0 +1,21 @@
+{
+  "rulings": [
+    {
+      "groupId": "g_e1f4f8edd8ca",
+      "sites": [
+        {
+          "siteId": "ul_ebdf56b987ec",
+          "verdict": "exclude",
+          "reason": "proper-noun",
+          "justification": "Nook is the product name; it is identical in French and English, and scripts/smoke.mjs asserts document.title === 'Nook'."
+        },
+        {
+          "siteId": "ul_af9b9b5e7865",
+          "verdict": "exclude",
+          "reason": "proper-noun",
+          "justification": "Nook is the product name; it is identical in French and English, and scripts/smoke.mjs asserts document.title === 'Nook'."
+        }
+      ]
+    }
+  ]
+}

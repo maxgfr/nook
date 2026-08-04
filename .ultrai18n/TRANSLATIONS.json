@@ -1,0 +1,4550 @@
+{
+  "schemaVersion": 1,
+  "translations": [
+    {
+      "id": "ul_05b16700f09c",
+      "text": "✔ {0} served files inspected, no network egress possible."
+    },
+    {
+      "id": "ul_afca83918288",
+      "text": "Same here: nothing to clear if access is denied."
+    },
+    {
+      "id": "ul_4a1de07d01a0",
+      "text": "a service worker"
+    },
+    {
+      "id": "ul_523ec3870c12",
+      "text": "the interface never talks directly to IndexedDB or WebCrypto"
+    },
+    {
+      "id": "ul_044e2f7ce48d",
+      "text": "Ask the browser not to evict our data.\n*\nWithout this, Safari clears the storage of an origin left idle for a few\nweeks — a notebook you don't open over the holidays can therefore vanish.\nThe request may be denied without explanation; the caller should use that\nto encourage exporting, not to panic."
+    },
+    {
+      "id": "ul_494292df0510",
+      "text": "Explicit exemptions.\n*\n`file` accepts `*`. `match` is the substring found. `reason` must explain\nwhy the finding cannot produce a request — an entry without a reason is\nignored, so the check will fail."
+    },
+    {
+      "id": "ul_a5b8984ac3a3",
+      "text": "Nook — local notes"
+    },
+    {
+      "id": "ul_618f3c0d16af",
+      "text": "Deletes a document and its whole subtree. Without the cascade, child\npages would stay in the database referencing a parent that no longer\nexists, invisible and never recoverable."
+    },
+    {
+      "id": "ul_f09aa68fb65b",
+      "text": "The page tree.\n*\nEvery row is a button, not a clickable `<div>`: keyboard navigation and\nscreen-reader announcements depend on it. The disclosure chevron is a\nseparate control from the row, otherwise expanding a branch would also\nchange the page on screen."
+    },
+    {
+      "id": "ul_23dc6e0f5ab3",
+      "text": "does not report empty while %s remains"
+    },
+    {
+      "id": "ul_2d2fa0564852",
+      "text": "GitHub Pages deployment"
+    },
+    {
+      "id": "ul_01601766b6d1",
+      "text": "Batched write of {0} record(s)"
+    },
+    {
+      "id": "ul_ea7dfd2b9057",
+      "text": "Open the app"
+    },
+    {
+      "id": "ul_b3376391f965",
+      "text": "`indexedDB.databases()` is not available everywhere. When it is missing we"
+    },
+    {
+      "id": "ul_919865417bc3",
+      "text": "BlockNote's schema generics do not satisfy"
+    },
+    {
+      "id": "ul_9839d865d4d1",
+      "text": "Block editor, page tree, autosave"
+    },
+    {
+      "id": "ul_b89997f933dc",
+      "text": "The GCM tag was verified: the content really is ours. Invalid JSON here"
+    },
+    {
+      "id": "ul_4d51bebb17ec",
+      "text": "The core must stay independent of {0}."
+    },
+    {
+      "id": "ul_1a704f1968b0",
+      "text": "Types"
+    },
+    {
+      "id": "ul_6a610f126adc",
+      "text": "sealed envelope"
+    },
+    {
+      "id": "ul_45b4dd76ecdf",
+      "text": "is configured so that no outgoing request is possible."
+    },
+    {
+      "id": "ul_3daebfeeec6a",
+      "text": "nothing to change in the code."
+    },
+    {
+      "id": "ul_386bc3baa51b",
+      "text": "It works offline"
+    },
+    {
+      "id": "ul_9222d024a382",
+      "text": "refuses a vault written by a newer version"
+    },
+    {
+      "id": "ul_df34ab212879",
+      "text": "the core never imports $why"
+    },
+    {
+      "id": "ul_5d3cf75cadf5",
+      "text": "A few characters around a finding, so a human can judge it."
+    },
+    {
+      "id": "ul_21bc60c0db30",
+      "text": "than block it indefinitely."
+    },
+    {
+      "id": "ul_35b55e08da9b",
+      "text": "A headless page believes it is in the background and refuses focus: without"
+    },
+    {
+      "id": "ul_50d379aa13ee",
+      "text": "Extracts every readable string from a content tree, whatever its shape.\n*\nDeliberately structural rather than semantic: we harvest every string in\nthe JSON tree without knowing anything about the editor's schema. That is\nwhat keeps search working the day the content format changes."
+    },
+    {
+      "id": "ul_3e2bc1570741",
+      "text": "reads back what was written"
+    },
+    {
+      "id": "ul_f0fe1510bded",
+      "text": "No pages yet."
+    },
+    {
+      "id": "ul_7b1691b6e4e5",
+      "text": "IndexedDB or WebCrypto. That boundary is not a style convention:"
+    },
+    {
+      "id": "ul_a8e8faa9e6d1",
+      "text": "✖ No Chromium browser found to rasterise the icons."
+    },
+    {
+      "id": "ul_44b64534e8e1",
+      "text": "Another tab is holding an older version open. Without this message,"
+    },
+    {
+      "id": "ul_fa29cc86d4b5",
+      "text": "Waits for a URL to answer, rather than betting on a fixed delay."
+    },
+    {
+      "id": "ul_8a510c7190e7",
+      "text": "Binds the envelope to its location. The version is part of the\nauthenticated data: a future format change cannot be passed off as a\nrecord of the old one."
+    },
+    {
+      "id": "ul_7e2b2b06d287",
+      "text": "Lifecycle of the master key.\n*\nAll user data is encrypted with a single AES-GCM-256 master key. This\nmodule decides how that key is protected at rest, and nothing else.\n*\nOne structural decision: **the master key is never extractable**. The\nbrowser handles it without ever letting JavaScript read its bytes. The\nprice is explicit — it cannot be re-wrapped to move from one protection\nmode to another. Changing protection will therefore mean generating a new\nkey and re-encrypting the data (phase 4). That is not a workaround:\nrotating the key when protection changes is exactly what we want, since\nthe old key disappears with it.\n*\nWhat \"device\" mode protects, and what it does not:\n  ✔ a raw copy of the profile or the disk — the records are unusable\n    without the key, which exists nowhere in readable form;\n  ✘ someone who launches *your* browser with *your* session — they get\n    the same key you do. Only a passphrase answers that threat.\nThe interface must say both, without rounding off."
+    },
+    {
+      "id": "ul_cd9416308dcf",
+      "text": "BlockNote refuses an empty document: it needs at least one block. The key"
+    },
+    {
+      "id": "ul_9d163acdc2b8",
+      "text": "clears one store without touching the others"
+    },
+    {
+      "id": "ul_a2a00a939bd9",
+      "text": "------------------------------------------------------------ Typography\nOne family for everything: headings, labels, body, data. The system\nstack, which is the native choice for product UI and the only one that\nguarantees zero bytes fetched from the network.\n\nFixed rem scale, ratio ~1.12. No `clamp()`: the reader works at a\nconstant density, and a fluid heading that shrinks inside a narrow panel\nis a defect, not an adaptation."
+    },
+    {
+      "id": "ul_d80b110cf28c",
+      "text": "batched write"
+    },
+    {
+      "id": "ul_973c8463424f",
+      "text": "is worth nothing: we fail even with no network call detected."
+    },
+    {
+      "id": "ul_929ff8a66564",
+      "text": "A feature removed on purpose"
+    },
+    {
+      "id": "ul_a15954cf65bc",
+      "text": "is not JSON. That is a serialisation bug, and the message should say so."
+    },
+    {
+      "id": "ul_2ef1eb27b53a",
+      "text": "The vault — the only API the interface consumes.\n*\nEverything underneath (IndexedDB, AES-GCM, the tree, the migrations) is a\ndetail `src/ui` is not allowed to know. A test enforces it: see\n`core/architecture.test.ts`.\n*\nTwo guarantees are kept here, and nowhere else:\n*\n1. **The index and the documents never diverge.** Every mutation encrypts\n   what it must write, *then* writes the document and the index in a\n   single transaction. A crash at the wrong moment leaves the previous\n   state, never an index referencing a missing document.\n*\n2. **The index lives in memory, decrypted once.** The sidebar, the command\n   palette and the breadcrumbs therefore never have to decrypt a document\n   in order to render."
+    },
+    {
+      "id": "ul_9ea044d35e13",
+      "text": "Product meeting"
+    },
+    {
+      "id": "ul_b44998cacac4",
+      "text": "Product meeting"
+    },
+    {
+      "id": "ul_99f6163490d4",
+      "text": "replace erases what was there"
+    },
+    {
+      "id": "ul_46611a7cd97d",
+      "text": "From the most distant ancestor down to the direct parent."
+    },
+    {
+      "id": "ul_127f2ec60418",
+      "text": "`exactOptionalPropertyTypes`, the two are not the same thing — and it"
+    },
+    {
+      "id": "ul_940837cdd63b",
+      "text": "Local-first note taking. Your data never leaves your machine."
+    },
+    {
+      "id": "ul_551fdbe2835e",
+      "text": "index.html contains an inline script, which the CSP will block"
+    },
+    {
+      "id": "ul_d9bc78aab631",
+      "text": "Fork this repository."
+    },
+    {
+      "id": "ul_8a5c50db1ee0",
+      "text": "refuses a tampered envelope"
+    },
+    {
+      "id": "ul_a4dd5c8e007d",
+      "text": "The returned inventory is read back afterwards: it is an observation, not"
+    },
+    {
+      "id": "ul_974690b8b81a",
+      "text": "Reading the keys of {0}"
+    },
+    {
+      "id": "ul_cfb49a3c00ef",
+      "text": "Reading the keys of {0}"
+    },
+    {
+      "id": "ul_0092964e089f",
+      "text": "A string inside a minified React error message: the URL is concatenated then printed to the console, never requested."
+    },
+    {
+      "id": "ul_b8ca32e11804",
+      "text": "`vitest/config` re-exports Vite's `defineConfig` while also accepting the"
+    },
+    {
+      "id": "ul_4421f88d37a7",
+      "text": "The tokens become Tailwind utilities. `inline` makes the classes emit\n`var(--nook-…)` rather than the literal value: a `bg-surface` class\ntherefore follows the theme switch without being recompiled.\n\nText colours are called `ink` rather than `text`, otherwise `text-muted`\nwould collide with the font-size namespace."
+    },
+    {
+      "id": "ul_94055f455827",
+      "text": "Writing {0}/{1}"
+    },
+    {
+      "id": "ul_41b99c4eff96",
+      "text": "4. The simple storages (theme preference, and nothing sensitive)."
+    },
+    {
+      "id": "ul_e73e68a33f93",
+      "text": "The save function changes identity on every render; we keep the latest one"
+    },
+    {
+      "id": "ul_e06f4324216f",
+      "text": "Migrations, indexed by target version. Entry 0 moves to v1. Adding a\nversion means adding a function here and bumping DB_VERSION; existing\ndatabases replay only the steps they are missing."
+    },
+    {
+      "id": "ul_60fb7b89fdf6",
+      "text": "The application's icons, drawn here rather than pulled from a library:\nthere are few of them, and one coherent family (same 24 grid, same stroke\nweight, same rounded terminals) beats an assortment."
+    },
+    {
+      "id": "ul_52e635c3d421",
+      "text": "- `meta`   : schema version, derivation salt, wrapped master key.\n             The only store readable without unlocking — it holds nothing\n             usable without the secret.\n- `index`  : a single encrypted record (tree, titles, tags, links, search\n             index). Decrypted on unlock.\n- `docs`   : one encrypted record per document.\n- `blobs`  : one encrypted record per image or attachment."
+    },
+    {
+      "id": "ul_bd36d0786c9f",
+      "text": "import() of an absolute URL"
+    },
+    {
+      "id": "ul_194ff82a041d",
+      "text": "XML namespaces and loopback addresses: these are identifiers, not\naddresses. An SVG references `www.w3.org/2000/svg` without anything ever\nbeing downloaded."
+    },
+    {
+      "id": "ul_2b347f863717",
+      "text": "**What it does not protect:** someone who opens _your_ browser with"
+    },
+    {
+      "id": "ul_74821ee4cd2d",
+      "text": "If structured cloning degraded Uint8Array, the whole encryption scheme"
+    },
+    {
+      "id": "ul_46fa72d8b439",
+      "text": "recovers everything after closing and reopening"
+    },
+    {
+      "id": "ul_4fd6e58597e9",
+      "text": "Cannot decrypt: wrong key, altered data, or a relocated record."
+    },
+    {
+      "id": "ul_31d1425624e2",
+      "text": "fails. The message therefore stays deliberately broad."
+    },
+    {
+      "id": "ul_7c429b68157c",
+      "text": "must not mask the signal from types, lint and unit tests."
+    },
+    {
+      "id": "ul_57a3e6f679c1",
+      "text": "Today, then, Nook can create pages, nest them, write in them and find them"
+    },
+    {
+      "id": "ul_b09c73a2e941",
+      "text": "and would reveal that no change had taken place."
+    },
+    {
+      "id": "ul_ff7a2344ea93",
+      "text": "round-trips JSON"
+    },
+    {
+      "id": "ul_9c2d573a017f",
+      "text": "Format"
+    },
+    {
+      "id": "ul_83df43aaaf26",
+      "text": "leaves the other branches untouched"
+    },
+    {
+      "id": "ul_ac1f6f816ea1",
+      "text": "In strict mode React mounts the effect twice: the first"
+    },
+    {
+      "id": "ul_1269e6fd05f5",
+      "text": "fake-indexeddb shares a single origin across all tests: each test therefore\nopens its own database so that none depends on execution order."
+    },
+    {
+      "id": "ul_64e2c600e5b2",
+      "text": "Nook is a note-taking tool that runs entirely inside your"
+    },
+    {
+      "id": "ul_59a9fbc2c4ed",
+      "text": "the title is found again after a reload"
+    },
+    {
+      "id": "ul_d655cbaccaff",
+      "text": "the user sees an application that never starts, with no explanation."
+    },
+    {
+      "id": "ul_a50b03347ac5",
+      "text": "CI inspects the published bundle and fails if network code gets in ([the guard][cnn])"
+    },
+    {
+      "id": "ul_13bf277c2f4c",
+      "text": "A view over an ordinary `ArrayBuffer`.\n*\n`Uint8Array` has been generic over its buffer since TypeScript 5.7, in\norder to distinguish memory shared between threads (`SharedArrayBuffer`) —\nwhich WebCrypto refuses. The alias avoids repeating that on every\nsignature, and makes any attempt to encrypt a shared buffer fail to\ncompile."
+    },
+    {
+      "id": "ul_24e2a70b2374",
+      "text": "If another tab asks for an upgrade, we release the database rather"
+    },
+    {
+      "id": "ul_4ab6df242b8d",
+      "text": "A notebook that talks to nobody."
+    },
+    {
+      "id": "ul_66c1258dafca",
+      "text": "The editor alone accounts for most of the application's weight. Taking it\nout of the initial load makes the sidebar appear immediately, and its\nchunk is only fetched when a page is opened. The service worker having\nprecached it, the application stays usable offline."
+    },
+    {
+      "id": "ul_beb1b0fd906e",
+      "text": "should land on this explanation, not on an empty menu."
+    },
+    {
+      "id": "ul_1253c186470b",
+      "text": "The site is served under the repository name. A fork that renames it has"
+    },
+    {
+      "id": "ul_c7749f905161",
+      "text": "document.body.innerText.includes('survive a reload')"
+    },
+    {
+      "id": "ul_e623c6fcbbb4",
+      "text": "the child, and not the original child."
+    },
+    {
+      "id": "ul_ee7bf5720662",
+      "text": "refuses an envelope from another version of the format"
+    },
+    {
+      "id": "ul_59231dcb9817",
+      "text": "remain, nor deny it; the interface must say what it knows, and the"
+    },
+    {
+      "id": "ul_050b22db249f",
+      "text": "breaks a tie between siblings of equal order by creation date"
+    },
+    {
+      "id": "ul_505308aa640a",
+      "text": "creates every expected store"
+    },
+    {
+      "id": "ul_55f28525bbb6",
+      "text": "`test` key, which keeps the project's configuration in a single file."
+    },
+    {
+      "id": "ul_3afd5345f4db",
+      "text": "A keystroke during the write may have refilled the queue: do not"
+    },
+    {
+      "id": "ul_2c45c47d3aff",
+      "text": "The core talks to IndexedDB and WebCrypto. Node 20+ provides WebCrypto on\n`globalThis.crypto`; IndexedDB, it does not. `fake-indexeddb/auto` installs\na spec-compliant implementation, which lets us test the real storage rather\nthan a test double that would lie about its behaviour."
+    },
+    {
+      "id": "ul_ce9ee4a6ecc3",
+      "text": "suggest a passing incident."
+    },
+    {
+      "id": "ul_f830a840ac5b",
+      "text": "The interface arrives in phase 2; until then there is nothing to check."
+    },
+    {
+      "id": "ul_5883b927dd6e",
+      "text": "We re-import into the original vault: every identifier already exists."
+    },
+    {
+      "id": "ul_389e9a685ba8",
+      "text": "End to end"
+    },
+    {
+      "id": "ul_d1f42c113951",
+      "text": "Thursday, without fail."
+    },
+    {
+      "id": "ul_606c130098d6",
+      "text": "Thursday, without fail."
+    },
+    {
+      "id": "ul_35ffe12df895",
+      "text": "One deployment at a time, without cancelling the one in flight: cutting"
+    },
+    {
+      "id": "ul_20d85efac65a",
+      "text": "------------------------------------------------------------------ Accent\nA single accent colour, in terracotta. It serves exactly three things:\nthe primary action, the current selection, the focus ring. Never\ndecorative."
+    },
+    {
+      "id": "ul_da2c11f8b176",
+      "text": "Private browsing, storage blocked: the system theme will do."
+    },
+    {
+      "id": "ul_71c3aef3dc50",
+      "text": "do not lose this"
+    },
+    {
+      "id": "ul_975e8fccfb6f",
+      "text": "do not lose this"
+    },
+    {
+      "id": "ul_c02fe62c80b2",
+      "text": "~68 characters in the editor"
+    },
+    {
+      "id": "ul_9189a5eee596",
+      "text": "Actions revealed on hover, but always reachable by keyboard:\n            `focus-within` makes them visible as soon as one takes focus. "
+    },
+    {
+      "id": "ul_91b2463d1e09",
+      "text": "Nook — local-first note taking. Your data stays encrypted on your machine."
+    },
+    {
+      "id": "ul_bc98b665d8a9",
+      "text": "Settings → Pages → Source: **GitHub Actions**."
+    },
+    {
+      "id": "ul_c3b10270cc5a",
+      "text": "✔ CSP present, with connect-src 'none'."
+    },
+    {
+      "id": "ul_20651bd4b04f",
+      "text": "Every descendant, depth first. Does not include `id`."
+    },
+    {
+      "id": "ul_efbb39037b4a",
+      "text": "This text must survive a reload."
+    },
+    {
+      "id": "ul_ac86e16fd691",
+      "text": "draws a fresh nonce on every write"
+    },
+    {
+      "id": "ul_178c46684532",
+      "text": "is omitted rather than passed as `undefined` — with"
+    },
+    {
+      "id": "ul_bec9eef2816d",
+      "text": "The real scenario: you export, you erase, you re-import."
+    },
+    {
+      "id": "ul_aa7e4f9a7375",
+      "text": "code at runtime and therefore cannot simply be erased by a transpiler"
+    },
+    {
+      "id": "ul_ea4f4dabb566",
+      "text": "a sessionStorage key"
+    },
+    {
+      "id": "ul_a60dccfd52d5",
+      "text": "refuses to move a page into its own subtree"
+    },
+    {
+      "id": "ul_b4ebd06f56b5",
+      "text": "recognises the shape of an envelope"
+    },
+    {
+      "id": "ul_644faecf9169",
+      "text": "produces a key JavaScript cannot read"
+    },
+    {
+      "id": "ul_98b5549b2795",
+      "text": "serves the precached files offline."
+    },
+    {
+      "id": "ul_4c7badf0e901",
+      "text": "APIs capable of emitting an outgoing request."
+    },
+    {
+      "id": "ul_fbbf20ec1c98",
+      "text": "with the library rather than paid for by all the code."
+    },
+    {
+      "id": "ul_9819c353373f",
+      "text": "an option, the library is [replaced at build time][stub]: the network"
+    },
+    {
+      "id": "ul_457e66a796f2",
+      "text": "puts it last when no position is requested"
+    },
+    {
+      "id": "ul_6963f0489700",
+      "text": "13px — interface default"
+    },
+    {
+      "id": "ul_47336184c43f",
+      "text": "deletes a key"
+    },
+    {
+      "id": "ul_e33b086284de",
+      "text": "Nobody disabled it by accident"
+    },
+    {
+      "id": "ul_19972eda9f88",
+      "text": "refuses a parent that does not exist"
+    },
+    {
+      "id": "ul_20e767c8ffea",
+      "text": "Encrypted vault: storage, AES-GCM envelopes, key lifecycle, wiping"
+    },
+    {
+      "id": "ul_b51e5cb9bf32",
+      "text": "enabled. The cast is confined to this single boundary"
+    },
+    {
+      "id": "ul_cecdac909067",
+      "text": "a publication half-way through would leave the site inconsistent."
+    },
+    {
+      "id": "ul_9ef5417f587d",
+      "text": "per key with 96-bit nonces drawn at random; a notebook will never"
+    },
+    {
+      "id": "ul_b73c3be04a07",
+      "text": "as in any document editor."
+    },
+    {
+      "id": "ul_d6481b2cb2b4",
+      "text": "`connect-src 'none'` in the CSP — the browser refuses every outgoing request"
+    },
+    {
+      "id": "ul_052f2c76966b",
+      "text": "The theme actually painted, once \"system\" is resolved.\n*\nThe CSS tokens do not need this information — `light-dark()` handles it. It\nis for third-party components that do want a word: the editor is one, and\nexpects `\"light\"` or `\"dark\"` as a prop."
+    },
+    {
+      "id": "ul_3aa4badf6adf",
+      "text": "What Nook protects, and what it does not"
+    },
+    {
+      "id": "ul_82e274034a64",
+      "text": "keeps two devices' vaults apart"
+    },
+    {
+      "id": "ul_4d03bedea3db",
+      "text": "report \"saved\" while something is still queued."
+    },
+    {
+      "id": "ul_09b91f74fb73",
+      "text": "actually served and fails if code capable of emitting a request"
+    },
+    {
+      "id": "ul_10799236b79f",
+      "text": "Deliberately silent: opening the vault takes a few milliseconds,"
+    },
+    {
+      "id": "ul_844f1f3fde58",
+      "text": "Modules removed from the bundle because they emit network requests.\n*\nDisabling them by configuration would not stop them being served; the\nalias guarantees they do not exist in what the browser receives. See\n`src/ui/editor/emoji-mart-absent.ts` for the full reasoning."
+    },
+    {
+      "id": "ul_6e2169de1b40",
+      "text": "Opens an existing vault. Returns `undefined` when no vault exists yet —\nthe caller then decides whether to create one."
+    },
+    {
+      "id": "ul_b475af5a4067",
+      "text": "Create the first one"
+    },
+    {
+      "id": "ul_46944aee7457",
+      "text": "Opens this device's vault, or creates it on the very first launch."
+    },
+    {
+      "id": "ul_95ee79f885c9",
+      "text": "A component, not a render function: an arrow function written in the\nparent's JSX would create a brand-new component type on every render, and\nReact would remount its whole subtree each time. "
+    },
+    {
+      "id": "ul_b8f6db33e6f2",
+      "text": "---------------------------------------------------------------- Motion\n120–220 ms. Motion signals a change of state; it does not narrate."
+    },
+    {
+      "id": "ul_426ae50f45fb",
+      "text": "The theme stays applied for the session, simply not remembered."
+    },
+    {
+      "id": "ul_0ef136f8648b",
+      "text": "and never has anything to receive back."
+    },
+    {
+      "id": "ul_4381f73fa694",
+      "text": "A URL quoted inside the text of a Workbox `console.warn`."
+    },
+    {
+      "id": "ul_2b28def7a64e",
+      "text": "orphan key and no vault — a detectable, repairable state. The reverse"
+    },
+    {
+      "id": "ul_17564b0f864b",
+      "text": "browser profile or a backup gets nothing but unusable bytes."
+    },
+    {
+      "id": "ul_491ab73ab452",
+      "text": "Our tokens already drive the colours of both schemes; this"
+    },
+    {
+      "id": "ul_63fd865e142d",
+      "text": "someone who opens the browser's database."
+    },
+    {
+      "id": "ul_78fdd1af6454",
+      "text": "Could not save"
+    },
+    {
+      "id": "ul_3543eb9e8b0b",
+      "text": "Nook's vocabulary.\n*\nOne decision carries all the rest: **the core does not know the format of a\ndocument's content**. It stores it, encrypts it, extracts text from it for\nsearch, but does not know what a level-2 heading or a checkbox is. Content\nis opaque JSON.\n*\nThe benefit is direct: changing editor — or supporting two — does not touch\na line of storage, encryption or search."
+    },
+    {
+      "id": "ul_1bb3d9fb1df1",
+      "text": "Your notes are unreadable on disk"
+    },
+    {
+      "id": "ul_c7501547000a",
+      "text": "a database left by an earlier version would contain notes."
+    },
+    {
+      "id": "ul_f7245f0e6b61",
+      "text": "Generates the application's PNGs from the SVG mark.\n*\nNo rasterisation library is added to the project for this: we borrow the\nrendering engine of a browser that is already installed, for the length of\none screenshot. The script is only run by hand, when the mark changes — the\nPNGs it produces are committed, so neither CI nor a contributor needs\nChrome to build the project.\n*\n  node scripts/make-icons.mjs"
+    },
+    {
+      "id": "ul_74ae521c1766",
+      "text": "then creates the initial paragraph itself."
+    },
+    {
+      "id": "ul_c24c93269709",
+      "text": "reports content that decrypted but is unreadable"
+    },
+    {
+      "id": "ul_37fec0c221b4",
+      "text": "Sub-path the site is served from. GitHub Pages serves a `nook` repository\nunder `/nook/`. A fork that renames the repository only has this line to\nchange (or the BASE environment variable)."
+    },
+    {
+      "id": "ul_dd3085f82eec",
+      "text": "\n  {0} network call(s), {1} CSP problem(s)."
+    },
+    {
+      "id": "ul_ebae55578c6d",
+      "text": "refuses a different key"
+    },
+    {
+      "id": "ul_bb9cf1745b0a",
+      "text": "deletes the database without complaining when it does not exist"
+    },
+    {
+      "id": "ul_0b82a15878e9",
+      "text": "`safe` reserves a margin around the mark. Android crops \"maskable\" icons\nto a shape it picks itself; without that margin, the corners of the square\nwould be cut off."
+    },
+    {
+      "id": "ul_dbd199ecd5c9",
+      "text": "walks the ancestor chain, from the most distant down to the direct parent"
+    },
+    {
+      "id": "ul_37733d9a3e6a",
+      "text": "permanently unreadable. It must fail loudly."
+    },
+    {
+      "id": "ul_4ba4c43c3bed",
+      "text": "`fetch` is the whole point of a service worker: it is how it"
+    },
+    {
+      "id": "ul_af2a5a4d9626",
+      "text": "writes to several stores in one go"
+    },
+    {
+      "id": "ul_351309ad8eea",
+      "text": "the dialog itself, not an element inside it."
+    },
+    {
+      "id": "ul_aaf3f4bda1ee",
+      "text": "The preview server"
+    },
+    {
+      "id": "ul_b62e64e4b7f3",
+      "text": "the address points at the open page"
+    },
+    {
+      "id": "ul_96471cd1168f",
+      "text": "_your_ unlocked session gets exactly the same rights you do. The"
+    },
+    {
+      "id": "ul_d0fbd4898502",
+      "text": "Total destruction of local data.\n*\n\"Erase everything\" has to be true. A local application that leaves behind a\nservice-worker cache or a forgotten database is lying to its user, and it is\nthe kind of lie only discovered at the worst possible moment.\n*\nThe order of operations is not cosmetic: the service worker is unregistered\nfirst, because it is the only actor able to repopulate a cache while we are\nemptying it.\n*\n`surveyStorage()` exists so the interface can *show* what remains afterwards,\nrather than display a confirmation nobody can verify."
+    },
+    {
+      "id": "ul_b462eced31f6",
+      "text": "  The existing PNGs are committed: this script only regenerates them."
+    },
+    {
+      "id": "ul_1bc5998e1056",
+      "text": "\"relocated envelope\": in all three cases, verifying the tag"
+    },
+    {
+      "id": "ul_86c1761c2f64",
+      "text": "3. The databases: Nook's, and any other database on this origin, because"
+    },
+    {
+      "id": "ul_7e106aa852c5",
+      "text": "at the new identifier, not at the old namesake."
+    },
+    {
+      "id": "ul_38671bed5746",
+      "text": "passphrase protection, which answers that threat, arrives in phase 4."
+    },
+    {
+      "id": "ul_7ce4055b0408",
+      "text": "returns the requested length, and never the same thing twice"
+    },
+    {
+      "id": "ul_1ad3073e356c",
+      "text": "wrongly, when they have just asked for a destruction."
+    },
+    {
+      "id": "ul_267cebbb2130",
+      "text": "is created with a usable key and a readable description"
+    },
+    {
+      "id": "ul_33be9f3dee63",
+      "text": "Navigation by URL fragment.\n*\nThe fragment rather than `history.pushState` because GitHub Pages serves\nstatic files: a URL like `/nook/doc/abc` would return a 404 before the\napplication even starts. The fragment stays client-side.\n*\nIt never leaves the machine — a fragment is not sent to the server — but it\ndoes appear in browser history, so it carries only an opaque identifier,\nnever a title."
+    },
+    {
+      "id": "ul_ea115d3c867a",
+      "text": "Switching manually only forces `color-scheme`: every `light-dark()` value\nabove follows automatically."
+    },
+    {
+      "id": "ul_8771f10b40ae",
+      "text": "and a loading message that flashes is worse than nothing."
+    },
+    {
+      "id": "ul_ca3b1af55d25",
+      "text": "involves waiting on time. A scheduling fluke on the runner"
+    },
+    {
+      "id": "ul_415e3b436d04",
+      "text": "A vault already exists on this device."
+    },
+    {
+      "id": "ul_0f80b0f3aa91",
+      "text": "exfiltrate the key's bytes."
+    },
+    {
+      "id": "ul_e4cd9578ebf7",
+      "text": "Review the quote"
+    },
+    {
+      "id": "ul_ab91a494d731",
+      "text": "`replace` erases the vault before importing; `merge` keeps what is there and\nreassigns an identifier to documents that would collide. There is no default\nmode: overwriting notes must always be an explicit choice."
+    },
+    {
+      "id": "ul_ea04f70b3fc2",
+      "text": "rest of the report keeps its value."
+    },
+    {
+      "id": "ul_278c7262efea",
+      "text": "does not complain when there is nothing to erase"
+    },
+    {
+      "id": "ul_ba27c6b9e1b5",
+      "text": "merges by reassigning colliding identifiers"
+    },
+    {
+      "id": "ul_d031f19d5a1a",
+      "text": "really deletes an existing database"
+    },
+    {
+      "id": "ul_56021b2273f9",
+      "text": "parent, then reassign clean integers to the whole sibling list."
+    },
+    {
+      "id": "ul_303a0e14c4ee",
+      "text": "A page deleted in another tab, or a shared address matching nothing:"
+    },
+    {
+      "id": "ul_eb01f8b03c16",
+      "text": "Tests"
+    },
+    {
+      "id": "ul_87891c1b2830",
+      "text": "The application's empty state.\n*\nIt teaches the interface instead of noting its emptiness: the one useful\naction is offered, and the product's promise is restated where it is put to\nthe test — on first launch, when you decide whether to trust it."
+    },
+    {
+      "id": "ul_2029aa8210a4",
+      "text": "silently empty — the worst of both worlds. Rather than disabling it with"
+    },
+    {
+      "id": "ul_aa4794e9f019",
+      "text": "#root not found in index.html"
+    },
+    {
+      "id": "ul_90e0bdf38d79",
+      "text": "without recreating `flush`, whose stability the effect cleanup depends on."
+    },
+    {
+      "id": "ul_ee0d7ed9a2ff",
+      "text": "No room left between the two neighbours: first reattach the page to the right"
+    },
+    {
+      "id": "ul_e47dd38e5e8d",
+      "text": "two positions ends up below the precision threshold, and the sibling list must"
+    },
+    {
+      "id": "ul_6d88896ba5a2",
+      "text": "yesterday's note"
+    },
+    {
+      "id": "ul_0f152d9c1fd8",
+      "text": "yesterday's note"
+    },
+    {
+      "id": "ul_2ef75e539e59",
+      "text": "page tree"
+    },
+    {
+      "id": "ul_be2fa558dc0f",
+      "text": "A document's editor.\n*\nLoading the content is asynchronous — it has to be decrypted — so this\ncomponent splits two responsibilities: this one waits for the document, and\n`LoadedEditor` only renders once it is there. The `doc.id` key guarantees\nthat opening another page rebuilds the editor rather than trying to swap its\ncontent under the caret."
+    },
+    {
+      "id": "ul_3fa4e20420f9",
+      "text": "when it is crossed. It lets us test all the logic without a"
+    },
+    {
+      "id": "ul_fb3537d585b1",
+      "text": "from a CDN, at runtime. The CSP would block them, and the menu would be"
+    },
+    {
+      "id": "ul_ab3ae6943aba",
+      "text": "The promise, and how it is kept"
+    },
+    {
+      "id": "ul_49cbc84d477c",
+      "text": "Title shown for a document the user has not named yet."
+    },
+    {
+      "id": "ul_7a5be3bf3077",
+      "text": "Project status"
+    },
+    {
+      "id": "ul_3f2c5db1cf36",
+      "text": "Project status"
+    },
+    {
+      "id": "ul_aaf501e88e5e",
+      "text": "Two halves, separated by a rule that CI enforces."
+    },
+    {
+      "id": "ul_9c06ba75a0a9",
+      "text": "The vault is declared but its key is missing. The notes on this device are unrecoverable; restore an export."
+    },
+    {
+      "id": "ul_0762068dbba5",
+      "text": "What the index keeps in memory for each document: enough to fill the\nsidebar, the palette and the breadcrumbs without decrypting a single\npiece of content."
+    },
+    {
+      "id": "ul_d5b6a179055d",
+      "text": "**What it protects:** someone who copies your disk, your browser"
+    },
+    {
+      "id": "ul_a6cb6eb36cd1",
+      "text": "Foundations, CI, Pages deployment, network guard, design tokens"
+    },
+    {
+      "id": "ul_23aa1dcf0ff3",
+      "text": "Reopening creates an empty database: proof the old one is gone."
+    },
+    {
+      "id": "ul_8d31039d6942",
+      "text": "Reassigns 0, 1, 2… to a sibling list, inserting `id` at rank `at`."
+    },
+    {
+      "id": "ul_291cd2eaa8ab",
+      "text": "cannot claim to know what the origin holds: we return `undefined`"
+    },
+    {
+      "id": "ul_ce37cfaf3886",
+      "text": "be reassigned rather than letting two pages sit on top of each other."
+    },
+    {
+      "id": "ul_acaede029d58",
+      "text": "We insert fifty times in a row at the same spot: the gap between"
+    },
+    {
+      "id": "ul_cc4132f76c5a",
+      "text": "would be ignored by ProseMirror."
+    },
+    {
+      "id": "ul_c0721205caf4",
+      "text": "{ this is not JSON"
+    },
+    {
+      "id": "ul_7f93393c44de",
+      "text": "Build"
+    },
+    {
+      "id": "ul_d70d66b981f5",
+      "text": "Build"
+    },
+    {
+      "id": "ul_faba853f4f67",
+      "text": "✖ dist/ is missing. Run `pnpm build` before this check."
+    },
+    {
+      "id": "ul_342ae9154251",
+      "text": "Everything really can be erased"
+    },
+    {
+      "id": "ul_c487f3b12488",
+      "text": "Digits aligned vertically in lists and tables."
+    },
+    {
+      "id": "ul_d742873fad86",
+      "text": "browser. There is no account, no server, no synchronisation."
+    },
+    {
+      "id": "ul_c996d03a0169",
+      "text": "moves and renames update."
+    },
+    {
+      "id": "ul_6d175756bdf1",
+      "text": "fixed choice only avoids a pointless recalculation inside the library."
+    },
+    {
+      "id": "ul_5cf2aad51e50",
+      "text": "Nothing is published until the guard has cleared the bundle."
+    },
+    {
+      "id": "ul_08724dc661b5",
+      "text": "starts empty"
+    },
+    {
+      "id": "ul_0302cbdeeb3b",
+      "text": "Storage blocked by the browser: there is nothing to count, and nothing to clear."
+    },
+    {
+      "id": "ul_8aeb79f28225",
+      "text": "Breadcrumbs"
+    },
+    {
+      "id": "ul_154fc1f2980a",
+      "text": "takes the whole subtree with it"
+    },
+    {
+      "id": "ul_947be1042a80",
+      "text": "transpiler that only strips types."
+    },
+    {
+      "id": "ul_ef27747f9a17",
+      "text": "Another Nook window is using an older version of the database. Close it, then reload."
+    },
+    {
+      "id": "ul_899d23215311",
+      "text": "Let autosave fire."
+    },
+    {
+      "id": "ul_93474afd8ead",
+      "text": "typed on the system keyboard work normally."
+    },
+    {
+      "id": "ul_6e7daf529507",
+      "text": "stamps the last modification time"
+    },
+    {
+      "id": "ul_99cc5cdc18bc",
+      "text": "Your notes are encrypted and stored on your machine, and the page itself"
+    },
+    {
+      "id": "ul_4c0dc976dbea",
+      "text": "A page cannot be moved into its own subtree."
+    },
+    {
+      "id": "ul_9d4d3e1587e6",
+      "text": "Every source of an `import ... from '…'` or an `import('…')`."
+    },
+    {
+      "id": "ul_703621df137f",
+      "text": "Lint"
+    },
+    {
+      "id": "ul_bb026f4cb0ae",
+      "text": "12px — metadata"
+    },
+    {
+      "id": "ul_9ca59ce0978a",
+      "text": "Writes or deletes several records in a single transaction.\n*\nThis is the primitive that guarantees a document and the index referencing\nit cannot diverge: either both are written, or neither. Every value must\nalready be encrypted — see the note at the top of this file."
+    },
+    {
+      "id": "ul_d7b10627a013",
+      "text": "Delete this page?"
+    },
+    {
+      "id": "ul_16b4ad9c9d4b",
+      "text": "recognises empty storage"
+    },
+    {
+      "id": "ul_a643caaf5437",
+      "text": "we fall back to the home screen rather than showing an"
+    },
+    {
+      "id": "ul_db0f75393794",
+      "text": "Sealed envelope — Nook's unit of storage.\n*\nEverything written to disk goes through here. Nothing else in the project\ncalls `crypto.subtle` to encrypt user data.\n*\nThe choice worth explaining is `context`. On top of the content, AES-GCM\nauthenticates an associated datum that is not encrypted. We put the\nrecord's location in it. The consequence: an attacker with disk access\ncannot *relocate* an envelope — copying the contents of `docs/A` into\n`docs/B` produces an authentication failure instead of a silent\nsubstitution. Without it, encryption would protect confidentiality but not\nthe integrity of the structure."
+    },
+    {
+      "id": "ul_c692a4c84cf9",
+      "text": "2. The caches, which hold the application itself."
+    },
+    {
+      "id": "ul_f5bbe9da5cac",
+      "text": "We would rather say it plainly than imply a guarantee"
+    },
+    {
+      "id": "ul_9f1d0e8d3bd9",
+      "text": "not ready yet"
+    },
+    {
+      "id": "ul_94bfdb21b06a",
+      "text": "Passphrase, auto-lock, encrypted export"
+    },
+    {
+      "id": "ul_35f3e48b19e1",
+      "text": "This vault was created by a newer version of Nook (schema {0})."
+    },
+    {
+      "id": "ul_a2d017c9e2a8",
+      "text": "code is not merely unreachable, it is not served at all. Emoji"
+    },
+    {
+      "id": "ul_9c6bf9e43782",
+      "text": "Envelope in version {0}, incompatible with this version of Nook ({1})."
+    },
+    {
+      "id": "ul_850182e644e5",
+      "text": "Deliberately separate from `verify`: this test drives a real browser and"
+    },
+    {
+      "id": "ul_af0f38671483",
+      "text": "Decrypted, but unreadable: invalid JSON."
+    },
+    {
+      "id": "ul_7f38bd698a25",
+      "text": "Could not open the local database."
+    },
+    {
+      "id": "ul_ea60cc9ce978",
+      "text": "which contradicts the \"no outgoing request\" promise. Use your system emoji keyboard."
+    },
+    {
+      "id": "ul_fa329272cfc8",
+      "text": "Local-first notes. Your data stays on your machine."
+    },
+    {
+      "id": "ul_4116afde6cce",
+      "text": "Moves a document under a new parent, at the requested position.\n*\n@param position Desired rank among siblings, `undefined` for the end.\n@throws if the move would create a cycle — dragging a page into its own\n  subtree would detach the whole branch from the tree, and it would become\n  invisible without ever being deleted."
+    },
+    {
+      "id": "ul_1b2ab68fbafa",
+      "text": "The \"zero network\" guard.\n*\nThe rule is really enforced by the CSP (`connect-src 'none'`): not even a\nmalicious dependency can get out. This script is the canary — it fails CI\n*at the moment* code capable of emitting a request enters the bundle,\nrather than at the moment a user notices.\n*\nIt inspects the build, not the sources: what matters is what is actually\nserved, dependencies included.\n*\nTwo distinct corpora, because they do not have the same rights:\n  - application code may not call any network API;\n  - the service worker, on the other hand, MUST call `fetch` — that is its\n    whole purpose — but may not mention any external origin.\n*\nEvery exception goes through ALLOWED and must carry a readable reason. The\nexceptions in force are reprinted on each run: a waiver nobody sees again\nis a waiver nobody ever re-examines."
+    },
+    {
+      "id": "ul_88e5cfe29612",
+      "text": "must not be found"
+    },
+    {
+      "id": "ul_e6e274916527",
+      "text": "Security"
+    },
+    {
+      "id": "ul_c3965ff3b92c",
+      "text": "someone inspecting IndexedDB or copying the browser profile."
+    },
+    {
+      "id": "ul_aeedc4155133",
+      "text": "This file destroys all the storage in its environment. Vitest isolates each\ntest file, so the wipe does not spill over into the others — but that is\nprecisely why these tests live alone here."
+    },
+    {
+      "id": "ul_dbb871d06989",
+      "text": "has got in, or if the CSP has disappeared from index.html."
+    },
+    {
+      "id": "ul_43013c5a2a46",
+      "text": "By default the encryption key is generated on the device and kept in the"
+    },
+    {
+      "id": "ul_6d2b58218956",
+      "text": "It is a static site served by GitHub Pages: the server sends files"
+    },
+    {
+      "id": "ul_dfc715c2d47a",
+      "text": "Access to IndexedDB.\n*\nDeliberately narrow: open, read, write, erase. No notion of a document, of\nencryption or of the interface gets in here — this module only knows how to\nhandle opaque key/value pairs.\n*\nOne IndexedDB constraint governs the shape of this API: a transaction\nauto-closes as soon as the microtask queue drains with no request pending.\nAwaiting a non-IndexedDB promise in the middle of a transaction therefore\nkills it silently. That is why there is no generic `transact(db, fn)` here:\nencryption, being asynchronous, must be finished *before* the transaction\nopens. `writeBatch` is the only atomic primitive on offer, and it takes\nonly values that are already prepared."
+    },
+    {
+      "id": "ul_f4b951d22d01",
+      "text": "Push to"
+    },
+    {
+      "id": "ul_ac7d62d59058",
+      "text": "Writes a note in a real browser, reloads, and checks that it"
+    },
+    {
+      "id": "ul_dc46a3e55e61",
+      "text": "core / UI boundary"
+    },
+    {
+      "id": "ul_26f573ca5a77",
+      "text": "Test texts named exactly once. Repeating them in the data and then in the\nassertion lets the two diverge in silence — and makes it impossible to tell\na displayed string from an identifier."
+    },
+    {
+      "id": "ul_8a5f114a22db",
+      "text": "does nothing on an empty batch"
+    },
+    {
+      "id": "ul_8afed2895390",
+      "text": "\n✖ {0} check(s) failed."
+    },
+    {
+      "id": "ul_dfc81633b21b",
+      "text": "The core imports neither React nor the editor; the interface never touches"
+    },
+    {
+      "id": "ul_25b82ca50a25",
+      "text": "  If a finding cannot produce a request, declare it in ALLOWED\n"
+    },
+    {
+      "id": "ul_ae19588fdafb",
+      "text": "Unknown operation \"{0}\" on {1}."
+    },
+    {
+      "id": "ul_03830f5e1d19",
+      "text": "Unreadable record: this is not a Nook envelope."
+    },
+    {
+      "id": "ul_b13ccefa4cbe",
+      "text": "a test enforces it"
+    },
+    {
+      "id": "ul_4f909708e6a5",
+      "text": "Development"
+    },
+    {
+      "id": "ul_1df6a3492cbe",
+      "text": "{0} did not answer on {1}"
+    },
+    {
+      "id": "ul_b5d22fce3fa4",
+      "text": "The product's central promise. This step inspects the bundle"
+    },
+    {
+      "id": "ul_42a5089c6d0b",
+      "text": "protect them with a passphrase."
+    },
+    {
+      "id": "ul_8ba5443a2afa",
+      "text": "reports a document that does not exist"
+    },
+    {
+      "id": "ul_247dcd209ca3",
+      "text": "The application's only button.\n*\nOne component rather than copied-around classes: when the same action has\ntwo appearances depending on the screen, one of them is a defect. The\nstates (hover, focus, active, disabled) are defined once here and hold\neverywhere."
+    },
+    {
+      "id": "ul_efdd13fb5bf1",
+      "text": "--------------------------------------------------------------- Semantics\nA standardised vocabulary of states. Every interactive component draws\nfrom here rather than inventing its own hue."
+    },
+    {
+      "id": "ul_44146bac821b",
+      "text": "index.html contains no Content-Security-Policy tag"
+    },
+    {
+      "id": "ul_55275de2019a",
+      "text": "connections to the database stay open and block any migration."
+    },
+    {
+      "id": "ul_b47a4b841647",
+      "text": "Enter from the title moves down into the body,"
+    },
+    {
+      "id": "ul_19c4d8d167d7",
+      "text": "the queue takes priority over the patch put back into it."
+    },
+    {
+      "id": "ul_d2ebe57ee749",
+      "text": "`undefined` when the browser refuses to enumerate databases (Firefox)."
+    },
+    {
+      "id": "ul_b214f57aeac0",
+      "text": "refuses a file that is not a Nook export"
+    },
+    {
+      "id": "ul_a2b3e0d67459",
+      "text": "`exactOptionalPropertyTypes`, which the rest of the project keeps"
+    },
+    {
+      "id": "ul_594679c31d11",
+      "text": "Nothing leaves your machine"
+    },
+    {
+      "id": "ul_59ea1467fc89",
+      "text": "The core / UI boundary, verified rather than promised.\n*\nAn architectural rule that lives only in a documentation file erodes at the\nfirst hurried import. This one breaks CI.\n*\nWhat the separation buys, concretely: the core is testable without a browser\nor a render, and the domain logic stays intact the day the interface changes\n— or the day another client (an extension, a script) wants to read the same\nvault."
+    },
+    {
+      "id": "ul_84838b749865",
+      "text": "is exactly what CI runs."
+    },
+    {
+      "id": "ul_dc9c3ea54e26",
+      "text": "Nook is built in phases, and each phase leaves a deployable repository."
+    },
+    {
+      "id": "ul_74493c9c8158",
+      "text": "really deletes the databases, and proves it"
+    },
+    {
+      "id": "ul_3231dd318836",
+      "text": "\n✔ {0} checks passed against the served build."
+    },
+    {
+      "id": "ul_0fb323ab8ec1",
+      "text": "collects the whole subtree, depth first"
+    },
+    {
+      "id": "ul_7add5f3bead1",
+      "text": "Title visible in the sidebar"
+    },
+    {
+      "id": "ul_464cdc5091d1",
+      "text": "Title visible in the sidebar"
+    },
+    {
+      "id": "ul_d1d42ced6e37",
+      "text": "Blocks in place of text rather than a spinner: the page\n            keeps its shape, and switching to the real content does not make\n            the layout jump. "
+    },
+    {
+      "id": "ul_be30435b1764",
+      "text": "will be deleted"
+    },
+    {
+      "id": "ul_deca9977b5c5",
+      "text": "is still there — and that the disk holds nothing but ciphertext."
+    },
+    {
+      "id": "ul_cebaf1b866d2",
+      "text": "\n✖ This build does not keep the \"zero network\" promise.\n"
+    },
+    {
+      "id": "ul_c009a831627f",
+      "text": "AES-GCM does not distinguish \"wrong key\" from \"altered data\" from"
+    },
+    {
+      "id": "ul_d0871066d3e5",
+      "text": "Tells the interface it must redraw. Returns the unsubscribe function."
+    },
+    {
+      "id": "ul_5f1a6fce8cdc",
+      "text": "than show a document that no longer exists."
+    },
+    {
+      "id": "ul_34d3c5adb5ef",
+      "text": "Opening the vault…"
+    },
+    {
+      "id": "ul_d97e4f153a1a",
+      "text": "Vite's module-preload polyfill calls `fetch()` for"
+    },
+    {
+      "id": "ul_6886a9932fc0",
+      "text": "-------------------------------------------------------------- Geometry"
+    },
+    {
+      "id": "ul_067601816109",
+      "text": "Content Security Policy.\n*\n`connect-src 'none'` is the heart of the product's promise: the browser\nrefuses every outgoing request (fetch, XHR, WebSocket, EventSource, beacon).\nEven if a dependency tried to call a server, the page cannot.\n*\nInjected only into the production build: the dev server needs a WebSocket\nfor hot reloading."
+    },
+    {
+      "id": "ul_d733890f455f",
+      "text": "the content is found again after a reload"
+    },
+    {
+      "id": "ul_4ba4cc0747f2",
+      "text": "Host your own"
+    },
+    {
+      "id": "ul_25bac0baa2b1",
+      "text": "Creates the vault on the very first launch.\n*\nFails if a vault already exists: overwriting the master key would make\nevery existing note permanently unreadable, and that is precisely the kind\nof accident an unintended call could cause."
+    },
+    {
+      "id": "ul_a3cc2e52b6fa",
+      "text": "The heart of the promise: not even code running inside the page can"
+    },
+    {
+      "id": "ul_1859060a76a5",
+      "text": "surfaces the title in the index without decrypting any content"
+    },
+    {
+      "id": "ul_820e79814df6",
+      "text": "Code-block text keeps the same monospace family as the rest of the\napplication, rather than the library's."
+    },
+    {
+      "id": "ul_8f8ba67eaf70",
+      "text": "No runtime caching: there is nothing to go and fetch."
+    },
+    {
+      "id": "ul_b0c7f67bcd47",
+      "text": "rather than an empty list, which would wrongly read as \"nothing to erase\"."
+    },
+    {
+      "id": "ul_088785010a3a",
+      "text": "refuses a record that is not an envelope"
+    },
+    {
+      "id": "ul_0dcc32f558e6",
+      "text": "accepts an out-of-range position without complaining"
+    },
+    {
+      "id": "ul_eecee7348550",
+      "text": "AES-GCM-256, a non-extractable key, never exposed to JavaScript"
+    },
+    {
+      "id": "ul_cc63ad00a30e",
+      "text": "Everything is precached: the application must start with no network."
+    },
+    {
+      "id": "ul_863dbc28c3d0",
+      "text": "the CSP does not contain \"{0}\""
+    },
+    {
+      "id": "ul_27e9033beadd",
+      "text": "a promise. The interface can therefore show it as is."
+    },
+    {
+      "id": "ul_4535a90a19a9",
+      "text": "writes nothing but sealed envelopes to disk"
+    },
+    {
+      "id": "ul_79ae6fa6d01d",
+      "text": "Firefox refuses to enumerate databases. We can then neither claim any"
+    },
+    {
+      "id": "ul_b4d51740f1c9",
+      "text": "treats \"I cannot know\" as nothing to report"
+    },
+    {
+      "id": "ul_19fe501e8001",
+      "text": "would stay in the database, invisible, and unrecoverable from the interface."
+    },
+    {
+      "id": "ul_bfdf1fdb6170",
+      "text": "Imported page"
+    },
+    {
+      "id": "ul_35a03cbeab91",
+      "text": "notifies its subscribers on every change"
+    },
+    {
+      "id": "ul_601c1b677348",
+      "text": "empty directory, and the rule would hold by accident."
+    },
+    {
+      "id": "ul_4c002d16a454",
+      "text": "Absolute URLs in the served code."
+    },
+    {
+      "id": "ul_874e3b795390",
+      "text": "Mechanism"
+    },
+    {
+      "id": "ul_9b60e82477ae",
+      "text": "This file is not a Nook export this version can read."
+    },
+    {
+      "id": "ul_686b6882dbaa",
+      "text": "A square button carrying only an icon. `label` is not optional: an icon on\nits own has no accessible name, and a screen reader would announce\n\"button\" and nothing more."
+    },
+    {
+      "id": "ul_e10c59a217de",
+      "text": "The service worker loads its own Workbox runtime, served from the same origin. Scanning this same file for absolute URLs guarantees no external origin is referenced in it."
+    },
+    {
+      "id": "ul_9d15bb71cf60",
+      "text": "Opens the vault once for the whole application and makes it available.\n*\nThe subscription goes through `useSyncExternalStore`: the vault reports its\nchanges with a plain callback, knowing nothing about React. That is what\nlets `src/core` stay an ordinary TypeScript library, testable without a\nrender."
+    },
+    {
+      "id": "ul_2e0c75d7381a",
+      "text": "A stand-in for `emoji-mart`, substituted at build time.\n*\nThe emoji-picker library fetches its localisation data *and* its images\nfrom a CDN, at runtime. That is incompatible with Nook's promise: the CSP\nwould block those requests, and the picker would be silently broken — the\nworst of the two situations, since the user would see a feature that does\nnot work without knowing why.\n*\nDisabling it with an option was not enough: the code still went into the\nserved files, and would have stayed there at the mercy of a future setting.\nAn alias in `vite.config.ts` therefore replaces it with this module, and\nthe network guard observes its absence.\n*\nWhat is lost: the emoji menu triggered by typing \":\". Emoji typed on the\nsystem keyboard work normally.\n*\nThis module stands in for `emoji-mart` and for `@emoji-mart/data` alike: the\nfirst reads functions, the second a data object, and the empty default\nexport suits both."
+    },
+    {
+      "id": "ul_3ae5cebf8232",
+      "text": "Confirmation of a destructive action.\n*\nBuilt on the native `<dialog>`, which gives — correctly, and for free —\nfocus trapping, Escape to close, an inert backdrop and the right semantics\nfor screen readers. Reimplementing all of that by hand is the shortcut that\nproduces modals nobody can use from a keyboard."
+    },
+    {
+      "id": "ul_ccbf600c4a82",
+      "text": "One focus treatment across the whole application. It is visible on light\nand dark backgrounds alike because it uses the accent, never a browser\ndefault hue."
+    },
+    {
+      "id": "ul_b19859816b9a",
+      "text": "`visibilitychange` is the last reliable signal on mobile: `unload`"
+    },
+    {
+      "id": "ul_9db906f681de",
+      "text": "again. It cannot yet link them together, search them, or"
+    },
+    {
+      "id": "ul_cd1c60553a59",
+      "text": "orders siblings by ascending rank"
+    },
+    {
+      "id": "ul_eed3cad32a07",
+      "text": "Agenda"
+    },
+    {
+      "id": "ul_f7923b2732fb",
+      "text": "Encrypts, writes in one transaction, and only then publishes the new index\nin memory. If the write fails, the visible state stays the previous one —\nthe interface never shows a change that did not reach the disk."
+    },
+    {
+      "id": "ul_b8dd9673d6c5",
+      "text": "the disk holds no plain text"
+    },
+    {
+      "id": "ul_21d3d02e6809",
+      "text": "Fields declared then assigned rather than constructor properties:"
+    },
+    {
+      "id": "ul_7b4c8431ff84",
+      "text": "Removed from the bundle: see `emoji-mart-absent.ts`."
+    },
+    {
+      "id": "ul_99f25c25a185",
+      "text": "the entire point of binding the envelope to its position."
+    },
+    {
+      "id": "ul_5366f532c7a6",
+      "text": "releases it; treating that as a failure would make the caller panic"
+    },
+    {
+      "id": "ul_70ba6a2b8f18",
+      "text": "`polite`: the information is useful but must not interrupt the"
+    },
+    {
+      "id": "ul_68482c187af9",
+      "text": "moves a document and remembers it"
+    },
+    {
+      "id": "ul_7a0e5ff47aa9",
+      "text": "does not let the plain text show through the envelope"
+    },
+    {
+      "id": "ul_96e5d106a845",
+      "text": "A documentation link, inside the text of a Mantine configuration warning."
+    },
+    {
+      "id": "ul_f6e4d166007e",
+      "text": "✖ No Chrome found. Set CHROME_PATH."
+    },
+    {
+      "id": "ul_09068d20e91a",
+      "text": "lists the keys and values of a store"
+    },
+    {
+      "id": "ul_349d4dbd3be4",
+      "text": "Redraws the component on every change to the index."
+    },
+    {
+      "id": "ul_952037c2e4c5",
+      "text": "Storage and encryption go through the core, never through a component."
+    },
+    {
+      "id": "ul_4b3ec7f0bafe",
+      "text": "Application precached, installable as a PWA"
+    },
+    {
+      "id": "ul_44b0fb761a03",
+      "text": "the product does not give yet."
+    },
+    {
+      "id": "ul_b3b96db809ca",
+      "text": "stores the content and returns it unchanged"
+    },
+    {
+      "id": "ul_ea9dd81174cf",
+      "text": "A complete document, content included. Loaded on open, one at a time."
+    },
+    {
+      "id": "ul_64206ce8453c",
+      "text": "The vault could not be opened"
+    },
+    {
+      "id": "ul_735495ec5a0a",
+      "text": "\n  Waivers that are no longer needed, to remove from ALLOWED:"
+    },
+    {
+      "id": "ul_12db701f6def",
+      "text": "returns undefined for a missing key"
+    },
+    {
+      "id": "ul_ce6056830d61",
+      "text": "places a new document after its siblings"
+    },
+    {
+      "id": "ul_d1ac4d446b60",
+      "text": "Phase 4 will add a `{ kind: 'passphrase'; kdf; wrappedKey }` variant. The\nsingle-branch union exists so that addition is purely additive, with no\nmigration of the `meta` format."
+    },
+    {
+      "id": "ul_17159a1dcba3",
+      "text": "A licence banner, inside a CSS comment."
+    },
+    {
+      "id": "ul_5eace249d582",
+      "text": "CI"
+    },
+    {
+      "id": "ul_74401cf90d45",
+      "text": "The CSP is the real barrier. If it disappears from the build, the canary"
+    },
+    {
+      "id": "ul_fb853bf3e3a7",
+      "text": "a malformed entry must make noise, not erase data."
+    },
+    {
+      "id": "ul_7e7aff33fffd",
+      "text": "here signals a serialisation bug, not an attack."
+    },
+    {
+      "id": "ul_9375bc6250f0",
+      "text": "it only makes the notes evictable after a long spell of inactivity."
+    },
+    {
+      "id": "ul_221f66cdd407",
+      "text": "reopens the vault with the same key"
+    },
+    {
+      "id": "ul_7f946cca4b13",
+      "text": "What the application shows while the vault is not open yet."
+    },
+    {
+      "id": "ul_ec81d6a96e07",
+      "text": "A second call would reset the key and make every note"
+    },
+    {
+      "id": "ul_97ad3146d3a6",
+      "text": "The key first: if writing `meta` fails, we end up with an"
+    },
+    {
+      "id": "ul_b806c8505feb",
+      "text": "the core exists and holds code"
+    },
+    {
+      "id": "ul_eada76998162",
+      "text": "come anywhere near that order of magnitude."
+    },
+    {
+      "id": "ul_98a2d4709122",
+      "text": "opening is cancelled and must be closed, otherwise two"
+    },
+    {
+      "id": "ul_d1c95e299344",
+      "text": "Copying A's content into B's location must fail: that is"
+    },
+    {
+      "id": "ul_60f72586741f",
+      "text": "Your pages are encrypted and kept on this device. Nothing is sent anywhere — the page\n        forbids itself any outgoing request."
+    },
+    {
+      "id": "ul_164f12034434",
+      "text": "Zero network"
+    },
+    {
+      "id": "ul_9014c7bd48ba",
+      "text": "Zero network"
+    },
+    {
+      "id": "ul_d988cbd0aba8",
+      "text": "freeze the application."
+    },
+    {
+      "id": "ul_7fb953a0106b",
+      "text": "Not enough room left between the two: we ask for a renumbering."
+    },
+    {
+      "id": "ul_931d6b6f6752",
+      "text": "the surface, backdrop included: we only close when the target is"
+    },
+    {
+      "id": "ul_ed3d2820fa09",
+      "text": "does not exist before it has been created"
+    },
+    {
+      "id": "ul_ada4737a6176",
+      "text": "A blocked database is eventually deleted once the last tab"
+    },
+    {
+      "id": "ul_715ba8829d15",
+      "text": "The vault's index: a single encrypted record describing everything except\nthe content of the documents."
+    },
+    {
+      "id": "ul_eea625f0e26e",
+      "text": "`erasableSyntaxOnly` forbids the latter, because they produce"
+    },
+    {
+      "id": "ul_e31345610ae2",
+      "text": "Without this guard, the whole branch would detach from the tree: it"
+    },
+    {
+      "id": "ul_c07419f122c1",
+      "text": "error for an identifier that simply no longer exists."
+    },
+    {
+      "id": "ul_0e5607ef26ff",
+      "text": "The page tree, in pure functions.\n*\nNothing here touches the disk: these functions take an index and return a\nnew one. That is what makes ordering, moves and cascading deletes testable\nin a few milliseconds, with no database and no browser.\n*\nOrder among siblings is a plain number. Inserting between two neighbours\ntakes the midpoint, which avoids rewriting the whole sibling list on every\ndrag. A floating-point number eventually runs out of precision after some\nfifty insertions at the same spot: when the gap becomes too small,\n`renumber` reassigns clean integers to the sibling list. The case is rare,\nbut it happens, and it is silently destructive if ignored."
+    },
+    {
+      "id": "ul_dd09f3b369e1",
+      "text": "\n  {0} waiver(s) in force:"
+    },
+    {
+      "id": "ul_ac1e12aa576a",
+      "text": "a localStorage key"
+    },
+    {
+      "id": "ul_1c2120f03b06",
+      "text": "Explicit rather than \"anything that is not a put is a delete\":"
+    },
+    {
+      "id": "ul_0a3f57e462d8",
+      "text": "Deliberately loud. If someone re-enables the picker one day, they"
+    },
+    {
+      "id": "ul_f9dc26f0cdf5",
+      "text": "Saved"
+    },
+    {
+      "id": "ul_d326a23c93f9",
+      "text": "the identifier of an existing document, and its parent must then point"
+    },
+    {
+      "id": "ul_abe29901aaf4",
+      "text": "A click on the backdrop closes. `<dialog>` receives the event for all of"
+    },
+    {
+      "id": "ul_5b4657cc9b11",
+      "text": "the code is 4271"
+    },
+    {
+      "id": "ul_77515aff0963",
+      "text": "future data that cannot be decrypted."
+    },
+    {
+      "id": "ul_2f53ffee3500",
+      "text": "Requested as soon as we open, before any write: a refusal blocks nothing,"
+    },
+    {
+      "id": "ul_3d2b7c1ae391",
+      "text": "moving"
+    },
+    {
+      "id": "ul_b5560204f383",
+      "text": "it contains"
+    },
+    {
+      "id": "ul_d18de6b6de19",
+      "text": "Content of a fresh document: an empty paragraph, ready for the caret."
+    },
+    {
+      "id": "ul_45cb109dcf76",
+      "text": "The editor's emoji picker downloads its data **and its images**"
+    },
+    {
+      "id": "ul_b7a57855c2da",
+      "text": "---------------------------------------------------------------- Surfaces\nTwo layers of neutrals: the content is the lightest surface (in light\nmode) or the highest one (in dark), while chrome and panels recede. A\nslightly warm cast — paper, not screen."
+    },
+    {
+      "id": "ul_a36a06063936",
+      "text": "1. The service worker first: it alone can write back into the caches."
+    },
+    {
+      "id": "ul_9e2124ed5978",
+      "text": "Light / dark theme.\n*\nRendering does not depend on this module: `tokens.css` already follows the\nsystem via `light-dark()`, so the page is painted correctly before React\neven starts. This module exists only to *force* a theme, by setting\n`data-theme` on <html>, which redefines `color-scheme` and nothing else."
+    },
+    {
+      "id": "ul_13986076a9b1",
+      "text": "does not loop on a corrupted tree"
+    },
+    {
+      "id": "ul_31c3a7aa9494",
+      "text": "Nook's design tokens.\n\nOne place defines a value. The colours use `light-dark()`: the light value\nand the dark value live side by side, and `color-scheme` decides. One\nimportant consequence: the theme follows the system from the first pixel\npainted, with no JavaScript.\n\nThat is a constraint, not a preference — the product's CSP forbids inline\nscripts, so the usual trick of a small anti-flash script in the <head> is\nimpossible here. Switching manually is done by setting `data-theme` on\n<html>, which does nothing but redefine `color-scheme`."
+    },
+    {
+      "id": "ul_8e237ebbf38b",
+      "text": "Two encryptions of the same text must be indistinguishable from one"
+    },
+    {
+      "id": "ul_c612b46dccfe",
+      "text": "-------------------------------------------------------------------- Text\nThree levels are enough. `faint` is reserved for metadata nobody reads\nactively (counters, timestamps) and never carries essential information,\nsince it sits close to the contrast threshold."
+    },
+    {
+      "id": "ul_6776cad4c456",
+      "text": "another to whoever reads the disk: without a fresh nonce they would be identical"
+    },
+    {
+      "id": "ul_58cac0e47506",
+      "text": "Survives a reload"
+    },
+    {
+      "id": "ul_7a12cc9bf735",
+      "text": "this variable to change."
+    },
+    {
+      "id": "ul_9fb3bf96adfa",
+      "text": "The emoji picker is removed from Nook: it downloaded its data from a CDN, "
+    },
+    {
+      "id": "ul_93e487bb1c4c",
+      "text": "The GCM tag will be valid: the content really is ours, but it is"
+    },
+    {
+      "id": "ul_709936969e40",
+      "text": "Add a page inside \"{0}\""
+    },
+    {
+      "id": "ul_da10d9ba45f8",
+      "text": "keeps the raw bytes intact"
+    },
+    {
+      "id": "ul_428505797c99",
+      "text": "{0} was aborted."
+    },
+    {
+      "id": "ul_4be263ef2931",
+      "text": "better to say it here than to discover it on a blank page in production."
+    },
+    {
+      "id": "ul_689ae5da0c6a",
+      "text": "refuses an envelope moved elsewhere"
+    },
+    {
+      "id": "ul_2e3efb5bd9d2",
+      "text": "restores identically after a wipe"
+    },
+    {
+      "id": "ul_11ac5cf5b1a6",
+      "text": "The editor, dressed in Nook's colours.\n\nBlockNote exposes its colours as CSS variables. We redefine them from our\nown tokens, for both schemes at once: our tokens already switch between\nlight and dark on their own, so pointing both at the same variables is\nenough and saves maintaining two palettes.\n\nWe touch only colours, radii and typography. The editor's behaviours — drag\nhandle, slash menu, multi-block selection — stay the library's: rewriting\nthem would produce exactly the wobbly affordances we are trying to avoid."
+    },
+    {
+      "id": "ul_3c81be987848",
+      "text": "browser in a form JavaScript cannot read."
+    },
+    {
+      "id": "ul_e5685e056c59",
+      "text": "permanently. This\n          action cannot be undone."
+    },
+    {
+      "id": "ul_a93f421767e4",
+      "text": "Position among its siblings. See `model/tree.ts` for the mechanics."
+    },
+    {
+      "id": "ul_c68ec72d0e26",
+      "text": "reorders among siblings"
+    },
+    {
+      "id": "ul_a215c4d183b2",
+      "text": "is not guaranteed there when the system closes the tab."
+    },
+    {
+      "id": "ul_87aa97462335",
+      "text": "The index is authoritative for metadata: it is what"
+    },
+    {
+      "id": "ul_cfa5c93b7f32",
+      "text": "Wikilinks, backlinks, tags, search, command palette, daily notes"
+    },
+    {
+      "id": "ul_6866231f3653",
+      "text": "15px — editor body"
+    },
+    {
+      "id": "ul_bb72f951a067",
+      "text": "the empty state greets the user"
+    },
+    {
+      "id": "ul_240c92aa1281",
+      "text": "mixes writes and deletes"
+    },
+    {
+      "id": "ul_fff5896e04b8",
+      "text": "an interface module"
+    },
+    {
+      "id": "ul_5b31f5c39b4c",
+      "text": "says plainly what happens when the key has vanished"
+    },
+    {
+      "id": "ul_a8d5e4b0f3a9",
+      "text": "Database, caches, service worker and storages destroyed, then an inventory of what remains"
+    },
+    {
+      "id": "ul_febd9ebff175",
+      "text": "Databases: typed properties, table / kanban / calendar views"
+    },
+    {
+      "id": "ul_73819208999b",
+      "text": "will be deleted"
+    },
+    {
+      "id": "ul_4f5bb793143d",
+      "text": "Untitled"
+    },
+    {
+      "id": "ul_b41856aaadce",
+      "text": "The non-extractable `CryptoKey` itself, in \"device\" mode."
+    },
+    {
+      "id": "ul_cb968f5ddffc",
+      "text": "The promise hardest to verify any other way: what would be seen by"
+    },
+    {
+      "id": "ul_76c5715d8e0d",
+      "text": "The content of document \"{0}\" cannot be found."
+    },
+    {
+      "id": "ul_b7e4e6809938",
+      "text": "An inline script would be blocked by `script-src 'self'` anyway, but"
+    },
+    {
+      "id": "ul_45d3f2eb87f5",
+      "text": "The editor fills the whole width of the reading column; it is the parent\ncontainer that sets the measure, not the library."
+    },
+    {
+      "id": "ul_a4dfdf031969",
+      "text": "What has just arrived is newer than what we were trying to write:"
+    },
+    {
+      "id": "ul_0348352fc32a",
+      "text": "typing reaches the editor"
+    },
+    {
+      "id": "ul_4333ad9b0177",
+      "text": "Unrecoverable case: the message must point towards an export rather than"
+    },
+    {
+      "id": "ul_050379f6c011",
+      "text": "A cycle should never exist, but a damaged index must not"
+    },
+    {
+      "id": "ul_5288d7088423",
+      "text": "Below this, two positions are no longer reliably distinguishable."
+    },
+    {
+      "id": "ul_5e256b8e0688",
+      "text": "would collapse in silence: this test locks that assumption down."
+    },
+    {
+      "id": "ul_3661ca3e04c9",
+      "text": "Frozen timestamp: the creation date must be the one we supplied."
+    },
+    {
+      "id": "ul_e03bd75e0fb1",
+      "text": "A's notes"
+    },
+    {
+      "id": "ul_315eef0e886d",
+      "text": "useVault must be called inside a <VaultProvider>."
+    },
+    {
+      "id": "ul_894f6aa515ef",
+      "text": "A remapping pass first: an imported document may carry"
+    },
+    {
+      "id": "ul_0d1884f3cef8",
+      "text": "renumbers the sibling list when room runs out"
+    },
+    {
+      "id": "ul_0b714840a7b7",
+      "text": "creates a document and reads it back"
+    },
+    {
+      "id": "ul_355bcfd47afd",
+      "text": "Menus and floating bubbles take our elevation, to stay consistent with the\ndialogs and the palette."
+    },
+    {
+      "id": "ul_c67e0cbf5c83",
+      "text": "A random nonce on every write. AES-GCM tolerates roughly 2³² encryptions"
+    },
+    {
+      "id": "ul_5ef03edc082b",
+      "text": "AES-GCM requires a 96-bit nonce; it is also the only recommended size."
+    },
+    {
+      "id": "ul_6d60bc6b4b97",
+      "text": "Destroys everything, then returns an inventory of what actually remains."
+    },
+    {
+      "id": "ul_476fcbae8a83",
+      "text": "refuses to overwrite an existing vault"
+    },
+    {
+      "id": "ul_50e76345652a",
+      "text": "The point that matters: the copy of the parent really picked up the copy of"
+    },
+    {
+      "id": "ul_c6e597b15093",
+      "text": "the editor, loaded on demand, arrives"
+    },
+    {
+      "id": "ul_4e72606dd526",
+      "text": "@param context Location of the record, for example `docs/<id>`.\n  The same value will have to be supplied when decrypting."
+    },
+    {
+      "id": "ul_11101dfc2f92",
+      "text": "browser, and to rebuild the interface without touching the data."
+    },
+    {
+      "id": "ul_03e600e22e39",
+      "text": "emulation, any simulated typing would go nowhere."
+    },
+    {
+      "id": "ul_006cb398386b",
+      "text": "Without this guard, every test below would pass against an"
+    },
+    {
+      "id": "ul_d82c6144fc4b",
+      "text": "browsers without `modulepreload`. No target of this project needs it,"
+    },
+    {
+      "id": "ul_42435d15ca21",
+      "text": "`Input.insertText` takes the path of real typing; a bare `keyDown`"
+    },
+    {
+      "id": "ul_16246e6a3455",
+      "text": "Debounced autosave.\n*\nThere is no \"Save\" button in Nook, so this module carries the promise of\nlosing nothing. Three moments matter, and forgetting them is the usual way\nto lose the last paragraph written:\n*\n  - after a pause in typing (the common case);\n  - when the tab goes to the background or closes, because a pending timer\n    will never fire;\n  - on unmount, typically when changing page.\n*\nOn failure, the changes go back into the queue rather than being thrown\naway: the next keystroke will retry, and the state moves to `error` so the\ninterface can say so."
+    },
+    {
+      "id": "ul_3b2578e232a3",
+      "text": "Imported notebook"
+    },
+    {
+      "id": "ul_23ad4d8ab49f",
+      "text": "If the open page has just disappeared, the editor must be cleared rather"
+    },
+    {
+      "id": "ul_8fd0caf0cd43",
+      "text": "The sub-path is derived from the repository name: renaming your fork is enough, there is"
+    },
+    {
+      "id": "ul_2017222aef09",
+      "text": "If another Nook window is open, close it and reload."
+    },
+    {
+      "id": "ul_57901338385f",
+      "text": "`IDBRequest` exposes its results through `on*` properties: that is the\ncanonical IndexedDB API, and each request is single-use, so the usual\narguments in favour of `addEventListener` (several subscribers,\n`{ once: true }`) do not apply here."
+    },
+    {
+      "id": "ul_3d347b792294",
+      "text": "Record describing the vault's protection. Readable without the secret."
+    },
+    {
+      "id": "ul_b32a5bef912c",
+      "text": "and we prefer a bundle where the word `fetch` appears nowhere."
+    },
+    {
+      "id": "ul_8ccc1caa9939",
+      "text": "A documentation link, inside the text of a schema error raised by ProseMirror."
+    },
+    {
+      "id": "ul_bd2c60b8d572",
+      "text": "HTML attributes come out of the build with their quotes escaped."
+    },
+    {
+      "id": "ul_803aa5197446",
+      "text": "reading the inventory"
+    },
+    {
+      "id": "ul_5ea5ebf92a23",
+      "text": "End-to-end check, against the build that is actually served.\n*\nThe unit tests cover the core without a browser; this one does the thing\nonly a real browser can prove: you write a note, you reload the page, and\nit is still there — while having left nothing but unreadable bytes on\ndisk.\n*\nIt drives Chrome over CDP. Node 24 ships a native WebSocket client, so no\nbrowser-testing dependency enters the project.\n*\n  pnpm build && pnpm smoke"
+    },
+    {
+      "id": "ul_856af2c2c3d4",
+      "text": "reverse order would produce a vault that is declared but has no key, so"
+    },
+    {
+      "id": "ul_614de30eea07",
+      "text": "typing in progress in order to announce it."
+    },
+    {
+      "id": "ul_ea1752d3e08a",
+      "text": "returns exactly what it was given"
+    },
+    {
+      "id": "ul_7a9e65642064",
+      "text": "We read the database back without going through the vault: this is what"
+    },
+    {
+      "id": "ul_ae73a387f906",
+      "text": "---------------------------------------------------------------- Elevation\nTwo shadows only, and they exist purely to lift an element out of the flow\n(menu, dialog). Nothing decorative carries a shadow."
+    }
+  ],
+  "insertions": [],
+  "report": {
+    "accepted": [
+      {
+        "groupId": "g_007fc979eb70",
+        "text": "✔ {0} served files inspected, no network egress possible.",
+        "violations": []
+      },
+      {
+        "groupId": "g_009159899c51",
+        "text": "Same here: nothing to clear if access is denied.",
+        "violations": []
+      },
+      {
+        "groupId": "g_0263031d927d",
+        "text": "a service worker",
+        "violations": []
+      },
+      {
+        "groupId": "g_027804696ea3",
+        "text": "the interface never talks directly to IndexedDB or WebCrypto",
+        "violations": []
+      },
+      {
+        "groupId": "g_02b15dea3f36",
+        "text": "Ask the browser not to evict our data.\n*\nWithout this, Safari clears the storage of an origin left idle for a few\nweeks — a notebook you don't open over the holidays can therefore vanish.\nThe request may be denied without explanation; the caller should use that\nto encourage exporting, not to panic.",
+        "violations": []
+      },
+      {
+        "groupId": "g_02dfb0803e1e",
+        "text": "Explicit exemptions.\n*\n`file` accepts `*`. `match` is the substring found. `reason` must explain\nwhy the finding cannot produce a request — an entry without a reason is\nignored, so the check will fail.",
+        "violations": []
+      },
+      {
+        "groupId": "g_0330f7aac077",
+        "text": "Nook — local notes",
+        "violations": []
+      },
+      {
+        "groupId": "g_037761e75a8f",
+        "text": "Deletes a document and its whole subtree. Without the cascade, child\npages would stay in the database referencing a parent that no longer\nexists, invisible and never recoverable.",
+        "violations": []
+      },
+      {
+        "groupId": "g_037b74b0cb75",
+        "text": "The page tree.\n*\nEvery row is a button, not a clickable `<div>`: keyboard navigation and\nscreen-reader announcements depend on it. The disclosure chevron is a\nseparate control from the row, otherwise expanding a branch would also\nchange the page on screen.",
+        "violations": []
+      },
+      {
+        "groupId": "g_04ccdc78a078",
+        "text": "does not report empty while %s remains",
+        "violations": []
+      },
+      {
+        "groupId": "g_053c733d173c",
+        "text": "GitHub Pages deployment",
+        "violations": []
+      },
+      {
+        "groupId": "g_05876a8fae6f",
+        "text": "Batched write of {0} record(s)",
+        "violations": []
+      },
+      {
+        "groupId": "g_0687816267e8",
+        "text": "Open the app",
+        "violations": []
+      },
+      {
+        "groupId": "g_084cbe003a6e",
+        "text": "`indexedDB.databases()` is not available everywhere. When it is missing we",
+        "violations": []
+      },
+      {
+        "groupId": "g_090ca137b838",
+        "text": "BlockNote's schema generics do not satisfy",
+        "violations": []
+      },
+      {
+        "groupId": "g_093febf6db18",
+        "text": "Block editor, page tree, autosave",
+        "violations": []
+      },
+      {
+        "groupId": "g_099e7a7d545c",
+        "text": "The GCM tag was verified: the content really is ours. Invalid JSON here",
+        "violations": []
+      },
+      {
+        "groupId": "g_09b2ae396233",
+        "text": "The core must stay independent of {0}.",
+        "violations": []
+      },
+      {
+        "groupId": "g_0aabd28a8509",
+        "text": "Types",
+        "violations": [
+          {
+            "validator": "V4",
+            "severity": "warn",
+            "message": "the translation is identical to the source — correct for a cognate or a product name, suspect otherwise"
+          }
+        ]
+      },
+      {
+        "groupId": "g_0b74686e46ad",
+        "text": "sealed envelope",
+        "violations": []
+      },
+      {
+        "groupId": "g_0c28914e64dc",
+        "text": "is configured so that no outgoing request is possible.",
+        "violations": []
+      },
+      {
+        "groupId": "g_0c377a37c3a1",
+        "text": "nothing to change in the code.",
+        "violations": []
+      },
+      {
+        "groupId": "g_0c90c314e746",
+        "text": "It works offline",
+        "violations": []
+      },
+      {
+        "groupId": "g_0c9a43f1725c",
+        "text": "refuses a vault written by a newer version",
+        "violations": []
+      },
+      {
+        "groupId": "g_0d57de09b4cd",
+        "text": "the core never imports $why",
+        "violations": []
+      },
+      {
+        "groupId": "g_0de465545640",
+        "text": "A few characters around a finding, so a human can judge it.",
+        "violations": []
+      },
+      {
+        "groupId": "g_0e20904db54d",
+        "text": "than block it indefinitely.",
+        "violations": []
+      },
+      {
+        "groupId": "g_0ef37c983175",
+        "text": "A headless page believes it is in the background and refuses focus: without",
+        "violations": []
+      },
+      {
+        "groupId": "g_0f23293d322d",
+        "text": "Extracts every readable string from a content tree, whatever its shape.\n*\nDeliberately structural rather than semantic: we harvest every string in\nthe JSON tree without knowing anything about the editor's schema. That is\nwhat keeps search working the day the content format changes.",
+        "violations": []
+      },
+      {
+        "groupId": "g_0f613313a11d",
+        "text": "reads back what was written",
+        "violations": []
+      },
+      {
+        "groupId": "g_10288f22806a",
+        "text": "No pages yet.",
+        "violations": []
+      },
+      {
+        "groupId": "g_11563e1da6a4",
+        "text": "IndexedDB or WebCrypto. That boundary is not a style convention:",
+        "violations": []
+      },
+      {
+        "groupId": "g_11cec9f00ab1",
+        "text": "✖ No Chromium browser found to rasterise the icons.",
+        "violations": []
+      },
+      {
+        "groupId": "g_1386f61595bd",
+        "text": "Another tab is holding an older version open. Without this message,",
+        "violations": []
+      },
+      {
+        "groupId": "g_13a53623b373",
+        "text": "Waits for a URL to answer, rather than betting on a fixed delay.",
+        "violations": []
+      },
+      {
+        "groupId": "g_13b840fa6bbd",
+        "text": "Binds the envelope to its location. The version is part of the\nauthenticated data: a future format change cannot be passed off as a\nrecord of the old one.",
+        "violations": []
+      },
+      {
+        "groupId": "g_1406645de654",
+        "text": "Lifecycle of the master key.\n*\nAll user data is encrypted with a single AES-GCM-256 master key. This\nmodule decides how that key is protected at rest, and nothing else.\n*\nOne structural decision: **the master key is never extractable**. The\nbrowser handles it without ever letting JavaScript read its bytes. The\nprice is explicit — it cannot be re-wrapped to move from one protection\nmode to another. Changing protection will therefore mean generating a new\nkey and re-encrypting the data (phase 4). That is not a workaround:\nrotating the key when protection changes is exactly what we want, since\nthe old key disappears with it.\n*\nWhat \"device\" mode protects, and what it does not:\n  ✔ a raw copy of the profile or the disk — the records are unusable\n    without the key, which exists nowhere in readable form;\n  ✘ someone who launches *your* browser with *your* session — they get\n    the same key you do. Only a passphrase answers that threat.\nThe interface must say both, without rounding off.",
+        "violations": []
+      },
+      {
+        "groupId": "g_159fc131d9da",
+        "text": "BlockNote refuses an empty document: it needs at least one block. The key",
+        "violations": []
+      },
+      {
+        "groupId": "g_15babbc525a9",
+        "text": "clears one store without touching the others",
+        "violations": []
+      },
+      {
+        "groupId": "g_15c0249a914b",
+        "text": "------------------------------------------------------------ Typography\nOne family for everything: headings, labels, body, data. The system\nstack, which is the native choice for product UI and the only one that\nguarantees zero bytes fetched from the network.\n\nFixed rem scale, ratio ~1.12. No `clamp()`: the reader works at a\nconstant density, and a fluid heading that shrinks inside a narrow panel\nis a defect, not an adaptation.",
+        "violations": []
+      },
+      {
+        "groupId": "g_15d6b262c3be",
+        "text": "batched write",
+        "violations": []
+      },
+      {
+        "groupId": "g_1682bf6a9d3e",
+        "text": "is worth nothing: we fail even with no network call detected.",
+        "violations": []
+      },
+      {
+        "groupId": "g_16a57f236c36",
+        "text": "A feature removed on purpose",
+        "violations": []
+      },
+      {
+        "groupId": "g_16dbf124dd23",
+        "text": "is not JSON. That is a serialisation bug, and the message should say so.",
+        "violations": []
+      },
+      {
+        "groupId": "g_181c7ef837ee",
+        "text": "The vault — the only API the interface consumes.\n*\nEverything underneath (IndexedDB, AES-GCM, the tree, the migrations) is a\ndetail `src/ui` is not allowed to know. A test enforces it: see\n`core/architecture.test.ts`.\n*\nTwo guarantees are kept here, and nowhere else:\n*\n1. **The index and the documents never diverge.** Every mutation encrypts\n   what it must write, *then* writes the document and the index in a\n   single transaction. A crash at the wrong moment leaves the previous\n   state, never an index referencing a missing document.\n*\n2. **The index lives in memory, decrypted once.** The sidebar, the command\n   palette and the breadcrumbs therefore never have to decrypt a document\n   in order to render.",
+        "violations": []
+      },
+      {
+        "groupId": "g_188294c29d6f",
+        "text": "Product meeting",
+        "violations": []
+      },
+      {
+        "groupId": "g_188f7667e682",
+        "text": "replace erases what was there",
+        "violations": []
+      },
+      {
+        "groupId": "g_18fcdf9251e2",
+        "text": "From the most distant ancestor down to the direct parent.",
+        "violations": []
+      },
+      {
+        "groupId": "g_19cd60b4ce72",
+        "text": "`exactOptionalPropertyTypes`, the two are not the same thing — and it",
+        "violations": []
+      },
+      {
+        "groupId": "g_19dd80239f19",
+        "text": "Local-first note taking. Your data never leaves your machine.",
+        "violations": []
+      },
+      {
+        "groupId": "g_1a8aa9697773",
+        "text": "index.html contains an inline script, which the CSP will block",
+        "violations": []
+      },
+      {
+        "groupId": "g_1a9a9c1078a9",
+        "text": "Fork this repository.",
+        "violations": []
+      },
+      {
+        "groupId": "g_1a9c0a7b7102",
+        "text": "refuses a tampered envelope",
+        "violations": []
+      },
+      {
+        "groupId": "g_1aba848aae73",
+        "text": "The returned inventory is read back afterwards: it is an observation, not",
+        "violations": []
+      },
+      {
+        "groupId": "g_1b1738acb74d",
+        "text": "Reading the keys of {0}",
+        "violations": []
+      },
+      {
+        "groupId": "g_1b2ac15fef4e",
+        "text": "A string inside a minified React error message: the URL is concatenated then printed to the console, never requested.",
+        "violations": []
+      },
+      {
+        "groupId": "g_1b898a82d9d1",
+        "text": "`vitest/config` re-exports Vite's `defineConfig` while also accepting the",
+        "violations": []
+      },
+      {
+        "groupId": "g_1c751107fb64",
+        "text": "The tokens become Tailwind utilities. `inline` makes the classes emit\n`var(--nook-…)` rather than the literal value: a `bg-surface` class\ntherefore follows the theme switch without being recompiled.\n\nText colours are called `ink` rather than `text`, otherwise `text-muted`\nwould collide with the font-size namespace.",
+        "violations": []
+      },
+      {
+        "groupId": "g_1c983a92b913",
+        "text": "Writing {0}/{1}",
+        "violations": []
+      },
+      {
+        "groupId": "g_1ccc387ec6f1",
+        "text": "4. The simple storages (theme preference, and nothing sensitive).",
+        "violations": []
+      },
+      {
+        "groupId": "g_1ccfa8802e92",
+        "text": "The save function changes identity on every render; we keep the latest one",
+        "violations": []
+      },
+      {
+        "groupId": "g_1e76073e3570",
+        "text": "Migrations, indexed by target version. Entry 0 moves to v1. Adding a\nversion means adding a function here and bumping DB_VERSION; existing\ndatabases replay only the steps they are missing.",
+        "violations": []
+      },
+      {
+        "groupId": "g_1eefb08e4b91",
+        "text": "The application's icons, drawn here rather than pulled from a library:\nthere are few of them, and one coherent family (same 24 grid, same stroke\nweight, same rounded terminals) beats an assortment.",
+        "violations": []
+      },
+      {
+        "groupId": "g_1f27ed5c1191",
+        "text": "- `meta`   : schema version, derivation salt, wrapped master key.\n             The only store readable without unlocking — it holds nothing\n             usable without the secret.\n- `index`  : a single encrypted record (tree, titles, tags, links, search\n             index). Decrypted on unlock.\n- `docs`   : one encrypted record per document.\n- `blobs`  : one encrypted record per image or attachment.",
+        "violations": []
+      },
+      {
+        "groupId": "g_1f5af833864a",
+        "text": "import() of an absolute URL",
+        "violations": []
+      },
+      {
+        "groupId": "g_1fa8cb79c30d",
+        "text": "XML namespaces and loopback addresses: these are identifiers, not\naddresses. An SVG references `www.w3.org/2000/svg` without anything ever\nbeing downloaded.",
+        "violations": []
+      },
+      {
+        "groupId": "g_1feae2c0c5ca",
+        "text": "**What it does not protect:** someone who opens _your_ browser with",
+        "violations": []
+      },
+      {
+        "groupId": "g_207164743fb1",
+        "text": "If structured cloning degraded Uint8Array, the whole encryption scheme",
+        "violations": []
+      },
+      {
+        "groupId": "g_208ce9c5d4e0",
+        "text": "recovers everything after closing and reopening",
+        "violations": []
+      },
+      {
+        "groupId": "g_20cc4f810b98",
+        "text": "Cannot decrypt: wrong key, altered data, or a relocated record.",
+        "violations": []
+      },
+      {
+        "groupId": "g_20f91eb83956",
+        "text": "fails. The message therefore stays deliberately broad.",
+        "violations": []
+      },
+      {
+        "groupId": "g_2149ea5f8a15",
+        "text": "must not mask the signal from types, lint and unit tests.",
+        "violations": []
+      },
+      {
+        "groupId": "g_217d1ba0a9a8",
+        "text": "Today, then, Nook can create pages, nest them, write in them and find them",
+        "violations": []
+      },
+      {
+        "groupId": "g_2193f8bfb7b0",
+        "text": "and would reveal that no change had taken place.",
+        "violations": []
+      },
+      {
+        "groupId": "g_229b4a7b9db6",
+        "text": "round-trips JSON",
+        "violations": []
+      },
+      {
+        "groupId": "g_2356fd0474f5",
+        "text": "Format",
+        "violations": []
+      },
+      {
+        "groupId": "g_245bebf22128",
+        "text": "leaves the other branches untouched",
+        "violations": []
+      },
+      {
+        "groupId": "g_2487eb1bbaa1",
+        "text": "In strict mode React mounts the effect twice: the first",
+        "violations": []
+      },
+      {
+        "groupId": "g_24e38413ef01",
+        "text": "fake-indexeddb shares a single origin across all tests: each test therefore\nopens its own database so that none depends on execution order.",
+        "violations": []
+      },
+      {
+        "groupId": "g_2610694926d3",
+        "text": "Nook is a note-taking tool that runs entirely inside your",
+        "violations": []
+      },
+      {
+        "groupId": "g_27101525b1d6",
+        "text": "the title is found again after a reload",
+        "violations": []
+      },
+      {
+        "groupId": "g_2718e785a286",
+        "text": "the user sees an application that never starts, with no explanation.",
+        "violations": []
+      },
+      {
+        "groupId": "g_2755d9b44613",
+        "text": "CI inspects the published bundle and fails if network code gets in ([the guard][cnn])",
+        "violations": []
+      },
+      {
+        "groupId": "g_27f0062332c7",
+        "text": "A view over an ordinary `ArrayBuffer`.\n*\n`Uint8Array` has been generic over its buffer since TypeScript 5.7, in\norder to distinguish memory shared between threads (`SharedArrayBuffer`) —\nwhich WebCrypto refuses. The alias avoids repeating that on every\nsignature, and makes any attempt to encrypt a shared buffer fail to\ncompile.",
+        "violations": []
+      },
+      {
+        "groupId": "g_28e8f3fcdf8c",
+        "text": "If another tab asks for an upgrade, we release the database rather",
+        "violations": []
+      },
+      {
+        "groupId": "g_292d16993da7",
+        "text": "A notebook that talks to nobody.",
+        "violations": []
+      },
+      {
+        "groupId": "g_29f36ce1ac20",
+        "text": "The editor alone accounts for most of the application's weight. Taking it\nout of the initial load makes the sidebar appear immediately, and its\nchunk is only fetched when a page is opened. The service worker having\nprecached it, the application stays usable offline.",
+        "violations": []
+      },
+      {
+        "groupId": "g_2a1cfb92c96f",
+        "text": "should land on this explanation, not on an empty menu.",
+        "violations": []
+      },
+      {
+        "groupId": "g_2ef33a64e429",
+        "text": "The site is served under the repository name. A fork that renames it has",
+        "violations": []
+      },
+      {
+        "groupId": "g_2f437a43d002",
+        "text": "document.body.innerText.includes('survive a reload')",
+        "violations": []
+      },
+      {
+        "groupId": "g_3062b6321d6a",
+        "text": "the child, and not the original child.",
+        "violations": []
+      },
+      {
+        "groupId": "g_30ce67e56967",
+        "text": "refuses an envelope from another version of the format",
+        "violations": []
+      },
+      {
+        "groupId": "g_316bf7a7e878",
+        "text": "remain, nor deny it; the interface must say what it knows, and the",
+        "violations": []
+      },
+      {
+        "groupId": "g_31c964adb0a4",
+        "text": "breaks a tie between siblings of equal order by creation date",
+        "violations": []
+      },
+      {
+        "groupId": "g_31d3b56fdd7d",
+        "text": "creates every expected store",
+        "violations": []
+      },
+      {
+        "groupId": "g_32119eaef84a",
+        "text": "`test` key, which keeps the project's configuration in a single file.",
+        "violations": []
+      },
+      {
+        "groupId": "g_330524829955",
+        "text": "A keystroke during the write may have refilled the queue: do not",
+        "violations": []
+      },
+      {
+        "groupId": "g_33c8221a152f",
+        "text": "The core talks to IndexedDB and WebCrypto. Node 20+ provides WebCrypto on\n`globalThis.crypto`; IndexedDB, it does not. `fake-indexeddb/auto` installs\na spec-compliant implementation, which lets us test the real storage rather\nthan a test double that would lie about its behaviour.",
+        "violations": []
+      },
+      {
+        "groupId": "g_343705407ffa",
+        "text": "suggest a passing incident.",
+        "violations": []
+      },
+      {
+        "groupId": "g_3455fa212550",
+        "text": "The interface arrives in phase 2; until then there is nothing to check.",
+        "violations": []
+      },
+      {
+        "groupId": "g_35b7d5f093c8",
+        "text": "We re-import into the original vault: every identifier already exists.",
+        "violations": []
+      },
+      {
+        "groupId": "g_3692d057b9c0",
+        "text": "End to end",
+        "violations": []
+      },
+      {
+        "groupId": "g_36e30ca3677d",
+        "text": "Thursday, without fail.",
+        "violations": []
+      },
+      {
+        "groupId": "g_3778bea16185",
+        "text": "One deployment at a time, without cancelling the one in flight: cutting",
+        "violations": []
+      },
+      {
+        "groupId": "g_37bb5d1f7aea",
+        "text": "------------------------------------------------------------------ Accent\nA single accent colour, in terracotta. It serves exactly three things:\nthe primary action, the current selection, the focus ring. Never\ndecorative.",
+        "violations": []
+      },
+      {
+        "groupId": "g_37e1c3bc8262",
+        "text": "Private browsing, storage blocked: the system theme will do.",
+        "violations": []
+      },
+      {
+        "groupId": "g_398f2bd3b4bf",
+        "text": "do not lose this",
+        "violations": []
+      },
+      {
+        "groupId": "g_3a09ae2bab8b",
+        "text": "~68 characters in the editor",
+        "violations": []
+      },
+      {
+        "groupId": "g_3a11bba1fb27",
+        "text": "Actions revealed on hover, but always reachable by keyboard:\n            `focus-within` makes them visible as soon as one takes focus. ",
+        "violations": []
+      },
+      {
+        "groupId": "g_3a85831b8afe",
+        "text": "Nook — local-first note taking. Your data stays encrypted on your machine.",
+        "violations": []
+      },
+      {
+        "groupId": "g_3b38706039e4",
+        "text": "Settings → Pages → Source: **GitHub Actions**.",
+        "violations": []
+      },
+      {
+        "groupId": "g_3b5f2200a941",
+        "text": "✔ CSP present, with connect-src 'none'.",
+        "violations": []
+      },
+      {
+        "groupId": "g_3b82c69ee825",
+        "text": "Every descendant, depth first. Does not include `id`.",
+        "violations": []
+      },
+      {
+        "groupId": "g_3c13d94a2022",
+        "text": "This text must survive a reload.",
+        "violations": []
+      },
+      {
+        "groupId": "g_3cd98316329a",
+        "text": "draws a fresh nonce on every write",
+        "violations": []
+      },
+      {
+        "groupId": "g_3ceeec080e10",
+        "text": "is omitted rather than passed as `undefined` — with",
+        "violations": []
+      },
+      {
+        "groupId": "g_3e51f83920df",
+        "text": "The real scenario: you export, you erase, you re-import.",
+        "violations": []
+      },
+      {
+        "groupId": "g_3eda46704e4b",
+        "text": "code at runtime and therefore cannot simply be erased by a transpiler",
+        "violations": []
+      },
+      {
+        "groupId": "g_3f9b2151c407",
+        "text": "a sessionStorage key",
+        "violations": []
+      },
+      {
+        "groupId": "g_406abfaed601",
+        "text": "refuses to move a page into its own subtree",
+        "violations": []
+      },
+      {
+        "groupId": "g_409cdf4fbf0f",
+        "text": "recognises the shape of an envelope",
+        "violations": []
+      },
+      {
+        "groupId": "g_414f8ccda09a",
+        "text": "produces a key JavaScript cannot read",
+        "violations": []
+      },
+      {
+        "groupId": "g_41d2bd7a9b43",
+        "text": "serves the precached files offline.",
+        "violations": []
+      },
+      {
+        "groupId": "g_4202b5a27c48",
+        "text": "APIs capable of emitting an outgoing request.",
+        "violations": []
+      },
+      {
+        "groupId": "g_42107135562f",
+        "text": "with the library rather than paid for by all the code.",
+        "violations": []
+      },
+      {
+        "groupId": "g_42b4b53458eb",
+        "text": "an option, the library is [replaced at build time][stub]: the network",
+        "violations": []
+      },
+      {
+        "groupId": "g_42bfe59d5b89",
+        "text": "puts it last when no position is requested",
+        "violations": []
+      },
+      {
+        "groupId": "g_434a25c5209f",
+        "text": "13px — interface default",
+        "violations": []
+      },
+      {
+        "groupId": "g_43c144f04524",
+        "text": "deletes a key",
+        "violations": []
+      },
+      {
+        "groupId": "g_4403dd57bb84",
+        "text": "Nobody disabled it by accident",
+        "violations": []
+      },
+      {
+        "groupId": "g_449d3393e948",
+        "text": "refuses a parent that does not exist",
+        "violations": []
+      },
+      {
+        "groupId": "g_4520d30e89b9",
+        "text": "Encrypted vault: storage, AES-GCM envelopes, key lifecycle, wiping",
+        "violations": []
+      },
+      {
+        "groupId": "g_4541692e8016",
+        "text": "enabled. The cast is confined to this single boundary",
+        "violations": []
+      },
+      {
+        "groupId": "g_460ad0ab07de",
+        "text": "a publication half-way through would leave the site inconsistent.",
+        "violations": []
+      },
+      {
+        "groupId": "g_465866c97e06",
+        "text": "per key with 96-bit nonces drawn at random; a notebook will never",
+        "violations": []
+      },
+      {
+        "groupId": "g_469b5b15dc0f",
+        "text": "as in any document editor.",
+        "violations": []
+      },
+      {
+        "groupId": "g_46af5be1d4ec",
+        "text": "`connect-src 'none'` in the CSP — the browser refuses every outgoing request",
+        "violations": []
+      },
+      {
+        "groupId": "g_46f4e33f6533",
+        "text": "The theme actually painted, once \"system\" is resolved.\n*\nThe CSS tokens do not need this information — `light-dark()` handles it. It\nis for third-party components that do want a word: the editor is one, and\nexpects `\"light\"` or `\"dark\"` as a prop.",
+        "violations": []
+      },
+      {
+        "groupId": "g_46fce05719f5",
+        "text": "What Nook protects, and what it does not",
+        "violations": []
+      },
+      {
+        "groupId": "g_47a422217efb",
+        "text": "keeps two devices' vaults apart",
+        "violations": []
+      },
+      {
+        "groupId": "g_48bc2ba8dbb4",
+        "text": "report \"saved\" while something is still queued.",
+        "violations": []
+      },
+      {
+        "groupId": "g_4918054ec0f6",
+        "text": "actually served and fails if code capable of emitting a request",
+        "violations": []
+      },
+      {
+        "groupId": "g_494402ec86f2",
+        "text": "Deliberately silent: opening the vault takes a few milliseconds,",
+        "violations": []
+      },
+      {
+        "groupId": "g_494f42136542",
+        "text": "Modules removed from the bundle because they emit network requests.\n*\nDisabling them by configuration would not stop them being served; the\nalias guarantees they do not exist in what the browser receives. See\n`src/ui/editor/emoji-mart-absent.ts` for the full reasoning.",
+        "violations": []
+      },
+      {
+        "groupId": "g_497cbc7dd226",
+        "text": "Opens an existing vault. Returns `undefined` when no vault exists yet —\nthe caller then decides whether to create one.",
+        "violations": []
+      },
+      {
+        "groupId": "g_4a72cf59a3d4",
+        "text": "Create the first one",
+        "violations": []
+      },
+      {
+        "groupId": "g_4aeeb2b68358",
+        "text": "Opens this device's vault, or creates it on the very first launch.",
+        "violations": []
+      },
+      {
+        "groupId": "g_4b769b94c6ec",
+        "text": "A component, not a render function: an arrow function written in the\nparent's JSX would create a brand-new component type on every render, and\nReact would remount its whole subtree each time. ",
+        "violations": []
+      },
+      {
+        "groupId": "g_4bdc9e3b7b45",
+        "text": "---------------------------------------------------------------- Motion\n120–220 ms. Motion signals a change of state; it does not narrate.",
+        "violations": []
+      },
+      {
+        "groupId": "g_4c41c231b067",
+        "text": "The theme stays applied for the session, simply not remembered.",
+        "violations": []
+      },
+      {
+        "groupId": "g_4cc6b0e55f8f",
+        "text": "and never has anything to receive back.",
+        "violations": []
+      },
+      {
+        "groupId": "g_4d7a5a459096",
+        "text": "A URL quoted inside the text of a Workbox `console.warn`.",
+        "violations": []
+      },
+      {
+        "groupId": "g_4e75142dcf7b",
+        "text": "orphan key and no vault — a detectable, repairable state. The reverse",
+        "violations": []
+      },
+      {
+        "groupId": "g_4e9d3cf41a92",
+        "text": "browser profile or a backup gets nothing but unusable bytes.",
+        "violations": []
+      },
+      {
+        "groupId": "g_4f3d9d8c0baa",
+        "text": "Our tokens already drive the colours of both schemes; this",
+        "violations": []
+      },
+      {
+        "groupId": "g_4fb9ada8ec06",
+        "text": "someone who opens the browser's database.",
+        "violations": []
+      },
+      {
+        "groupId": "g_50214d692d55",
+        "text": "Could not save",
+        "violations": []
+      },
+      {
+        "groupId": "g_50437cc79369",
+        "text": "Nook's vocabulary.\n*\nOne decision carries all the rest: **the core does not know the format of a\ndocument's content**. It stores it, encrypts it, extracts text from it for\nsearch, but does not know what a level-2 heading or a checkbox is. Content\nis opaque JSON.\n*\nThe benefit is direct: changing editor — or supporting two — does not touch\na line of storage, encryption or search.",
+        "violations": []
+      },
+      {
+        "groupId": "g_513f24307219",
+        "text": "Your notes are unreadable on disk",
+        "violations": []
+      },
+      {
+        "groupId": "g_515d5d432405",
+        "text": "a database left by an earlier version would contain notes.",
+        "violations": []
+      },
+      {
+        "groupId": "g_51e2db5d8810",
+        "text": "Generates the application's PNGs from the SVG mark.\n*\nNo rasterisation library is added to the project for this: we borrow the\nrendering engine of a browser that is already installed, for the length of\none screenshot. The script is only run by hand, when the mark changes — the\nPNGs it produces are committed, so neither CI nor a contributor needs\nChrome to build the project.\n*\n  node scripts/make-icons.mjs",
+        "violations": []
+      },
+      {
+        "groupId": "g_52b4b7ec2988",
+        "text": "then creates the initial paragraph itself.",
+        "violations": []
+      },
+      {
+        "groupId": "g_52c11cfb8d1b",
+        "text": "reports content that decrypted but is unreadable",
+        "violations": []
+      },
+      {
+        "groupId": "g_52e40eb12a9e",
+        "text": "Sub-path the site is served from. GitHub Pages serves a `nook` repository\nunder `/nook/`. A fork that renames the repository only has this line to\nchange (or the BASE environment variable).",
+        "violations": []
+      },
+      {
+        "groupId": "g_531704b49849",
+        "text": "\n  {0} network call(s), {1} CSP problem(s).",
+        "violations": []
+      },
+      {
+        "groupId": "g_53e91adcdcde",
+        "text": "refuses a different key",
+        "violations": []
+      },
+      {
+        "groupId": "g_551353bdad4e",
+        "text": "deletes the database without complaining when it does not exist",
+        "violations": []
+      },
+      {
+        "groupId": "g_5552726a4ba5",
+        "text": "`safe` reserves a margin around the mark. Android crops \"maskable\" icons\nto a shape it picks itself; without that margin, the corners of the square\nwould be cut off.",
+        "violations": []
+      },
+      {
+        "groupId": "g_5713ca736823",
+        "text": "walks the ancestor chain, from the most distant down to the direct parent",
+        "violations": []
+      },
+      {
+        "groupId": "g_57a84fa9c374",
+        "text": "permanently unreadable. It must fail loudly.",
+        "violations": []
+      },
+      {
+        "groupId": "g_581b5c2fd7f6",
+        "text": "`fetch` is the whole point of a service worker: it is how it",
+        "violations": []
+      },
+      {
+        "groupId": "g_58c112437803",
+        "text": "writes to several stores in one go",
+        "violations": []
+      },
+      {
+        "groupId": "g_58c349312749",
+        "text": "the dialog itself, not an element inside it.",
+        "violations": []
+      },
+      {
+        "groupId": "g_594c4a2f546b",
+        "text": "The preview server",
+        "violations": []
+      },
+      {
+        "groupId": "g_59a01a86926f",
+        "text": "the address points at the open page",
+        "violations": []
+      },
+      {
+        "groupId": "g_5ae8401a9c05",
+        "text": "_your_ unlocked session gets exactly the same rights you do. The",
+        "violations": []
+      },
+      {
+        "groupId": "g_5b000dbfb4fb",
+        "text": "Total destruction of local data.\n*\n\"Erase everything\" has to be true. A local application that leaves behind a\nservice-worker cache or a forgotten database is lying to its user, and it is\nthe kind of lie only discovered at the worst possible moment.\n*\nThe order of operations is not cosmetic: the service worker is unregistered\nfirst, because it is the only actor able to repopulate a cache while we are\nemptying it.\n*\n`surveyStorage()` exists so the interface can *show* what remains afterwards,\nrather than display a confirmation nobody can verify.",
+        "violations": []
+      },
+      {
+        "groupId": "g_5ccd5c7d355d",
+        "text": "  The existing PNGs are committed: this script only regenerates them.",
+        "violations": []
+      },
+      {
+        "groupId": "g_5ceec5e9f628",
+        "text": "\"relocated envelope\": in all three cases, verifying the tag",
+        "violations": []
+      },
+      {
+        "groupId": "g_5cfdc0af4e5b",
+        "text": "3. The databases: Nook's, and any other database on this origin, because",
+        "violations": []
+      },
+      {
+        "groupId": "g_5d6a8fb88df0",
+        "text": "at the new identifier, not at the old namesake.",
+        "violations": []
+      },
+      {
+        "groupId": "g_5e8046d7577e",
+        "text": "passphrase protection, which answers that threat, arrives in phase 4.",
+        "violations": []
+      },
+      {
+        "groupId": "g_5f20346df46d",
+        "text": "returns the requested length, and never the same thing twice",
+        "violations": []
+      },
+      {
+        "groupId": "g_5f6af64f7ac6",
+        "text": "wrongly, when they have just asked for a destruction.",
+        "violations": []
+      },
+      {
+        "groupId": "g_60f2ef56bfb4",
+        "text": "is created with a usable key and a readable description",
+        "violations": []
+      },
+      {
+        "groupId": "g_613543259738",
+        "text": "Navigation by URL fragment.\n*\nThe fragment rather than `history.pushState` because GitHub Pages serves\nstatic files: a URL like `/nook/doc/abc` would return a 404 before the\napplication even starts. The fragment stays client-side.\n*\nIt never leaves the machine — a fragment is not sent to the server — but it\ndoes appear in browser history, so it carries only an opaque identifier,\nnever a title.",
+        "violations": []
+      },
+      {
+        "groupId": "g_61936ac41aea",
+        "text": "Switching manually only forces `color-scheme`: every `light-dark()` value\nabove follows automatically.",
+        "violations": []
+      },
+      {
+        "groupId": "g_6194ea6135ba",
+        "text": "and a loading message that flashes is worse than nothing.",
+        "violations": []
+      },
+      {
+        "groupId": "g_6197648dcf4a",
+        "text": "involves waiting on time. A scheduling fluke on the runner",
+        "violations": []
+      },
+      {
+        "groupId": "g_622e1fa76b4f",
+        "text": "A vault already exists on this device.",
+        "violations": []
+      },
+      {
+        "groupId": "g_62d73f8c65e4",
+        "text": "exfiltrate the key's bytes.",
+        "violations": []
+      },
+      {
+        "groupId": "g_632b797ecf51",
+        "text": "Review the quote",
+        "violations": []
+      },
+      {
+        "groupId": "g_634597fdb824",
+        "text": "`replace` erases the vault before importing; `merge` keeps what is there and\nreassigns an identifier to documents that would collide. There is no default\nmode: overwriting notes must always be an explicit choice.",
+        "violations": []
+      },
+      {
+        "groupId": "g_638274ccf1f3",
+        "text": "rest of the report keeps its value.",
+        "violations": []
+      },
+      {
+        "groupId": "g_6463613b4618",
+        "text": "does not complain when there is nothing to erase",
+        "violations": []
+      },
+      {
+        "groupId": "g_648d45a606b0",
+        "text": "merges by reassigning colliding identifiers",
+        "violations": []
+      },
+      {
+        "groupId": "g_64a21e614f68",
+        "text": "really deletes an existing database",
+        "violations": []
+      },
+      {
+        "groupId": "g_66a37f97a494",
+        "text": "parent, then reassign clean integers to the whole sibling list.",
+        "violations": []
+      },
+      {
+        "groupId": "g_6739da15424c",
+        "text": "A page deleted in another tab, or a shared address matching nothing:",
+        "violations": []
+      },
+      {
+        "groupId": "g_67aa6c2541fe",
+        "text": "Tests",
+        "violations": []
+      },
+      {
+        "groupId": "g_67aefb353ace",
+        "text": "The application's empty state.\n*\nIt teaches the interface instead of noting its emptiness: the one useful\naction is offered, and the product's promise is restated where it is put to\nthe test — on first launch, when you decide whether to trust it.",
+        "violations": []
+      },
+      {
+        "groupId": "g_67c5533921b1",
+        "text": "silently empty — the worst of both worlds. Rather than disabling it with",
+        "violations": []
+      },
+      {
+        "groupId": "g_687eba7f99c3",
+        "text": "#root not found in index.html",
+        "violations": []
+      },
+      {
+        "groupId": "g_696a97a8b8ac",
+        "text": "without recreating `flush`, whose stability the effect cleanup depends on.",
+        "violations": []
+      },
+      {
+        "groupId": "g_6a66e34aca16",
+        "text": "No room left between the two neighbours: first reattach the page to the right",
+        "violations": []
+      },
+      {
+        "groupId": "g_6b0b6336c20a",
+        "text": "two positions ends up below the precision threshold, and the sibling list must",
+        "violations": []
+      },
+      {
+        "groupId": "g_6b79a59d4787",
+        "text": "yesterday's note",
+        "violations": []
+      },
+      {
+        "groupId": "g_6b89a98c3526",
+        "text": "page tree",
+        "violations": []
+      },
+      {
+        "groupId": "g_6bbf226c94f8",
+        "text": "A document's editor.\n*\nLoading the content is asynchronous — it has to be decrypted — so this\ncomponent splits two responsibilities: this one waits for the document, and\n`LoadedEditor` only renders once it is there. The `doc.id` key guarantees\nthat opening another page rebuilds the editor rather than trying to swap its\ncontent under the caret.",
+        "violations": []
+      },
+      {
+        "groupId": "g_6c5bb39d1fe1",
+        "text": "when it is crossed. It lets us test all the logic without a",
+        "violations": []
+      },
+      {
+        "groupId": "g_6c637e54f636",
+        "text": "from a CDN, at runtime. The CSP would block them, and the menu would be",
+        "violations": []
+      },
+      {
+        "groupId": "g_6cd166909eca",
+        "text": "The promise, and how it is kept",
+        "violations": []
+      },
+      {
+        "groupId": "g_6cef93bb35ff",
+        "text": "Title shown for a document the user has not named yet.",
+        "violations": []
+      },
+      {
+        "groupId": "g_6e08fd664036",
+        "text": "Project status",
+        "violations": []
+      },
+      {
+        "groupId": "g_6e5a88c1e264",
+        "text": "Two halves, separated by a rule that CI enforces.",
+        "violations": []
+      },
+      {
+        "groupId": "g_6e8fb9c4c206",
+        "text": "The vault is declared but its key is missing. The notes on this device are unrecoverable; restore an export.",
+        "violations": []
+      },
+      {
+        "groupId": "g_6e904b59eb69",
+        "text": "What the index keeps in memory for each document: enough to fill the\nsidebar, the palette and the breadcrumbs without decrypting a single\npiece of content.",
+        "violations": []
+      },
+      {
+        "groupId": "g_6eb5fa0942c1",
+        "text": "**What it protects:** someone who copies your disk, your browser",
+        "violations": []
+      },
+      {
+        "groupId": "g_6fa2b9e72a5b",
+        "text": "Foundations, CI, Pages deployment, network guard, design tokens",
+        "violations": []
+      },
+      {
+        "groupId": "g_7056d373267a",
+        "text": "Reopening creates an empty database: proof the old one is gone.",
+        "violations": []
+      },
+      {
+        "groupId": "g_7126299c01cb",
+        "text": "Reassigns 0, 1, 2… to a sibling list, inserting `id` at rank `at`.",
+        "violations": []
+      },
+      {
+        "groupId": "g_7131db6297d0",
+        "text": "cannot claim to know what the origin holds: we return `undefined`",
+        "violations": []
+      },
+      {
+        "groupId": "g_713b1d8f1fef",
+        "text": "be reassigned rather than letting two pages sit on top of each other.",
+        "violations": []
+      },
+      {
+        "groupId": "g_7294b94aef29",
+        "text": "We insert fifty times in a row at the same spot: the gap between",
+        "violations": []
+      },
+      {
+        "groupId": "g_72c26f74563e",
+        "text": "would be ignored by ProseMirror.",
+        "violations": []
+      },
+      {
+        "groupId": "g_73106d80f07f",
+        "text": "{ this is not JSON",
+        "violations": []
+      },
+      {
+        "groupId": "g_7480486cafc0",
+        "text": "Build",
+        "violations": [
+          {
+            "validator": "V4",
+            "severity": "warn",
+            "message": "the translation is identical to the source — correct for a cognate or a product name, suspect otherwise"
+          }
+        ]
+      },
+      {
+        "groupId": "g_7535ec03208d",
+        "text": "✖ dist/ is missing. Run `pnpm build` before this check.",
+        "violations": []
+      },
+      {
+        "groupId": "g_7682e6eb9398",
+        "text": "Everything really can be erased",
+        "violations": []
+      },
+      {
+        "groupId": "g_76b8fb2361d9",
+        "text": "Digits aligned vertically in lists and tables.",
+        "violations": []
+      },
+      {
+        "groupId": "g_774a0a1d1c8c",
+        "text": "browser. There is no account, no server, no synchronisation.",
+        "violations": []
+      },
+      {
+        "groupId": "g_77578ba9bff0",
+        "text": "moves and renames update.",
+        "violations": []
+      },
+      {
+        "groupId": "g_77ce22a9e4f7",
+        "text": "fixed choice only avoids a pointless recalculation inside the library.",
+        "violations": []
+      },
+      {
+        "groupId": "g_7878077836ec",
+        "text": "Nothing is published until the guard has cleared the bundle.",
+        "violations": []
+      },
+      {
+        "groupId": "g_788c00947629",
+        "text": "starts empty",
+        "violations": []
+      },
+      {
+        "groupId": "g_78fa32e8d424",
+        "text": "Storage blocked by the browser: there is nothing to count, and nothing to clear.",
+        "violations": []
+      },
+      {
+        "groupId": "g_79d490c0830a",
+        "text": "Breadcrumbs",
+        "violations": []
+      },
+      {
+        "groupId": "g_79f64e90a219",
+        "text": "takes the whole subtree with it",
+        "violations": []
+      },
+      {
+        "groupId": "g_7bf9b3e939fd",
+        "text": "transpiler that only strips types.",
+        "violations": []
+      },
+      {
+        "groupId": "g_7c0b09a18530",
+        "text": "Another Nook window is using an older version of the database. Close it, then reload.",
+        "violations": []
+      },
+      {
+        "groupId": "g_7c82a154bc87",
+        "text": "Let autosave fire.",
+        "violations": []
+      },
+      {
+        "groupId": "g_7d7f834d5aba",
+        "text": "typed on the system keyboard work normally.",
+        "violations": []
+      },
+      {
+        "groupId": "g_7df8585b5a7e",
+        "text": "stamps the last modification time",
+        "violations": []
+      },
+      {
+        "groupId": "g_7e1a2b208cbc",
+        "text": "Your notes are encrypted and stored on your machine, and the page itself",
+        "violations": []
+      },
+      {
+        "groupId": "g_7f8c5a3a8580",
+        "text": "A page cannot be moved into its own subtree.",
+        "violations": []
+      },
+      {
+        "groupId": "g_7fb327009e77",
+        "text": "Every source of an `import ... from '…'` or an `import('…')`.",
+        "violations": []
+      },
+      {
+        "groupId": "g_802c059abcde",
+        "text": "Lint",
+        "violations": [
+          {
+            "validator": "V4",
+            "severity": "warn",
+            "message": "the translation is identical to the source — correct for a cognate or a product name, suspect otherwise"
+          }
+        ]
+      },
+      {
+        "groupId": "g_80b779b2ccc0",
+        "text": "12px — metadata",
+        "violations": []
+      },
+      {
+        "groupId": "g_80e181056490",
+        "text": "Writes or deletes several records in a single transaction.\n*\nThis is the primitive that guarantees a document and the index referencing\nit cannot diverge: either both are written, or neither. Every value must\nalready be encrypted — see the note at the top of this file.",
+        "violations": []
+      },
+      {
+        "groupId": "g_813e6976b968",
+        "text": "Delete this page?",
+        "violations": []
+      },
+      {
+        "groupId": "g_818835f850ae",
+        "text": "recognises empty storage",
+        "violations": []
+      },
+      {
+        "groupId": "g_81c2fb02b71f",
+        "text": "we fall back to the home screen rather than showing an",
+        "violations": []
+      },
+      {
+        "groupId": "g_81e2fc5c1b7d",
+        "text": "Sealed envelope — Nook's unit of storage.\n*\nEverything written to disk goes through here. Nothing else in the project\ncalls `crypto.subtle` to encrypt user data.\n*\nThe choice worth explaining is `context`. On top of the content, AES-GCM\nauthenticates an associated datum that is not encrypted. We put the\nrecord's location in it. The consequence: an attacker with disk access\ncannot *relocate* an envelope — copying the contents of `docs/A` into\n`docs/B` produces an authentication failure instead of a silent\nsubstitution. Without it, encryption would protect confidentiality but not\nthe integrity of the structure.",
+        "violations": []
+      },
+      {
+        "groupId": "g_8227c3cb99d5",
+        "text": "2. The caches, which hold the application itself.",
+        "violations": []
+      },
+      {
+        "groupId": "g_838cceb3c539",
+        "text": "We would rather say it plainly than imply a guarantee",
+        "violations": []
+      },
+      {
+        "groupId": "g_839fed492f07",
+        "text": "not ready yet",
+        "violations": []
+      },
+      {
+        "groupId": "g_846d82f17ec7",
+        "text": "Passphrase, auto-lock, encrypted export",
+        "violations": []
+      },
+      {
+        "groupId": "g_8557319bafa5",
+        "text": "This vault was created by a newer version of Nook (schema {0}).",
+        "violations": []
+      },
+      {
+        "groupId": "g_85c5d81eca52",
+        "text": "code is not merely unreachable, it is not served at all. Emoji",
+        "violations": []
+      },
+      {
+        "groupId": "g_86995da8e883",
+        "text": "Envelope in version {0}, incompatible with this version of Nook ({1}).",
+        "violations": []
+      },
+      {
+        "groupId": "g_86cb0bb43159",
+        "text": "Deliberately separate from `verify`: this test drives a real browser and",
+        "violations": []
+      },
+      {
+        "groupId": "g_86e5066f3a69",
+        "text": "Decrypted, but unreadable: invalid JSON.",
+        "violations": []
+      },
+      {
+        "groupId": "g_87fee5789c9b",
+        "text": "Could not open the local database.",
+        "violations": []
+      },
+      {
+        "groupId": "g_883016c3dcc5",
+        "text": "which contradicts the \"no outgoing request\" promise. Use your system emoji keyboard.",
+        "violations": []
+      },
+      {
+        "groupId": "g_88a35a34fe52",
+        "text": "Local-first notes. Your data stays on your machine.",
+        "violations": []
+      },
+      {
+        "groupId": "g_88e02e70dce2",
+        "text": "Moves a document under a new parent, at the requested position.\n*\n@param position Desired rank among siblings, `undefined` for the end.\n@throws if the move would create a cycle — dragging a page into its own\n  subtree would detach the whole branch from the tree, and it would become\n  invisible without ever being deleted.",
+        "violations": []
+      },
+      {
+        "groupId": "g_8971a9d39040",
+        "text": "The \"zero network\" guard.\n*\nThe rule is really enforced by the CSP (`connect-src 'none'`): not even a\nmalicious dependency can get out. This script is the canary — it fails CI\n*at the moment* code capable of emitting a request enters the bundle,\nrather than at the moment a user notices.\n*\nIt inspects the build, not the sources: what matters is what is actually\nserved, dependencies included.\n*\nTwo distinct corpora, because they do not have the same rights:\n  - application code may not call any network API;\n  - the service worker, on the other hand, MUST call `fetch` — that is its\n    whole purpose — but may not mention any external origin.\n*\nEvery exception goes through ALLOWED and must carry a readable reason. The\nexceptions in force are reprinted on each run: a waiver nobody sees again\nis a waiver nobody ever re-examines.",
+        "violations": []
+      },
+      {
+        "groupId": "g_8a07bb18caf9",
+        "text": "must not be found",
+        "violations": []
+      },
+      {
+        "groupId": "g_8a1e9158ddcf",
+        "text": "Security",
+        "violations": []
+      },
+      {
+        "groupId": "g_8adfef5640ad",
+        "text": "someone inspecting IndexedDB or copying the browser profile.",
+        "violations": []
+      },
+      {
+        "groupId": "g_8bc63cb93dbe",
+        "text": "This file destroys all the storage in its environment. Vitest isolates each\ntest file, so the wipe does not spill over into the others — but that is\nprecisely why these tests live alone here.",
+        "violations": []
+      },
+      {
+        "groupId": "g_8c0431ea93f7",
+        "text": "has got in, or if the CSP has disappeared from index.html.",
+        "violations": []
+      },
+      {
+        "groupId": "g_8c5188adc9ab",
+        "text": "By default the encryption key is generated on the device and kept in the",
+        "violations": []
+      },
+      {
+        "groupId": "g_8ca27c0de7b8",
+        "text": "It is a static site served by GitHub Pages: the server sends files",
+        "violations": []
+      },
+      {
+        "groupId": "g_8cacd81517a8",
+        "text": "Access to IndexedDB.\n*\nDeliberately narrow: open, read, write, erase. No notion of a document, of\nencryption or of the interface gets in here — this module only knows how to\nhandle opaque key/value pairs.\n*\nOne IndexedDB constraint governs the shape of this API: a transaction\nauto-closes as soon as the microtask queue drains with no request pending.\nAwaiting a non-IndexedDB promise in the middle of a transaction therefore\nkills it silently. That is why there is no generic `transact(db, fn)` here:\nencryption, being asynchronous, must be finished *before* the transaction\nopens. `writeBatch` is the only atomic primitive on offer, and it takes\nonly values that are already prepared.",
+        "violations": []
+      },
+      {
+        "groupId": "g_8cdc404cec50",
+        "text": "Push to",
+        "violations": []
+      },
+      {
+        "groupId": "g_8d5c78b6a747",
+        "text": "Writes a note in a real browser, reloads, and checks that it",
+        "violations": []
+      },
+      {
+        "groupId": "g_8d6271767d5e",
+        "text": "core / UI boundary",
+        "violations": []
+      },
+      {
+        "groupId": "g_8dfd45acb53c",
+        "text": "Test texts named exactly once. Repeating them in the data and then in the\nassertion lets the two diverge in silence — and makes it impossible to tell\na displayed string from an identifier.",
+        "violations": []
+      },
+      {
+        "groupId": "g_8e05293e6790",
+        "text": "does nothing on an empty batch",
+        "violations": []
+      },
+      {
+        "groupId": "g_8e27cb22b613",
+        "text": "\n✖ {0} check(s) failed.",
+        "violations": []
+      },
+      {
+        "groupId": "g_8e397fceb733",
+        "text": "The core imports neither React nor the editor; the interface never touches",
+        "violations": []
+      },
+      {
+        "groupId": "g_8e79792e5186",
+        "text": "  If a finding cannot produce a request, declare it in ALLOWED\n",
+        "violations": []
+      },
+      {
+        "groupId": "g_8edb579cf0f5",
+        "text": "Unknown operation \"{0}\" on {1}.",
+        "violations": []
+      },
+      {
+        "groupId": "g_8f04c50d88b1",
+        "text": "Unreadable record: this is not a Nook envelope.",
+        "violations": []
+      },
+      {
+        "groupId": "g_8f3277b9b0eb",
+        "text": "a test enforces it",
+        "violations": []
+      },
+      {
+        "groupId": "g_8f3eaad20f47",
+        "text": "Development",
+        "violations": []
+      },
+      {
+        "groupId": "g_8f744ec0d03a",
+        "text": "{0} did not answer on {1}",
+        "violations": []
+      },
+      {
+        "groupId": "g_8f972fb239bb",
+        "text": "The product's central promise. This step inspects the bundle",
+        "violations": []
+      },
+      {
+        "groupId": "g_90aee37cb25f",
+        "text": "protect them with a passphrase.",
+        "violations": []
+      },
+      {
+        "groupId": "g_90ce6e41dcee",
+        "text": "reports a document that does not exist",
+        "violations": []
+      },
+      {
+        "groupId": "g_9216fe7c2ce1",
+        "text": "The application's only button.\n*\nOne component rather than copied-around classes: when the same action has\ntwo appearances depending on the screen, one of them is a defect. The\nstates (hover, focus, active, disabled) are defined once here and hold\neverywhere.",
+        "violations": []
+      },
+      {
+        "groupId": "g_92bae011f394",
+        "text": "--------------------------------------------------------------- Semantics\nA standardised vocabulary of states. Every interactive component draws\nfrom here rather than inventing its own hue.",
+        "violations": []
+      },
+      {
+        "groupId": "g_92c811af1e40",
+        "text": "index.html contains no Content-Security-Policy tag",
+        "violations": []
+      },
+      {
+        "groupId": "g_92cc2271ff2c",
+        "text": "connections to the database stay open and block any migration.",
+        "violations": []
+      },
+      {
+        "groupId": "g_9328511e9b92",
+        "text": "Enter from the title moves down into the body,",
+        "violations": []
+      },
+      {
+        "groupId": "g_9443685c2621",
+        "text": "the queue takes priority over the patch put back into it.",
+        "violations": []
+      },
+      {
+        "groupId": "g_94fe77986e78",
+        "text": "`undefined` when the browser refuses to enumerate databases (Firefox).",
+        "violations": []
+      },
+      {
+        "groupId": "g_954d30129ad1",
+        "text": "refuses a file that is not a Nook export",
+        "violations": []
+      },
+      {
+        "groupId": "g_97145abf1b5a",
+        "text": "`exactOptionalPropertyTypes`, which the rest of the project keeps",
+        "violations": []
+      },
+      {
+        "groupId": "g_976fbeaa80b2",
+        "text": "Nothing leaves your machine",
+        "violations": []
+      },
+      {
+        "groupId": "g_97f164eee3c2",
+        "text": "The core / UI boundary, verified rather than promised.\n*\nAn architectural rule that lives only in a documentation file erodes at the\nfirst hurried import. This one breaks CI.\n*\nWhat the separation buys, concretely: the core is testable without a browser\nor a render, and the domain logic stays intact the day the interface changes\n— or the day another client (an extension, a script) wants to read the same\nvault.",
+        "violations": []
+      },
+      {
+        "groupId": "g_980a9ede5657",
+        "text": "is exactly what CI runs.",
+        "violations": []
+      },
+      {
+        "groupId": "g_98b9a3146492",
+        "text": "Nook is built in phases, and each phase leaves a deployable repository.",
+        "violations": []
+      },
+      {
+        "groupId": "g_9a612df1a1f3",
+        "text": "really deletes the databases, and proves it",
+        "violations": []
+      },
+      {
+        "groupId": "g_9ae10185a1f7",
+        "text": "\n✔ {0} checks passed against the served build.",
+        "violations": []
+      },
+      {
+        "groupId": "g_9af4414ec0e8",
+        "text": "collects the whole subtree, depth first",
+        "violations": []
+      },
+      {
+        "groupId": "g_9b22b6af3f34",
+        "text": "Title visible in the sidebar",
+        "violations": []
+      },
+      {
+        "groupId": "g_9bd51804024d",
+        "text": "Blocks in place of text rather than a spinner: the page\n            keeps its shape, and switching to the real content does not make\n            the layout jump. ",
+        "violations": []
+      },
+      {
+        "groupId": "g_9d22c6e752f4",
+        "text": "will be deleted",
+        "violations": []
+      },
+      {
+        "groupId": "g_9d33df4309c9",
+        "text": "is still there — and that the disk holds nothing but ciphertext.",
+        "violations": []
+      },
+      {
+        "groupId": "g_9d7368cc5cd1",
+        "text": "\n✖ This build does not keep the \"zero network\" promise.\n",
+        "violations": []
+      },
+      {
+        "groupId": "g_9e60586738e2",
+        "text": "AES-GCM does not distinguish \"wrong key\" from \"altered data\" from",
+        "violations": []
+      },
+      {
+        "groupId": "g_9fbfa9f45e54",
+        "text": "Tells the interface it must redraw. Returns the unsubscribe function.",
+        "violations": []
+      },
+      {
+        "groupId": "g_a027ca5cd656",
+        "text": "than show a document that no longer exists.",
+        "violations": []
+      },
+      {
+        "groupId": "g_a0449b38c9ba",
+        "text": "Opening the vault…",
+        "violations": []
+      },
+      {
+        "groupId": "g_a0d45192cde7",
+        "text": "Vite's module-preload polyfill calls `fetch()` for",
+        "violations": []
+      },
+      {
+        "groupId": "g_a16895a77931",
+        "text": "-------------------------------------------------------------- Geometry",
+        "violations": []
+      },
+      {
+        "groupId": "g_a1701ada8d31",
+        "text": "Content Security Policy.\n*\n`connect-src 'none'` is the heart of the product's promise: the browser\nrefuses every outgoing request (fetch, XHR, WebSocket, EventSource, beacon).\nEven if a dependency tried to call a server, the page cannot.\n*\nInjected only into the production build: the dev server needs a WebSocket\nfor hot reloading.",
+        "violations": []
+      },
+      {
+        "groupId": "g_a202253528a5",
+        "text": "the content is found again after a reload",
+        "violations": []
+      },
+      {
+        "groupId": "g_a2d35ee6fbb4",
+        "text": "Host your own",
+        "violations": []
+      },
+      {
+        "groupId": "g_a30b1f3f43c1",
+        "text": "Creates the vault on the very first launch.\n*\nFails if a vault already exists: overwriting the master key would make\nevery existing note permanently unreadable, and that is precisely the kind\nof accident an unintended call could cause.",
+        "violations": []
+      },
+      {
+        "groupId": "g_a3977569ef8d",
+        "text": "The heart of the promise: not even code running inside the page can",
+        "violations": []
+      },
+      {
+        "groupId": "g_a4f5452c25b0",
+        "text": "surfaces the title in the index without decrypting any content",
+        "violations": []
+      },
+      {
+        "groupId": "g_a569993c53fa",
+        "text": "Code-block text keeps the same monospace family as the rest of the\napplication, rather than the library's.",
+        "violations": []
+      },
+      {
+        "groupId": "g_a657a115c1cb",
+        "text": "No runtime caching: there is nothing to go and fetch.",
+        "violations": []
+      },
+      {
+        "groupId": "g_a8974e593e18",
+        "text": "rather than an empty list, which would wrongly read as \"nothing to erase\".",
+        "violations": []
+      },
+      {
+        "groupId": "g_a93900db3628",
+        "text": "refuses a record that is not an envelope",
+        "violations": []
+      },
+      {
+        "groupId": "g_a94d945e93fd",
+        "text": "accepts an out-of-range position without complaining",
+        "violations": []
+      },
+      {
+        "groupId": "g_aac793ab2f9c",
+        "text": "AES-GCM-256, a non-extractable key, never exposed to JavaScript",
+        "violations": []
+      },
+      {
+        "groupId": "g_aad6dec73660",
+        "text": "Everything is precached: the application must start with no network.",
+        "violations": []
+      },
+      {
+        "groupId": "g_ab67692baa61",
+        "text": "the CSP does not contain \"{0}\"",
+        "violations": []
+      },
+      {
+        "groupId": "g_acecbe06df52",
+        "text": "a promise. The interface can therefore show it as is.",
+        "violations": []
+      },
+      {
+        "groupId": "g_ae6cec349e1d",
+        "text": "writes nothing but sealed envelopes to disk",
+        "violations": []
+      },
+      {
+        "groupId": "g_ae74c12b5a57",
+        "text": "Firefox refuses to enumerate databases. We can then neither claim any",
+        "violations": []
+      },
+      {
+        "groupId": "g_af0dca39c2a3",
+        "text": "treats \"I cannot know\" as nothing to report",
+        "violations": []
+      },
+      {
+        "groupId": "g_af523842c124",
+        "text": "would stay in the database, invisible, and unrecoverable from the interface.",
+        "violations": []
+      },
+      {
+        "groupId": "g_afed4054dea6",
+        "text": "Imported page",
+        "violations": []
+      },
+      {
+        "groupId": "g_b01d430489fb",
+        "text": "notifies its subscribers on every change",
+        "violations": []
+      },
+      {
+        "groupId": "g_b117aebe51ea",
+        "text": "empty directory, and the rule would hold by accident.",
+        "violations": []
+      },
+      {
+        "groupId": "g_b1ae451c669f",
+        "text": "Absolute URLs in the served code.",
+        "violations": []
+      },
+      {
+        "groupId": "g_b21bceef937e",
+        "text": "Mechanism",
+        "violations": []
+      },
+      {
+        "groupId": "g_b2622390a21d",
+        "text": "This file is not a Nook export this version can read.",
+        "violations": []
+      },
+      {
+        "groupId": "g_b279286cf7a7",
+        "text": "A square button carrying only an icon. `label` is not optional: an icon on\nits own has no accessible name, and a screen reader would announce\n\"button\" and nothing more.",
+        "violations": []
+      },
+      {
+        "groupId": "g_b29ffa8cccf8",
+        "text": "The service worker loads its own Workbox runtime, served from the same origin. Scanning this same file for absolute URLs guarantees no external origin is referenced in it.",
+        "violations": []
+      },
+      {
+        "groupId": "g_b46d16de6688",
+        "text": "Opens the vault once for the whole application and makes it available.\n*\nThe subscription goes through `useSyncExternalStore`: the vault reports its\nchanges with a plain callback, knowing nothing about React. That is what\nlets `src/core` stay an ordinary TypeScript library, testable without a\nrender.",
+        "violations": []
+      },
+      {
+        "groupId": "g_b53295fbbe1c",
+        "text": "A stand-in for `emoji-mart`, substituted at build time.\n*\nThe emoji-picker library fetches its localisation data *and* its images\nfrom a CDN, at runtime. That is incompatible with Nook's promise: the CSP\nwould block those requests, and the picker would be silently broken — the\nworst of the two situations, since the user would see a feature that does\nnot work without knowing why.\n*\nDisabling it with an option was not enough: the code still went into the\nserved files, and would have stayed there at the mercy of a future setting.\nAn alias in `vite.config.ts` therefore replaces it with this module, and\nthe network guard observes its absence.\n*\nWhat is lost: the emoji menu triggered by typing \":\". Emoji typed on the\nsystem keyboard work normally.\n*\nThis module stands in for `emoji-mart` and for `@emoji-mart/data` alike: the\nfirst reads functions, the second a data object, and the empty default\nexport suits both.",
+        "violations": []
+      },
+      {
+        "groupId": "g_b5f63206459a",
+        "text": "Confirmation of a destructive action.\n*\nBuilt on the native `<dialog>`, which gives — correctly, and for free —\nfocus trapping, Escape to close, an inert backdrop and the right semantics\nfor screen readers. Reimplementing all of that by hand is the shortcut that\nproduces modals nobody can use from a keyboard.",
+        "violations": []
+      },
+      {
+        "groupId": "g_b64aab5f3c51",
+        "text": "One focus treatment across the whole application. It is visible on light\nand dark backgrounds alike because it uses the accent, never a browser\ndefault hue.",
+        "violations": []
+      },
+      {
+        "groupId": "g_b6e5f1c73285",
+        "text": "`visibilitychange` is the last reliable signal on mobile: `unload`",
+        "violations": []
+      },
+      {
+        "groupId": "g_b6ffea0b6452",
+        "text": "again. It cannot yet link them together, search them, or",
+        "violations": []
+      },
+      {
+        "groupId": "g_b710137860af",
+        "text": "orders siblings by ascending rank",
+        "violations": []
+      },
+      {
+        "groupId": "g_b73fe4688832",
+        "text": "Agenda",
+        "violations": []
+      },
+      {
+        "groupId": "g_b7f567fe07c2",
+        "text": "Encrypts, writes in one transaction, and only then publishes the new index\nin memory. If the write fails, the visible state stays the previous one —\nthe interface never shows a change that did not reach the disk.",
+        "violations": []
+      },
+      {
+        "groupId": "g_b8c93e9b00d0",
+        "text": "the disk holds no plain text",
+        "violations": []
+      },
+      {
+        "groupId": "g_b937c6afc7b9",
+        "text": "Fields declared then assigned rather than constructor properties:",
+        "violations": []
+      },
+      {
+        "groupId": "g_b94f71df28c9",
+        "text": "Removed from the bundle: see `emoji-mart-absent.ts`.",
+        "violations": []
+      },
+      {
+        "groupId": "g_b9b299cb50ed",
+        "text": "the entire point of binding the envelope to its position.",
+        "violations": []
+      },
+      {
+        "groupId": "g_ba3c2bb01846",
+        "text": "releases it; treating that as a failure would make the caller panic",
+        "violations": []
+      },
+      {
+        "groupId": "g_baace00c8ba8",
+        "text": "`polite`: the information is useful but must not interrupt the",
+        "violations": []
+      },
+      {
+        "groupId": "g_bb84ba7a9893",
+        "text": "moves a document and remembers it",
+        "violations": []
+      },
+      {
+        "groupId": "g_bb8c20a70658",
+        "text": "does not let the plain text show through the envelope",
+        "violations": []
+      },
+      {
+        "groupId": "g_bbd8aba80c30",
+        "text": "A documentation link, inside the text of a Mantine configuration warning.",
+        "violations": []
+      },
+      {
+        "groupId": "g_bbdf2cf38799",
+        "text": "✖ No Chrome found. Set CHROME_PATH.",
+        "violations": []
+      },
+      {
+        "groupId": "g_bbf0d8484477",
+        "text": "lists the keys and values of a store",
+        "violations": []
+      },
+      {
+        "groupId": "g_bc28a2fc9ee9",
+        "text": "Redraws the component on every change to the index.",
+        "violations": []
+      },
+      {
+        "groupId": "g_bc89a290602d",
+        "text": "Storage and encryption go through the core, never through a component.",
+        "violations": []
+      },
+      {
+        "groupId": "g_bca56f9ab43c",
+        "text": "Application precached, installable as a PWA",
+        "violations": []
+      },
+      {
+        "groupId": "g_bcebcb1b78eb",
+        "text": "the product does not give yet.",
+        "violations": []
+      },
+      {
+        "groupId": "g_be294ff38096",
+        "text": "stores the content and returns it unchanged",
+        "violations": []
+      },
+      {
+        "groupId": "g_bf838744f5e0",
+        "text": "A complete document, content included. Loaded on open, one at a time.",
+        "violations": []
+      },
+      {
+        "groupId": "g_bfa79d163407",
+        "text": "The vault could not be opened",
+        "violations": []
+      },
+      {
+        "groupId": "g_bfdb4c987abf",
+        "text": "\n  Waivers that are no longer needed, to remove from ALLOWED:",
+        "violations": []
+      },
+      {
+        "groupId": "g_c047d2b32d61",
+        "text": "returns undefined for a missing key",
+        "violations": []
+      },
+      {
+        "groupId": "g_c09d7e4eb5c9",
+        "text": "places a new document after its siblings",
+        "violations": []
+      },
+      {
+        "groupId": "g_c155f5ddde93",
+        "text": "Phase 4 will add a `{ kind: 'passphrase'; kdf; wrappedKey }` variant. The\nsingle-branch union exists so that addition is purely additive, with no\nmigration of the `meta` format.",
+        "violations": []
+      },
+      {
+        "groupId": "g_c3537bb630a2",
+        "text": "A licence banner, inside a CSS comment.",
+        "violations": []
+      },
+      {
+        "groupId": "g_c3f495264b75",
+        "text": "CI",
+        "violations": []
+      },
+      {
+        "groupId": "g_c491082a4238",
+        "text": "The CSP is the real barrier. If it disappears from the build, the canary",
+        "violations": []
+      },
+      {
+        "groupId": "g_c4adf7a0045f",
+        "text": "a malformed entry must make noise, not erase data.",
+        "violations": []
+      },
+      {
+        "groupId": "g_c59f1eb1db03",
+        "text": "here signals a serialisation bug, not an attack.",
+        "violations": []
+      },
+      {
+        "groupId": "g_c61594598c6c",
+        "text": "it only makes the notes evictable after a long spell of inactivity.",
+        "violations": []
+      },
+      {
+        "groupId": "g_c74bbfe395d4",
+        "text": "reopens the vault with the same key",
+        "violations": []
+      },
+      {
+        "groupId": "g_c7c4af6966ae",
+        "text": "What the application shows while the vault is not open yet.",
+        "violations": []
+      },
+      {
+        "groupId": "g_c845c8e3a72d",
+        "text": "A second call would reset the key and make every note",
+        "violations": []
+      },
+      {
+        "groupId": "g_c870246ce9f6",
+        "text": "The key first: if writing `meta` fails, we end up with an",
+        "violations": []
+      },
+      {
+        "groupId": "g_c89e795f7209",
+        "text": "the core exists and holds code",
+        "violations": []
+      },
+      {
+        "groupId": "g_c8d4888313fc",
+        "text": "come anywhere near that order of magnitude.",
+        "violations": []
+      },
+      {
+        "groupId": "g_c94450240f56",
+        "text": "opening is cancelled and must be closed, otherwise two",
+        "violations": []
+      },
+      {
+        "groupId": "g_c9646389dea3",
+        "text": "Copying A's content into B's location must fail: that is",
+        "violations": []
+      },
+      {
+        "groupId": "g_c996f24d0498",
+        "text": "Your pages are encrypted and kept on this device. Nothing is sent anywhere — the page\n        forbids itself any outgoing request.",
+        "violations": []
+      },
+      {
+        "groupId": "g_ca61f8334a92",
+        "text": "Zero network",
+        "violations": []
+      },
+      {
+        "groupId": "g_caa4f4fb40a5",
+        "text": "freeze the application.",
+        "violations": []
+      },
+      {
+        "groupId": "g_caca5ff42e0a",
+        "text": "Not enough room left between the two: we ask for a renumbering.",
+        "violations": []
+      },
+      {
+        "groupId": "g_cacb0bc6feb7",
+        "text": "the surface, backdrop included: we only close when the target is",
+        "violations": []
+      },
+      {
+        "groupId": "g_cb22af2e8975",
+        "text": "does not exist before it has been created",
+        "violations": []
+      },
+      {
+        "groupId": "g_cb2461462a20",
+        "text": "A blocked database is eventually deleted once the last tab",
+        "violations": []
+      },
+      {
+        "groupId": "g_cc33d499ace9",
+        "text": "The vault's index: a single encrypted record describing everything except\nthe content of the documents.",
+        "violations": []
+      },
+      {
+        "groupId": "g_cc66bc909c85",
+        "text": "`erasableSyntaxOnly` forbids the latter, because they produce",
+        "violations": []
+      },
+      {
+        "groupId": "g_cdf81f46481a",
+        "text": "Without this guard, the whole branch would detach from the tree: it",
+        "violations": []
+      },
+      {
+        "groupId": "g_ce5e1014c9fc",
+        "text": "error for an identifier that simply no longer exists.",
+        "violations": []
+      },
+      {
+        "groupId": "g_cea35522149d",
+        "text": "The page tree, in pure functions.\n*\nNothing here touches the disk: these functions take an index and return a\nnew one. That is what makes ordering, moves and cascading deletes testable\nin a few milliseconds, with no database and no browser.\n*\nOrder among siblings is a plain number. Inserting between two neighbours\ntakes the midpoint, which avoids rewriting the whole sibling list on every\ndrag. A floating-point number eventually runs out of precision after some\nfifty insertions at the same spot: when the gap becomes too small,\n`renumber` reassigns clean integers to the sibling list. The case is rare,\nbut it happens, and it is silently destructive if ignored.",
+        "violations": []
+      },
+      {
+        "groupId": "g_cebdc7b8dcab",
+        "text": "\n  {0} waiver(s) in force:",
+        "violations": []
+      },
+      {
+        "groupId": "g_cf6cf0b3efff",
+        "text": "a localStorage key",
+        "violations": []
+      },
+      {
+        "groupId": "g_cf7c75d576a7",
+        "text": "Explicit rather than \"anything that is not a put is a delete\":",
+        "violations": []
+      },
+      {
+        "groupId": "g_cf7f26290605",
+        "text": "Deliberately loud. If someone re-enables the picker one day, they",
+        "violations": []
+      },
+      {
+        "groupId": "g_cfbe8a1f0c02",
+        "text": "Saved",
+        "violations": []
+      },
+      {
+        "groupId": "g_cff1d5da8cd2",
+        "text": "the identifier of an existing document, and its parent must then point",
+        "violations": []
+      },
+      {
+        "groupId": "g_d0ef39d1114f",
+        "text": "A click on the backdrop closes. `<dialog>` receives the event for all of",
+        "violations": []
+      },
+      {
+        "groupId": "g_d336fe809d0e",
+        "text": "the code is 4271",
+        "violations": []
+      },
+      {
+        "groupId": "g_d3a9785ab5f2",
+        "text": "future data that cannot be decrypted.",
+        "violations": []
+      },
+      {
+        "groupId": "g_d596fe0e90df",
+        "text": "Requested as soon as we open, before any write: a refusal blocks nothing,",
+        "violations": []
+      },
+      {
+        "groupId": "g_d5c074cfb584",
+        "text": "moving",
+        "violations": []
+      },
+      {
+        "groupId": "g_d5e81c3955dd",
+        "text": "it contains",
+        "violations": []
+      },
+      {
+        "groupId": "g_d62b5bc55c3b",
+        "text": "Content of a fresh document: an empty paragraph, ready for the caret.",
+        "violations": []
+      },
+      {
+        "groupId": "g_d6db55516bf9",
+        "text": "The editor's emoji picker downloads its data **and its images**",
+        "violations": []
+      },
+      {
+        "groupId": "g_d76d622c4619",
+        "text": "---------------------------------------------------------------- Surfaces\nTwo layers of neutrals: the content is the lightest surface (in light\nmode) or the highest one (in dark), while chrome and panels recede. A\nslightly warm cast — paper, not screen.",
+        "violations": []
+      },
+      {
+        "groupId": "g_d7b16e35e7da",
+        "text": "1. The service worker first: it alone can write back into the caches.",
+        "violations": []
+      },
+      {
+        "groupId": "g_d7efe0560b49",
+        "text": "Light / dark theme.\n*\nRendering does not depend on this module: `tokens.css` already follows the\nsystem via `light-dark()`, so the page is painted correctly before React\neven starts. This module exists only to *force* a theme, by setting\n`data-theme` on <html>, which redefines `color-scheme` and nothing else.",
+        "violations": []
+      },
+      {
+        "groupId": "g_d81279694731",
+        "text": "does not loop on a corrupted tree",
+        "violations": []
+      },
+      {
+        "groupId": "g_d880264f7dff",
+        "text": "Nook's design tokens.\n\nOne place defines a value. The colours use `light-dark()`: the light value\nand the dark value live side by side, and `color-scheme` decides. One\nimportant consequence: the theme follows the system from the first pixel\npainted, with no JavaScript.\n\nThat is a constraint, not a preference — the product's CSP forbids inline\nscripts, so the usual trick of a small anti-flash script in the <head> is\nimpossible here. Switching manually is done by setting `data-theme` on\n<html>, which does nothing but redefine `color-scheme`.",
+        "violations": []
+      },
+      {
+        "groupId": "g_d8a3ceaf61b3",
+        "text": "Two encryptions of the same text must be indistinguishable from one",
+        "violations": []
+      },
+      {
+        "groupId": "g_da2b97beaca0",
+        "text": "-------------------------------------------------------------------- Text\nThree levels are enough. `faint` is reserved for metadata nobody reads\nactively (counters, timestamps) and never carries essential information,\nsince it sits close to the contrast threshold.",
+        "violations": []
+      },
+      {
+        "groupId": "g_dae951a51241",
+        "text": "another to whoever reads the disk: without a fresh nonce they would be identical",
+        "violations": []
+      },
+      {
+        "groupId": "g_db1997ad4f43",
+        "text": "Survives a reload",
+        "violations": []
+      },
+      {
+        "groupId": "g_dba5090b2b10",
+        "text": "this variable to change.",
+        "violations": []
+      },
+      {
+        "groupId": "g_dd0f94457948",
+        "text": "The emoji picker is removed from Nook: it downloaded its data from a CDN, ",
+        "violations": []
+      },
+      {
+        "groupId": "g_de16adf69b83",
+        "text": "The GCM tag will be valid: the content really is ours, but it is",
+        "violations": []
+      },
+      {
+        "groupId": "g_de1fabb64d6e",
+        "text": "Add a page inside \"{0}\"",
+        "violations": []
+      },
+      {
+        "groupId": "g_df29118faa8d",
+        "text": "keeps the raw bytes intact",
+        "violations": []
+      },
+      {
+        "groupId": "g_e01f5dfa1df0",
+        "text": "{0} was aborted.",
+        "violations": []
+      },
+      {
+        "groupId": "g_e099b82a3026",
+        "text": "better to say it here than to discover it on a blank page in production.",
+        "violations": []
+      },
+      {
+        "groupId": "g_e0db28590dfe",
+        "text": "refuses an envelope moved elsewhere",
+        "violations": []
+      },
+      {
+        "groupId": "g_e13485246794",
+        "text": "restores identically after a wipe",
+        "violations": []
+      },
+      {
+        "groupId": "g_e32681206c25",
+        "text": "The editor, dressed in Nook's colours.\n\nBlockNote exposes its colours as CSS variables. We redefine them from our\nown tokens, for both schemes at once: our tokens already switch between\nlight and dark on their own, so pointing both at the same variables is\nenough and saves maintaining two palettes.\n\nWe touch only colours, radii and typography. The editor's behaviours — drag\nhandle, slash menu, multi-block selection — stay the library's: rewriting\nthem would produce exactly the wobbly affordances we are trying to avoid.",
+        "violations": []
+      },
+      {
+        "groupId": "g_e39f92debc2f",
+        "text": "browser in a form JavaScript cannot read.",
+        "violations": []
+      },
+      {
+        "groupId": "g_e3c2ec11e14d",
+        "text": "permanently. This\n          action cannot be undone.",
+        "violations": []
+      },
+      {
+        "groupId": "g_e41168a424fa",
+        "text": "Position among its siblings. See `model/tree.ts` for the mechanics.",
+        "violations": []
+      },
+      {
+        "groupId": "g_e449af652e45",
+        "text": "reorders among siblings",
+        "violations": []
+      },
+      {
+        "groupId": "g_e45723bd0383",
+        "text": "is not guaranteed there when the system closes the tab.",
+        "violations": []
+      },
+      {
+        "groupId": "g_e55e696410c6",
+        "text": "The index is authoritative for metadata: it is what",
+        "violations": []
+      },
+      {
+        "groupId": "g_e57895599e73",
+        "text": "Wikilinks, backlinks, tags, search, command palette, daily notes",
+        "violations": []
+      },
+      {
+        "groupId": "g_e6244902ceb6",
+        "text": "15px — editor body",
+        "violations": []
+      },
+      {
+        "groupId": "g_e685558ac074",
+        "text": "the empty state greets the user",
+        "violations": []
+      },
+      {
+        "groupId": "g_e690c8a6d133",
+        "text": "mixes writes and deletes",
+        "violations": []
+      },
+      {
+        "groupId": "g_e6f2bcad64b4",
+        "text": "an interface module",
+        "violations": []
+      },
+      {
+        "groupId": "g_e70a386ea111",
+        "text": "says plainly what happens when the key has vanished",
+        "violations": []
+      },
+      {
+        "groupId": "g_e750b8c06ca5",
+        "text": "Database, caches, service worker and storages destroyed, then an inventory of what remains",
+        "violations": []
+      },
+      {
+        "groupId": "g_e89bbbf7bf85",
+        "text": "Databases: typed properties, table / kanban / calendar views",
+        "violations": []
+      },
+      {
+        "groupId": "g_e89de9092dcc",
+        "text": "will be deleted",
+        "violations": []
+      },
+      {
+        "groupId": "g_e921849e9b9e",
+        "text": "Untitled",
+        "violations": []
+      },
+      {
+        "groupId": "g_e97ff8bce4b0",
+        "text": "The non-extractable `CryptoKey` itself, in \"device\" mode.",
+        "violations": []
+      },
+      {
+        "groupId": "g_e99d913fe81b",
+        "text": "The promise hardest to verify any other way: what would be seen by",
+        "violations": []
+      },
+      {
+        "groupId": "g_e9a56e2246dd",
+        "text": "The content of document \"{0}\" cannot be found.",
+        "violations": []
+      },
+      {
+        "groupId": "g_e9c0ba543077",
+        "text": "An inline script would be blocked by `script-src 'self'` anyway, but",
+        "violations": []
+      },
+      {
+        "groupId": "g_ea969462b984",
+        "text": "The editor fills the whole width of the reading column; it is the parent\ncontainer that sets the measure, not the library.",
+        "violations": []
+      },
+      {
+        "groupId": "g_eb17cf13678c",
+        "text": "What has just arrived is newer than what we were trying to write:",
+        "violations": []
+      },
+      {
+        "groupId": "g_ec8042ed9073",
+        "text": "typing reaches the editor",
+        "violations": []
+      },
+      {
+        "groupId": "g_ec9ff56b6af8",
+        "text": "Unrecoverable case: the message must point towards an export rather than",
+        "violations": []
+      },
+      {
+        "groupId": "g_ecac3d7bb046",
+        "text": "A cycle should never exist, but a damaged index must not",
+        "violations": []
+      },
+      {
+        "groupId": "g_ecf9d9eb52d6",
+        "text": "Below this, two positions are no longer reliably distinguishable.",
+        "violations": []
+      },
+      {
+        "groupId": "g_ed247639d4a1",
+        "text": "would collapse in silence: this test locks that assumption down.",
+        "violations": []
+      },
+      {
+        "groupId": "g_ed5644723880",
+        "text": "Frozen timestamp: the creation date must be the one we supplied.",
+        "violations": []
+      },
+      {
+        "groupId": "g_ee0390e29c9a",
+        "text": "A's notes",
+        "violations": []
+      },
+      {
+        "groupId": "g_ee19392aa369",
+        "text": "useVault must be called inside a <VaultProvider>.",
+        "violations": []
+      },
+      {
+        "groupId": "g_ee3ea6351222",
+        "text": "A remapping pass first: an imported document may carry",
+        "violations": []
+      },
+      {
+        "groupId": "g_ee83ce5820b0",
+        "text": "renumbers the sibling list when room runs out",
+        "violations": []
+      },
+      {
+        "groupId": "g_ef6e9ed4756b",
+        "text": "creates a document and reads it back",
+        "violations": []
+      },
+      {
+        "groupId": "g_ef9020c9cda7",
+        "text": "Menus and floating bubbles take our elevation, to stay consistent with the\ndialogs and the palette.",
+        "violations": []
+      },
+      {
+        "groupId": "g_efc79532fefd",
+        "text": "A random nonce on every write. AES-GCM tolerates roughly 2³² encryptions",
+        "violations": []
+      },
+      {
+        "groupId": "g_f07543a964f7",
+        "text": "AES-GCM requires a 96-bit nonce; it is also the only recommended size.",
+        "violations": []
+      },
+      {
+        "groupId": "g_f163019b43a3",
+        "text": "Destroys everything, then returns an inventory of what actually remains.",
+        "violations": []
+      },
+      {
+        "groupId": "g_f21a19102624",
+        "text": "refuses to overwrite an existing vault",
+        "violations": []
+      },
+      {
+        "groupId": "g_f2fc4478f7a6",
+        "text": "The point that matters: the copy of the parent really picked up the copy of",
+        "violations": []
+      },
+      {
+        "groupId": "g_f300c43f809c",
+        "text": "the editor, loaded on demand, arrives",
+        "violations": []
+      },
+      {
+        "groupId": "g_f31ab9af15f4",
+        "text": "@param context Location of the record, for example `docs/<id>`.\n  The same value will have to be supplied when decrypting.",
+        "violations": []
+      },
+      {
+        "groupId": "g_f38b9cca0806",
+        "text": "browser, and to rebuild the interface without touching the data.",
+        "violations": []
+      },
+      {
+        "groupId": "g_f390643e68bf",
+        "text": "emulation, any simulated typing would go nowhere.",
+        "violations": []
+      },
+      {
+        "groupId": "g_f69594a2ac9e",
+        "text": "Without this guard, every test below would pass against an",
+        "violations": []
+      },
+      {
+        "groupId": "g_f70e89196d2d",
+        "text": "browsers without `modulepreload`. No target of this project needs it,",
+        "violations": []
+      },
+      {
+        "groupId": "g_f7f0534a1aa8",
+        "text": "`Input.insertText` takes the path of real typing; a bare `keyDown`",
+        "violations": []
+      },
+      {
+        "groupId": "g_f8982dc234cc",
+        "text": "Debounced autosave.\n*\nThere is no \"Save\" button in Nook, so this module carries the promise of\nlosing nothing. Three moments matter, and forgetting them is the usual way\nto lose the last paragraph written:\n*\n  - after a pause in typing (the common case);\n  - when the tab goes to the background or closes, because a pending timer\n    will never fire;\n  - on unmount, typically when changing page.\n*\nOn failure, the changes go back into the queue rather than being thrown\naway: the next keystroke will retry, and the state moves to `error` so the\ninterface can say so.",
+        "violations": []
+      },
+      {
+        "groupId": "g_f8cb388328b7",
+        "text": "Imported notebook",
+        "violations": []
+      },
+      {
+        "groupId": "g_f981b313ccfa",
+        "text": "If the open page has just disappeared, the editor must be cleared rather",
+        "violations": []
+      },
+      {
+        "groupId": "g_f9aeadc4bc14",
+        "text": "The sub-path is derived from the repository name: renaming your fork is enough, there is",
+        "violations": []
+      },
+      {
+        "groupId": "g_f9b1659a7e84",
+        "text": "If another Nook window is open, close it and reload.",
+        "violations": []
+      },
+      {
+        "groupId": "g_fa4d2cb1528b",
+        "text": "`IDBRequest` exposes its results through `on*` properties: that is the\ncanonical IndexedDB API, and each request is single-use, so the usual\narguments in favour of `addEventListener` (several subscribers,\n`{ once: true }`) do not apply here.",
+        "violations": []
+      },
+      {
+        "groupId": "g_fa63b38ead35",
+        "text": "Record describing the vault's protection. Readable without the secret.",
+        "violations": []
+      },
+      {
+        "groupId": "g_fb0e34265adc",
+        "text": "and we prefer a bundle where the word `fetch` appears nowhere.",
+        "violations": []
+      },
+      {
+        "groupId": "g_fbdfe0aacb75",
+        "text": "A documentation link, inside the text of a schema error raised by ProseMirror.",
+        "violations": []
+      },
+      {
+        "groupId": "g_fbe958474043",
+        "text": "HTML attributes come out of the build with their quotes escaped.",
+        "violations": []
+      },
+      {
+        "groupId": "g_fc0fa309a0a6",
+        "text": "reading the inventory",
+        "violations": []
+      },
+      {
+        "groupId": "g_fc5f8e7a1f0a",
+        "text": "End-to-end check, against the build that is actually served.\n*\nThe unit tests cover the core without a browser; this one does the thing\nonly a real browser can prove: you write a note, you reload the page, and\nit is still there — while having left nothing but unreadable bytes on\ndisk.\n*\nIt drives Chrome over CDP. Node 24 ships a native WebSocket client, so no\nbrowser-testing dependency enters the project.\n*\n  pnpm build && pnpm smoke",
+        "violations": []
+      },
+      {
+        "groupId": "g_fcbe8ffeba78",
+        "text": "reverse order would produce a vault that is declared but has no key, so",
+        "violations": []
+      },
+      {
+        "groupId": "g_fcda7cc3dc32",
+        "text": "typing in progress in order to announce it.",
+        "violations": []
+      },
+      {
+        "groupId": "g_fcde38e672bf",
+        "text": "returns exactly what it was given",
+        "violations": []
+      },
+      {
+        "groupId": "g_fd04bb6b8196",
+        "text": "We read the database back without going through the vault: this is what",
+        "violations": []
+      },
+      {
+        "groupId": "g_fddd07e1b82a",
+        "text": "---------------------------------------------------------------- Elevation\nTwo shadows only, and they exist purely to lift an element out of the flow\n(menu, dialog). Nothing decorative carries a shadow.",
+        "violations": []
+      }
+    ],
+    "rejected": [],
+    "refused": [],
+    "unknown": [],
+    "missing": []
+  }
+}

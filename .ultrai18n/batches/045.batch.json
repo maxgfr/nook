@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "batchId": "045",
+  "batchDigest": "6755879e15f77570",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_bb84ba7a9893",
+      "text": "déplace un document et le retient",
+      "role": "label",
+      "max": 49
+    },
+    {
+      "id": "g_bb8c20a70658",
+      "text": "ne laisse pas le texte clair apparaître dans l’enveloppe",
+      "role": "paragraph"
+    },
+    {
+      "id": "g_bbd8aba80c30",
+      "text": "Lien vers la documentation, à l’intérieur du texte d’un avertissement de configuration de Mantine.",
+      "role": "paragraph"
+    },
+    {
+      "id": "g_bbdf2cf38799",
+      "text": "✖ Aucun Chrome trouvé. Définissez CHROME_PATH.",
+      "role": "label",
+      "max": 67
+    },
+    {
+      "id": "g_bbf0d8484477",
+      "text": "liste les clés et les valeurs d’un magasin",
+      "role": "label",
+      "max": 61
+    },
+    {
+      "id": "g_bc28a2fc9ee9",
+      "text": "Redessine le composant à chaque modification de l'index.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_bc89a290602d",
+      "text": "Le stockage et le chiffrement passent par le core, jamais par un composant.",
+      "role": "paragraph"
+    },
+    {
+      "id": "g_bca56f9ab43c",
+      "text": "Application précachée, installable en PWA",
+      "role": "doc-prose"
+    }
+  ]
+}

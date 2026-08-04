@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "batchId": "027",
+  "batchDigest": "e4d8cafa2cd5a36a",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_6e904b59eb69",
+      "text": "Ce que l'index garde en mémoire pour chaque document : de quoi peupler la\nbarre latérale, la palette et les fils d'Ariane sans déchiffrer un seul\ncontenu.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_6eb5fa0942c1",
+      "text": "**Ce que ça protège :** quelqu'un qui copie votre disque, votre profil",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_6fa2b9e72a5b",
+      "text": "Fondations, CI, déploiement Pages, garde-fou réseau, jetons de design",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_7056d373267a",
+      "text": "Rouvrir recrée une base vide : la preuve que l'ancienne a disparu.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_7126299c01cb",
+      "text": "Réattribue 0, 1, 2… à une fratrie, en insérant `id` au rang `at`.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_7131db6297d0",
+      "text": "pas prétendre connaître le contenu de l'origine : on renvoie `undefined`",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_713b1d8f1fef",
+      "text": "être réattribuée plutôt que de voir deux pages se superposer.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_7294b94aef29",
+      "text": "On insère cinquante fois de suite au même endroit : l'écart entre",
+      "role": "doc-prose"
+    }
+  ]
+}

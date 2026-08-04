@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "batchId": "025",
+  "batchDigest": "61369486b42b0acd",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_67aefb353ace",
+      "text": "État vide de l'application.\n*\nIl enseigne l'interface au lieu de constater son vide : la seule action\nutile est proposée, et la promesse du produit est rappelée là où elle se\nvérifie — au premier lancement, quand on décide de faire confiance.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_67c5533921b1",
+      "text": "silencieusement vide — le pire des deux mondes. Plutôt que de le désactiver par",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_687eba7f99c3",
+      "text": "#root introuvable dans index.html",
+      "role": "label",
+      "max": 49
+    },
+    {
+      "id": "g_696a97a8b8ac",
+      "text": "recréer `flush`, dont la stabilité est indispensable au nettoyage d'effet.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_6a66e34aca16",
+      "text": "Plus de place entre les deux voisins : on rattache d'abord la page au bon",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_6b0b6336c20a",
+      "text": "deux positions finit sous le seuil de précision, et la fratrie doit",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_6b79a59d4787",
+      "text": "la note d’hier",
+      "role": "label",
+      "max": 23,
+      "sites": 2
+    },
+    {
+      "id": "g_6b89a98c3526",
+      "text": "arbre des pages",
+      "role": "label",
+      "max": 25
+    }
+  ]
+}

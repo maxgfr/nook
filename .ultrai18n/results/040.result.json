@@ -1,0 +1,39 @@
+{
+ "schemaVersion": 1,
+ "batchId": "040",
+ "batchDigest": "c41359989533b697",
+ "items": [
+  {
+   "id": "g_a2d35ee6fbb4",
+   "text": "Host your own"
+  },
+  {
+   "id": "g_a30b1f3f43c1",
+   "text": "Creates the vault on the very first launch.\n*\nFails if a vault already exists: overwriting the master key would make\nevery existing note permanently unreadable, and that is precisely the kind\nof accident an unintended call could cause."
+  },
+  {
+   "id": "g_a3977569ef8d",
+   "text": "The heart of the promise: not even code running inside the page can"
+  },
+  {
+   "id": "g_a4f5452c25b0",
+   "text": "surfaces the title in the index without decrypting any content"
+  },
+  {
+   "id": "g_a569993c53fa",
+   "text": "Code-block text keeps the same monospace family as the rest of the\napplication, rather than the library's."
+  },
+  {
+   "id": "g_a657a115c1cb",
+   "text": "No runtime caching: there is nothing to go and fetch."
+  },
+  {
+   "id": "g_a8974e593e18",
+   "text": "rather than an empty list, which would wrongly read as \"nothing to erase\"."
+  },
+  {
+   "id": "g_a93900db3628",
+   "text": "refuses a record that is not an envelope"
+  }
+ ]
+}

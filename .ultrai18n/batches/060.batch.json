@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "batchId": "060",
+  "batchDigest": "fb79b2759946885e",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_f7f0534a1aa8",
+      "text": "`Input.insertText` emprunte le chemin d'une vraie saisie ; un `keyDown` nu",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_f8982dc234cc",
+      "text": "Sauvegarde automatique, temporisée.\n*\nIl n'y a pas de bouton « Enregistrer » dans Nook, donc c'est ce module qui\nporte la promesse de ne rien perdre. Trois moments comptent, et les oublier\nest la façon habituelle de perdre le dernier paragraphe écrit :\n*\n  - après une pause dans la frappe (le cas courant) ;\n  - quand l'onglet passe en arrière-plan ou se ferme, car une temporisation\n    en attente ne se déclenchera jamais ;\n  - au démontage, typiquement en changeant de page.\n*\nEn cas d'échec, les modifications sont remises dans la file plutôt que\njetées : la frappe suivante réessaiera, et l'état passe à `error` pour que\nl'interface puisse le dire.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_f8cb388328b7",
+      "text": "Carnet importé",
+      "role": "label",
+      "max": 23
+    },
+    {
+      "id": "g_f981b313ccfa",
+      "text": "Si la page ouverte vient de disparaître, l'éditeur doit être vidé plutôt",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_f9aeadc4bc14",
+      "text": "Le sous-chemin est déduit du nom du dépôt : renommer votre fork suffit, il n'y",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_f9b1659a7e84",
+      "text": "Si une autre fenêtre de Nook est ouverte, fermez-la puis rechargez.",
+      "role": "paragraph"
+    },
+    {
+      "id": "g_fa4d2cb1528b",
+      "text": "`IDBRequest` expose ses résultats par des propriétés `on*` : c'est l'API\ncanonique d'IndexedDB, et chaque requête est à usage unique, donc les\narguments habituels en faveur de `addEventListener` (plusieurs abonnés,\n`{ once: true }`) ne s'appliquent pas ici.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_fa63b38ead35",
+      "text": "Enregistrement décrivant la protection du coffre. Lisible sans secret.",
+      "role": "doc-prose"
+    }
+  ]
+}

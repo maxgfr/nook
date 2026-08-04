@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "batchId": "014",
+  "batchDigest": "95dce823b7742a3e",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_3b82c69ee825",
+      "text": "Tous les descendants, en profondeur. N'inclut pas `id`.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_3c13d94a2022",
+      "text": "Le texte doit survivre au rechargement.",
+      "role": "label",
+      "max": 57
+    },
+    {
+      "id": "g_3cd98316329a",
+      "text": "tire un nonce neuf à chaque écriture",
+      "role": "label",
+      "max": 53
+    },
+    {
+      "id": "g_3ceeec080e10",
+      "text": "est omise plutôt que passée à `undefined` — avec",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_3e51f83920df",
+      "text": "Le scénario réel : on exporte, on efface, on réimporte.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_3eda46704e4b",
+      "text": "code à l'exécution et ne peuvent donc pas être simplement effacées par un",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_3f9b2151c407",
+      "text": "une clé de sessionStorage",
+      "role": "label",
+      "max": 38
+    },
+    {
+      "id": "g_406abfaed601",
+      "text": "refuse de déplacer une page dans sa propre descendance",
+      "role": "paragraph"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "batchId": "052",
+  "batchDigest": "6588ace0c506ab04",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_d76d622c4619",
+      "text": "---------------------------------------------------------------- Surfaces\nDeux couches de neutres : le contenu est la surface la plus claire (en\nclair) ou la plus haute (en sombre), les chrome et panneaux reculent.\nTeinte légèrement chaude — du papier, pas de l'écran.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_d7b16e35e7da",
+      "text": "1. Le service worker d'abord : lui seul peut réécrire dans les caches.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_d7efe0560b49",
+      "text": "Thème clair / sombre.\n*\nLe rendu ne dépend pas de ce module : `tokens.css` suit déjà le système via\n`light-dark()`, donc la page est correctement peinte avant même que React\ndémarre. Ce module ne sert qu'à *forcer* un thème, en posant `data-theme`\nsur <html>, ce qui redéfinit `color-scheme` et rien d'autre.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_d81279694731",
+      "text": "ne boucle pas sur un arbre corrompu",
+      "role": "label",
+      "max": 52
+    },
+    {
+      "id": "g_d880264f7dff",
+      "text": "Jetons de design de Nook.\n\nUn seul endroit définit une valeur. Les couleurs utilisent `light-dark()` :\nla valeur claire et la valeur sombre vivent côte à côte, et c'est\n`color-scheme` qui tranche. Conséquence importante : le thème suit le\nsystème dès le premier pixel peint, sans JavaScript.\n\nC'est une contrainte, pas une préférence — la CSP du produit interdit les\nscripts inline, donc l'astuce habituelle du petit script anti-flash dans le\n<head> est impossible ici. La bascule manuelle se fait en posant\n`data-theme` sur <html>, qui ne fait que redéfinir `color-scheme`.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_d8a3ceaf61b3",
+      "text": "Deux chiffrements du même texte doivent être indistinguables l'un de",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_da2b97beaca0",
+      "text": "-------------------------------------------------------------------- Texte\nTrois niveaux suffisent. `faint` est réservé aux métadonnées qu'on ne lit\npas activement (compteurs, horodatages) et ne porte jamais d'information\nindispensable, puisqu'il frôle le seuil de contraste.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_dae951a51241",
+      "text": "l'autre pour qui lit le disque : sans nonce neuf, ils seraient identiques",
+      "role": "doc-prose"
+    }
+  ]
+}

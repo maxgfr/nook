@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "batchId": "061",
+  "batchDigest": "9c7b8493b3816ef1",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_fb0e34265adc",
+      "text": "besoin, et on préfère un bundle où le mot `fetch` n'apparaît nulle part.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_fbdfe0aacb75",
+      "text": "Lien vers la documentation, à l’intérieur du texte d’une erreur de schéma levée par ProseMirror.",
+      "role": "paragraph"
+    },
+    {
+      "id": "g_fbe958474043",
+      "text": "Les attributs HTML sortent du build avec leurs guillemets échappés.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_fc0fa309a0a6",
+      "text": "lecture de l’inventaire",
+      "role": "label",
+      "max": 36
+    },
+    {
+      "id": "g_fc5f8e7a1f0a",
+      "text": "Vérification de bout en bout, sur le build réellement servi.\n*\nLes tests unitaires couvrent le core sans navigateur ; celui-ci fait la\nchose que seul un vrai navigateur peut prouver : on écrit une note, on\nrecharge la page, et elle est toujours là — tout en n'ayant laissé sur le\ndisque que des octets illisibles.\n*\nIl pilote Chrome par CDP. Node 24 fournit un client WebSocket natif, donc\naucune dépendance de test navigateur n'entre dans le projet.\n*\n  pnpm build && pnpm smoke",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_fcbe8ffeba78",
+      "text": "inverse produirait un coffre déclaré mais sans clé, donc des données",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_fcda7cc3dc32",
+      "text": "frappe en cours pour l'annoncer.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_fcde38e672bf",
+      "text": "rend exactement ce qu’on lui a confié",
+      "role": "label",
+      "max": 54
+    }
+  ]
+}

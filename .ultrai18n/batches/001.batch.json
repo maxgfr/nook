@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "batchId": "001",
+  "batchDigest": "95a1bd5333fad41e",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_037b74b0cb75",
+      "text": "L'arbre des pages.\n*\nChaque ligne est un bouton, pas un `<div>` cliquable : la navigation au\nclavier et l'annonce par les lecteurs d'écran en dépendent. Le chevron\nd'ouverture est un contrôle distinct de la ligne, sinon déplier une branche\nchangerait aussi la page affichée.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_04ccdc78a078",
+      "text": "ne dit pas « vide » quand il reste %s",
+      "role": "label",
+      "max": 54
+    },
+    {
+      "id": "g_053c733d173c",
+      "text": "Déploiement GitHub Pages",
+      "role": "label",
+      "max": 37
+    },
+    {
+      "id": "g_05876a8fae6f",
+      "text": "Écriture groupée de {0} enregistrement(s)",
+      "role": "label",
+      "max": 60,
+      "holes": {
+        "0": "entries length"
+      }
+    },
+    {
+      "id": "g_0687816267e8",
+      "text": "Ouvrir l'application",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_084cbe003a6e",
+      "text": "`indexedDB.databases()` n'existe pas partout. Quand il manque, on ne peut",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_090ca137b838",
+      "text": "Les génériques de schéma de BlockNote ne satisfont pas",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_093febf6db18",
+      "text": "Éditeur à blocs, arbre de pages, sauvegarde automatique",
+      "role": "doc-prose"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "batchId": "047",
+  "batchDigest": "de791e5f0e3e2654",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_c3537bb630a2",
+      "text": "Bannière de licence, dans un commentaire CSS.",
+      "role": "label",
+      "max": 65
+    },
+    {
+      "id": "g_c3f495264b75",
+      "text": "CI",
+      "role": "label",
+      "max": 7
+    },
+    {
+      "id": "g_c491082a4238",
+      "text": "La CSP est la véritable barrière. Si elle disparaît du build, le canari ne",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_c4adf7a0045f",
+      "text": "une entrée malformée doit faire du bruit, pas effacer une donnée.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_c59f1eb1db03",
+      "text": "ici signale un bug de sérialisation, pas une attaque.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_c61594598c6c",
+      "text": "il rend seulement les notes évinçables après une longue inactivité.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_c74bbfe395d4",
+      "text": "rouvre le coffre avec la même clé",
+      "role": "label",
+      "max": 49
+    },
+    {
+      "id": "g_c7c4af6966ae",
+      "text": "Ce que voit l'application tant que le coffre n'est pas ouvert.",
+      "role": "doc-prose"
+    }
+  ]
+}

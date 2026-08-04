@@ -1,0 +1,39 @@
+{
+ "schemaVersion": 1,
+ "batchId": "061",
+ "batchDigest": "9c7b8493b3816ef1",
+ "items": [
+  {
+   "id": "g_fb0e34265adc",
+   "text": "and we prefer a bundle where the word `fetch` appears nowhere."
+  },
+  {
+   "id": "g_fbdfe0aacb75",
+   "text": "A documentation link, inside the text of a schema error raised by ProseMirror."
+  },
+  {
+   "id": "g_fbe958474043",
+   "text": "HTML attributes come out of the build with their quotes escaped."
+  },
+  {
+   "id": "g_fc0fa309a0a6",
+   "text": "reading the inventory"
+  },
+  {
+   "id": "g_fc5f8e7a1f0a",
+   "text": "End-to-end check, against the build that is actually served.\n*\nThe unit tests cover the core without a browser; this one does the thing\nonly a real browser can prove: you write a note, you reload the page, and\nit is still there — while having left nothing but unreadable bytes on\ndisk.\n*\nIt drives Chrome over CDP. Node 24 ships a native WebSocket client, so no\nbrowser-testing dependency enters the project.\n*\n  pnpm build && pnpm smoke"
+  },
+  {
+   "id": "g_fcbe8ffeba78",
+   "text": "reverse order would produce a vault that is declared but has no key, so"
+  },
+  {
+   "id": "g_fcda7cc3dc32",
+   "text": "typing in progress in order to announce it."
+  },
+  {
+   "id": "g_fcde38e672bf",
+   "text": "returns exactly what it was given"
+  }
+ ]
+}

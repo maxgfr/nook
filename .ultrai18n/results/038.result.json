@@ -1,0 +1,39 @@
+{
+ "schemaVersion": 1,
+ "batchId": "038",
+ "batchDigest": "1273f02cc2811043",
+ "items": [
+  {
+   "id": "g_9a612df1a1f3",
+   "text": "really deletes the databases, and proves it"
+  },
+  {
+   "id": "g_9ae10185a1f7",
+   "text": "\n✔ {0} checks passed against the served build."
+  },
+  {
+   "id": "g_9af4414ec0e8",
+   "text": "collects the whole subtree, depth first"
+  },
+  {
+   "id": "g_9b22b6af3f34",
+   "text": "Title visible in the sidebar"
+  },
+  {
+   "id": "g_9bd51804024d",
+   "text": "Blocks in place of text rather than a spinner: the page\n            keeps its shape, and switching to the real content does not make\n            the layout jump. "
+  },
+  {
+   "id": "g_9d22c6e752f4",
+   "text": "will be deleted"
+  },
+  {
+   "id": "g_9d33df4309c9",
+   "text": "is still there — and that the disk holds nothing but ciphertext."
+  },
+  {
+   "id": "g_9d7368cc5cd1",
+   "text": "\n✖ This build does not keep the \"zero network\" promise.\n"
+  }
+ ]
+}

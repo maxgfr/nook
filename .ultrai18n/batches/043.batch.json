@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "batchId": "043",
+  "batchDigest": "25bbed569b78f0db",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_b29ffa8cccf8",
+      "text": "Le service worker charge son propre runtime Workbox, servi depuis la même origine. Le scan des URL absolues de ce même fichier garantit qu’aucune origine externe n’y est référencée.",
+      "role": "paragraph"
+    },
+    {
+      "id": "g_b46d16de6688",
+      "text": "Ouvre le coffre une fois pour toute l'application et le met à disposition.\n*\nL'abonnement passe par `useSyncExternalStore` : le coffre notifie ses\nchangements avec un simple callback, sans rien connaître de React. C'est ce\nqui permet à `src/core` de rester une bibliothèque TypeScript ordinaire,\ntestable sans rendu.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_b53295fbbe1c",
+      "text": "Remplaçant d'`emoji-mart`, substitué à la compilation.\n*\nLa bibliothèque de sélection d'emoji va chercher ses données d'internationa-\nlisation *et* ses images sur un CDN, à l'exécution. C'est incompatible avec\nla promesse de Nook : la CSP bloquerait ces requêtes, et le sélecteur serait\nsilencieusement cassé — la pire des deux situations, puisque l'utilisateur\nverrait une fonctionnalité qui ne marche pas sans savoir pourquoi.\n*\nLe désactiver par une option ne suffisait pas : le code partait quand même\ndans les fichiers servis, et y serait resté à la merci d'un futur réglage.\nUn alias dans `vite.config.ts` le remplace donc par ce module, et le\ngarde-fou réseau constate son absence.\n*\nCe qui est perdu : le menu d'emoji déclenché en tapant « : ». Les emoji\ntapés au clavier système fonctionnent normalement, eux.\n*\nCe module sert d'alias à `emoji-mart` comme à `@emoji-mart/data` : le premier\nlit des fonctions, le second un objet de données, et l'export par défaut vide\nconvient aux deux.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_b5f63206459a",
+      "text": "Confirmation d'une action destructrice.\n*\nBâti sur `<dialog>` natif, ce qui donne gratuitement — et correctement — le\npiégeage du focus, la fermeture par Échap, le fond inerte et la bonne\nsémantique pour les lecteurs d'écran. Réimplémenter tout cela à la main est\nle raccourci qui produit les modales inutilisables au clavier.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_b64aab5f3c51",
+      "text": "Un seul traitement du focus dans toute l'application. Il est visible sur\nfond clair comme sombre parce qu'il utilise l'accent, jamais une teinte\nde navigateur.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_b6e5f1c73285",
+      "text": "`visibilitychange` est le dernier signal fiable sur mobile : `unload`",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_b6ffea0b6452",
+      "text": "retrouver. Il ne sait pas encore les relier entre elles, les chercher, ni les",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_b710137860af",
+      "text": "range les frères par ordre croissant",
+      "role": "label",
+      "max": 53
+    }
+  ]
+}

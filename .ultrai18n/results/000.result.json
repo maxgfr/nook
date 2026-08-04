@@ -1,0 +1,39 @@
+{
+ "schemaVersion": 1,
+ "batchId": "000",
+ "batchDigest": "1fcdcd1f573520c7",
+ "items": [
+  {
+   "id": "g_007fc979eb70",
+   "text": "✔ {0} served files inspected, no network egress possible."
+  },
+  {
+   "id": "g_009159899c51",
+   "text": "Same here: nothing to clear if access is denied."
+  },
+  {
+   "id": "g_0263031d927d",
+   "text": "a service worker"
+  },
+  {
+   "id": "g_027804696ea3",
+   "text": "the interface never talks directly to IndexedDB or WebCrypto"
+  },
+  {
+   "id": "g_02b15dea3f36",
+   "text": "Ask the browser not to evict our data.\n*\nWithout this, Safari clears the storage of an origin left idle for a few\nweeks — a notebook you don't open over the holidays can therefore vanish.\nThe request may be denied without explanation; the caller should use that\nto encourage exporting, not to panic."
+  },
+  {
+   "id": "g_02dfb0803e1e",
+   "text": "Explicit exemptions.\n*\n`file` accepts `*`. `match` is the substring found. `reason` must explain\nwhy the finding cannot produce a request — an entry without a reason is\nignored, so the check will fail."
+  },
+  {
+   "id": "g_0330f7aac077",
+   "text": "Nook — local notes"
+  },
+  {
+   "id": "g_037761e75a8f",
+   "text": "Deletes a document and its whole subtree. Without the cascade, child\npages would stay in the database referencing a parent that no longer\nexists, invisible and never recoverable."
+  }
+ ]
+}

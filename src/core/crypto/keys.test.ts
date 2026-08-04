@@ -6,6 +6,9 @@ import { open, seal } from './envelope'
 let counter = 0
 const freshDatabase = () => openDatabase(`nook-keys-${++counter}`)
 
+/** Horodatage figé : la date de création doit être celle qu'on a fournie. */
+const CREATED_AT = '2026-08-04T10:00:00.000Z'
+
 const bytes = (text: string) => new TextEncoder().encode(text)
 const text = (data: Uint8Array) => new TextDecoder().decode(data)
 
@@ -20,12 +23,12 @@ describe('coffre', () => {
   it('se crée avec une clé utilisable et une description lisible', async () => {
     const db = await freshDatabase()
 
-    const key = await createVault(db, new Date('2026-08-04T10:00:00Z'))
+    const key = await createVault(db, new Date(CREATED_AT))
 
     expect(await readVaultMeta(db)).toEqual({
       schema: 1,
       protection: { kind: 'device' },
-      createdAt: '2026-08-04T10:00:00.000Z',
+      createdAt: CREATED_AT,
     })
     expect(text(await open(key, await seal(key, bytes('test'), 'docs/a'), 'docs/a'))).toBe('test')
   })

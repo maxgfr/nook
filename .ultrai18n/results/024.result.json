@@ -1,0 +1,39 @@
+{
+ "schemaVersion": 1,
+ "batchId": "024",
+ "batchDigest": "5c62937643a3657e",
+ "items": [
+  {
+   "id": "g_634597fdb824",
+   "text": "`replace` erases the vault before importing; `merge` keeps what is there and\nreassigns an identifier to documents that would collide. There is no default\nmode: overwriting notes must always be an explicit choice."
+  },
+  {
+   "id": "g_638274ccf1f3",
+   "text": "rest of the report keeps its value."
+  },
+  {
+   "id": "g_6463613b4618",
+   "text": "does not complain when there is nothing to erase"
+  },
+  {
+   "id": "g_648d45a606b0",
+   "text": "merges by reassigning colliding identifiers"
+  },
+  {
+   "id": "g_64a21e614f68",
+   "text": "really deletes an existing database"
+  },
+  {
+   "id": "g_66a37f97a494",
+   "text": "parent, then reassign clean integers to the whole sibling list."
+  },
+  {
+   "id": "g_6739da15424c",
+   "text": "A page deleted in another tab, or a shared address matching nothing:"
+  },
+  {
+   "id": "g_67aa6c2541fe",
+   "text": "Tests"
+  }
+ ]
+}

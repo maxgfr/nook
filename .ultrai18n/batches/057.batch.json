@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "batchId": "057",
+  "batchDigest": "48fd460eacea15ef",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_eb17cf13678c",
+      "text": "Ce qui vient d'arriver est plus récent que ce qu'on tentait d'écrire :",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_ec8042ed9073",
+      "text": "la frappe atteint l’éditeur",
+      "role": "label",
+      "max": 41
+    },
+    {
+      "id": "g_ec9ff56b6af8",
+      "text": "Cas irrécupérable : le message doit orienter vers un export plutôt que",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_ecac3d7bb046",
+      "text": "Un cycle ne devrait jamais exister, mais un index abîmé ne doit pas",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_ecf9d9eb52d6",
+      "text": "En deçà, deux positions ne sont plus distinguables de façon fiable.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_ed247639d4a1",
+      "text": "s'effondrerait en silence : ce test verrouille cette hypothèse.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_ed5644723880",
+      "text": "Horodatage figé : la date de création doit être celle qu'on a fournie.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_ee0390e29c9a",
+      "text": "les notes de A",
+      "role": "label",
+      "max": 23
+    }
+  ]
+}

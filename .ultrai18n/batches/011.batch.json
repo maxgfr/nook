@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "batchId": "011",
+  "batchDigest": "bc32ff377ebc3f08",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_2ef33a64e429",
+      "text": "Le site est servi sous le nom du repo. Un fork qui renomme n'a que",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_2f437a43d002",
+      "text": "document.body.innerText.includes('survivre au rechargement')",
+      "role": "paragraph"
+    },
+    {
+      "id": "g_3062b6321d6a",
+      "text": "l'enfant, et non l'enfant d'origine.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_30ce67e56967",
+      "text": "refuse une enveloppe d’une autre version du format",
+      "role": "paragraph"
+    },
+    {
+      "id": "g_316bf7a7e878",
+      "text": "en reste, ni le nier ; l'interface doit dire ce qu'elle sait, et le",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_31c964adb0a4",
+      "text": "départage deux frères de même ordre par date de création",
+      "role": "paragraph"
+    },
+    {
+      "id": "g_31d3b56fdd7d",
+      "text": "crée tous les magasins attendus",
+      "role": "label",
+      "max": 46
+    },
+    {
+      "id": "g_32119eaef84a",
+      "text": "clé `test`, ce qui garde la configuration du projet dans un seul fichier.",
+      "role": "doc-prose"
+    }
+  ]
+}

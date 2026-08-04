@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "batchId": "028",
+  "batchDigest": "99bf89634a85fffe",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_72c26f74563e",
+      "text": "serait ignoré par ProseMirror.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_73106d80f07f",
+      "text": "{ ceci n’est pas du JSON",
+      "role": "label",
+      "max": 37
+    },
+    {
+      "id": "g_7480486cafc0",
+      "text": "Build",
+      "role": "label",
+      "max": 11,
+      "sites": 2
+    },
+    {
+      "id": "g_7535ec03208d",
+      "text": "✖ dist/ est absent. Lancez `pnpm build` avant cette vérification.",
+      "role": "paragraph"
+    },
+    {
+      "id": "g_7682e6eb9398",
+      "text": "Tout peut vraiment être effacé",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_76b8fb2361d9",
+      "text": "Les chiffres alignés verticalement dans les listes et les tableaux.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_774a0a1d1c8c",
+      "text": "navigateur. Il n'y a pas de compte, pas de serveur, pas de synchronisation.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_77578ba9bff0",
+      "text": "déplacements et renommages mettent à jour.",
+      "role": "doc-prose"
+    }
+  ]
+}

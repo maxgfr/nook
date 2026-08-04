@@ -1,0 +1,39 @@
+{
+ "schemaVersion": 1,
+ "batchId": "010",
+ "batchDigest": "2b2583beec7b3513",
+ "items": [
+  {
+   "id": "g_27101525b1d6",
+   "text": "the title is found again after a reload"
+  },
+  {
+   "id": "g_2718e785a286",
+   "text": "the user sees an application that never starts, with no explanation."
+  },
+  {
+   "id": "g_2755d9b44613",
+   "text": "CI inspects the published bundle and fails if network code gets in ([the guard][cnn])"
+  },
+  {
+   "id": "g_27f0062332c7",
+   "text": "A view over an ordinary `ArrayBuffer`.\n*\n`Uint8Array` has been generic over its buffer since TypeScript 5.7, in\norder to distinguish memory shared between threads (`SharedArrayBuffer`) —\nwhich WebCrypto refuses. The alias avoids repeating that on every\nsignature, and makes any attempt to encrypt a shared buffer fail to\ncompile."
+  },
+  {
+   "id": "g_28e8f3fcdf8c",
+   "text": "If another tab asks for an upgrade, we release the database rather"
+  },
+  {
+   "id": "g_292d16993da7",
+   "text": "A notebook that talks to nobody."
+  },
+  {
+   "id": "g_29f36ce1ac20",
+   "text": "The editor alone accounts for most of the application's weight. Taking it\nout of the initial load makes the sidebar appear immediately, and its\nchunk is only fetched when a page is opened. The service worker having\nprecached it, the application stays usable offline."
+  },
+  {
+   "id": "g_2a1cfb92c96f",
+   "text": "should land on this explanation, not on an empty menu."
+  }
+ ]
+}

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "batchId": "010",
+  "batchDigest": "2b2583beec7b3513",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_27101525b1d6",
+      "text": "le titre est retrouvé après rechargement",
+      "role": "label",
+      "max": 58
+    },
+    {
+      "id": "g_2718e785a286",
+      "text": "l'utilisateur voit une application qui ne démarre jamais, sans raison.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_2755d9b44613",
+      "text": "La CI inspecte le bundle publié et échoue si du code réseau y entre ([le garde-fou][cnn])",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_27f0062332c7",
+      "text": "Vue sur un `ArrayBuffer` ordinaire.\n*\n`Uint8Array` est générique sur son tampon depuis TypeScript 5.7, afin de\ndistinguer la mémoire partagée entre threads (`SharedArrayBuffer`) — que\nWebCrypto refuse. L'alias évite de répéter cette précision à chaque\nsignature, et fait échouer à la compilation toute tentative de chiffrer un\ntampon partagé.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_28e8f3fcdf8c",
+      "text": "Si un autre onglet réclame une mise à niveau, on libère la base plutôt",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_292d16993da7",
+      "text": "Un carnet de notes qui ne parle à personne.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_29f36ce1ac20",
+      "text": "L'éditeur pèse à lui seul l'essentiel du poids de l'application. Le sortir\ndu chargement initial fait apparaître la barre latérale immédiatement, et\nson morceau n'est cherché qu'à l'ouverture d'une page. Le service worker\nl'ayant précaché, l'application reste utilisable hors connexion.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_2a1cfb92c96f",
+      "text": "doit tomber sur cette explication, pas sur un menu vide.",
+      "role": "doc-prose"
+    }
+  ]
+}

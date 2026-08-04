@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "batchId": "018",
+  "batchDigest": "2d6bff5a1380fb02",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_497cbc7dd226",
+      "text": "Ouvre un coffre existant. Renvoie `undefined` si aucun coffre n'existe\nencore — l'appelant décide alors d'en créer un.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_4a72cf59a3d4",
+      "text": "Créer la première",
+      "role": "button",
+      "max": 27
+    },
+    {
+      "id": "g_4aeeb2b68358",
+      "text": "Ouvre le coffre de cet appareil, ou le crée au tout premier lancement.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_4b769b94c6ec",
+      "text": "Composant, et non fonction de rendu : une fonction fléchée écrite dans\nle JSX du parent créerait un type de composant neuf à chaque rendu, et\nReact remonterait tout son sous-arbre à chaque fois. ",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_4bdc9e3b7b45",
+      "text": "---------------------------------------------------------------- Mouvement\n120–220 ms. Le mouvement signale un changement d'état, il ne raconte rien.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_4c41c231b067",
+      "text": "Le thème reste appliqué pour la session, simplement pas mémorisé.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_4cc6b0e55f8f",
+      "text": "et n'a jamais rien à recevoir en retour.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_4d7a5a459096",
+      "text": "URL citée dans le texte d’un `console.warn` de Workbox.",
+      "role": "paragraph"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+ "schemaVersion": 1,
+ "batchId": "030",
+ "batchDigest": "9f35dead7249b2fa",
+ "items": [
+  {
+   "id": "g_7c82a154bc87",
+   "text": "Let autosave fire."
+  },
+  {
+   "id": "g_7d7f834d5aba",
+   "text": "typed on the system keyboard work normally."
+  },
+  {
+   "id": "g_7df8585b5a7e",
+   "text": "stamps the last modification time"
+  },
+  {
+   "id": "g_7e1a2b208cbc",
+   "text": "Your notes are encrypted and stored on your machine, and the page itself"
+  },
+  {
+   "id": "g_7f8c5a3a8580",
+   "text": "A page cannot be moved into its own subtree."
+  },
+  {
+   "id": "g_7fb327009e77",
+   "text": "Every source of an `import ... from '…'` or an `import('…')`."
+  },
+  {
+   "id": "g_802c059abcde",
+   "text": "Lint"
+  },
+  {
+   "id": "g_80b779b2ccc0",
+   "text": "12px — metadata"
+  }
+ ]
+}

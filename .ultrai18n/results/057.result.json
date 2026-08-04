@@ -1,0 +1,39 @@
+{
+ "schemaVersion": 1,
+ "batchId": "057",
+ "batchDigest": "48fd460eacea15ef",
+ "items": [
+  {
+   "id": "g_eb17cf13678c",
+   "text": "What has just arrived is newer than what we were trying to write:"
+  },
+  {
+   "id": "g_ec8042ed9073",
+   "text": "typing reaches the editor"
+  },
+  {
+   "id": "g_ec9ff56b6af8",
+   "text": "Unrecoverable case: the message must point towards an export rather than"
+  },
+  {
+   "id": "g_ecac3d7bb046",
+   "text": "A cycle should never exist, but a damaged index must not"
+  },
+  {
+   "id": "g_ecf9d9eb52d6",
+   "text": "Below this, two positions are no longer reliably distinguishable."
+  },
+  {
+   "id": "g_ed247639d4a1",
+   "text": "would collapse in silence: this test locks that assumption down."
+  },
+  {
+   "id": "g_ed5644723880",
+   "text": "Frozen timestamp: the creation date must be the one we supplied."
+  },
+  {
+   "id": "g_ee0390e29c9a",
+   "text": "A's notes"
+  }
+ ]
+}

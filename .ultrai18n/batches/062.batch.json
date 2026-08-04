@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "batchId": "062",
+  "batchDigest": "342a8b00b930c495",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_fd04bb6b8196",
+      "text": "On relit la base sans passer par le coffre : c'est ce que verrait",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_fddd07e1b82a",
+      "text": "---------------------------------------------------------------- Élévation\nDeux ombres seulement, et elles ne servent qu'à sortir un élément du flux\n(menu, dialogue). Rien de décoratif ne porte d'ombre.",
+      "role": "doc-prose"
+    }
+  ]
+}

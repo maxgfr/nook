@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "batchId": "049",
+  "batchDigest": "caa566c93267fbf1",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_caa4f4fb40a5",
+      "text": "figer l'application.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_caca5ff42e0a",
+      "text": "Plus assez de place entre les deux : on demande une renumérotation.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_cacb0bc6feb7",
+      "text": "la surface, y compris le backdrop : on ne ferme que si la cible est",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_cb22af2e8975",
+      "text": "n’existe pas avant d’avoir été créé",
+      "role": "label",
+      "max": 52
+    },
+    {
+      "id": "g_cb2461462a20",
+      "text": "Une base bloquée finit par être supprimée quand le dernier onglet la",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_cc33d499ace9",
+      "text": "L'index du coffre : un unique enregistrement chiffré qui décrit tout, sauf\nle contenu des documents.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_cc66bc909c85",
+      "text": "`erasableSyntaxOnly` interdit ces dernières, parce qu'elles produisent du",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_cdf81f46481a",
+      "text": "Sans ce garde-fou, toute la branche se détacherait de l'arbre : elle",
+      "role": "doc-prose"
+    }
+  ]
+}

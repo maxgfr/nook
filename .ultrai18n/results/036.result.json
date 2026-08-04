@@ -1,0 +1,39 @@
+{
+ "schemaVersion": 1,
+ "batchId": "036",
+ "batchDigest": "cc4770ca3f4752ec",
+ "items": [
+  {
+   "id": "g_8f972fb239bb",
+   "text": "The product's central promise. This step inspects the bundle"
+  },
+  {
+   "id": "g_90aee37cb25f",
+   "text": "protect them with a passphrase."
+  },
+  {
+   "id": "g_90ce6e41dcee",
+   "text": "reports a document that does not exist"
+  },
+  {
+   "id": "g_9216fe7c2ce1",
+   "text": "The application's only button.\n*\nOne component rather than copied-around classes: when the same action has\ntwo appearances depending on the screen, one of them is a defect. The\nstates (hover, focus, active, disabled) are defined once here and hold\neverywhere."
+  },
+  {
+   "id": "g_92bae011f394",
+   "text": "--------------------------------------------------------------- Semantics\nA standardised vocabulary of states. Every interactive component draws\nfrom here rather than inventing its own hue."
+  },
+  {
+   "id": "g_92c811af1e40",
+   "text": "index.html contains no Content-Security-Policy tag"
+  },
+  {
+   "id": "g_92cc2271ff2c",
+   "text": "connections to the database stay open and block any migration."
+  },
+  {
+   "id": "g_9328511e9b92",
+   "text": "Enter from the title moves down into the body,"
+  }
+ ]
+}

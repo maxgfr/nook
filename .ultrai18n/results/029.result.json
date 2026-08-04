@@ -1,0 +1,39 @@
+{
+ "schemaVersion": 1,
+ "batchId": "029",
+ "batchDigest": "fe3b5bdc5dca772e",
+ "items": [
+  {
+   "id": "g_77ce22a9e4f7",
+   "text": "fixed choice only avoids a pointless recalculation inside the library."
+  },
+  {
+   "id": "g_7878077836ec",
+   "text": "Nothing is published until the guard has cleared the bundle."
+  },
+  {
+   "id": "g_788c00947629",
+   "text": "starts empty"
+  },
+  {
+   "id": "g_78fa32e8d424",
+   "text": "Storage blocked by the browser: there is nothing to count, and nothing to clear."
+  },
+  {
+   "id": "g_79d490c0830a",
+   "text": "Breadcrumbs"
+  },
+  {
+   "id": "g_79f64e90a219",
+   "text": "takes the whole subtree with it"
+  },
+  {
+   "id": "g_7bf9b3e939fd",
+   "text": "transpiler that only strips types."
+  },
+  {
+   "id": "g_7c0b09a18530",
+   "text": "Another Nook window is using an older version of the database. Close it, then reload."
+  }
+ ]
+}

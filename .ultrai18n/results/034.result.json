@@ -1,0 +1,39 @@
+{
+ "schemaVersion": 1,
+ "batchId": "034",
+ "batchDigest": "47bd5be31bfd0b38",
+ "items": [
+  {
+   "id": "g_8c5188adc9ab",
+   "text": "By default the encryption key is generated on the device and kept in the"
+  },
+  {
+   "id": "g_8ca27c0de7b8",
+   "text": "It is a static site served by GitHub Pages: the server sends files"
+  },
+  {
+   "id": "g_8cacd81517a8",
+   "text": "Access to IndexedDB.\n*\nDeliberately narrow: open, read, write, erase. No notion of a document, of\nencryption or of the interface gets in here — this module only knows how to\nhandle opaque key/value pairs.\n*\nOne IndexedDB constraint governs the shape of this API: a transaction\nauto-closes as soon as the microtask queue drains with no request pending.\nAwaiting a non-IndexedDB promise in the middle of a transaction therefore\nkills it silently. That is why there is no generic `transact(db, fn)` here:\nencryption, being asynchronous, must be finished *before* the transaction\nopens. `writeBatch` is the only atomic primitive on offer, and it takes\nonly values that are already prepared."
+  },
+  {
+   "id": "g_8cdc404cec50",
+   "text": "Push to"
+  },
+  {
+   "id": "g_8d5c78b6a747",
+   "text": "Writes a note in a real browser, reloads, and checks that it"
+  },
+  {
+   "id": "g_8d6271767d5e",
+   "text": "core / UI boundary"
+  },
+  {
+   "id": "g_8dfd45acb53c",
+   "text": "Test texts named exactly once. Repeating them in the data and then in the\nassertion lets the two diverge in silence — and makes it impossible to tell\na displayed string from an identifier."
+  },
+  {
+   "id": "g_8e05293e6790",
+   "text": "does nothing on an empty batch"
+  }
+ ]
+}

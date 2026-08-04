@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "batchId": "021",
+  "batchDigest": "f8a5c05f1a679116",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_5713ca736823",
+      "text": "remonte la chaîne des ancêtres, du plus lointain au parent direct",
+      "role": "paragraph"
+    },
+    {
+      "id": "g_57a84fa9c374",
+      "text": "définitivement illisibles. Il doit échouer bruyamment.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_581b5c2fd7f6",
+      "text": "`fetch` est la raison d'être d'un service worker : c'est par là qu'il",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_58c112437803",
+      "text": "écrit dans plusieurs magasins d’un seul geste",
+      "role": "label",
+      "max": 65
+    },
+    {
+      "id": "g_58c349312749",
+      "text": "le dialogue lui-même, pas un élément à l'intérieur.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_594c4a2f546b",
+      "text": "Le serveur de prévisualisation",
+      "role": "label",
+      "max": 45
+    },
+    {
+      "id": "g_59a01a86926f",
+      "text": "l’adresse désigne la page ouverte",
+      "role": "label",
+      "max": 49
+    },
+    {
+      "id": "g_5ae8401a9c05",
+      "text": "_votre_ session déverrouillée obtient exactement les mêmes droits que vous. La",
+      "role": "doc-prose"
+    }
+  ]
+}

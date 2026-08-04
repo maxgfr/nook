@@ -1,0 +1,39 @@
+{
+ "schemaVersion": 1,
+ "batchId": "060",
+ "batchDigest": "fb79b2759946885e",
+ "items": [
+  {
+   "id": "g_f7f0534a1aa8",
+   "text": "`Input.insertText` takes the path of real typing; a bare `keyDown`"
+  },
+  {
+   "id": "g_f8982dc234cc",
+   "text": "Debounced autosave.\n*\nThere is no \"Save\" button in Nook, so this module carries the promise of\nlosing nothing. Three moments matter, and forgetting them is the usual way\nto lose the last paragraph written:\n*\n  - after a pause in typing (the common case);\n  - when the tab goes to the background or closes, because a pending timer\n    will never fire;\n  - on unmount, typically when changing page.\n*\nOn failure, the changes go back into the queue rather than being thrown\naway: the next keystroke will retry, and the state moves to `error` so the\ninterface can say so."
+  },
+  {
+   "id": "g_f8cb388328b7",
+   "text": "Imported notebook"
+  },
+  {
+   "id": "g_f981b313ccfa",
+   "text": "If the open page has just disappeared, the editor must be cleared rather"
+  },
+  {
+   "id": "g_f9aeadc4bc14",
+   "text": "The sub-path is derived from the repository name: renaming your fork is enough, there is"
+  },
+  {
+   "id": "g_f9b1659a7e84",
+   "text": "If another Nook window is open, close it and reload."
+  },
+  {
+   "id": "g_fa4d2cb1528b",
+   "text": "`IDBRequest` exposes its results through `on*` properties: that is the\ncanonical IndexedDB API, and each request is single-use, so the usual\narguments in favour of `addEventListener` (several subscribers,\n`{ once: true }`) do not apply here."
+  },
+  {
+   "id": "g_fa63b38ead35",
+   "text": "Record describing the vault's protection. Readable without the secret."
+  }
+ ]
+}

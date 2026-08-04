@@ -1,0 +1,39 @@
+{
+ "schemaVersion": 1,
+ "batchId": "003",
+ "batchDigest": "f86c3a8cb6c25bf0",
+ "items": [
+  {
+   "id": "g_0d57de09b4cd",
+   "text": "the core never imports $why"
+  },
+  {
+   "id": "g_0de465545640",
+   "text": "A few characters around a finding, so a human can judge it."
+  },
+  {
+   "id": "g_0e20904db54d",
+   "text": "than block it indefinitely."
+  },
+  {
+   "id": "g_0ef37c983175",
+   "text": "A headless page believes it is in the background and refuses focus: without"
+  },
+  {
+   "id": "g_0f23293d322d",
+   "text": "Extracts every readable string from a content tree, whatever its shape.\n*\nDeliberately structural rather than semantic: we harvest every string in\nthe JSON tree without knowing anything about the editor's schema. That is\nwhat keeps search working the day the content format changes."
+  },
+  {
+   "id": "g_0f613313a11d",
+   "text": "reads back what was written"
+  },
+  {
+   "id": "g_10288f22806a",
+   "text": "No pages yet."
+  },
+  {
+   "id": "g_11563e1da6a4",
+   "text": "IndexedDB or WebCrypto. That boundary is not a style convention:"
+  }
+ ]
+}

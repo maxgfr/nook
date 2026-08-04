@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "batchId": "005",
+  "batchDigest": "35f435cd263d11fe",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_15d6b262c3be",
+      "text": "écriture groupée",
+      "role": "label",
+      "max": 26
+    },
+    {
+      "id": "g_1682bf6a9d3e",
+      "text": "vaut plus rien : on échoue même sans aucun appel réseau détecté.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_16a57f236c36",
+      "text": "Une fonctionnalité retirée volontairement",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_16dbf124dd23",
+      "text": "pas du JSON. C'est un bug de sérialisation, et le message doit le dire.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_181c7ef837ee",
+      "text": "Le coffre — la seule API que l'interface consomme.\n*\nTout ce qui est en dessous (IndexedDB, AES-GCM, l'arbre, les migrations)\nest un détail que `src/ui` n'a pas le droit de connaître. Un test le fait\nrespecter : voir `core/architecture.test.ts`.\n*\nDeux garanties tenues ici, et nulle part ailleurs :\n*\n1. **L'index et les documents ne divergent jamais.** Chaque mutation\n   chiffre ce qu'elle doit écrire, *puis* écrit le document et l'index dans\n   une seule transaction. Une coupure au mauvais moment laisse l'état\n   d'avant, jamais un index qui référence un document absent.\n*\n2. **L'index vit en mémoire, déchiffré une seule fois.** La barre latérale,\n   la palette et les fils d'Ariane n'ont donc jamais à déchiffrer un\n   document pour s'afficher.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_188294c29d6f",
+      "text": "Réunion produit",
+      "role": "label",
+      "max": 25,
+      "sites": 2
+    },
+    {
+      "id": "g_188f7667e682",
+      "text": "remplace efface ce qui existait",
+      "role": "label",
+      "max": 46
+    },
+    {
+      "id": "g_18fcdf9251e2",
+      "text": "Du plus ancien ancêtre jusqu'au parent direct.",
+      "role": "doc-prose"
+    }
+  ]
+}

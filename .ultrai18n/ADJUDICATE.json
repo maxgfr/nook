@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "accepted": [
+    {
+      "siteKey": "index.html#title/text[0]",
+      "siteId": "ul_ebdf56b987ec",
+      "groupId": "g_e1f4f8edd8ca",
+      "verdict": "exclude",
+      "reason": "proper-noun",
+      "justification": "Nook is the product name; it is identical in French and English, and scripts/smoke.mjs asserts document.title === 'Nook'.",
+      "contentHash": "a1a5e2de",
+      "decidedBy": "adjudicator"
+    },
+    {
+      "siteKey": "vite.config.ts#default/defineConfig()/plugins/[3]/VitePWA()/manifest/short_name",
+      "siteId": "ul_af9b9b5e7865",
+      "groupId": "g_e1f4f8edd8ca",
+      "verdict": "exclude",
+      "reason": "proper-noun",
+      "justification": "Nook is the product name; it is identical in French and English, and scripts/smoke.mjs asserts document.title === 'Nook'.",
+      "contentHash": "a1a5e2de",
+      "decidedBy": "adjudicator"
+    }
+  ],
+  "blocked": [],
+  "problems": [],
+  "wrote": {
+    "exceptions": 2,
+    "unchanged": 0
+  }
+}

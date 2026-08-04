@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "batchId": "015",
+  "batchDigest": "69826122d75899be",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_409cdf4fbf0f",
+      "text": "reconnaît la forme d’une enveloppe",
+      "role": "label",
+      "max": 50
+    },
+    {
+      "id": "g_414f8ccda09a",
+      "text": "produit une clé que JavaScript ne peut pas lire",
+      "role": "label",
+      "max": 68
+    },
+    {
+      "id": "g_41d2bd7a9b43",
+      "text": "sert les fichiers précachés hors ligne.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_4202b5a27c48",
+      "text": "APIs capables d'émettre une requête sortante.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_42107135562f",
+      "text": "avec la bibliothèque plutôt que payée par tout le code.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_42b4b53458eb",
+      "text": "une option, la bibliothèque est [remplacée à la compilation][stub] : le code",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_42bfe59d5b89",
+      "text": "met à la fin quand aucune position n’est demandée",
+      "role": "paragraph"
+    },
+    {
+      "id": "g_434a25c5209f",
+      "text": "13px — défaut de l'interface",
+      "role": "doc-prose"
+    }
+  ]
+}

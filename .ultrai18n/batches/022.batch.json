@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "batchId": "022",
+  "batchDigest": "22d2e1539e009e2a",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_5b000dbfb4fb",
+      "text": "Destruction totale des données locales.\n*\n« Tout effacer » doit être vrai. Une application locale qui laisse derrière\nelle un cache du service worker ou une base oubliée ment à son utilisateur,\net c'est le genre de mensonge qui ne se découvre qu'au pire moment.\n*\nL'ordre des opérations n'est pas cosmétique : le service worker est\ndésinscrit en premier, parce qu'il est le seul acteur capable de repeupler\nun cache pendant qu'on le vide.\n*\n`surveyStorage()` existe pour que l'interface puisse *montrer* ce qui reste après\ncoup, plutôt que d'afficher une confirmation que personne ne peut vérifier.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_5ccd5c7d355d",
+      "text": "  Les PNG existants sont versionnés : ce script ne sert qu’à les régénérer.",
+      "role": "paragraph"
+    },
+    {
+      "id": "g_5ceec5e9f628",
+      "text": "« enveloppe déplacée » : dans les trois cas, la vérification du tag",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_5cfdc0af4e5b",
+      "text": "3. Les bases : celle de Nook, et toute autre base de cette origine, car",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_5d6a8fb88df0",
+      "text": "vers le nouvel identifiant, pas vers l'ancien homonyme.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_5e8046d7577e",
+      "text": "protection par passphrase, qui répond à cette menace, arrive en phase 4.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_5f20346df46d",
+      "text": "renvoie la longueur demandée, et pas deux fois la même chose",
+      "role": "paragraph"
+    },
+    {
+      "id": "g_5f6af64f7ac6",
+      "text": "tort, alors qu'il vient de demander une destruction.",
+      "role": "doc-prose"
+    }
+  ]
+}

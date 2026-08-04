@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "batchId": "016",
+  "batchDigest": "221f21fea16eb8be",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_43c144f04524",
+      "text": "supprime une clé",
+      "role": "label",
+      "max": 26
+    },
+    {
+      "id": "g_4403dd57bb84",
+      "text": "Personne ne l'a désactivé par mégarde",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_449d3393e948",
+      "text": "refuse un parent inexistant",
+      "role": "label",
+      "max": 41
+    },
+    {
+      "id": "g_4520d30e89b9",
+      "text": "Coffre chiffré : stockage, enveloppes AES-GCM, cycle de vie de la clé, effacement",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_4541692e8016",
+      "text": "activé. La conversion est confinée à cette unique frontière",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_460ad0ab07de",
+      "text": "une publication à mi-chemin laisserait le site dans un état incohérent.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_465866c97e06",
+      "text": "par clé avec des nonces de 96 bits tirés au hasard ; un carnet de notes",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_469b5b15dc0f",
+      "text": "comme dans n'importe quel éditeur de document.",
+      "role": "doc-prose"
+    }
+  ]
+}

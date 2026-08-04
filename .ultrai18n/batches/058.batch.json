@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "batchId": "058",
+  "batchDigest": "bb9de4a1a353c68b",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_ee19392aa369",
+      "text": "useVault doit être appelé sous un <VaultProvider>.",
+      "role": "paragraph"
+    },
+    {
+      "id": "g_ee3ea6351222",
+      "text": "Une passe de remappage d'abord : un document importé peut porter",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_ee83ce5820b0",
+      "text": "renumérote la fratrie quand la place vient à manquer",
+      "role": "paragraph"
+    },
+    {
+      "id": "g_ef6e9ed4756b",
+      "text": "crée un document et le relit",
+      "role": "label",
+      "max": 42
+    },
+    {
+      "id": "g_ef9020c9cda7",
+      "text": "Les menus et bulles flottantes prennent notre élévation, pour rester\ncohérents avec les dialogues et la palette.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_efc79532fefd",
+      "text": "Nonce aléatoire à chaque écriture. AES-GCM tolère environ 2³² chiffrements",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_f07543a964f7",
+      "text": "AES-GCM impose 96 bits de nonce ; c'est aussi la seule taille recommandée.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_f163019b43a3",
+      "text": "Détruit tout, puis renvoie l'inventaire de ce qui subsiste réellement.",
+      "role": "doc-prose"
+    }
+  ]
+}

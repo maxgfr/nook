@@ -1,0 +1,39 @@
+{
+ "schemaVersion": 1,
+ "batchId": "037",
+ "batchDigest": "532e81cac3108e75",
+ "items": [
+  {
+   "id": "g_9443685c2621",
+   "text": "the queue takes priority over the patch put back into it."
+  },
+  {
+   "id": "g_94fe77986e78",
+   "text": "`undefined` when the browser refuses to enumerate databases (Firefox)."
+  },
+  {
+   "id": "g_954d30129ad1",
+   "text": "refuses a file that is not a Nook export"
+  },
+  {
+   "id": "g_97145abf1b5a",
+   "text": "`exactOptionalPropertyTypes`, which the rest of the project keeps"
+  },
+  {
+   "id": "g_976fbeaa80b2",
+   "text": "Nothing leaves your machine"
+  },
+  {
+   "id": "g_97f164eee3c2",
+   "text": "The core / UI boundary, verified rather than promised.\n*\nAn architectural rule that lives only in a documentation file erodes at the\nfirst hurried import. This one breaks CI.\n*\nWhat the separation buys, concretely: the core is testable without a browser\nor a render, and the domain logic stays intact the day the interface changes\n— or the day another client (an extension, a script) wants to read the same\nvault."
+  },
+  {
+   "id": "g_980a9ede5657",
+   "text": "is exactly what CI runs."
+  },
+  {
+   "id": "g_98b9a3146492",
+   "text": "Nook is built in phases, and each phase leaves a deployable repository."
+  }
+ ]
+}

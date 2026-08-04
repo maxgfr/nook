@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "batchId": "054",
+  "batchDigest": "03476eff951a3151",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_e0db28590dfe",
+      "text": "refuse une enveloppe déplacée ailleurs",
+      "role": "label",
+      "max": 56
+    },
+    {
+      "id": "g_e13485246794",
+      "text": "restitue à l’identique après un effacement",
+      "role": "label",
+      "max": 61
+    },
+    {
+      "id": "g_e32681206c25",
+      "text": "L'éditeur, habillé aux couleurs de Nook.\n\nBlockNote expose ses couleurs sous forme de variables CSS. On les redéfinit\nà partir de nos propres jetons, dans les deux schémas à la fois : nos jetons\nbasculent déjà seuls entre clair et sombre, donc pointer les deux vers les\nmêmes variables suffit et évite d'entretenir deux palettes.\n\nOn ne touche qu'aux couleurs, aux rayons et à la typographie. Les\ncomportements de l'éditeur — poignée de déplacement, menu slash, sélection\nmulti-blocs — restent ceux de la bibliothèque : les réécrire produirait\nexactement les affordances bancales que l'on cherche à éviter.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_e39f92debc2f",
+      "text": "navigateur sous une forme que JavaScript ne peut pas lire.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_e3c2ec11e14d",
+      "text": "définitivement. Cette\n          action ne peut pas être annulée.",
+      "role": "paragraph"
+    },
+    {
+      "id": "g_e41168a424fa",
+      "text": "Position parmi ses frères. Voir `model/tree.ts` pour la mécanique.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_e449af652e45",
+      "text": "réordonne entre frères",
+      "role": "label",
+      "max": 34
+    },
+    {
+      "id": "g_e45723bd0383",
+      "text": "n'y est pas garanti quand le système referme l'onglet.",
+      "role": "doc-prose"
+    }
+  ]
+}

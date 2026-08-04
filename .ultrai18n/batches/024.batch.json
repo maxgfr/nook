@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "batchId": "024",
+  "batchDigest": "5c62937643a3657e",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_634597fdb824",
+      "text": "`replace` efface le coffre avant d'importer ; `merge` conserve l'existant et\nréattribue un identifiant aux documents qui entreraient en collision. Aucun\nmode par défaut : écraser des notes doit toujours être un choix explicite.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_638274ccf1f3",
+      "text": "reste du bilan garde sa valeur.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_6463613b4618",
+      "text": "ne se plaint pas s’il n’y a rien à effacer",
+      "role": "label",
+      "max": 61
+    },
+    {
+      "id": "g_648d45a606b0",
+      "text": "fusionne en réattribuant les identifiants en collision",
+      "role": "paragraph"
+    },
+    {
+      "id": "g_64a21e614f68",
+      "text": "supprime réellement une base existante",
+      "role": "label",
+      "max": 56
+    },
+    {
+      "id": "g_66a37f97a494",
+      "text": "parent, puis on réattribue des entiers propres à toute la fratrie.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_6739da15424c",
+      "text": "Une page supprimée dans un autre onglet, ou une adresse partagée qui ne",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_67aa6c2541fe",
+      "text": "Tests",
+      "role": "label",
+      "max": 11
+    }
+  ]
+}

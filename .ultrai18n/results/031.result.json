@@ -1,0 +1,39 @@
+{
+ "schemaVersion": 1,
+ "batchId": "031",
+ "batchDigest": "484b0118daba12ad",
+ "items": [
+  {
+   "id": "g_80e181056490",
+   "text": "Writes or deletes several records in a single transaction.\n*\nThis is the primitive that guarantees a document and the index referencing\nit cannot diverge: either both are written, or neither. Every value must\nalready be encrypted — see the note at the top of this file."
+  },
+  {
+   "id": "g_813e6976b968",
+   "text": "Delete this page?"
+  },
+  {
+   "id": "g_818835f850ae",
+   "text": "recognises empty storage"
+  },
+  {
+   "id": "g_81c2fb02b71f",
+   "text": "we fall back to the home screen rather than showing an"
+  },
+  {
+   "id": "g_81e2fc5c1b7d",
+   "text": "Sealed envelope — Nook's unit of storage.\n*\nEverything written to disk goes through here. Nothing else in the project\ncalls `crypto.subtle` to encrypt user data.\n*\nThe choice worth explaining is `context`. On top of the content, AES-GCM\nauthenticates an associated datum that is not encrypted. We put the\nrecord's location in it. The consequence: an attacker with disk access\ncannot *relocate* an envelope — copying the contents of `docs/A` into\n`docs/B` produces an authentication failure instead of a silent\nsubstitution. Without it, encryption would protect confidentiality but not\nthe integrity of the structure."
+  },
+  {
+   "id": "g_8227c3cb99d5",
+   "text": "2. The caches, which hold the application itself."
+  },
+  {
+   "id": "g_838cceb3c539",
+   "text": "We would rather say it plainly than imply a guarantee"
+  },
+  {
+   "id": "g_839fed492f07",
+   "text": "not ready yet"
+  }
+ ]
+}

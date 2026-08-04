@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "batchId": "034",
+  "batchDigest": "47bd5be31bfd0b38",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_8c5188adc9ab",
+      "text": "Par défaut, la clé de chiffrement est générée sur l'appareil et rangée dans le",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_8ca27c0de7b8",
+      "text": "C'est un site statique servi par GitHub Pages : le serveur envoie des fichiers",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_8cacd81517a8",
+      "text": "Accès à IndexedDB.\n*\nVolontairement étroit : ouvrir, lire, écrire, effacer. Aucune notion de\ndocument, de chiffrement ou d'interface n'entre ici — ce module ne sait\nmanipuler que des paires clé/valeur opaques.\n*\nUne contrainte d'IndexedDB gouverne la forme de cette API : une transaction\ns'auto-referme dès que la file de microtâches se vide sans requête en\nattente. Attendre une promesse non-IndexedDB au milieu d'une transaction la\ntue donc silencieusement. C'est pour cette raison qu'il n'existe pas ici de\n`transact(db, fn)` générique : le chiffrement, qui est asynchrone, doit être\nterminé *avant* d'ouvrir la transaction. `writeBatch` est la seule primitive\natomique offerte, et elle ne prend que des valeurs déjà prêtes.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_8cdc404cec50",
+      "text": "Poussez sur",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_8d5c78b6a747",
+      "text": "Écrit une note dans un vrai navigateur, recharge, et vérifie qu'elle",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_8d6271767d5e",
+      "text": "frontière core / UI",
+      "role": "label",
+      "max": 30
+    },
+    {
+      "id": "g_8dfd45acb53c",
+      "text": "Textes d'essai nommés une seule fois. Les répéter dans la donnée puis dans\nl'assertion laisse les deux diverger en silence — et rend impossible de\ndistinguer une chaîne affichée d'un identifiant.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_8e05293e6790",
+      "text": "ne fait rien sur un lot vide",
+      "role": "label",
+      "max": 42
+    }
+  ]
+}

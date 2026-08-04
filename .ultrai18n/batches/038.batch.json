@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "batchId": "038",
+  "batchDigest": "1273f02cc2811043",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_9a612df1a1f3",
+      "text": "supprime réellement les bases, et le prouve",
+      "role": "label",
+      "max": 63
+    },
+    {
+      "id": "g_9ae10185a1f7",
+      "text": "\n✔ {0} vérifications passées sur le build servi.",
+      "role": "label",
+      "max": 69,
+      "holes": {
+        "0": "results length"
+      }
+    },
+    {
+      "id": "g_9af4414ec0e8",
+      "text": "collecte toute la descendance en profondeur",
+      "role": "label",
+      "max": 63
+    },
+    {
+      "id": "g_9b22b6af3f34",
+      "text": "Titre visible dans la barre latérale",
+      "role": "label",
+      "max": 53,
+      "sites": 2
+    },
+    {
+      "id": "g_9bd51804024d",
+      "text": "Des blocs à la place du texte plutôt qu'un tourniquet : la page\n            garde sa forme, et le passage au contenu réel ne fait pas sauter\n            la mise en page. ",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_9d22c6e752f4",
+      "text": "sera supprimée",
+      "role": "label",
+      "max": 23
+    },
+    {
+      "id": "g_9d33df4309c9",
+      "text": "est toujours là — et que le disque ne contient que du chiffré.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_9d7368cc5cd1",
+      "text": "\n✖ La promesse « zéro réseau » n’est pas tenue par ce build.\n",
+      "role": "paragraph"
+    }
+  ]
+}

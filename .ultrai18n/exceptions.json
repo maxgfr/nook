@@ -1,0 +1,28 @@
+{
+  "entries": [
+    {
+      "siteKey": "index.html#title/text[0]",
+      "reason": "proper-noun",
+      "justification": "Nook is the product name; it is identical in French and English, and scripts/smoke.mjs asserts document.title === 'Nook'.",
+      "contentHash": "a1a5e2de",
+      "pin": true,
+      "decidedBy": "adjudicator"
+    },
+    {
+      "siteKey": "vite.config.ts#default/defineConfig()/plugins/[3]/VitePWA()/manifest/short_name",
+      "reason": "proper-noun",
+      "justification": "Nook is the product name; it is identical in French and English, and scripts/smoke.mjs asserts document.title === 'Nook'.",
+      "contentHash": "a1a5e2de",
+      "pin": true,
+      "decidedBy": "adjudicator"
+    },
+    {
+      "siteKey": "src/core/crypto/keys.test.ts#describe()/it()/expect(await readVaultMeta(db)).toEqual()/createdAt",
+      "reason": "test-fixture",
+      "justification": "Not copy: an ISO-8601 timestamp and a BlockNote block-type identifier, both asserted by tests and unaffected by the language swap.",
+      "contentHash": "5bd724d2",
+      "pin": true,
+      "decidedBy": "adjudicator"
+    }
+  ]
+}

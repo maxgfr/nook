@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "batchId": "050",
+  "batchDigest": "0a477d6f10a6252a",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_ce5e1014c9fc",
+      "text": "erreur pour un identifiant qui n'existe simplement plus.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_cea35522149d",
+      "text": "L'arbre des pages, en fonctions pures.\n*\nRien ici ne touche au disque : ces fonctions prennent un index et en\nrenvoient un nouveau. C'est ce qui rend l'ordre, les déplacements et les\nsuppressions en cascade testables en quelques millisecondes, sans base ni\nnavigateur.\n*\nL'ordre entre frères est un simple nombre. Insérer entre deux voisins prend\nle milieu, ce qui évite de réécrire toute la fratrie à chaque glisser-\ndéposer. Un nombre flottant finit par manquer de précision après une\ncinquantaine d'insertions au même endroit : quand l'écart devient trop\npetit, `renumber` réattribue des entiers propres à la fratrie. Le cas est\nrare, mais il arrive, et il est silencieusement destructeur si on l'ignore.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_cebdc7b8dcab",
+      "text": "\n  {0} dérogation(s) retenue(s) :",
+      "role": "label",
+      "max": 49,
+      "holes": {
+        "0": "used size"
+      }
+    },
+    {
+      "id": "g_cf6cf0b3efff",
+      "text": "une clé de localStorage",
+      "role": "label",
+      "max": 36
+    },
+    {
+      "id": "g_cf7c75d576a7",
+      "text": "Explicite plutôt que « tout ce qui n'est pas un put est un delete » :",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_cf7f26290605",
+      "text": "Volontairement bruyant. Si quelqu'un réactive le sélecteur un jour, il",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_cfbe8a1f0c02",
+      "text": "Enregistré",
+      "role": "label",
+      "max": 18
+    },
+    {
+      "id": "g_cff1d5da8cd2",
+      "text": "l'identifiant d'un document existant, et son parent doit alors pointer",
+      "role": "doc-prose"
+    }
+  ]
+}

@@ -1,0 +1,3269 @@
+{
+  "write": false,
+  "ok": true,
+  "sites": {
+    "total": 507,
+    "applied": 507,
+    "skipped": 0,
+    "refused": 0,
+    "recovered": 0,
+    "inserted": 0
+  },
+  "files": {
+    "touched": 39,
+    "written": 39,
+    "skipped": 0
+  },
+  "groups": {
+    "total": 498,
+    "applied": 498,
+    "incomplete": 0
+  },
+  "outcomes": [
+    {
+      "id": "ul_09b91f74fb73",
+      "status": "applied",
+      "file": ".github/workflows/ci.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_164f12034434",
+      "status": "applied",
+      "file": ".github/workflows/ci.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_1a704f1968b0",
+      "status": "applied",
+      "file": ".github/workflows/ci.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_389e9a685ba8",
+      "status": "applied",
+      "file": ".github/workflows/ci.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_5eace249d582",
+      "status": "applied",
+      "file": ".github/workflows/ci.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_703621df137f",
+      "status": "applied",
+      "file": ".github/workflows/ci.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_7c429b68157c",
+      "status": "applied",
+      "file": ".github/workflows/ci.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_7f93393c44de",
+      "status": "applied",
+      "file": ".github/workflows/ci.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_850182e644e5",
+      "status": "applied",
+      "file": ".github/workflows/ci.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_9c2d573a017f",
+      "status": "applied",
+      "file": ".github/workflows/ci.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_ac7d62d59058",
+      "status": "applied",
+      "file": ".github/workflows/ci.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_b5d22fce3fa4",
+      "status": "applied",
+      "file": ".github/workflows/ci.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_ca3b1af55d25",
+      "status": "applied",
+      "file": ".github/workflows/ci.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_dbb871d06989",
+      "status": "applied",
+      "file": ".github/workflows/ci.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_deca9977b5c5",
+      "status": "applied",
+      "file": ".github/workflows/ci.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_eb01f8b03c16",
+      "status": "applied",
+      "file": ".github/workflows/ci.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_1253c186470b",
+      "status": "applied",
+      "file": ".github/workflows/deploy.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_2d2fa0564852",
+      "status": "applied",
+      "file": ".github/workflows/deploy.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_35ffe12df895",
+      "status": "applied",
+      "file": ".github/workflows/deploy.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_5cf2aad51e50",
+      "status": "applied",
+      "file": ".github/workflows/deploy.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_7a12cc9bf735",
+      "status": "applied",
+      "file": ".github/workflows/deploy.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_9014c7bd48ba",
+      "status": "applied",
+      "file": ".github/workflows/deploy.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_cecdac909067",
+      "status": "applied",
+      "file": ".github/workflows/deploy.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_d70d66b981f5",
+      "status": "applied",
+      "file": ".github/workflows/deploy.yml",
+      "recovered": false
+    },
+    {
+      "id": "ul_0ef136f8648b",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_11101dfc2f92",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_17564b0f864b",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_1bb3d9fb1df1",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_2029aa8210a4",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_20e767c8ffea",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_2b347f863717",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_342ae9154251",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_38671bed5746",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_386bc3baa51b",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_3aa4badf6adf",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_3c81be987848",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_3daebfeeec6a",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_3f2c5db1cf36",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_3fa4e20420f9",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_42a5089c6d0b",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_43013c5a2a46",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_44b0fb761a03",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_45b4dd76ecdf",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_45cb109dcf76",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_4ab6df242b8d",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_4b3ec7f0bafe",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_4ba4cc0747f2",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_4f909708e6a5",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_57a3e6f679c1",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_594679c31d11",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_64e2c600e5b2",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_6d2b58218956",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_7a5be3bf3077",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_7b1691b6e4e5",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_84838b749865",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_874e3b795390",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_8fd0caf0cd43",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_929ff8a66564",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_93474afd8ead",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_94bfdb21b06a",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_96471cd1168f",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_9819c353373f",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_9839d865d4d1",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_99cc5cdc18bc",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_9db906f681de",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_a2d017c9e2a8",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_a50b03347ac5",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_a6cb6eb36cd1",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_a8d5e4b0f3a9",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_aaf501e88e5e",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_ab3ae6943aba",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_b13ccefa4cbe",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_bc98b665d8a9",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_cfa5c93b7f32",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_d5b6a179055d",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_d6481b2cb2b4",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_d742873fad86",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_d9bc78aab631",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_dc9c3ea54e26",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_dfc81633b21b",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_e33b086284de",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_e6e274916527",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_ea7dfd2b9057",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_eecee7348550",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_f4b951d22d01",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_f5bbe9da5cac",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_fb3537d585b1",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_febd9ebff175",
+      "status": "applied",
+      "file": "README.md",
+      "recovered": false
+    },
+    {
+      "id": "ul_91b2463d1e09",
+      "status": "applied",
+      "file": "index.html",
+      "recovered": false
+    },
+    {
+      "id": "ul_fa329272cfc8",
+      "status": "applied",
+      "file": "package.json",
+      "recovered": false
+    },
+    {
+      "id": "ul_0092964e089f",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_05b16700f09c",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_17159a1dcba3",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_194ff82a041d",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_1b2ab68fbafa",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_25b82ca50a25",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_4381f73fa694",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_44146bac821b",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_494292df0510",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_4ba4c43c3bed",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_4be263ef2931",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_4c002d16a454",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_4c7badf0e901",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_551fdbe2835e",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_5d3cf75cadf5",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_735495ec5a0a",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_74401cf90d45",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_863dbc28c3d0",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_8ccc1caa9939",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_96e5d106a845",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_973c8463424f",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_98b5549b2795",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_b7e4e6809938",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_bd2c60b8d572",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_bd36d0786c9f",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_c3b10270cc5a",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_cebaf1b866d2",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_dd09f3b369e1",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_dd3085f82eec",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_e10c59a217de",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_faba853f4f67",
+      "status": "applied",
+      "file": "scripts/check-no-network.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_0b82a15878e9",
+      "status": "applied",
+      "file": "scripts/make-icons.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_a8e8faa9e6d1",
+      "status": "applied",
+      "file": "scripts/make-icons.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_b462eced31f6",
+      "status": "applied",
+      "file": "scripts/make-icons.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_f7245f0e6b61",
+      "status": "applied",
+      "file": "scripts/make-icons.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_0348352fc32a",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_03e600e22e39",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_1df6a3492cbe",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_3231dd318836",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_35b55e08da9b",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_42435d15ca21",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_59a9fbc2c4ed",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_5ea5ebf92a23",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_63fd865e142d",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_899d23215311",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_8afed2895390",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_9f1d0e8d3bd9",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_aaf3f4bda1ee",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_b62e64e4b7f3",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_b8dd9673d6c5",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_bb72f951a067",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_c6e597b15093",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_c7749f905161",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_cb968f5ddffc",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_cc4132f76c5a",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_d733890f455f",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_efbb39037b4a",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_f6e4d166007e",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_fa29cc86d4b5",
+      "status": "applied",
+      "file": "scripts/smoke.mjs",
+      "recovered": false
+    },
+    {
+      "id": "ul_006cb398386b",
+      "status": "applied",
+      "file": "src/core/architecture.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_4d51bebb17ec",
+      "status": "applied",
+      "file": "src/core/architecture.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_523ec3870c12",
+      "status": "applied",
+      "file": "src/core/architecture.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_59ea1467fc89",
+      "status": "applied",
+      "file": "src/core/architecture.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_601c1b677348",
+      "status": "applied",
+      "file": "src/core/architecture.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_952037c2e4c5",
+      "status": "applied",
+      "file": "src/core/architecture.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_9d4d3e1587e6",
+      "status": "applied",
+      "file": "src/core/architecture.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_b806c8505feb",
+      "status": "applied",
+      "file": "src/core/architecture.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_dc46a3e55e61",
+      "status": "applied",
+      "file": "src/core/architecture.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_df34ab212879",
+      "status": "applied",
+      "file": "src/core/architecture.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_f830a840ac5b",
+      "status": "applied",
+      "file": "src/core/architecture.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_fff5896e04b8",
+      "status": "applied",
+      "file": "src/core/architecture.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_088785010a3a",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_606c130098d6",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_6776cad4c456",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_689ae5da0c6a",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_6a610f126adc",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_7a0e5ff47aa9",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_7ce4055b0408",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_8a5c50db1ee0",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_8e237ebbf38b",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_93e487bb1c4c",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_99f25c25a185",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_a15954cf65bc",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_ac86e16fd691",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_b09c73a2e941",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_b4ebd06f56b5",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_c0721205caf4",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_c24c93269709",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_d1c95e299344",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_d1f42c113951",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_e03bd75e0fb1",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_ea1752d3e08a",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_ebae55578c6d",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_ee7bf5720662",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_ff7a2344ea93",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_03830f5e1d19",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_13bf277c2f4c",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_1bc5998e1056",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_31d1425624e2",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_4e72606dd526",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_4fd6e58597e9",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_5ef03edc082b",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_7e7aff33fffd",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_8a510c7190e7",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_9c6bf9e43782",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_9ef5417f587d",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_af0f38671483",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_b89997f933dc",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_c009a831627f",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_c67e0cbf5c83",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_db0f75393794",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_eada76998162",
+      "status": "applied",
+      "file": "src/core/crypto/envelope.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_0f152d9c1fd8",
+      "status": "applied",
+      "file": "src/core/crypto/keys.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_0f80b0f3aa91",
+      "status": "applied",
+      "file": "src/core/crypto/keys.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_221f66cdd407",
+      "status": "applied",
+      "file": "src/core/crypto/keys.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_267cebbb2130",
+      "status": "applied",
+      "file": "src/core/crypto/keys.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_3661ca3e04c9",
+      "status": "applied",
+      "file": "src/core/crypto/keys.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_37733d9a3e6a",
+      "status": "applied",
+      "file": "src/core/crypto/keys.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_4333ad9b0177",
+      "status": "applied",
+      "file": "src/core/crypto/keys.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_476fcbae8a83",
+      "status": "applied",
+      "file": "src/core/crypto/keys.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_5b31f5c39b4c",
+      "status": "applied",
+      "file": "src/core/crypto/keys.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_644faecf9169",
+      "status": "applied",
+      "file": "src/core/crypto/keys.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_6d88896ba5a2",
+      "status": "applied",
+      "file": "src/core/crypto/keys.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_82e274034a64",
+      "status": "applied",
+      "file": "src/core/crypto/keys.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_9222d024a382",
+      "status": "applied",
+      "file": "src/core/crypto/keys.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_a3cc2e52b6fa",
+      "status": "applied",
+      "file": "src/core/crypto/keys.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_ce9ee4a6ecc3",
+      "status": "applied",
+      "file": "src/core/crypto/keys.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_ec81d6a96e07",
+      "status": "applied",
+      "file": "src/core/crypto/keys.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_ed3d2820fa09",
+      "status": "applied",
+      "file": "src/core/crypto/keys.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_25bac0baa2b1",
+      "status": "applied",
+      "file": "src/core/crypto/keys.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_2b28def7a64e",
+      "status": "applied",
+      "file": "src/core/crypto/keys.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_35f3e48b19e1",
+      "status": "applied",
+      "file": "src/core/crypto/keys.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_3d347b792294",
+      "status": "applied",
+      "file": "src/core/crypto/keys.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_415e3b436d04",
+      "status": "applied",
+      "file": "src/core/crypto/keys.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_6e2169de1b40",
+      "status": "applied",
+      "file": "src/core/crypto/keys.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_77515aff0963",
+      "status": "applied",
+      "file": "src/core/crypto/keys.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_7e2b2b06d287",
+      "status": "applied",
+      "file": "src/core/crypto/keys.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_856af2c2c3d4",
+      "status": "applied",
+      "file": "src/core/crypto/keys.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_97ad3146d3a6",
+      "status": "applied",
+      "file": "src/core/crypto/keys.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_9c06ba75a0a9",
+      "status": "applied",
+      "file": "src/core/crypto/keys.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_b41856aaadce",
+      "status": "applied",
+      "file": "src/core/crypto/keys.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_d1ac4d446b60",
+      "status": "applied",
+      "file": "src/core/crypto/keys.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_050379f6c011",
+      "status": "applied",
+      "file": "src/core/model/tree.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_050b22db249f",
+      "status": "applied",
+      "file": "src/core/model/tree.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_0d1884f3cef8",
+      "status": "applied",
+      "file": "src/core/model/tree.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_0dcc32f558e6",
+      "status": "applied",
+      "file": "src/core/model/tree.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_0fb323ab8ec1",
+      "status": "applied",
+      "file": "src/core/model/tree.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_13986076a9b1",
+      "status": "applied",
+      "file": "src/core/model/tree.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_19972eda9f88",
+      "status": "applied",
+      "file": "src/core/model/tree.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_19fe501e8001",
+      "status": "applied",
+      "file": "src/core/model/tree.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_2ef75e539e59",
+      "status": "applied",
+      "file": "src/core/model/tree.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_3d2b7c1ae391",
+      "status": "applied",
+      "file": "src/core/model/tree.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_457e66a796f2",
+      "status": "applied",
+      "file": "src/core/model/tree.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_8ba5443a2afa",
+      "status": "applied",
+      "file": "src/core/model/tree.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_a60dccfd52d5",
+      "status": "applied",
+      "file": "src/core/model/tree.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_acaede029d58",
+      "status": "applied",
+      "file": "src/core/model/tree.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_c68ec72d0e26",
+      "status": "applied",
+      "file": "src/core/model/tree.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_cd1c60553a59",
+      "status": "applied",
+      "file": "src/core/model/tree.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_ce37cfaf3886",
+      "status": "applied",
+      "file": "src/core/model/tree.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_ce6056830d61",
+      "status": "applied",
+      "file": "src/core/model/tree.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_d988cbd0aba8",
+      "status": "applied",
+      "file": "src/core/model/tree.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_dbd199ecd5c9",
+      "status": "applied",
+      "file": "src/core/model/tree.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_e31345610ae2",
+      "status": "applied",
+      "file": "src/core/model/tree.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_e47dd38e5e8d",
+      "status": "applied",
+      "file": "src/core/model/tree.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_0e5607ef26ff",
+      "status": "applied",
+      "file": "src/core/model/tree.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_20651bd4b04f",
+      "status": "applied",
+      "file": "src/core/model/tree.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_4116afde6cce",
+      "status": "applied",
+      "file": "src/core/model/tree.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_46611a7cd97d",
+      "status": "applied",
+      "file": "src/core/model/tree.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_4c0dc976dbea",
+      "status": "applied",
+      "file": "src/core/model/tree.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_5288d7088423",
+      "status": "applied",
+      "file": "src/core/model/tree.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_56021b2273f9",
+      "status": "applied",
+      "file": "src/core/model/tree.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_7fb953a0106b",
+      "status": "applied",
+      "file": "src/core/model/tree.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_8d31039d6942",
+      "status": "applied",
+      "file": "src/core/model/tree.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_ee0d7ed9a2ff",
+      "status": "applied",
+      "file": "src/core/model/tree.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_0762068dbba5",
+      "status": "applied",
+      "file": "src/core/model/types.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_3543eb9e8b0b",
+      "status": "applied",
+      "file": "src/core/model/types.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_49cbc84d477c",
+      "status": "applied",
+      "file": "src/core/model/types.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_4f5bb793143d",
+      "status": "applied",
+      "file": "src/core/model/types.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_50d379aa13ee",
+      "status": "applied",
+      "file": "src/core/model/types.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_715ba8829d15",
+      "status": "applied",
+      "file": "src/core/model/types.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_a93f421767e4",
+      "status": "applied",
+      "file": "src/core/model/types.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_ea9dd81174cf",
+      "status": "applied",
+      "file": "src/core/model/types.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_09068d20e91a",
+      "status": "applied",
+      "file": "src/core/storage/idb.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_1269e6fd05f5",
+      "status": "applied",
+      "file": "src/core/storage/idb.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_12db701f6def",
+      "status": "applied",
+      "file": "src/core/storage/idb.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_23aa1dcf0ff3",
+      "status": "applied",
+      "file": "src/core/storage/idb.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_240c92aa1281",
+      "status": "applied",
+      "file": "src/core/storage/idb.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_3e2bc1570741",
+      "status": "applied",
+      "file": "src/core/storage/idb.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_47336184c43f",
+      "status": "applied",
+      "file": "src/core/storage/idb.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_505308aa640a",
+      "status": "applied",
+      "file": "src/core/storage/idb.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_5e256b8e0688",
+      "status": "applied",
+      "file": "src/core/storage/idb.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_74821ee4cd2d",
+      "status": "applied",
+      "file": "src/core/storage/idb.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_8a5f114a22db",
+      "status": "applied",
+      "file": "src/core/storage/idb.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_9d163acdc2b8",
+      "status": "applied",
+      "file": "src/core/storage/idb.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_af2a5a4d9626",
+      "status": "applied",
+      "file": "src/core/storage/idb.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_bb9cf1745b0a",
+      "status": "applied",
+      "file": "src/core/storage/idb.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_d031f19d5a1a",
+      "status": "applied",
+      "file": "src/core/storage/idb.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_d80b110cf28c",
+      "status": "applied",
+      "file": "src/core/storage/idb.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_da10d9ba45f8",
+      "status": "applied",
+      "file": "src/core/storage/idb.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_01601766b6d1",
+      "status": "applied",
+      "file": "src/core/storage/idb.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_044e2f7ce48d",
+      "status": "applied",
+      "file": "src/core/storage/idb.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_1ad3073e356c",
+      "status": "applied",
+      "file": "src/core/storage/idb.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_1c2120f03b06",
+      "status": "applied",
+      "file": "src/core/storage/idb.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_21bc60c0db30",
+      "status": "applied",
+      "file": "src/core/storage/idb.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_24e2a70b2374",
+      "status": "applied",
+      "file": "src/core/storage/idb.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_428505797c99",
+      "status": "applied",
+      "file": "src/core/storage/idb.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_44b64534e8e1",
+      "status": "applied",
+      "file": "src/core/storage/idb.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_52e635c3d421",
+      "status": "applied",
+      "file": "src/core/storage/idb.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_5366f532c7a6",
+      "status": "applied",
+      "file": "src/core/storage/idb.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_57901338385f",
+      "status": "applied",
+      "file": "src/core/storage/idb.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_7f38bd698a25",
+      "status": "applied",
+      "file": "src/core/storage/idb.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_94055f455827",
+      "status": "applied",
+      "file": "src/core/storage/idb.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_974690b8b81a",
+      "status": "applied",
+      "file": "src/core/storage/idb.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_9ca59ce0978a",
+      "status": "applied",
+      "file": "src/core/storage/idb.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_ada4737a6176",
+      "status": "applied",
+      "file": "src/core/storage/idb.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_ae19588fdafb",
+      "status": "applied",
+      "file": "src/core/storage/idb.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_cfb49a3c00ef",
+      "status": "applied",
+      "file": "src/core/storage/idb.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_d655cbaccaff",
+      "status": "applied",
+      "file": "src/core/storage/idb.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_dfc715c2d47a",
+      "status": "applied",
+      "file": "src/core/storage/idb.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_e06f4324216f",
+      "status": "applied",
+      "file": "src/core/storage/idb.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_ef27747f9a17",
+      "status": "applied",
+      "file": "src/core/storage/idb.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_fb853bf3e3a7",
+      "status": "applied",
+      "file": "src/core/storage/idb.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_16b4ad9c9d4b",
+      "status": "applied",
+      "file": "src/core/storage/wipe.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_23dc6e0f5ab3",
+      "status": "applied",
+      "file": "src/core/storage/wipe.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_278c7262efea",
+      "status": "applied",
+      "file": "src/core/storage/wipe.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_27e9033beadd",
+      "status": "applied",
+      "file": "src/core/storage/wipe.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_4a1de07d01a0",
+      "status": "applied",
+      "file": "src/core/storage/wipe.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_59231dcb9817",
+      "status": "applied",
+      "file": "src/core/storage/wipe.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_74493c9c8158",
+      "status": "applied",
+      "file": "src/core/storage/wipe.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_79ae6fa6d01d",
+      "status": "applied",
+      "file": "src/core/storage/wipe.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_803aa5197446",
+      "status": "applied",
+      "file": "src/core/storage/wipe.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_88e5cfe29612",
+      "status": "applied",
+      "file": "src/core/storage/wipe.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_a4dd5c8e007d",
+      "status": "applied",
+      "file": "src/core/storage/wipe.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_ac1e12aa576a",
+      "status": "applied",
+      "file": "src/core/storage/wipe.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_aeedc4155133",
+      "status": "applied",
+      "file": "src/core/storage/wipe.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_b4d51740f1c9",
+      "status": "applied",
+      "file": "src/core/storage/wipe.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_ea04f70b3fc2",
+      "status": "applied",
+      "file": "src/core/storage/wipe.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_ea4f4dabb566",
+      "status": "applied",
+      "file": "src/core/storage/wipe.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_0302cbdeeb3b",
+      "status": "applied",
+      "file": "src/core/storage/wipe.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_291cd2eaa8ab",
+      "status": "applied",
+      "file": "src/core/storage/wipe.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_41b99c4eff96",
+      "status": "applied",
+      "file": "src/core/storage/wipe.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_86c1761c2f64",
+      "status": "applied",
+      "file": "src/core/storage/wipe.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_a36a06063936",
+      "status": "applied",
+      "file": "src/core/storage/wipe.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_afca83918288",
+      "status": "applied",
+      "file": "src/core/storage/wipe.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_b0c7f67bcd47",
+      "status": "applied",
+      "file": "src/core/storage/wipe.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_b3376391f965",
+      "status": "applied",
+      "file": "src/core/storage/wipe.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_c692a4c84cf9",
+      "status": "applied",
+      "file": "src/core/storage/wipe.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_c7501547000a",
+      "status": "applied",
+      "file": "src/core/storage/wipe.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_d0fbd4898502",
+      "status": "applied",
+      "file": "src/core/storage/wipe.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_d2ebe57ee749",
+      "status": "applied",
+      "file": "src/core/storage/wipe.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_08724dc661b5",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_0b714840a7b7",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_154fc1f2980a",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_1859060a76a5",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_26f573ca5a77",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_2e3efb5bd9d2",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_35a03cbeab91",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_3b2578e232a3",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_4535a90a19a9",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_464cdc5091d1",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_46fa72d8b439",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_50e76345652a",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_5883b927dd6e",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_58cac0e47506",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_5b4657cc9b11",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_68482c187af9",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_6e7daf529507",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_71c3aef3dc50",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_7a9e65642064",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_7add5f3bead1",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_83df43aaaf26",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_975e8fccfb6f",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_99f6163490d4",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_9ea044d35e13",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_b214f57aeac0",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_b3b96db809ca",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_b44998cacac4",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_ba27c6b9e1b5",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_bec9eef2816d",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_bfdf1fdb6170",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_c3965ff3b92c",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_e4cd9578ebf7",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_e623c6fcbbb4",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_eed3cad32a07",
+      "status": "applied",
+      "file": "src/core/vault.test.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_21d3d02e6809",
+      "status": "applied",
+      "file": "src/core/vault.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_2ef1eb27b53a",
+      "status": "applied",
+      "file": "src/core/vault.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_2f53ffee3500",
+      "status": "applied",
+      "file": "src/core/vault.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_46944aee7457",
+      "status": "applied",
+      "file": "src/core/vault.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_618f3c0d16af",
+      "status": "applied",
+      "file": "src/core/vault.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_6d60bc6b4b97",
+      "status": "applied",
+      "file": "src/core/vault.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_76c5715d8e0d",
+      "status": "applied",
+      "file": "src/core/vault.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_7e106aa852c5",
+      "status": "applied",
+      "file": "src/core/vault.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_87aa97462335",
+      "status": "applied",
+      "file": "src/core/vault.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_894f6aa515ef",
+      "status": "applied",
+      "file": "src/core/vault.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_9375bc6250f0",
+      "status": "applied",
+      "file": "src/core/vault.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_947be1042a80",
+      "status": "applied",
+      "file": "src/core/vault.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_9b60e82477ae",
+      "status": "applied",
+      "file": "src/core/vault.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_aa7e4f9a7375",
+      "status": "applied",
+      "file": "src/core/vault.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_ab91a494d731",
+      "status": "applied",
+      "file": "src/core/vault.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_c996d03a0169",
+      "status": "applied",
+      "file": "src/core/vault.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_d0871066d3e5",
+      "status": "applied",
+      "file": "src/core/vault.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_d18de6b6de19",
+      "status": "applied",
+      "file": "src/core/vault.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_d326a23c93f9",
+      "status": "applied",
+      "file": "src/core/vault.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_eea625f0e26e",
+      "status": "applied",
+      "file": "src/core/vault.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_f7923b2732fb",
+      "status": "applied",
+      "file": "src/core/vault.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_aa4794e9f019",
+      "status": "applied",
+      "file": "src/main.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_4421f88d37a7",
+      "status": "applied",
+      "file": "src/styles.css",
+      "recovered": false
+    },
+    {
+      "id": "ul_c487f3b12488",
+      "status": "applied",
+      "file": "src/styles.css",
+      "recovered": false
+    },
+    {
+      "id": "ul_ccbf600c4a82",
+      "status": "applied",
+      "file": "src/styles.css",
+      "recovered": false
+    },
+    {
+      "id": "ul_10799236b79f",
+      "status": "applied",
+      "file": "src/ui/app/App.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_2017222aef09",
+      "status": "applied",
+      "file": "src/ui/app/App.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_303a0e14c4ee",
+      "status": "applied",
+      "file": "src/ui/app/App.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_34d3c5adb5ef",
+      "status": "applied",
+      "file": "src/ui/app/App.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_60f72586741f",
+      "status": "applied",
+      "file": "src/ui/app/App.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_64206ce8453c",
+      "status": "applied",
+      "file": "src/ui/app/App.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_66c1258dafca",
+      "status": "applied",
+      "file": "src/ui/app/App.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_8771f10b40ae",
+      "status": "applied",
+      "file": "src/ui/app/App.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_87891c1b2830",
+      "status": "applied",
+      "file": "src/ui/app/App.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_a643caaf5437",
+      "status": "applied",
+      "file": "src/ui/app/App.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_c07419f122c1",
+      "status": "applied",
+      "file": "src/ui/app/App.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_315eef0e886d",
+      "status": "applied",
+      "file": "src/ui/app/VaultProvider.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_349d4dbd3be4",
+      "status": "applied",
+      "file": "src/ui/app/VaultProvider.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_55275de2019a",
+      "status": "applied",
+      "file": "src/ui/app/VaultProvider.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_7f946cca4b13",
+      "status": "applied",
+      "file": "src/ui/app/VaultProvider.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_95ee79f885c9",
+      "status": "applied",
+      "file": "src/ui/app/VaultProvider.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_98a2d4709122",
+      "status": "applied",
+      "file": "src/ui/app/VaultProvider.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_9d15bb71cf60",
+      "status": "applied",
+      "file": "src/ui/app/VaultProvider.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_ac1f6f816ea1",
+      "status": "applied",
+      "file": "src/ui/app/VaultProvider.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_33be9f3dee63",
+      "status": "applied",
+      "file": "src/ui/app/router.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_052f2c76966b",
+      "status": "applied",
+      "file": "src/ui/app/theme.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_426ae50f45fb",
+      "status": "applied",
+      "file": "src/ui/app/theme.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_9e2124ed5978",
+      "status": "applied",
+      "file": "src/ui/app/theme.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_da2c11f8b176",
+      "status": "applied",
+      "file": "src/ui/app/theme.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_247dcd209ca3",
+      "status": "applied",
+      "file": "src/ui/design/Button.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_686b6882dbaa",
+      "status": "applied",
+      "file": "src/ui/design/Button.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_351309ad8eea",
+      "status": "applied",
+      "file": "src/ui/design/ConfirmDialog.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_3ae5cebf8232",
+      "status": "applied",
+      "file": "src/ui/design/ConfirmDialog.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_931d6b6f6752",
+      "status": "applied",
+      "file": "src/ui/design/ConfirmDialog.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_abe29901aaf4",
+      "status": "applied",
+      "file": "src/ui/design/ConfirmDialog.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_60fb7b89fdf6",
+      "status": "applied",
+      "file": "src/ui/design/Icon.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_11ac5cf5b1a6",
+      "status": "applied",
+      "file": "src/ui/design/blocknote.css",
+      "recovered": false
+    },
+    {
+      "id": "ul_355bcfd47afd",
+      "status": "applied",
+      "file": "src/ui/design/blocknote.css",
+      "recovered": false
+    },
+    {
+      "id": "ul_45d3f2eb87f5",
+      "status": "applied",
+      "file": "src/ui/design/blocknote.css",
+      "recovered": false
+    },
+    {
+      "id": "ul_820e79814df6",
+      "status": "applied",
+      "file": "src/ui/design/blocknote.css",
+      "recovered": false
+    },
+    {
+      "id": "ul_20d85efac65a",
+      "status": "applied",
+      "file": "src/ui/design/tokens.css",
+      "recovered": false
+    },
+    {
+      "id": "ul_31c3a7aa9494",
+      "status": "applied",
+      "file": "src/ui/design/tokens.css",
+      "recovered": false
+    },
+    {
+      "id": "ul_6866231f3653",
+      "status": "applied",
+      "file": "src/ui/design/tokens.css",
+      "recovered": false
+    },
+    {
+      "id": "ul_6886a9932fc0",
+      "status": "applied",
+      "file": "src/ui/design/tokens.css",
+      "recovered": false
+    },
+    {
+      "id": "ul_6963f0489700",
+      "status": "applied",
+      "file": "src/ui/design/tokens.css",
+      "recovered": false
+    },
+    {
+      "id": "ul_a2a00a939bd9",
+      "status": "applied",
+      "file": "src/ui/design/tokens.css",
+      "recovered": false
+    },
+    {
+      "id": "ul_ae73a387f906",
+      "status": "applied",
+      "file": "src/ui/design/tokens.css",
+      "recovered": false
+    },
+    {
+      "id": "ul_b7a57855c2da",
+      "status": "applied",
+      "file": "src/ui/design/tokens.css",
+      "recovered": false
+    },
+    {
+      "id": "ul_b8f6db33e6f2",
+      "status": "applied",
+      "file": "src/ui/design/tokens.css",
+      "recovered": false
+    },
+    {
+      "id": "ul_bb026f4cb0ae",
+      "status": "applied",
+      "file": "src/ui/design/tokens.css",
+      "recovered": false
+    },
+    {
+      "id": "ul_c02fe62c80b2",
+      "status": "applied",
+      "file": "src/ui/design/tokens.css",
+      "recovered": false
+    },
+    {
+      "id": "ul_c612b46dccfe",
+      "status": "applied",
+      "file": "src/ui/design/tokens.css",
+      "recovered": false
+    },
+    {
+      "id": "ul_ea115d3c867a",
+      "status": "applied",
+      "file": "src/ui/design/tokens.css",
+      "recovered": false
+    },
+    {
+      "id": "ul_efdd13fb5bf1",
+      "status": "applied",
+      "file": "src/ui/design/tokens.css",
+      "recovered": false
+    },
+    {
+      "id": "ul_127f2ec60418",
+      "status": "applied",
+      "file": "src/ui/editor/DocEditor.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_178c46684532",
+      "status": "applied",
+      "file": "src/ui/editor/DocEditor.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_491ab73ab452",
+      "status": "applied",
+      "file": "src/ui/editor/DocEditor.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_614de30eea07",
+      "status": "applied",
+      "file": "src/ui/editor/DocEditor.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_6d175756bdf1",
+      "status": "applied",
+      "file": "src/ui/editor/DocEditor.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_70ba6a2b8f18",
+      "status": "applied",
+      "file": "src/ui/editor/DocEditor.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_74ae521c1766",
+      "status": "applied",
+      "file": "src/ui/editor/DocEditor.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_78fdd1af6454",
+      "status": "applied",
+      "file": "src/ui/editor/DocEditor.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_7b4c8431ff84",
+      "status": "applied",
+      "file": "src/ui/editor/DocEditor.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_8aeb79f28225",
+      "status": "applied",
+      "file": "src/ui/editor/DocEditor.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_919865417bc3",
+      "status": "applied",
+      "file": "src/ui/editor/DocEditor.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_a2b3e0d67459",
+      "status": "applied",
+      "file": "src/ui/editor/DocEditor.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_b47a4b841647",
+      "status": "applied",
+      "file": "src/ui/editor/DocEditor.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_b51e5cb9bf32",
+      "status": "applied",
+      "file": "src/ui/editor/DocEditor.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_b73c3be04a07",
+      "status": "applied",
+      "file": "src/ui/editor/DocEditor.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_be2fa558dc0f",
+      "status": "applied",
+      "file": "src/ui/editor/DocEditor.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_cd9416308dcf",
+      "status": "applied",
+      "file": "src/ui/editor/DocEditor.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_d1d42ced6e37",
+      "status": "applied",
+      "file": "src/ui/editor/DocEditor.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_f9dc26f0cdf5",
+      "status": "applied",
+      "file": "src/ui/editor/DocEditor.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_fbbf20ec1c98",
+      "status": "applied",
+      "file": "src/ui/editor/DocEditor.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_0a3f57e462d8",
+      "status": "applied",
+      "file": "src/ui/editor/emoji-mart-absent.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_2e0c75d7381a",
+      "status": "applied",
+      "file": "src/ui/editor/emoji-mart-absent.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_9fb3bf96adfa",
+      "status": "applied",
+      "file": "src/ui/editor/emoji-mart-absent.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_beb1b0fd906e",
+      "status": "applied",
+      "file": "src/ui/editor/emoji-mart-absent.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_ea60cc9ce978",
+      "status": "applied",
+      "file": "src/ui/editor/emoji-mart-absent.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_16246e6a3455",
+      "status": "applied",
+      "file": "src/ui/editor/useAutosave.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_19c4d8d167d7",
+      "status": "applied",
+      "file": "src/ui/editor/useAutosave.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_3afd5345f4db",
+      "status": "applied",
+      "file": "src/ui/editor/useAutosave.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_4d03bedea3db",
+      "status": "applied",
+      "file": "src/ui/editor/useAutosave.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_90e0bdf38d79",
+      "status": "applied",
+      "file": "src/ui/editor/useAutosave.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_a215c4d183b2",
+      "status": "applied",
+      "file": "src/ui/editor/useAutosave.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_a4dfdf031969",
+      "status": "applied",
+      "file": "src/ui/editor/useAutosave.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_b19859816b9a",
+      "status": "applied",
+      "file": "src/ui/editor/useAutosave.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_e73e68a33f93",
+      "status": "applied",
+      "file": "src/ui/editor/useAutosave.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_23ad4d8ab49f",
+      "status": "applied",
+      "file": "src/ui/sidebar/Sidebar.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_5f1a6fce8cdc",
+      "status": "applied",
+      "file": "src/ui/sidebar/Sidebar.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_709936969e40",
+      "status": "applied",
+      "file": "src/ui/sidebar/Sidebar.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_73819208999b",
+      "status": "applied",
+      "file": "src/ui/sidebar/Sidebar.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_9189a5eee596",
+      "status": "applied",
+      "file": "src/ui/sidebar/Sidebar.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_b475af5a4067",
+      "status": "applied",
+      "file": "src/ui/sidebar/Sidebar.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_b5560204f383",
+      "status": "applied",
+      "file": "src/ui/sidebar/Sidebar.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_be30435b1764",
+      "status": "applied",
+      "file": "src/ui/sidebar/Sidebar.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_d7b10627a013",
+      "status": "applied",
+      "file": "src/ui/sidebar/Sidebar.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_e5685e056c59",
+      "status": "applied",
+      "file": "src/ui/sidebar/Sidebar.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_f09aa68fb65b",
+      "status": "applied",
+      "file": "src/ui/sidebar/Sidebar.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_f0fe1510bded",
+      "status": "applied",
+      "file": "src/ui/sidebar/Sidebar.tsx",
+      "recovered": false
+    },
+    {
+      "id": "ul_067601816109",
+      "status": "applied",
+      "file": "vite.config.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_37fec0c221b4",
+      "status": "applied",
+      "file": "vite.config.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_55f28525bbb6",
+      "status": "applied",
+      "file": "vite.config.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_844f1f3fde58",
+      "status": "applied",
+      "file": "vite.config.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_8f8ba67eaf70",
+      "status": "applied",
+      "file": "vite.config.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_940837cdd63b",
+      "status": "applied",
+      "file": "vite.config.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_a5b8984ac3a3",
+      "status": "applied",
+      "file": "vite.config.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_b32a5bef912c",
+      "status": "applied",
+      "file": "vite.config.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_b8ca32e11804",
+      "status": "applied",
+      "file": "vite.config.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_cc63ad00a30e",
+      "status": "applied",
+      "file": "vite.config.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_d82c6144fc4b",
+      "status": "applied",
+      "file": "vite.config.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_d97e4f153a1a",
+      "status": "applied",
+      "file": "vite.config.ts",
+      "recovered": false
+    },
+    {
+      "id": "ul_2c45c47d3aff",
+      "status": "applied",
+      "file": "vitest.setup.ts",
+      "recovered": false
+    }
+  ],
+  "written": [
+    {
+      "file": ".github/workflows/ci.yml",
+      "sha256Before": "18edb5c34e95fd65",
+      "sha256After": "937f7183c47cd6c3"
+    },
+    {
+      "file": ".github/workflows/deploy.yml",
+      "sha256Before": "e8adf0e0401bf614",
+      "sha256After": "f53730f9909b72d9"
+    },
+    {
+      "file": "README.md",
+      "sha256Before": "ca4176741d64edd8",
+      "sha256After": "54c77878d9163919"
+    },
+    {
+      "file": "index.html",
+      "sha256Before": "4109e502718b6014",
+      "sha256After": "e4b23be445fc8d05"
+    },
+    {
+      "file": "package.json",
+      "sha256Before": "79701beeee93b33a",
+      "sha256After": "1818d093a703e18d"
+    },
+    {
+      "file": "scripts/check-no-network.mjs",
+      "sha256Before": "acde1a9cc4db4d2e",
+      "sha256After": "689c1eb9ed9a8321"
+    },
+    {
+      "file": "scripts/make-icons.mjs",
+      "sha256Before": "56cdb91a848654cb",
+      "sha256After": "73891471488e38fe"
+    },
+    {
+      "file": "scripts/smoke.mjs",
+      "sha256Before": "f19ee9ea77e471c3",
+      "sha256After": "35501bae442b7b25"
+    },
+    {
+      "file": "src/core/architecture.test.ts",
+      "sha256Before": "bca14e7096281929",
+      "sha256After": "28de9f7bcc3a40cb"
+    },
+    {
+      "file": "src/core/crypto/envelope.test.ts",
+      "sha256Before": "ed3e2cc6e3a1701d",
+      "sha256After": "a30c9a4c1eab0016"
+    },
+    {
+      "file": "src/core/crypto/envelope.ts",
+      "sha256Before": "d805bab4fd87d309",
+      "sha256After": "6a645ee7ee947c38"
+    },
+    {
+      "file": "src/core/crypto/keys.test.ts",
+      "sha256Before": "bd50077bd6e4e1e0",
+      "sha256After": "16614105b41e2719"
+    },
+    {
+      "file": "src/core/crypto/keys.ts",
+      "sha256Before": "1fc24dbf13de4759",
+      "sha256After": "273cd8be8a10e0d5"
+    },
+    {
+      "file": "src/core/model/tree.test.ts",
+      "sha256Before": "5dc1e720877ed2ec",
+      "sha256After": "49ba7c4372dd7c16"
+    },
+    {
+      "file": "src/core/model/tree.ts",
+      "sha256Before": "838172f5d03b8946",
+      "sha256After": "a0c643377e139b27"
+    },
+    {
+      "file": "src/core/model/types.ts",
+      "sha256Before": "8fe5c716c3a02ba8",
+      "sha256After": "57fb5e6665287597"
+    },
+    {
+      "file": "src/core/storage/idb.test.ts",
+      "sha256Before": "a1e7225dd28880d1",
+      "sha256After": "5e4460ee7e87faf0"
+    },
+    {
+      "file": "src/core/storage/idb.ts",
+      "sha256Before": "6ce94f20c18bd10c",
+      "sha256After": "9db4776ce68b8a2d"
+    },
+    {
+      "file": "src/core/storage/wipe.test.ts",
+      "sha256Before": "9f0c35efcd68984c",
+      "sha256After": "5d6d7643cb6b1d88"
+    },
+    {
+      "file": "src/core/storage/wipe.ts",
+      "sha256Before": "a08d25b09b61df32",
+      "sha256After": "b23a8b7dc3a84f93"
+    },
+    {
+      "file": "src/core/vault.test.ts",
+      "sha256Before": "ff2d3c64db694e5d",
+      "sha256After": "4f124498b801536d"
+    },
+    {
+      "file": "src/core/vault.ts",
+      "sha256Before": "17185d679497362d",
+      "sha256After": "43ae831163bf418f"
+    },
+    {
+      "file": "src/main.tsx",
+      "sha256Before": "2a0fbb6eaf95968f",
+      "sha256After": "6a80871848d4a57c"
+    },
+    {
+      "file": "src/styles.css",
+      "sha256Before": "170ddef3950e3124",
+      "sha256After": "389fc60b428a37cd"
+    },
+    {
+      "file": "src/ui/app/App.tsx",
+      "sha256Before": "a23acbb831ba6d6d",
+      "sha256After": "047663d6d1d900bc"
+    },
+    {
+      "file": "src/ui/app/VaultProvider.tsx",
+      "sha256Before": "2c167b6c09be5d88",
+      "sha256After": "bd3e6b75ff2d7527"
+    },
+    {
+      "file": "src/ui/app/router.ts",
+      "sha256Before": "c5d4483ea8394a7c",
+      "sha256After": "d5abc7bc2e05a857"
+    },
+    {
+      "file": "src/ui/app/theme.ts",
+      "sha256Before": "07502143275a6c37",
+      "sha256After": "14dc0b8fb7f374e9"
+    },
+    {
+      "file": "src/ui/design/Button.tsx",
+      "sha256Before": "77679e53db97f77a",
+      "sha256After": "13363a9995e3fac7"
+    },
+    {
+      "file": "src/ui/design/ConfirmDialog.tsx",
+      "sha256Before": "373de575956fbb8e",
+      "sha256After": "2ee4c8be9e63fe84"
+    },
+    {
+      "file": "src/ui/design/Icon.tsx",
+      "sha256Before": "62a68e7e9bb69711",
+      "sha256After": "4439b9729122c589"
+    },
+    {
+      "file": "src/ui/design/blocknote.css",
+      "sha256Before": "cf9b7eaca645185f",
+      "sha256After": "59924225c043df43"
+    },
+    {
+      "file": "src/ui/design/tokens.css",
+      "sha256Before": "2475ec16729abb4b",
+      "sha256After": "55d617230123265a"
+    },
+    {
+      "file": "src/ui/editor/DocEditor.tsx",
+      "sha256Before": "3c9a4c07c9da957f",
+      "sha256After": "f883d9583a340fe7"
+    },
+    {
+      "file": "src/ui/editor/emoji-mart-absent.ts",
+      "sha256Before": "0563b4374095e6f3",
+      "sha256After": "8ffb051492bbe657"
+    },
+    {
+      "file": "src/ui/editor/useAutosave.ts",
+      "sha256Before": "8d79b62bb4bf6f9d",
+      "sha256After": "25de8f93bc9b6ff3"
+    },
+    {
+      "file": "src/ui/sidebar/Sidebar.tsx",
+      "sha256Before": "bcb6af2ce1f3ce6e",
+      "sha256After": "108896dd036049f4"
+    },
+    {
+      "file": "vite.config.ts",
+      "sha256Before": "7ae29dacf17f286c",
+      "sha256After": "bd5f729cf3ce55be"
+    },
+    {
+      "file": "vitest.setup.ts",
+      "sha256Before": "f720a6c496a18578",
+      "sha256After": "d702585c4b1338c0"
+    }
+  ],
+  "drift": {
+    "hard": 0,
+    "recovered": 0,
+    "files": []
+  },
+  "backups": []
+}

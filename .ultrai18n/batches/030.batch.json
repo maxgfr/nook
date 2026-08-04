@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "batchId": "030",
+  "batchDigest": "9f35dead7249b2fa",
+  "sourceLang": "fr",
+  "targetLang": "en",
+  "project": {
+    "name": "nook"
+  },
+  "glossary": [],
+  "items": [
+    {
+      "id": "g_7c82a154bc87",
+      "text": "Laisse la sauvegarde automatique se déclencher.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_7d7f834d5aba",
+      "text": "tapés au clavier système fonctionnent normalement.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_7df8585b5a7e",
+      "text": "horodate la dernière modification",
+      "role": "label",
+      "max": 49
+    },
+    {
+      "id": "g_7e1a2b208cbc",
+      "text": "Vos notes sont chiffrées et stockées sur votre machine, et la page elle-même",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_7f8c5a3a8580",
+      "text": "Impossible de déplacer une page dans sa propre sous-arborescence.",
+      "role": "paragraph"
+    },
+    {
+      "id": "g_7fb327009e77",
+      "text": "Toutes les sources d'un `import ... from '…'` ou d'un `import('…')`.",
+      "role": "doc-prose"
+    },
+    {
+      "id": "g_802c059abcde",
+      "text": "Lint",
+      "role": "label",
+      "max": 10
+    },
+    {
+      "id": "g_80b779b2ccc0",
+      "text": "12px — métadonnées",
+      "role": "doc-prose"
+    }
+  ]
+}
