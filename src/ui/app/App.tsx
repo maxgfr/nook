@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useState } from 'react'
 import {
   VaultProvider,
   useVault,
@@ -9,12 +9,13 @@ import {
 import { UnlockScreen } from '../lock/UnlockScreen'
 import { SettingsDialog } from '../settings/SettingsDialog'
 import { CanvasView } from '../canvas/CanvasView'
-import { useNavigate, useOpenDocId } from './router'
+import { useNavigate, useOpenDocId, useRoute } from './router'
 import { applyTheme, readTheme, type Theme } from './theme'
 import { Sidebar } from '../sidebar/Sidebar'
 import { Button } from '../design/Button'
 import { Icon } from '../design/Icon'
 import { CommandPalette } from '../search/CommandPalette'
+import { OpenSettingsContext } from './openSettings'
 
 /**
  * The editor alone accounts for most of the application's weight. Taking it
@@ -26,9 +27,31 @@ const DocEditor = lazy(() =>
   import('../editor/DocEditor').then((module) => ({ default: module.DocEditor })),
 )
 
+/**
+ * The reader for a shared page is loaded on demand: someone who never opens a
+ * share should not pay for it, and someone who only opens a share should not
+ * pay for the notebook.
+ */
+const ReaderView = lazy(() =>
+  import('../share/ReaderView').then((module) => ({ default: module.ReaderView })),
+)
+
 export function App() {
   const [theme, setTheme] = useState<Theme>(readTheme)
   useEffect(() => applyTheme(theme), [theme])
+  const route = useRoute()
+
+  // The share route is answered **before** the vault provider is mounted, and
+  // that ordering is the guarantee: opening a link somebody sent must not
+  // create an encrypted notebook on the reader's machine. Nothing touches
+  // storage until they press the button that says it will.
+  if (route.kind === 'read') {
+    return (
+      <Suspense fallback={<div className="h-full" aria-busy="true" />}>
+        <ReaderView payload={route.payload} />
+      </Suspense>
+    )
+  }
 
   return (
     <VaultProvider fallback={Boot}>
@@ -44,6 +67,11 @@ function Workspace({ theme, onThemeChange }: { theme: Theme; onThemeChange: (t: 
   const [paletteOpen, setPaletteOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [mapOpen, setMapOpen] = useState(false)
+
+  // Handed down so a block that has just declined to load something can offer
+  // to take you to the switch that would allow it. Stable, or every block in
+  // the page would re-render whenever anything else here changed.
+  const openSettings = useCallback(() => setSettingsOpen(true), [])
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -80,7 +108,9 @@ function Workspace({ theme, onThemeChange }: { theme: Theme; onThemeChange: (t: 
       <main className="flex min-w-0 flex-1 flex-col">
         {current ? (
           <Suspense fallback={<div className="flex-1" aria-busy="true" />}>
-            <DocEditor docId={current} />
+            <OpenSettingsContext value={openSettings}>
+              <DocEditor docId={current} />
+            </OpenSettingsContext>
           </Suspense>
         ) : (
           <Welcome />

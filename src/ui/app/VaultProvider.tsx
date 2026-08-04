@@ -164,6 +164,19 @@ export function useVault(): Vault {
   return vault
 }
 
+/**
+ * The vault if there is one, `null` otherwise.
+ *
+ * For components that render both inside the notebook and outside it — the
+ * editor's blocks are shown again, read-only, when someone opens a page shared
+ * with them, and that reader deliberately has no vault open. Throwing there
+ * would be right for `useVault` and wrong here: the absence is expected, and
+ * what changes is which actions the block offers.
+ */
+export function useOptionalVault(): Vault | null {
+  return useContext(VaultContext)
+}
+
 export function useLockControls(): LockControls {
   const controls = useContext(LockContext)
   if (!controls) throw new Error('useLockControls must be called inside a <VaultProvider>.')
