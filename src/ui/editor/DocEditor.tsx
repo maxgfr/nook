@@ -13,6 +13,7 @@ import { ancestorsOf } from '../../core/model/tree'
 import { useVault, useVaultIndex } from '../app/VaultProvider'
 import { useAutosave, type SaveState } from './useAutosave'
 import { Backlinks } from './Backlinks'
+import { History } from './History'
 import { CollectionView } from '../collection/CollectionView'
 import { isCollection, type CollectionContent } from '../../core/model/collection'
 import { useNavigate } from '../app/router'
@@ -78,7 +79,10 @@ function LoadedEditor({ doc }: { doc: Doc }) {
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <header className="flex h-11 shrink-0 items-center justify-between gap-4 border-b border-line px-6">
+      <header
+        data-print-hide
+        className="flex h-11 shrink-0 items-center justify-between gap-4 border-b border-line px-6"
+      >
         <nav aria-label="Breadcrumbs" className="min-w-0 truncate text-xs text-ink-faint">
           {trail.map((ancestor) => (
             <span key={ancestor.id}>{ancestor.title || UNTITLED} / </span>
@@ -108,6 +112,7 @@ function LoadedEditor({ doc }: { doc: Doc }) {
           )}
 
           <Backlinks docId={doc.id} onOpen={navigate} />
+          <History docId={doc.id} />
         </div>
       </div>
     </div>

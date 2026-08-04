@@ -8,6 +8,7 @@ import {
 } from './VaultProvider'
 import { UnlockScreen } from '../lock/UnlockScreen'
 import { SettingsDialog } from '../settings/SettingsDialog'
+import { CanvasView } from '../canvas/CanvasView'
 import { useNavigate, useOpenDocId } from './router'
 import { applyTheme, readTheme, type Theme } from './theme'
 import { Sidebar } from '../sidebar/Sidebar'
@@ -42,6 +43,7 @@ function Workspace({ theme, onThemeChange }: { theme: Theme; onThemeChange: (t: 
   const index = useVaultIndex()
   const [paletteOpen, setPaletteOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
+  const [mapOpen, setMapOpen] = useState(false)
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -60,6 +62,18 @@ function Workspace({ theme, onThemeChange }: { theme: Theme; onThemeChange: (t: 
   // error for an identifier that simply no longer exists.
   const current = openId && index.docs[openId] ? openId : null
 
+  if (mapOpen) {
+    return (
+      <CanvasView
+        onOpen={(id) => {
+          navigate(id)
+          setMapOpen(false)
+        }}
+        onClose={() => setMapOpen(false)}
+      />
+    )
+  }
+
   return (
     <div className="flex h-full">
       <Sidebar openId={current} onOpen={navigate} />
@@ -77,6 +91,7 @@ function Workspace({ theme, onThemeChange }: { theme: Theme; onThemeChange: (t: 
         onThemeChange={onThemeChange}
         onOpenPalette={() => setPaletteOpen(true)}
         onOpenSettings={() => setSettingsOpen(true)}
+        onOpenMap={() => setMapOpen(true)}
       />
       <SettingsDialog open={settingsOpen} onClose={() => setSettingsOpen(false)} />
       <CommandPalette
@@ -153,11 +168,13 @@ function BottomBar({
   onThemeChange,
   onOpenPalette,
   onOpenSettings,
+  onOpenMap,
 }: {
   theme: Theme
   onThemeChange: (theme: Theme) => void
   onOpenPalette: () => void
   onOpenSettings: () => void
+  onOpenMap: () => void
 }) {
   return (
     <div className="fixed right-3 bottom-3 flex items-center gap-1">
@@ -168,6 +185,13 @@ function BottomBar({
       >
         Search
         <kbd className="rounded-xs border border-line px-1 font-sans">⌘K</kbd>
+      </button>
+      <button
+        type="button"
+        onClick={onOpenMap}
+        className="flex h-7 items-center rounded-lg border border-line bg-raised/90 px-2.5 text-2xs text-ink-faint backdrop-blur-sm transition-colors duration-(--nook-dur-fast) ease-nook hover:text-ink"
+      >
+        Map
       </button>
       <button
         type="button"

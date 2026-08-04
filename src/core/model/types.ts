@@ -33,9 +33,56 @@ export type DocSummary = {
   readonly order: number
 }
 
+/**
+ * A past state of a document, kept so a bad edit is not final.
+ *
+ * Snapshots live inside the document's own encrypted record: they are as
+ * secret as the text they hold, and they travel with an export without any
+ * extra plumbing.
+ */
+export type Snapshot = { readonly at: string; readonly content: JsonValue }
+
 /** A complete document, content included. Loaded on open, one at a time. */
 export type Doc = DocSummary & {
   readonly content: JsonValue
+  /** Most recent first. Bounded — see `HISTORY_LIMIT`. */
+  readonly history?: readonly Snapshot[]
+}
+
+/**
+ * How many past states a document keeps.
+ *
+ * Bounded on purpose: unlimited history would grow the record that must be
+ * decrypted every time the page opens, so old states would slow down the thing
+ * they exist to protect.
+ */
+export const HISTORY_LIMIT = 20
+
+/**
+ * How long before an edit earns its own snapshot.
+ *
+ * Without this, autosave would file one every few seconds and the twenty slots
+ * would all hold the same afternoon. With it, they span days.
+ */
+export const HISTORY_INTERVAL_MS = 5 * 60_000
+
+/**
+ * Decides what history a save should leave behind.
+ *
+ * Pure, so the coalescing rule is testable without a database or a clock.
+ */
+export function nextHistory(
+  previous: readonly Snapshot[] | undefined,
+  supersededContent: JsonValue,
+  now: Date,
+): Snapshot[] {
+  const history = previous ?? []
+  const last = history[0]
+  const recent =
+    last !== undefined && now.getTime() - new Date(last.at).getTime() < HISTORY_INTERVAL_MS
+
+  if (recent) return [...history]
+  return [{ at: now.toISOString(), content: supersededContent }, ...history].slice(0, HISTORY_LIMIT)
 }
 
 /**
@@ -43,18 +90,33 @@ export type Doc = DocSummary & {
  * the content of the documents.
  *
  * Schema 2 added `facets`, so search and backlinks can answer without opening
- * any document. A schema-1 vault is upgraded on first open by reading every
- * document once — see `Vault.open`.
+ * any document; schema 3 added canvas positions. Older vaults are upgraded on
+ * first open — see `Vault.open`.
  */
+export type Point = { readonly x: number; readonly y: number }
+
 export type VaultIndex = {
-  readonly schema: 2
+  readonly schema: 3
   readonly docs: Readonly<Record<DocId, DocSummary>>
   readonly facets: Readonly<Record<DocId, DocFacets>>
+  /**
+   * Where a page sits on the canvas, once someone has moved it.
+   *
+   * Absent means "wherever the layout puts it". Storing only what was moved
+   * keeps the canvas useful from the first visit, with no placement step, and
+   * keeps the index small for people who never open it.
+   */
+  readonly positions: Readonly<Record<DocId, Point>>
 }
 
-export const INDEX_SCHEMA = 2
+export const INDEX_SCHEMA = 3
 
-export const EMPTY_INDEX: VaultIndex = { schema: INDEX_SCHEMA, docs: {}, facets: {} }
+export const EMPTY_INDEX: VaultIndex = {
+  schema: INDEX_SCHEMA,
+  docs: {},
+  facets: {},
+  positions: {},
+}
 
 export function newId(): DocId {
   return crypto.randomUUID()

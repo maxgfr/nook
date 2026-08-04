@@ -101,3 +101,44 @@
     display: none !important;
   }
 }
+
+/**
+ * Printing.
+ *
+ * A note worth printing is the text, not the application around it. The
+ * sidebar, the floating controls and the backlinks are chrome for finding
+ * things, and nobody needs them on paper — so the printed page is the reading
+ * column, at full width, in black on white.
+ */
+@media print {
+  nav[aria-label='Pages'],
+  .fixed,
+  dialog,
+  [data-print-hide] {
+    display: none !important;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  main {
+    overflow: visible !important;
+  }
+
+  main > div,
+  main > div > div {
+    max-width: none !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* A link is useless on paper unless you can read where it goes. */
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.85em;
+    word-break: break-all;
+  }
+}

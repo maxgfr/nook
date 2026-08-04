@@ -63,8 +63,12 @@ Nook is built in phases, and each one leaves a deployable repository.
 Today Nook can create pages, nest them, write in them, link them with
 `[[wikilinks]]`, tag them, find any of them from `⌘K` — including by a word
 buried in the text — lock the whole vault behind a passphrase, keep structured
-databases with table, board and calendar views, and erase itself in a way you
-can check.
+databases with table, board and calendar views, walk back through a page's
+history, print a note without the application around it, see the whole notebook
+as a map you can pan and rearrange, and erase itself in a way you can check.
+
+The one thing on the original plan that is **not** built is attaching images to
+a page. Everything else is.
 
 ### A feature removed on purpose
 

@@ -272,6 +272,22 @@ try {
     ),
   )
 
+  // --- Phases 6 & 7: history and the map ---------------------------------
+  await evaluate(
+    `[...document.querySelectorAll('button')].find((b) => b.textContent.trim() === 'Map').click()`,
+  )
+  await sleep(1200)
+  check(
+    'the map shows a card per page and the link between them',
+    await evaluate(
+      `document.querySelectorAll('.absolute.origin-top-left button').length >= 2 && document.querySelectorAll('svg line').length >= 1`,
+    ),
+  )
+  await evaluate(
+    `[...document.querySelectorAll('button')].find((b) => b.textContent.trim() === 'Close').click()`,
+  )
+  await sleep(800)
+
   // --- Phase 4: passphrase and locking -----------------------------------
   //
   // Argon2id is deliberately slow, so these steps wait seconds rather than

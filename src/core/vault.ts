@@ -54,11 +54,13 @@ import {
   EMPTY_INDEX,
   INDEX_SCHEMA,
   newId,
+  nextHistory,
   UNTITLED,
   type Doc,
   type DocId,
   type DocSummary,
   type JsonValue,
+  type Snapshot,
   type VaultIndex,
 } from './model/types'
 
@@ -87,12 +89,27 @@ export type ImportMode = 'replace' | 'merge'
  * What may actually be sitting on disk. A vault created before schema 2 has no
  * facets; `Vault.open` upgrades it by reading every document once.
  */
+type LegacyDocs = Readonly<Record<DocId, DocSummary>>
 type StoredIndex =
-  VaultIndex | { readonly schema: 1; readonly docs: Readonly<Record<DocId, DocSummary>> }
+  | VaultIndex
+  | { readonly schema: 1; readonly docs: LegacyDocs }
+  | { readonly schema: 2; readonly docs: LegacyDocs; readonly facets: VaultIndex['facets'] }
 
-/** Presents an older index in the current shape, with facets still empty. */
+/**
+ * Presents an older index in the current shape.
+ *
+ * Missing pieces get their empty value rather than a guess: facets are then
+ * rebuilt from the documents, and an unplaced page simply falls back to the
+ * automatic layout.
+ */
 function upgraded(stored: StoredIndex): VaultIndex {
-  return stored.schema === INDEX_SCHEMA ? stored : { ...stored, schema: INDEX_SCHEMA, facets: {} }
+  if (stored.schema === INDEX_SCHEMA) return stored
+  return {
+    schema: INDEX_SCHEMA,
+    docs: stored.docs,
+    facets: stored.schema === 2 ? stored.facets : {},
+    positions: {},
+  }
 }
 
 function withFacets(index: VaultIndex, id: DocId, facets: DocFacets): VaultIndex {
@@ -101,8 +118,12 @@ function withFacets(index: VaultIndex, id: DocId, facets: DocFacets): VaultIndex
 
 function withoutFacets(index: VaultIndex, ids: readonly DocId[]): VaultIndex {
   const facets = { ...index.facets }
-  for (const id of ids) delete facets[id]
-  return { ...index, facets }
+  const positions = { ...index.positions }
+  for (const id of ids) {
+    delete facets[id]
+    delete positions[id]
+  }
+  return { ...index, facets, positions }
 }
 
 export class Vault {
@@ -229,15 +250,23 @@ export class Vault {
     patch: { title?: string; icon?: string | null; content?: JsonValue },
   ): Promise<DocSummary> {
     const current = await this.readDoc(id)
+    const now = new Date()
+    // Only a content change is worth remembering; renaming a page is not the
+    // kind of edit anyone needs to undo from a list of timestamps.
+    const contentChanged =
+      patch.content !== undefined &&
+      JSON.stringify(patch.content) !== JSON.stringify(current.content)
+
     const updated: Doc = {
       ...current,
       ...(patch.title === undefined ? {} : { title: patch.title }),
       ...(patch.icon === undefined ? {} : { icon: patch.icon }),
       ...(patch.content === undefined ? {} : { content: patch.content }),
-      updatedAt: new Date().toISOString(),
+      ...(contentChanged ? { history: nextHistory(current.history, current.content, now) } : {}),
+      updatedAt: now.toISOString(),
     }
 
-    const { content: _content, ...summary } = updated
+    const { content: _content, history: _history, ...summary } = updated
     const next = withFacets(
       upsert(this.#index, summary),
       id,
@@ -245,6 +274,30 @@ export class Vault {
     )
     await this.#commit(next, [{ op: 'put', store: 'docs', key: id, value: updated }])
     return summary
+  }
+
+  /** Past states of a document, most recent first. */
+  async history(id: DocId): Promise<readonly Snapshot[]> {
+    return (await this.readDoc(id)).history ?? []
+  }
+
+  /**
+   * Puts a past state back.
+   *
+   * Restoring is an ordinary edit, so the state being replaced is itself
+   * snapshotted: changing your mind about changing your mind must also work.
+   */
+  async restore(id: DocId, at: string): Promise<void> {
+    const doc = await this.readDoc(id)
+    const snapshot = doc.history?.find((candidate) => candidate.at === at)
+    if (!snapshot) throw new Error('That version is no longer available.')
+    await this.saveDoc(id, { content: snapshot.content })
+  }
+
+  /** Remembers where a page was dragged to on the canvas. */
+  async placeOnCanvas(id: DocId, point: { x: number; y: number }): Promise<void> {
+    docOrThrow(this.#index, id)
+    await this.#commit({ ...this.#index, positions: { ...this.#index.positions, [id]: point } }, [])
   }
 
   async moveDoc(id: DocId, parentId: DocId | null, position?: number): Promise<void> {
