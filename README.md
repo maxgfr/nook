@@ -59,8 +59,9 @@ Nook is built in phases, and each one leaves a deployable repository.
 |  P5   | Databases: typed properties, table / kanban / calendar views       | planned |
 |  P6   | Graph view, version history, images, printing                      | planned |
 
-Today Nook can create pages, nest them, write in them and find them again. It
-cannot yet link them together, search them, or lock them behind a passphrase.
+Today Nook can create pages, nest them, write in them, link them with
+`[[wikilinks]]`, tag them, and find any of them from `⌘K` — including by a word
+buried in the text. It cannot yet lock them behind a passphrase.
 
 ### A feature removed on purpose
 

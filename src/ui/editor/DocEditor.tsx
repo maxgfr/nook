@@ -12,6 +12,8 @@ import { UNTITLED } from '../../core/model/types'
 import { ancestorsOf } from '../../core/model/tree'
 import { useVault, useVaultIndex } from '../app/VaultProvider'
 import { useAutosave, type SaveState } from './useAutosave'
+import { Backlinks } from './Backlinks'
+import { useNavigate } from '../app/router'
 
 /**
  * A document's editor.
@@ -64,6 +66,7 @@ type BlockNoteViewEditor = ComponentProps<typeof BlockNoteView>['editor']
 function LoadedEditor({ doc }: { doc: Doc }) {
   const vault = useVault()
   const index = useVaultIndex()
+  const navigate = useNavigate()
   const editorHost = useRef<HTMLDivElement>(null)
 
   const { state, schedule } = useAutosave<DocPatch>((patch) => vault.saveDoc(doc.id, patch))
@@ -125,6 +128,8 @@ function LoadedEditor({ doc }: { doc: Doc }) {
               onChange={() => schedule({ content: editor.document as JsonValue })}
             />
           </div>
+
+          <Backlinks docId={doc.id} onOpen={navigate} />
         </div>
       </div>
     </div>

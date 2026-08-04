@@ -27,6 +27,7 @@ import {
   type BatchEntry,
 } from './storage/idb'
 import { surveyStorage, wipeEverything, type StorageSurvey } from './storage/wipe'
+import { buildFacets, type DocFacets } from './model/facets'
 import {
   childrenOf,
   descendantIdsOf,
@@ -38,6 +39,7 @@ import {
 } from './model/tree'
 import {
   EMPTY_INDEX,
+  INDEX_SCHEMA,
   newId,
   UNTITLED,
   type Doc,
@@ -68,6 +70,28 @@ export type VaultExport = {
  */
 export type ImportMode = 'replace' | 'merge'
 
+/**
+ * What may actually be sitting on disk. A vault created before schema 2 has no
+ * facets; `Vault.open` upgrades it by reading every document once.
+ */
+type StoredIndex =
+  VaultIndex | { readonly schema: 1; readonly docs: Readonly<Record<DocId, DocSummary>> }
+
+/** Presents an older index in the current shape, with facets still empty. */
+function upgraded(stored: StoredIndex): VaultIndex {
+  return stored.schema === INDEX_SCHEMA ? stored : { ...stored, schema: INDEX_SCHEMA, facets: {} }
+}
+
+function withFacets(index: VaultIndex, id: DocId, facets: DocFacets): VaultIndex {
+  return { ...index, facets: { ...index.facets, [id]: facets } }
+}
+
+function withoutFacets(index: VaultIndex, ids: readonly DocId[]): VaultIndex {
+  const facets = { ...index.facets }
+  for (const id of ids) delete facets[id]
+  return { ...index, facets }
+}
+
 export class Vault {
   // Fields declared then assigned rather than constructor properties:
   // `erasableSyntaxOnly` forbids the latter, because they produce
@@ -94,9 +118,13 @@ export class Vault {
     const key = (await openVault(db)) ?? (await createVault(db))
 
     const stored = await read<Envelope>(db, 'index', INDEX_KEY)
-    const index = stored ? await openJson<VaultIndex>(key, stored, indexContext()) : EMPTY_INDEX
+    const onDisk = stored ? await openJson<StoredIndex>(key, stored, indexContext()) : EMPTY_INDEX
 
-    return new Vault(db, key, index)
+    const vault = new Vault(db, key, upgraded(onDisk))
+    // Facets are derived data, so an older vault is repaired by recomputing
+    // them rather than by a migration that could get them wrong.
+    if (onDisk.schema !== INDEX_SCHEMA) await vault.#rebuildFacets()
+    return vault
   }
 
   get index(): VaultIndex {
@@ -126,7 +154,12 @@ export class Vault {
       order: nextOrder(this.#index, parentId),
     }
 
-    await this.#commit(upsert(this.#index, summary), [
+    const next = withFacets(
+      upsert(this.#index, summary),
+      summary.id,
+      buildFacets(summary.title, EMPTY_CONTENT),
+    )
+    await this.#commit(next, [
       { op: 'put', store: 'docs', key: summary.id, value: { ...summary, content: EMPTY_CONTENT } },
     ])
     return summary
@@ -158,9 +191,12 @@ export class Vault {
     }
 
     const { content: _content, ...summary } = updated
-    await this.#commit(upsert(this.#index, summary), [
-      { op: 'put', store: 'docs', key: id, value: updated },
-    ])
+    const next = withFacets(
+      upsert(this.#index, summary),
+      id,
+      buildFacets(updated.title, updated.content),
+    )
+    await this.#commit(next, [{ op: 'put', store: 'docs', key: id, value: updated }])
     return summary
   }
 
@@ -178,7 +214,7 @@ export class Vault {
     const removed = [id, ...descendantIdsOf(this.#index, id)]
 
     await this.#commit(
-      removeAll(this.#index, removed),
+      withoutFacets(removeAll(this.#index, removed), removed),
       removed.map((docId) => ({ op: 'delete', store: 'docs', key: docId }) as const),
     )
     return removed
@@ -221,7 +257,7 @@ export class Vault {
       const parentId = doc.parentId === null ? null : (remap.get(doc.parentId) ?? null)
       const { content, ...rest } = doc
       const summary: DocSummary = { ...rest, id, parentId }
-      index = upsert(index, summary)
+      index = withFacets(upsert(index, summary), id, buildFacets(summary.title, content))
       writes.push({ op: 'put', store: 'docs', key: id, value: { ...summary, content } })
     }
 
@@ -274,6 +310,28 @@ export class Vault {
     await writeBatch(this.#db, entries)
     this.#index = index
     this.#emit()
+  }
+
+  /**
+   * Recomputes every document's facets, and stores them.
+   *
+   * Runs once, when a vault written before facets existed is opened. It is the
+   * only operation that decrypts the whole notebook — acceptable for a one-off
+   * upgrade, and it keeps the derived data honest instead of migrating a shape
+   * we would have to guess at.
+   */
+  async #rebuildFacets(): Promise<void> {
+    let index = this.#index
+    for (const id of Object.keys(index.docs)) {
+      try {
+        const doc = await this.readDoc(id)
+        index = withFacets(index, id, buildFacets(doc.title, doc.content))
+      } catch {
+        // A document whose content is missing keeps empty facets rather than
+        // aborting the upgrade: the rest of the notebook stays searchable.
+      }
+    }
+    await this.#commit(index, [])
   }
 
   #emit(): void {

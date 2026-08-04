@@ -201,6 +201,77 @@ try {
     `${onDisk.length} unreadable bytes`,
   )
 
+  // --- Phase 3: links, tags, search --------------------------------------
+  //
+  // The headings in these sections are uppercased by CSS, and `innerText`
+  // returns the *rendered* text, so these matches are deliberately
+  // case-insensitive.
+  const setTitle = (value) =>
+    evaluate(`
+      (() => {
+        const input = document.querySelector('input[aria-label="Page title"]')
+        const setValue = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set
+        setValue.call(input, ${JSON.stringify(value)})
+        input.dispatchEvent(new Event('input', { bubbles: true }))
+      })()
+    `)
+
+  await evaluate(
+    `document.querySelector('nav[aria-label="Pages"] button[aria-label="New page"]').click()`,
+  )
+  await sleep(2500)
+  await setTitle('Monday')
+  await evaluate(`document.querySelector('.bn-editor[contenteditable=true]').focus()`)
+  await send('Input.insertText', { text: 'prepare [[Recipe note]] and [[Nowhere yet]] #urgent' })
+  await sleep(1800)
+
+  check(
+    'a link leading nowhere is offered as a page to create',
+    await evaluate(
+      `/not written yet/i.test(document.body.innerText) && document.body.innerText.includes('nowhere yet')`,
+    ),
+  )
+
+  await evaluate(
+    `[...document.querySelectorAll('nav[aria-label="Pages"] button')].find((b) => b.textContent.includes('Recipe note')).click()`,
+  )
+  await sleep(2500)
+  check(
+    'backlinks list the page that links here',
+    await evaluate(
+      `/linked from 1 page/i.test(document.body.innerText) && document.body.innerText.includes('Monday')`,
+    ),
+  )
+
+  await send('Input.dispatchKeyEvent', {
+    type: 'keyDown',
+    key: 'k',
+    code: 'KeyK',
+    modifiers: 4,
+    windowsVirtualKeyCode: 75,
+  })
+  await send('Input.dispatchKeyEvent', {
+    type: 'keyUp',
+    key: 'k',
+    code: 'KeyK',
+    modifiers: 4,
+    windowsVirtualKeyCode: 75,
+  })
+  await sleep(700)
+  check(
+    'the command palette opens on the keyboard',
+    await evaluate(`!!document.querySelector('dialog[aria-label="Search and commands"][open]')`),
+  )
+
+  await send('Input.insertText', { text: 'urgent' })
+  await sleep(600)
+  check(
+    'a tag is searchable from the palette',
+    await evaluate(
+      `document.querySelector('dialog[aria-label="Search and commands"]').innerText.includes('Monday')`,
+    ),
+  )
+
   socket.close()
 } finally {
   chrome.kill()

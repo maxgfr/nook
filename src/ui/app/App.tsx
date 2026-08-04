@@ -5,6 +5,7 @@ import { applyTheme, readTheme, type Theme } from './theme'
 import { Sidebar } from '../sidebar/Sidebar'
 import { Button } from '../design/Button'
 import { Icon } from '../design/Icon'
+import { CommandPalette } from '../search/CommandPalette'
 
 /**
  * The editor alone accounts for most of the application's weight. Taking it
@@ -31,6 +32,19 @@ function Workspace({ theme, onThemeChange }: { theme: Theme; onThemeChange: (t: 
   const openId = useOpenDocId()
   const navigate = useNavigate()
   const index = useVaultIndex()
+  const [paletteOpen, setPaletteOpen] = useState(false)
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      // ⌘K on macOS, Ctrl+K elsewhere. The browser reserves neither.
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault()
+        setPaletteOpen((current) => !current)
+      }
+    }
+    globalThis.addEventListener('keydown', onKeyDown)
+    return () => globalThis.removeEventListener('keydown', onKeyDown)
+  }, [])
 
   // A page deleted in another tab, or a shared address matching nothing:
   // we fall back to the home screen rather than showing an
@@ -49,7 +63,16 @@ function Workspace({ theme, onThemeChange }: { theme: Theme; onThemeChange: (t: 
           <Welcome />
         )}
       </main>
-      <ThemePicker value={theme} onChange={onThemeChange} />
+      <ThemePicker
+        value={theme}
+        onChange={onThemeChange}
+        onOpenPalette={() => setPaletteOpen(true)}
+      />
+      <CommandPalette
+        open={paletteOpen}
+        onClose={() => setPaletteOpen(false)}
+        onOpenDoc={navigate}
+      />
     </div>
   )
 }
@@ -110,31 +133,49 @@ const THEMES: readonly { value: Theme; label: string }[] = [
   { value: 'dark', label: 'Dark' },
 ]
 
-function ThemePicker({ value, onChange }: { value: Theme; onChange: (theme: Theme) => void }) {
+function ThemePicker({
+  value,
+  onChange,
+  onOpenPalette,
+}: {
+  value: Theme
+  onChange: (theme: Theme) => void
+  onOpenPalette: () => void
+}) {
   return (
-    <div
-      role="radiogroup"
-      aria-label="Theme"
-      className="fixed right-3 bottom-3 flex items-center gap-0.5 rounded-lg border border-line bg-raised/90 p-0.5 backdrop-blur-sm"
-    >
-      {THEMES.map((option) => {
-        const selected = option.value === value
-        return (
-          <button
-            key={option.value}
-            type="button"
-            role="radio"
-            aria-checked={selected}
-            onClick={() => onChange(option.value)}
-            className={[
-              'rounded-sm px-2 py-1 text-2xs transition-colors duration-(--nook-dur-fast) ease-nook',
-              selected ? 'bg-hover text-ink' : 'text-ink-faint hover:text-ink',
-            ].join(' ')}
-          >
-            {option.label}
-          </button>
-        )
-      })}
+    <div className="fixed right-3 bottom-3 flex items-center gap-1">
+      <button
+        type="button"
+        onClick={onOpenPalette}
+        className="flex h-7 items-center gap-1.5 rounded-lg border border-line bg-raised/90 px-2.5 text-2xs text-ink-faint backdrop-blur-sm transition-colors duration-(--nook-dur-fast) ease-nook hover:text-ink"
+      >
+        Search
+        <kbd className="rounded-xs border border-line px-1 font-sans">⌘K</kbd>
+      </button>
+      <div
+        role="radiogroup"
+        aria-label="Theme"
+        className="flex items-center gap-0.5 rounded-lg border border-line bg-raised/90 p-0.5 backdrop-blur-sm"
+      >
+        {THEMES.map((option) => {
+          const selected = option.value === value
+          return (
+            <button
+              key={option.value}
+              type="button"
+              role="radio"
+              aria-checked={selected}
+              onClick={() => onChange(option.value)}
+              className={[
+                'rounded-sm px-2 py-1 text-2xs transition-colors duration-(--nook-dur-fast) ease-nook',
+                selected ? 'bg-hover text-ink' : 'text-ink-faint hover:text-ink',
+              ].join(' ')}
+            >
+              {option.label}
+            </button>
+          )
+        })}
+      </div>
     </div>
   )
 }

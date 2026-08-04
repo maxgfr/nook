@@ -10,6 +10,8 @@
  * a line of storage, encryption or search.
  */
 
+import type { DocFacets } from './facets'
+
 export type JsonValue =
   string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue }
 
@@ -39,13 +41,20 @@ export type Doc = DocSummary & {
 /**
  * The vault's index: a single encrypted record describing everything except
  * the content of the documents.
+ *
+ * Schema 2 added `facets`, so search and backlinks can answer without opening
+ * any document. A schema-1 vault is upgraded on first open by reading every
+ * document once — see `Vault.open`.
  */
 export type VaultIndex = {
-  readonly schema: 1
+  readonly schema: 2
   readonly docs: Readonly<Record<DocId, DocSummary>>
+  readonly facets: Readonly<Record<DocId, DocFacets>>
 }
 
-export const EMPTY_INDEX: VaultIndex = { schema: 1, docs: {} }
+export const INDEX_SCHEMA = 2
+
+export const EMPTY_INDEX: VaultIndex = { schema: INDEX_SCHEMA, docs: {}, facets: {} }
 
 export function newId(): DocId {
   return crypto.randomUUID()
