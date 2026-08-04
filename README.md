@@ -42,8 +42,9 @@ itself never gains the ability to send anything anywhere.
   checkboxes, code and tables. There is no Save button; edits are written after
   a pause in typing, when the tab goes to the background, and when you leave the
   page.
-- **Organise.** Pages nest to any depth. Every page keeps a bounded history you
-  can walk back through and restore from.
+- **Organise.** Pages nest to any depth. Every page keeps up to twenty past
+  versions you can walk back through and restore from — filed automatically on
+  an interval you choose, or kept the moment you press **Snapshot**.
 - **Connect.** `[[Wikilinks]]` resolve by title, and every page lists what links
   to it. A link to a page you have not written yet is offered as a page to
   create rather than reported as an error. `#tags` work anywhere.
@@ -107,7 +108,10 @@ What each one actually gives away:
   quietly.
 - **Players from the web** — opening a note with a player in it tells YouTube or
   Vimeo that you opened it. The page around it still cannot make a request; the
-  player is a separate document, and that one can.
+  player is a separate document, and that one can. The frame sends the site's
+  origin and never the path, so what leaves is "somebody on this site opened a
+  player" — which is implied by embedding one. YouTube refuses to play without
+  it, so withholding it bought no privacy and lost the feature.
 
 With both off, a block that points at the web shows what it points at and
 contacts nobody.
@@ -129,8 +133,13 @@ that, and Nook says it on the screen where you press the button:
   Nook shows your reader that request and declines to open the page past it.
   That is a courtesy applied by the reader's copy of Nook, not a lock, and the
   reader is told exactly that — with a working button underneath.
-- **The passphrase is the real protection**, and it is required. Argon2id and
-  AES-GCM-256, the same as the vault. Send it by some other route than the link.
+- **The passphrase is the real protection**, and it is recommended rather than
+  required. With one: Argon2id and AES-GCM-256, the same as the vault, and you
+  send it by some other route than the link. Without one the page travels in
+  the clear and anyone holding the link can read it — allowed, because that is
+  a fine choice for a shopping list, and said plainly on both ends rather than
+  made impossible. A _short_ passphrase is refused outright: it looks like
+  protection without being any. Nook will suggest a strong one if you want it.
 
 A share carries the page, its pictures, and nothing else — in particular **not
 its history**, so the recipient does not receive every draft and every deleted

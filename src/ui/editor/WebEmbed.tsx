@@ -171,10 +171,23 @@ function WebEmbedBlock({
         <iframe
           src={embed.embedUrl}
           title={`${embed.label} player`}
-          // The referrer would otherwise hand over the address of the document
-          // holding the note. It buys the provider nothing and costs us
-          // something, so it does not go.
-          referrerPolicy="no-referrer"
+          /*
+           * The origin goes, and nothing more.
+           *
+           * This was `no-referrer`, on the reasoning that withholding it cost
+           * the provider nothing. That was wrong, and the way it was wrong is
+           * worth keeping: since late 2025 YouTube refuses to play at all
+           * without a `Referer`, and shows "Error 153, video player
+           * configuration error" — so the strictest setting bought no privacy
+           * and lost the whole feature.
+           *
+           * `strict-origin-when-cross-origin` sends the origin alone —
+           * `https://maxgfr.github.io` — never the path. Which note you are
+           * reading is in the URL fragment, and a fragment is never sent in a
+           * `Referer` at all. So what the provider learns is that somebody on
+           * this site opened a player, which is implied by embedding one.
+           */
+          referrerPolicy="strict-origin-when-cross-origin"
           /*
            * What the player is allowed to be.
            *
