@@ -12,7 +12,8 @@ import '@blocknote/mantine/style.css'
 import '../design/blocknote.css'
 
 import type { Doc, DocId, JsonValue } from '../../core/model/types'
-import { UNTITLED } from '../../core/model/types'
+import { MINUTE_MS, UNTITLED } from '../../core/model/types'
+import { readSnapshotPolicy } from '../app/snapshots'
 import { ancestorsOf } from '../../core/model/tree'
 import { useVault, useVaultIndex } from '../app/VaultProvider'
 import { useAutosave, type SaveState } from './useAutosave'
@@ -84,7 +85,15 @@ function LoadedEditor({ doc }: { doc: Doc }) {
   const index = useVaultIndex()
   const navigate = useNavigate()
 
-  const { state, schedule } = useAutosave<DocPatch>((patch) => vault.saveDoc(doc.id, patch))
+  // The policy is read at each save rather than captured once, so changing it
+  // in Settings applies from the next keystroke instead of the next reload.
+  const { state, schedule, flush } = useAutosave<DocPatch>((patch) => {
+    const policy = readSnapshotPolicy()
+    return vault.saveDoc(doc.id, patch, {
+      snapshot: policy.automatic ? 'auto' : 'never',
+      intervalMs: policy.everyMinutes * MINUTE_MS,
+    })
+  })
 
   const trail = ancestorsOf(index, doc.id)
 
@@ -112,6 +121,7 @@ function LoadedEditor({ doc }: { doc: Doc }) {
         </nav>
         <div className="flex shrink-0 items-center gap-2">
           <SaveIndicator state={state} />
+          <SnapshotButton docId={doc.id} flush={flush} />
           <Button size="sm" onClick={() => setShareOpen(true)}>
             Share
           </Button>
@@ -301,7 +311,20 @@ function RichTextBody({
               [
                 // Same boundary cast as everywhere the editor is handed to the
                 // library: the schema cast above costs it its own generics.
-                ...getDefaultReactSlashMenuItems(editor as unknown as SlashMenuEditor),
+                ...getDefaultReactSlashMenuItems(editor as unknown as SlashMenuEditor).filter(
+                  /*
+                   * The emoji picker is not in this build — its library fetches
+                   * its data and its images from a CDN, so it is replaced at
+                   * build time (see `emoji-mart-absent.ts`). The menu entry
+                   * survived that removal and opened nothing at all, which is
+                   * precisely the "silently empty menu, the worst of both
+                   * worlds" the removal existed to avoid.
+                   *
+                   * Matched against the same dictionary the editor renders
+                   * from, so a translation cannot make the filter miss.
+                   */
+                  (item) => item.title !== en.slash_menu.emoji.title,
+                ),
                 {
                   title: 'Embed a page',
                   subtext: 'Show another page of this notebook here, read-only',
@@ -467,6 +490,61 @@ function downloadMarkdown(title: string, markdown: string): void {
 
 function toInitialContent(content: JsonValue): PartialBlock[] | undefined {
   return Array.isArray(content) && content.length > 0 ? (content as PartialBlock[]) : undefined
+}
+
+/**
+ * Keeps this version, now.
+ *
+ * The automatic rule can only ever guess which moments matter; this is the one
+ * moment somebody chose. It flushes the pending autosave first, because the
+ * text worth keeping is the text on the screen — snapshotting the last saved
+ * version instead would quietly keep something slightly older than what was
+ * asked for.
+ */
+function SnapshotButton({ docId, flush }: { docId: DocId; flush: () => Promise<void> }) {
+  const vault = useVault()
+  const [busy, setBusy] = useState(false)
+  const [said, setSaid] = useState<string | null>(null)
+
+  // The timer that clears the message has to be cancellable. Without this, the
+  // countdown started by one press wipes the answer to the *next* one — so
+  // pressing twice in quick succession showed nothing the second time, which
+  // reads as a button that stopped working.
+  const clearing = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => () => clearTimeout(clearing.current ?? undefined), [])
+
+  const say = (message: string) => {
+    setSaid(message)
+    if (clearing.current !== null) clearTimeout(clearing.current)
+    clearing.current = setTimeout(() => setSaid(null), 4000)
+  }
+
+  const take = async () => {
+    setBusy(true)
+    setSaid(null)
+    try {
+      await flush()
+      say((await vault.snapshot(docId)) ? 'Kept' : 'Nothing new to keep')
+    } catch (cause) {
+      say(cause instanceof Error ? cause.message : String(cause))
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  return (
+    <>
+      {said && (
+        <span aria-live="polite" className="text-xs text-ink-faint">
+          {said}
+        </span>
+      )}
+      <Button size="sm" disabled={busy} onClick={() => void take()} title="Keep this version">
+        {busy ? 'Keeping…' : 'Snapshot'}
+      </Button>
+    </>
+  )
 }
 
 const LABELS: Record<SaveState, string> = {
