@@ -214,6 +214,125 @@ describe('coffre', () => {
   })
 })
 
+describe('history', () => {
+  const FIRST = [{ type: 'paragraph', text: 'the first draft' }]
+  const SECOND = [{ type: 'paragraph', text: 'the second draft' }]
+
+  it('keeps what a restore replaces, however recently the last snapshot was taken', async () => {
+    const vault = await freshVault()
+    const doc = await vault.createDoc({ title: SURVIVING_TITLE })
+    await vault.saveDoc(doc.id, { content: FIRST })
+    await vault.saveDoc(doc.id, { content: SECOND })
+
+    const [oldest] = await vault.history(doc.id)
+    await vault.restore(doc.id, oldest?.at ?? '')
+
+    // Restoring is an ordinary edit, so the state it replaced has to be
+    // recoverable too: changing your mind about changing your mind must work.
+    // Coalescing must not swallow this one, or a restore is a silent deletion
+    // of whatever was on the page.
+    const history = await vault.history(doc.id)
+    const kept = history.some((snap) => JSON.stringify(snap.content) === JSON.stringify(SECOND))
+    expect(kept).toBe(true)
+  })
+
+  it('still coalesces ordinary edits made moments apart', async () => {
+    const vault = await freshVault()
+    const doc = await vault.createDoc({ title: SURVIVING_TITLE })
+    await vault.saveDoc(doc.id, { content: FIRST })
+    await vault.saveDoc(doc.id, { content: SECOND })
+
+    // Otherwise autosave would file a snapshot every few seconds and the
+    // twenty slots would all hold the same afternoon.
+    expect(await vault.history(doc.id)).toHaveLength(1)
+  })
+})
+
+describe('preparing a page to be shared', () => {
+  const bytes = new Uint8Array([137, 80, 78, 71, 1, 2, 3])
+
+  it('takes the title, the content and the files the page points at', async () => {
+    const vault = await freshVault()
+    const blobId = await vault.putBlob({ name: 'chart.png', type: 'image/png', bytes })
+    const doc = await vault.createDoc({ title: SURVIVING_TITLE })
+    await vault.saveDoc(doc.id, { content: [{ type: 'image', props: { url: `nook:${blobId}` } }] })
+
+    const share = await vault.buildShare(doc.id)
+
+    expect(share.title).toBe(SURVIVING_TITLE)
+    expect(share.files.map((file) => file.id)).toEqual([blobId])
+    expect(share.files[0]?.name).toBe('chart.png')
+  })
+
+  it('leaves behind the files the page does not point at', async () => {
+    const vault = await freshVault()
+    await vault.putBlob({ name: 'other-page.png', type: 'image/png', bytes })
+    const doc = await vault.createDoc({ title: SURVIVING_TITLE })
+    await vault.saveDoc(doc.id, { content: SURVIVING_CONTENT })
+
+    // Sharing one page must not hand over the pictures from every other page.
+    expect((await vault.buildShare(doc.id)).files).toEqual([])
+  })
+
+  it('never carries the page’s history', async () => {
+    const vault = await freshVault()
+    const doc = await vault.createDoc({ title: SURVIVING_TITLE })
+    await vault.saveDoc(doc.id, { content: [{ type: 'paragraph', text: SECRET_BODY }] })
+    await vault.saveDoc(doc.id, { content: [{ type: 'paragraph', text: 'the published version' }] })
+
+    const share = await vault.buildShare(doc.id)
+
+    // The document really does hold the earlier draft…
+    expect((await vault.readDoc(doc.id)).history?.length).toBeGreaterThan(0)
+    // …and sharing the page must not hand over every sentence ever deleted from it.
+    expect(JSON.stringify(share)).not.toContain(SECRET_BODY)
+    expect(JSON.stringify(share)).not.toContain('history')
+  })
+})
+
+describe('adopting a page someone shared', () => {
+  const bytes = new Uint8Array([137, 80, 78, 71, 1, 2, 3])
+
+  it('lands as a new top-level page, readable and searchable', async () => {
+    const source = await freshVault()
+    const doc = await source.createDoc({ title: SURVIVING_TITLE })
+    await source.saveDoc(doc.id, { content: SURVIVING_CONTENT })
+
+    const target = await freshVault()
+    const adopted = await target.adoptShare(await source.buildShare(doc.id))
+
+    expect(adopted.parentId).toBeNull()
+    expect(adopted.id).not.toBe(doc.id)
+    expect((await target.readDoc(adopted.id)).content).toEqual(SURVIVING_CONTENT)
+    expect(target.index.facets[adopted.id]?.terms.length).toBeGreaterThan(0)
+  })
+
+  it('brings the pictures with it', async () => {
+    const source = await freshVault()
+    const blobId = await source.putBlob({ name: 'chart.png', type: 'image/png', bytes })
+    const doc = await source.createDoc({ title: SURVIVING_TITLE })
+    await source.saveDoc(doc.id, { content: [{ type: 'image', props: { url: `nook:${blobId}` } }] })
+
+    const target = await freshVault()
+    await target.adoptShare(await source.buildShare(doc.id))
+
+    // The content refers to the file by its identifier, so an adopted page
+    // whose pictures were dropped would render as a page full of holes.
+    expect([...((await target.readBlob(blobId))?.bytes ?? [])]).toEqual([...bytes])
+  })
+
+  it('starts its own history rather than inheriting one', async () => {
+    const source = await freshVault()
+    const doc = await source.createDoc({ title: SURVIVING_TITLE })
+    await source.saveDoc(doc.id, { content: SURVIVING_CONTENT })
+
+    const target = await freshVault()
+    const adopted = await target.adoptShare(await source.buildShare(doc.id))
+
+    expect((await target.readDoc(adopted.id)).history ?? []).toEqual([])
+  })
+})
+
 describe('files', () => {
   const bytes = new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10, 1, 2, 3])
 

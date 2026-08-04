@@ -128,7 +128,16 @@ describe('history in a vault', () => {
 
     // Restoring is an ordinary edit: changing your mind about changing your
     // mind has to work too.
-    expect(await vault.history(doc.id)).toHaveLength(1)
+    //
+    // This used to assert a length of 1, which is what the *bug* produced: the
+    // restore happened within the coalescing window, so the text it replaced
+    // was merged into the snapshot before it and lost. The name of the test
+    // and its assertion disagreed, and the assertion is the half that runs —
+    // which is exactly how the defect survived. It now checks that the
+    // replaced text is genuinely recoverable.
+    const history = await vault.history(doc.id)
+    expect(history).toHaveLength(2)
+    expect(history[0]?.content).toEqual([{ text: 'original' }])
   })
 
   it('refuses a version that no longer exists', async () => {

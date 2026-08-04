@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { DocId, Snapshot } from '../../core/model/types'
-import { useVault } from '../app/VaultProvider'
+import { useVault, useVaultIndex } from '../app/VaultProvider'
 import { Button } from '../design/Button'
 
 /**
@@ -12,8 +12,25 @@ import { Button } from '../design/Button'
  */
 export function History({ docId }: { docId: DocId }) {
   const vault = useVault()
+  const index = useVaultIndex()
   const [open, setOpen] = useState(false)
   const [snapshots, setSnapshots] = useState<readonly Snapshot[]>([])
+
+  /**
+   * Re-read whenever this document is written, and only then.
+   *
+   * Snapshots live inside the encrypted document, so unlike backlinks or tags
+   * they cannot be read off the index — this list has to be fetched, which
+   * means it can go stale. It did: the effect used to depend only on the
+   * document's identity, so a page that gained its first snapshot while open
+   * kept showing nothing at all, and there was no control to press to correct
+   * it because the panel hides itself when the list is empty. It came back on
+   * the next reload, which reads exactly like a save that did not happen.
+   *
+   * `updatedAt` rather than the whole index: creating an unrelated page also
+   * replaces the index, and this decrypts a document to answer.
+   */
+  const updatedAt = index.docs[docId]?.updatedAt
 
   useEffect(() => {
     let cancelled = false
@@ -23,7 +40,7 @@ export function History({ docId }: { docId: DocId }) {
     return () => {
       cancelled = true
     }
-  }, [vault, docId, open])
+  }, [vault, docId, updatedAt])
 
   if (snapshots.length === 0) return null
 

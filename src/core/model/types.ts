@@ -70,18 +70,26 @@ export const HISTORY_INTERVAL_MS = 5 * 60_000
  * Decides what history a save should leave behind.
  *
  * Pure, so the coalescing rule is testable without a database or a clock.
+ *
+ * `always` overrides the coalescing, and exists for exactly one caller:
+ * restoring an old version. Coalescing is right for autosave, where the edits
+ * being merged are a continuous act of typing — but a restore replaces the
+ * whole page in one deliberate step, and merging that into the previous
+ * snapshot would drop the text that was on the page a moment earlier with no
+ * way to get it back. Changing your mind about changing your mind has to work.
  */
 export function nextHistory(
   previous: readonly Snapshot[] | undefined,
   supersededContent: JsonValue,
   now: Date,
+  always = false,
 ): Snapshot[] {
   const history = previous ?? []
   const last = history[0]
   const recent =
     last !== undefined && now.getTime() - new Date(last.at).getTime() < HISTORY_INTERVAL_MS
 
-  if (recent) return [...history]
+  if (recent && !always) return [...history]
   return [{ at: now.toISOString(), content: supersededContent }, ...history].slice(0, HISTORY_LIMIT)
 }
 

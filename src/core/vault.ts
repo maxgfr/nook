@@ -41,6 +41,9 @@ import {
   type BatchEntry,
 } from './storage/idb'
 import { surveyStorage, wipeEverything, type StorageSurvey } from './storage/wipe'
+import { fromBase64, toBase64 } from './base64'
+import { referencedBlobIds } from './model/blobs'
+import type { SharedFile } from './share'
 import { buildFacets, type DocFacets } from './model/facets'
 import {
   childrenOf,
@@ -269,6 +272,12 @@ export class Vault {
   async saveDoc(
     id: DocId,
     patch: { title?: string; icon?: string | null; content?: JsonValue },
+    /**
+     * `alwaysSnapshot` defeats the coalescing that autosave relies on. Only
+     * `restore` sets it — see `nextHistory` for why a restore must not be
+     * merged into the snapshot before it.
+     */
+    options: { alwaysSnapshot?: boolean } = {},
   ): Promise<DocSummary> {
     const current = await this.readDoc(id)
     const now = new Date()
@@ -283,7 +292,16 @@ export class Vault {
       ...(patch.title === undefined ? {} : { title: patch.title }),
       ...(patch.icon === undefined ? {} : { icon: patch.icon }),
       ...(patch.content === undefined ? {} : { content: patch.content }),
-      ...(contentChanged ? { history: nextHistory(current.history, current.content, now) } : {}),
+      ...(contentChanged
+        ? {
+            history: nextHistory(
+              current.history,
+              current.content,
+              now,
+              options.alwaysSnapshot ?? false,
+            ),
+          }
+        : {}),
       updatedAt: now.toISOString(),
     }
 
@@ -312,7 +330,7 @@ export class Vault {
     const doc = await this.readDoc(id)
     const snapshot = doc.history?.find((candidate) => candidate.at === at)
     if (!snapshot) throw new Error('That version is no longer available.')
-    await this.saveDoc(id, { content: snapshot.content })
+    await this.saveDoc(id, { content: snapshot.content }, { alwaysSnapshot: true })
   }
 
   /** Remembers where a page was dragged to on the canvas. */
@@ -372,6 +390,85 @@ export class Vault {
     const stored = await read<Envelope>(this.#db, 'blobs', id)
     if (!stored) return undefined
     return openJson<StoredBlob>(this.#key, stored, blobContext(id))
+  }
+
+  /**
+   * Gathers what a page needs to be readable somewhere else.
+   *
+   * **The history does not go.** `readDoc` returns every past state of the
+   * document, and a page shared with its history would hand the recipient every
+   * draft, every sentence written and deleted, and every earlier version of
+   * anything that was corrected. Nobody sharing a page means to share that. Only
+   * the title, the current content and the files it points at are taken.
+   *
+   * Files are looked up from the content rather than from the whole store, so a
+   * share carries the pictures on that page and no others.
+   */
+  async buildShare(id: DocId): Promise<{
+    title: string
+    content: JsonValue
+    files: SharedFile[]
+  }> {
+    const doc = await this.readDoc(id)
+    const files: SharedFile[] = []
+
+    for (const blobId of referencedBlobIds(doc.content)) {
+      const blob = await this.readBlob(blobId)
+      if (!blob) continue
+      files.push({
+        id: blob.id,
+        name: blob.name,
+        type: blob.type,
+        base64: toBase64(Uint8Array.from(blob.bytes)),
+      })
+    }
+
+    return { title: doc.title, content: doc.content, files }
+  }
+
+  /**
+   * Takes a page someone shared and makes it one of yours.
+   *
+   * It arrives at the top level with a fresh identifier and no history: it is a
+   * new page in this notebook, not a continuation of the sender's. The files
+   * keep the identifiers they had, exactly as an import does — the content
+   * refers to them by those names, and they are drawn from the same space of
+   * random identifiers as everything else.
+   */
+  async adoptShare(page: {
+    title: string
+    content: JsonValue
+    files: readonly SharedFile[]
+  }): Promise<DocSummary> {
+    const now = new Date().toISOString()
+    const summary: DocSummary = {
+      id: newId(),
+      parentId: null,
+      title: page.title,
+      icon: null,
+      createdAt: now,
+      updatedAt: now,
+      order: nextOrder(this.#index, null),
+    }
+
+    const writes: BatchEntry[] = [
+      { op: 'put', store: 'docs', key: summary.id, value: { ...summary, content: page.content } },
+    ]
+    for (const file of page.files) {
+      const record: StoredBlob = {
+        id: file.id,
+        name: file.name,
+        type: file.type,
+        bytes: [...fromBase64(file.base64)],
+      }
+      writes.push({ op: 'put', store: 'blobs', key: file.id, value: record })
+    }
+
+    await this.#commit(
+      withFacets(upsert(this.#index, summary), summary.id, buildFacets(page.title, page.content)),
+      writes,
+    )
+    return summary
   }
 
   async exportAll(): Promise<VaultExport> {
