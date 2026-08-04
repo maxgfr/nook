@@ -159,8 +159,21 @@ export async function writeBatch(db: IDBDatabase, entries: readonly BatchEntry[]
   const tx = db.transaction(stores, 'readwrite')
   for (const entry of entries) {
     const objectStore = tx.objectStore(entry.store)
-    if (entry.op === 'put') objectStore.put(entry.value, entry.key)
-    else objectStore.delete(entry.key)
+    // Explicite plutôt que « tout ce qui n'est pas un put est un delete » :
+    // une entrée malformée doit faire du bruit, pas effacer une donnée.
+    switch (entry.op) {
+      case 'put':
+        objectStore.put(entry.value, entry.key)
+        break
+      case 'delete':
+        objectStore.delete(entry.key)
+        break
+      default:
+        tx.abort()
+        throw new StorageError(
+          `Opération inconnue « ${String((entry as { op: unknown }).op)} » sur ${(entry as BatchEntry).store}.`,
+        )
+    }
   }
   return settled(tx, `Écriture groupée de ${entries.length} enregistrement(s)`)
 }
