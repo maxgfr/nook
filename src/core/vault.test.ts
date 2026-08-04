@@ -7,41 +7,41 @@ let counter = 0
 const freshVault = () => Vault.open(`nook-vault-${++counter}`)
 
 /**
- * Textes d'essai nommés une seule fois. Les répéter dans la donnée puis dans
- * l'assertion laisse les deux diverger en silence — et rend impossible de
- * distinguer une chaîne affichée d'un identifiant.
+ * Test texts named exactly once. Repeating them in the data and then in the
+ * assertion lets the two diverge in silence — and makes it impossible to tell
+ * a displayed string from an identifier.
  */
-const SECRET_TITLE = 'code de la porte'
-const SECRET_BODY = 'le code est 4271'
-const IMPORTED_TITLE = 'Carnet importé'
-const SURVIVING_TITLE = 'Survit au rechargement'
-const SURVIVING_CONTENT = [{ type: 'paragraph', text: 'contenu' }]
+const SECRET_TITLE = 'door code'
+const SECRET_BODY = 'the code is 4271'
+const IMPORTED_TITLE = 'Imported notebook'
+const SURVIVING_TITLE = 'Survives a reload'
+const SURVIVING_CONTENT = [{ type: 'paragraph', text: 'body text' }]
 
 describe('coffre', () => {
-  it('démarre vide', async () => {
+  it('starts empty', async () => {
     const vault = await freshVault()
 
     expect(vault.index.docs).toEqual({})
     expect(vault.children(null)).toEqual([])
   })
 
-  it('crée un document et le relit', async () => {
+  it('creates a document and reads it back', async () => {
     const vault = await freshVault()
 
-    const created = await vault.createDoc({ title: 'Réunion produit' })
+    const created = await vault.createDoc({ title: 'Product meeting' })
     const doc = await vault.readDoc(created.id)
 
-    expect(doc.title).toBe('Réunion produit')
+    expect(doc.title).toBe('Product meeting')
     expect(doc.parentId).toBeNull()
     expect(vault.children(null).map((d) => d.id)).toEqual([created.id])
   })
 
-  it('enregistre le contenu et le rend tel quel', async () => {
+  it('stores the content and returns it unchanged', async () => {
     const vault = await freshVault()
     const created = await vault.createDoc()
     const content = [
-      { type: 'heading', content: [{ text: 'Ordre du jour' }] },
-      { type: 'checkListItem', props: { checked: true }, content: [{ text: 'Relire le devis' }] },
+      { type: 'heading', content: [{ text: 'Agenda' }] },
+      { type: 'checkListItem', props: { checked: true }, content: [{ text: 'Review the quote' }] },
     ]
 
     await vault.saveDoc(created.id, { title: 'Jeudi', content })
@@ -49,16 +49,16 @@ describe('coffre', () => {
     expect((await vault.readDoc(created.id)).content).toEqual(content)
   })
 
-  it('fait remonter le titre dans l’index sans déchiffrer les contenus', async () => {
+  it('surfaces the title in the index without decrypting any content', async () => {
     const vault = await freshVault()
     const created = await vault.createDoc()
 
-    await vault.saveDoc(created.id, { title: 'Titre visible dans la barre latérale' })
+    await vault.saveDoc(created.id, { title: 'Title visible in the sidebar' })
 
-    expect(vault.index.docs[created.id]?.title).toBe('Titre visible dans la barre latérale')
+    expect(vault.index.docs[created.id]?.title).toBe('Title visible in the sidebar')
   })
 
-  it('horodate la dernière modification', async () => {
+  it('stamps the last modification time', async () => {
     const vault = await freshVault()
     const created = await vault.createDoc()
 
@@ -69,7 +69,7 @@ describe('coffre', () => {
     )
   })
 
-  it('retrouve tout après fermeture et réouverture', async () => {
+  it('recovers everything after closing and reopening', async () => {
     const name = `nook-vault-persistance-${++counter}`
     const first = await Vault.open(name)
     const created = await first.createDoc({ title: SURVIVING_TITLE })
@@ -82,15 +82,15 @@ describe('coffre', () => {
     expect((await second.readDoc(created.id)).content).toEqual(SURVIVING_CONTENT)
   })
 
-  it('n’écrit sur le disque que des enveloppes chiffrées', async () => {
+  it('writes nothing but sealed envelopes to disk', async () => {
     const name = `nook-vault-chiffre-${++counter}`
     const vault = await Vault.open(name)
     const created = await vault.createDoc({ title: SECRET_TITLE })
     await vault.saveDoc(created.id, { content: [{ text: SECRET_BODY }] })
     vault.close()
 
-    // On relit la base sans passer par le coffre : c'est ce que verrait
-    // quelqu'un qui inspecte IndexedDB ou copie le profil du navigateur.
+    // We read the database back without going through the vault: this is what
+    // someone inspecting IndexedDB or copying the browser profile.
     const raw = await openDatabase(name)
     const storedDoc = await read(raw, 'docs', created.id)
     const storedIndex = await read(raw, 'index', 'index')
@@ -101,7 +101,7 @@ describe('coffre', () => {
     expect(JSON.stringify(storedIndex)).not.toContain(SECRET_TITLE)
   })
 
-  it('prévient ses abonnés à chaque modification', async () => {
+  it('notifies its subscribers on every change', async () => {
     const vault = await freshVault()
     let notifications = 0
     const unsubscribe = vault.subscribe(() => notifications++)
@@ -115,7 +115,7 @@ describe('coffre', () => {
   })
 
   describe('suppression', () => {
-    it('emporte toute la descendance', async () => {
+    it('takes the whole subtree with it', async () => {
       const vault = await freshVault()
       const racine = await vault.createDoc({ title: 'Projet' })
       const enfant = await vault.createDoc({ parentId: racine.id })
@@ -125,10 +125,10 @@ describe('coffre', () => {
 
       expect(removed.toSorted()).toEqual([racine.id, enfant.id, petit.id].toSorted())
       expect(vault.index.docs).toEqual({})
-      await expect(vault.readDoc(petit.id)).rejects.toThrow(/introuvable/)
+      await expect(vault.readDoc(petit.id)).rejects.toThrow(/not found/)
     })
 
-    it('laisse les autres branches intactes', async () => {
+    it('leaves the other branches untouched', async () => {
       const vault = await freshVault()
       const a = await vault.createDoc({ title: 'A' })
       const b = await vault.createDoc({ title: 'B' })
@@ -139,7 +139,7 @@ describe('coffre', () => {
     })
   })
 
-  it('déplace un document et le retient', async () => {
+  it('moves a document and remembers it', async () => {
     const name = `nook-vault-deplacement-${++counter}`
     const vault = await Vault.open(name)
     const parent = await vault.createDoc({ title: 'Parent' })
@@ -153,24 +153,24 @@ describe('coffre', () => {
   })
 
   describe('export et import', () => {
-    it('restitue à l’identique après un effacement', async () => {
+    it('restores identically after a wipe', async () => {
       const source = await freshVault()
       const parent = await source.createDoc({ title: 'Carnet' })
       const enfant = await source.createDoc({ parentId: parent.id, title: 'Page' })
-      await source.saveDoc(enfant.id, { content: [{ text: 'ne pas perdre ça' }] })
+      await source.saveDoc(enfant.id, { content: [{ text: 'do not lose this' }] })
 
       const exported = await source.exportAll()
 
-      // Le scénario réel : on exporte, on efface, on réimporte.
+      // The real scenario: you export, you erase, you re-import.
       const cible = await freshVault()
       await cible.importAll(exported, 'replace')
 
       expect(cible.index.docs[parent.id]?.title).toBe('Carnet')
       expect(cible.children(parent.id).map((d) => d.id)).toEqual([enfant.id])
-      expect((await cible.readDoc(enfant.id)).content).toEqual([{ text: 'ne pas perdre ça' }])
+      expect((await cible.readDoc(enfant.id)).content).toEqual([{ text: 'do not lose this' }])
     })
 
-    it('remplace efface ce qui existait', async () => {
+    it('replace erases what was there', async () => {
       const vault = await freshVault()
       const ancien = await vault.createDoc({ title: 'Ancien' })
       const exported = await vault.exportAll()
@@ -183,20 +183,20 @@ describe('coffre', () => {
       await expect(vault.readDoc(autre.id)).rejects.toThrow()
     })
 
-    it('fusionne en réattribuant les identifiants en collision', async () => {
+    it('merges by reassigning colliding identifiers', async () => {
       const source = await freshVault()
       const parent = await source.createDoc({ title: IMPORTED_TITLE })
-      await source.createDoc({ parentId: parent.id, title: 'Page importée' })
+      await source.createDoc({ parentId: parent.id, title: 'Imported page' })
       const exported = await source.exportAll()
 
-      // On réimporte dans le coffre d'origine : chaque identifiant existe déjà.
+      // We re-import into the original vault: every identifier already exists.
       const count = await source.importAll(exported, 'merge')
 
       expect(count).toBe(2)
       expect(Object.keys(source.index.docs)).toHaveLength(4)
 
-      // Le point qui compte : la copie du parent a bien récupéré la copie de
-      // l'enfant, et non l'enfant d'origine.
+      // The point that matters: the copy of the parent really picked up the copy of
+      // the child, and not the original child.
       const parents = Object.values(source.index.docs).filter((d) => d.title === IMPORTED_TITLE)
       expect(parents).toHaveLength(2)
       for (const p of parents) {
@@ -204,11 +204,11 @@ describe('coffre', () => {
       }
     })
 
-    it('refuse un fichier qui n’est pas un export Nook', async () => {
+    it('refuses a file that is not a Nook export', async () => {
       const vault = await freshVault()
 
       await expect(vault.importAll({ format: 'autre-chose' } as never, 'replace')).rejects.toThrow(
-        /export Nook/,
+        /not a Nook export/,
       )
     })
   })

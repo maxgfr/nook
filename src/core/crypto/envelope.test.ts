@@ -17,56 +17,56 @@ function key() {
 const bytes = (text: string) => new TextEncoder().encode(text)
 const text = (data: Uint8Array) => new TextDecoder().decode(data)
 
-describe('enveloppe chiffrée', () => {
-  it('rend exactement ce qu’on lui a confié', async () => {
+describe('sealed envelope', () => {
+  it('returns exactly what it was given', async () => {
     const k = await key()
-    const secret = bytes('Rendez-vous jeudi, sans faute.')
+    const secret = bytes('Thursday, without fail.')
 
     const sealed = await seal(k, secret, 'docs/abc')
 
-    expect(text(await open(k, sealed, 'docs/abc'))).toBe('Rendez-vous jeudi, sans faute.')
+    expect(text(await open(k, sealed, 'docs/abc'))).toBe('Thursday, without fail.')
   })
 
-  it('ne laisse pas le texte clair apparaître dans l’enveloppe', async () => {
+  it('does not let the plain text show through the envelope', async () => {
     const k = await key()
 
-    const sealed = await seal(k, bytes('code de la porte : 4271'), 'docs/abc')
+    const sealed = await seal(k, bytes('door code: 4271'), 'docs/abc')
 
     expect(text(sealed.ct)).not.toContain('4271')
     expect(sealed.v).toBe(ENVELOPE_VERSION)
     expect(sealed.iv).toHaveLength(12)
   })
 
-  it('tire un nonce neuf à chaque écriture', async () => {
+  it('draws a fresh nonce on every write', async () => {
     const k = await key()
     const same = bytes('contenu identique')
 
     const first = await seal(k, same, 'docs/abc')
     const second = await seal(k, same, 'docs/abc')
 
-    // Deux chiffrements du même texte doivent être indistinguables l'un de
-    // l'autre pour qui lit le disque : sans nonce neuf, ils seraient identiques
-    // et révéleraient qu'aucune modification n'a eu lieu.
+    // Two encryptions of the same text must be indistinguishable from one
+    // another to whoever reads the disk: without a fresh nonce they would be identical
+    // and would reveal that no change had taken place.
     expect(first.iv).not.toEqual(second.iv)
     expect(first.ct).not.toEqual(second.ct)
   })
 
-  it('refuse une autre clé', async () => {
+  it('refuses a different key', async () => {
     const sealed = await seal(await key(), bytes('secret'), 'docs/abc')
 
     await expect(open(await key(), sealed, 'docs/abc')).rejects.toThrow(DecryptionError)
   })
 
-  it('refuse une enveloppe déplacée ailleurs', async () => {
+  it('refuses an envelope moved elsewhere', async () => {
     const k = await key()
-    const sealed = await seal(k, bytes('les notes de A'), 'docs/A')
+    const sealed = await seal(k, bytes("A's notes"), 'docs/A')
 
-    // Recopier le contenu de A dans l'emplacement de B doit échouer : c'est
-    // tout l'intérêt de lier l'enveloppe à sa position.
+    // Copying A's content into B's location must fail: that is
+    // the entire point of binding the envelope to its position.
     await expect(open(k, sealed, 'docs/B')).rejects.toThrow(DecryptionError)
   })
 
-  it('refuse une enveloppe altérée', async () => {
+  it('refuses a tampered envelope', async () => {
     const k = await key()
     const sealed = await seal(k, bytes('solde : 1000'), 'docs/abc')
 
@@ -76,22 +76,22 @@ describe('enveloppe chiffrée', () => {
     await expect(open(k, { ...sealed, ct: corrupted }, 'docs/abc')).rejects.toThrow(DecryptionError)
   })
 
-  it('refuse une enveloppe d’une autre version du format', async () => {
+  it('refuses an envelope from another version of the format', async () => {
     const k = await key()
     const sealed = await seal(k, bytes('secret'), 'docs/abc')
 
     await expect(open(k, { ...sealed, v: 99 }, 'docs/abc')).rejects.toThrow(/version 99/)
   })
 
-  it('refuse un enregistrement qui n’est pas une enveloppe', async () => {
+  it('refuses a record that is not an envelope', async () => {
     const k = await key()
 
     await expect(
       open(k, { nope: true } as unknown as Parameters<typeof open>[1], 'docs/abc'),
-    ).rejects.toThrow(/pas une enveloppe/)
+    ).rejects.toThrow(/not a Nook envelope/)
   })
 
-  it('reconnaît la forme d’une enveloppe', async () => {
+  it('recognises the shape of an envelope', async () => {
     const sealed = await seal(await key(), bytes('x'), 'docs/abc')
 
     expect(isEnvelope(sealed)).toBe(true)
@@ -100,27 +100,27 @@ describe('enveloppe chiffrée', () => {
     expect(isEnvelope('enveloppe')).toBe(false)
   })
 
-  it('fait l’aller-retour sur du JSON', async () => {
+  it('round-trips JSON', async () => {
     const k = await key()
-    const doc = { titre: 'Réunion', tags: ['projet', 'urgent'], fait: false, notes: null }
+    const doc = { title: 'Meeting', tags: ['project', 'urgent'], done: false, notes: null }
 
     const sealed = await sealJson(k, doc, 'docs/abc')
 
     expect(await openJson(k, sealed, 'docs/abc')).toEqual(doc)
   })
 
-  it('signale un contenu déchiffré mais illisible', async () => {
+  it('reports content that decrypted but is unreadable', async () => {
     const k = await key()
-    // Le tag GCM sera valide : le contenu vient bien de nous, mais ce n'est
-    // pas du JSON. C'est un bug de sérialisation, et le message doit le dire.
-    const sealed = await seal(k, bytes('{ ceci n’est pas du JSON'), 'docs/abc')
+    // The GCM tag will be valid: the content really is ours, but it is
+    // is not JSON. That is a serialisation bug, and the message should say so.
+    const sealed = await seal(k, bytes('{ this is not JSON'), 'docs/abc')
 
-    await expect(openJson(k, sealed, 'docs/abc')).rejects.toThrow(/JSON invalide/)
+    await expect(openJson(k, sealed, 'docs/abc')).rejects.toThrow(/invalid JSON/)
   })
 })
 
 describe('randomBytes', () => {
-  it('renvoie la longueur demandée, et pas deux fois la même chose', () => {
+  it('returns the requested length, and never the same thing twice', () => {
     expect(randomBytes(12)).toHaveLength(12)
     expect(randomBytes(32)).not.toEqual(randomBytes(32))
   })

@@ -1,39 +1,39 @@
 {
- "schemaVersion": 1,
- "batchId": "042",
- "batchDigest": "c52b046d0b952103",
- "items": [
-  {
-   "id": "g_af523842c124",
-   "text": "would stay in the database, invisible, and unrecoverable from the interface."
-  },
-  {
-   "id": "g_afed4054dea6",
-   "text": "Imported page"
-  },
-  {
-   "id": "g_b01d430489fb",
-   "text": "notifies its subscribers on every change"
-  },
-  {
-   "id": "g_b117aebe51ea",
-   "text": "empty directory, and the rule would hold by accident."
-  },
-  {
-   "id": "g_b1ae451c669f",
-   "text": "Absolute URLs in the served code."
-  },
-  {
-   "id": "g_b21bceef937e",
-   "text": "Mechanism"
-  },
-  {
-   "id": "g_b2622390a21d",
-   "text": "This file is not a Nook export this version can read."
-  },
-  {
-   "id": "g_b279286cf7a7",
-   "text": "A square button carrying only an icon. `label` is not optional: an icon on\nits own has no accessible name, and a screen reader would announce\n\"button\" and nothing more."
-  }
- ]
+  "schemaVersion": 1,
+  "batchId": "042",
+  "batchDigest": "c52b046d0b952103",
+  "items": [
+    {
+      "id": "g_af523842c124",
+      "text": "would stay in the database, invisible, and unrecoverable from the interface."
+    },
+    {
+      "id": "g_afed4054dea6",
+      "text": "Imported page"
+    },
+    {
+      "id": "g_b01d430489fb",
+      "text": "notifies its subscribers on every change"
+    },
+    {
+      "id": "g_b117aebe51ea",
+      "text": "empty directory, and the rule would hold by accident."
+    },
+    {
+      "id": "g_b1ae451c669f",
+      "text": "Absolute URLs in the served code."
+    },
+    {
+      "id": "g_b21bceef937e",
+      "text": "Mechanism"
+    },
+    {
+      "id": "g_b2622390a21d",
+      "text": "This file is not a Nook export this version can read."
+    },
+    {
+      "id": "g_b279286cf7a7",
+      "text": "A square button carrying only an icon. `label` is not optional: an icon on\nits own has no accessible name, and a screen reader would announce\n\"button\" and nothing more."
+    }
+  ]
 }

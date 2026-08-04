@@ -1,39 +1,39 @@
 {
- "schemaVersion": 1,
- "batchId": "056",
- "batchDigest": "571fa2a3f73ce673",
- "items": [
-  {
-   "id": "g_e89bbbf7bf85",
-   "text": "Databases: typed properties, table / kanban / calendar views"
-  },
-  {
-   "id": "g_e89de9092dcc",
-   "text": "will be deleted"
-  },
-  {
-   "id": "g_e921849e9b9e",
-   "text": "Untitled"
-  },
-  {
-   "id": "g_e97ff8bce4b0",
-   "text": "The non-extractable `CryptoKey` itself, in \"device\" mode."
-  },
-  {
-   "id": "g_e99d913fe81b",
-   "text": "The promise hardest to verify any other way: what would be seen by"
-  },
-  {
-   "id": "g_e9a56e2246dd",
-   "text": "The content of document \"{0}\" cannot be found."
-  },
-  {
-   "id": "g_e9c0ba543077",
-   "text": "An inline script would be blocked by `script-src 'self'` anyway, but"
-  },
-  {
-   "id": "g_ea969462b984",
-   "text": "The editor fills the whole width of the reading column; it is the parent\ncontainer that sets the measure, not the library."
-  }
- ]
+  "schemaVersion": 1,
+  "batchId": "056",
+  "batchDigest": "571fa2a3f73ce673",
+  "items": [
+    {
+      "id": "g_e89bbbf7bf85",
+      "text": "Databases: typed properties, table / kanban / calendar views"
+    },
+    {
+      "id": "g_e89de9092dcc",
+      "text": "will be deleted"
+    },
+    {
+      "id": "g_e921849e9b9e",
+      "text": "Untitled"
+    },
+    {
+      "id": "g_e97ff8bce4b0",
+      "text": "The non-extractable `CryptoKey` itself, in \"device\" mode."
+    },
+    {
+      "id": "g_e99d913fe81b",
+      "text": "The promise hardest to verify any other way: what would be seen by"
+    },
+    {
+      "id": "g_e9a56e2246dd",
+      "text": "The content of document \"{0}\" cannot be found."
+    },
+    {
+      "id": "g_e9c0ba543077",
+      "text": "An inline script would be blocked by `script-src 'self'` anyway, but"
+    },
+    {
+      "id": "g_ea969462b984",
+      "text": "The editor fills the whole width of the reading column; it is the parent\ncontainer that sets the measure, not the library."
+    }
+  ]
 }

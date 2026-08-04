@@ -1,13 +1,13 @@
 /**
- * Le vocabulaire de Nook.
+ * Nook's vocabulary.
  *
- * Une décision porte tout le reste : **le core ne connaît pas le format du
- * contenu d'un document**. Il le stocke, le chiffre, en extrait du texte pour
- * la recherche, mais ne sait pas ce qu'est un titre de niveau 2 ni une case à
- * cocher. Le contenu est du JSON opaque.
+ * One decision carries all the rest: **the core does not know the format of a
+ * document's content**. It stores it, encrypts it, extracts text from it for
+ * search, but does not know what a level-2 heading or a checkbox is. Content
+ * is opaque JSON.
  *
- * Le bénéfice est direct : changer d'éditeur — ou en supporter deux — ne
- * touche pas une ligne de stockage, de chiffrement ou de recherche.
+ * The benefit is direct: changing editor — or supporting two — does not touch
+ * a line of storage, encryption or search.
  */
 
 export type JsonValue =
@@ -16,9 +16,9 @@ export type JsonValue =
 export type DocId = string
 
 /**
- * Ce que l'index garde en mémoire pour chaque document : de quoi peupler la
- * barre latérale, la palette et les fils d'Ariane sans déchiffrer un seul
- * contenu.
+ * What the index keeps in memory for each document: enough to fill the
+ * sidebar, the palette and the breadcrumbs without decrypting a single
+ * piece of content.
  */
 export type DocSummary = {
   readonly id: DocId
@@ -27,18 +27,18 @@ export type DocSummary = {
   readonly icon: string | null
   readonly createdAt: string
   readonly updatedAt: string
-  /** Position parmi ses frères. Voir `model/tree.ts` pour la mécanique. */
+  /** Position among its siblings. See `model/tree.ts` for the mechanics. */
   readonly order: number
 }
 
-/** Un document complet, contenu inclus. Chargé à l'ouverture, un par un. */
+/** A complete document, content included. Loaded on open, one at a time. */
 export type Doc = DocSummary & {
   readonly content: JsonValue
 }
 
 /**
- * L'index du coffre : un unique enregistrement chiffré qui décrit tout, sauf
- * le contenu des documents.
+ * The vault's index: a single encrypted record describing everything except
+ * the content of the documents.
  */
 export type VaultIndex = {
   readonly schema: 1
@@ -51,16 +51,15 @@ export function newId(): DocId {
   return crypto.randomUUID()
 }
 
-/** Titre affiché pour un document que l'utilisateur n'a pas encore nommé. */
-export const UNTITLED = 'Sans titre'
+/** Title shown for a document the user has not named yet. */
+export const UNTITLED = 'Untitled'
 
 /**
- * Extrait tout le texte lisible d'un contenu, quelle que soit sa forme.
+ * Extracts every readable string from a content tree, whatever its shape.
  *
- * Volontairement structurel plutôt que sémantique : on récolte toutes les
- * chaînes de l'arbre JSON sans rien savoir du schéma de l'éditeur. C'est ce
- * qui permet à la recherche de fonctionner le jour où le format du contenu
- * change.
+ * Deliberately structural rather than semantic: we harvest every string in
+ * the JSON tree without knowing anything about the editor's schema. That is
+ * what keeps search working the day the content format changes.
  */
 export function extractText(content: JsonValue): string {
   const parts: string[] = []

@@ -29,39 +29,39 @@ function indexOf(...docs: DocSummary[]): VaultIndex {
 
 const ids = (docs: DocSummary[]) => docs.map((d) => d.id)
 
-describe('arbre des pages', () => {
-  it('range les frères par ordre croissant', () => {
+describe('page tree', () => {
+  it('orders siblings by ascending rank', () => {
     const index = indexOf(doc('c', null, 2), doc('a', null, 0), doc('b', null, 1))
 
     expect(ids(childrenOf(index, null))).toEqual(['a', 'b', 'c'])
   })
 
-  it('départage deux frères de même ordre par date de création', () => {
+  it('breaks a tie between siblings of equal order by creation date', () => {
     const index = indexOf(
-      { ...doc('récent', null, 0), createdAt: '2026-06-01T00:00:00.000Z' },
-      { ...doc('ancien', null, 0), createdAt: '2026-01-01T00:00:00.000Z' },
+      { ...doc('recent', null, 0), createdAt: '2026-06-01T00:00:00.000Z' },
+      { ...doc('old', null, 0), createdAt: '2026-01-01T00:00:00.000Z' },
     )
 
-    expect(ids(childrenOf(index, null))).toEqual(['ancien', 'récent'])
+    expect(ids(childrenOf(index, null))).toEqual(['old', 'recent'])
   })
 
-  it('remonte la chaîne des ancêtres, du plus lointain au parent direct', () => {
+  it('walks the ancestor chain, from the most distant down to the direct parent', () => {
     const index = indexOf(doc('racine'), doc('milieu', 'racine'), doc('feuille', 'milieu'))
 
     expect(ids(ancestorsOf(index, 'feuille'))).toEqual(['racine', 'milieu'])
     expect(ancestorsOf(index, 'racine')).toEqual([])
   })
 
-  it('ne boucle pas sur un arbre corrompu', () => {
-    // Un cycle ne devrait jamais exister, mais un index abîmé ne doit pas
-    // figer l'application.
+  it('does not loop on a corrupted tree', () => {
+    // A cycle should never exist, but a damaged index must not
+    // freeze the application.
     const index = indexOf(doc('a', 'b'), doc('b', 'a'))
 
     expect(() => ancestorsOf(index, 'a')).not.toThrow()
     expect(ids(ancestorsOf(index, 'a')).length).toBeLessThanOrEqual(2)
   })
 
-  it('collecte toute la descendance en profondeur', () => {
+  it('collects the whole subtree, depth first', () => {
     const index = indexOf(
       doc('racine'),
       doc('enfant1', 'racine'),
@@ -73,15 +73,15 @@ describe('arbre des pages', () => {
     expect(descendantIdsOf(index, 'petit')).toEqual([])
   })
 
-  it('place un nouveau document après ses frères', () => {
+  it('places a new document after its siblings', () => {
     const index = indexOf(doc('a', null, 0), doc('b', null, 5))
 
     expect(nextOrder(index, null)).toBe(6)
     expect(nextOrder(index, 'a')).toBe(0)
   })
 
-  it('signale un document introuvable', () => {
-    expect(() => docOrThrow(EMPTY_INDEX, 'fantôme')).toThrow(/introuvable/)
+  it('reports a document that does not exist', () => {
+    expect(() => docOrThrow(EMPTY_INDEX, 'ghost')).toThrow(/not found/)
   })
 
   it('retire un document et ses descendants', () => {
@@ -92,7 +92,7 @@ describe('arbre des pages', () => {
     expect(Object.keys(after.docs)).toEqual(['c'])
   })
 
-  describe('déplacement', () => {
+  describe('moving', () => {
     it('change de parent', () => {
       const index = indexOf(doc('a'), doc('b'), doc('feuille', 'a'))
 
@@ -102,7 +102,7 @@ describe('arbre des pages', () => {
       expect(ids(childrenOf(after, 'b'))).toEqual(['feuille'])
     })
 
-    it('réordonne entre frères', () => {
+    it('reorders among siblings', () => {
       const index = indexOf(doc('a', null, 0), doc('b', null, 1), doc('c', null, 2))
 
       const after = moveDoc(index, 'c', null, 0)
@@ -110,36 +110,36 @@ describe('arbre des pages', () => {
       expect(ids(childrenOf(after, null))).toEqual(['c', 'a', 'b'])
     })
 
-    it('met à la fin quand aucune position n’est demandée', () => {
+    it('puts it last when no position is requested', () => {
       const index = indexOf(doc('a', null, 0), doc('b', null, 1))
 
       expect(ids(childrenOf(moveDoc(index, 'a', null), null))).toEqual(['b', 'a'])
     })
 
-    it('accepte une position hors bornes sans se plaindre', () => {
+    it('accepts an out-of-range position without complaining', () => {
       const index = indexOf(doc('a', null, 0), doc('b', null, 1))
 
       expect(ids(childrenOf(moveDoc(index, 'a', null, 99), null))).toEqual(['b', 'a'])
       expect(ids(childrenOf(moveDoc(index, 'b', null, -5), null))).toEqual(['b', 'a'])
     })
 
-    it('refuse de déplacer une page dans sa propre descendance', () => {
+    it('refuses to move a page into its own subtree', () => {
       const index = indexOf(doc('racine'), doc('enfant', 'racine'), doc('petit', 'enfant'))
 
-      // Sans ce garde-fou, toute la branche se détacherait de l'arbre : elle
-      // resterait en base, invisible, et irrécupérable depuis l'interface.
-      expect(() => moveDoc(index, 'racine', 'petit')).toThrow(/sous-arborescence/)
-      expect(() => moveDoc(index, 'racine', 'racine')).toThrow(/sous-arborescence/)
+      // Without this guard, the whole branch would detach from the tree: it
+      // would stay in the database, invisible, and unrecoverable from the interface.
+      expect(() => moveDoc(index, 'racine', 'petit')).toThrow(/own subtree/)
+      expect(() => moveDoc(index, 'racine', 'racine')).toThrow(/own subtree/)
     })
 
-    it('refuse un parent inexistant', () => {
-      expect(() => moveDoc(indexOf(doc('a')), 'a', 'fantôme')).toThrow(/introuvable/)
+    it('refuses a parent that does not exist', () => {
+      expect(() => moveDoc(indexOf(doc('a')), 'a', 'ghost')).toThrow(/not found/)
     })
 
-    it('renumérote la fratrie quand la place vient à manquer', () => {
-      // On insère cinquante fois de suite au même endroit : l'écart entre
-      // deux positions finit sous le seuil de précision, et la fratrie doit
-      // être réattribuée plutôt que de voir deux pages se superposer.
+    it('renumbers the sibling list when room runs out', () => {
+      // We insert fifty times in a row at the same spot: the gap between
+      // two positions ends up below the precision threshold, and the sibling list must
+      // be reassigned rather than letting two pages sit on top of each other.
       let index = indexOf(doc('a', null, 0), doc('b', null, 1))
       for (let i = 0; i < 50; i++) {
         index = upsert(index, doc(`n${i}`, null, 0))

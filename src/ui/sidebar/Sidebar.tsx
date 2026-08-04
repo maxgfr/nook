@@ -8,12 +8,12 @@ import { Icon } from '../design/Icon'
 import { ConfirmDialog } from '../design/ConfirmDialog'
 
 /**
- * L'arbre des pages.
+ * The page tree.
  *
- * Chaque ligne est un bouton, pas un `<div>` cliquable : la navigation au
- * clavier et l'annonce par les lecteurs d'écran en dépendent. Le chevron
- * d'ouverture est un contrôle distinct de la ligne, sinon déplier une branche
- * changerait aussi la page affichée.
+ * Every row is a button, not a clickable `<div>`: keyboard navigation and
+ * screen-reader announcements depend on it. The disclosure chevron is a
+ * separate control from the row, otherwise expanding a branch would also
+ * change the page on screen.
  */
 export function Sidebar({
   openId,
@@ -47,8 +47,8 @@ export function Sidebar({
     if (!pendingDelete) return
     const removed = await vault.deleteDoc(pendingDelete.id)
     setPendingDelete(null)
-    // Si la page ouverte vient de disparaître, l'éditeur doit être vidé plutôt
-    // que d'afficher un document qui n'existe plus.
+    // If the open page has just disappeared, the editor must be cleared rather
+    // than show a document that no longer exists.
     if (openId && removed.includes(openId)) onOpen(null)
   }
 
@@ -61,7 +61,7 @@ export function Sidebar({
     >
       <div className="flex items-center justify-between px-3 py-3">
         <span className="text-sm font-semibold tracking-tight">Nook</span>
-        <IconButton label="Nouvelle page" size="sm" onClick={() => void createChild(null)}>
+        <IconButton label="New page" size="sm" onClick={() => void createChild(null)}>
           <Icon name="plus" />
         </IconButton>
       </div>
@@ -90,21 +90,20 @@ export function Sidebar({
 
       <ConfirmDialog
         open={pendingDelete !== null}
-        title="Supprimer cette page ?"
-        confirmLabel="Supprimer"
+        title="Delete this page?"
+        confirmLabel="Delete"
         onConfirm={() => void confirmDelete()}
         onCancel={() => setPendingDelete(null)}
       >
         <p>
-          « {pendingDelete?.title || UNTITLED} »
+          “{pendingDelete?.title || UNTITLED}”
           {descendantCount > 0 && (
             <>
               {' '}
-              et {descendantCount} page{descendantCount > 1 ? 's' : ''} qu'elle contient
+              and the {descendantCount} page{descendantCount > 1 ? 's' : ''} inside it
             </>
           )}{' '}
-          {descendantCount > 0 ? 'seront supprimées' : 'sera supprimée'} définitivement. Cette
-          action ne peut pas être annulée.
+          will be deleted permanently. This action cannot be undone.
         </p>
       </ConfirmDialog>
     </nav>
@@ -114,9 +113,9 @@ export function Sidebar({
 function EmptySidebar({ onCreate }: { onCreate: () => void }) {
   return (
     <div className="px-2 py-6 text-center">
-      <p className="text-xs text-ink-muted">Aucune page pour l'instant.</p>
+      <p className="text-xs text-ink-muted">No pages yet.</p>
       <Button tone="primary" size="sm" className="mt-3" onClick={onCreate}>
-        Créer la première
+        Create the first one
       </Button>
     </div>
   )
@@ -157,7 +156,7 @@ function TreeRow({
       >
         {children.length > 0 ? (
           <IconButton
-            label={isOpen ? 'Replier' : 'Déplier'}
+            label={isOpen ? 'Collapse' : 'Expand'}
             size="sm"
             onClick={() => onToggle(doc.id)}
           >
@@ -182,18 +181,20 @@ function TreeRow({
           {doc.title || <span className="text-ink-faint">{UNTITLED}</span>}
         </button>
 
-        {/* Actions révélées au survol, mais toujours atteignables au clavier :
-            `focus-within` les rend visibles dès que l'une reçoit le focus. */}
+        {/*
+Actions revealed on hover, but always reachable by keyboard:
+            `focus-within` makes them visible as soon as one takes focus. 
+*/}
         <span className="flex opacity-0 transition-opacity duration-(--nook-dur-fast) group-hover:opacity-100 group-focus-within:opacity-100">
           <IconButton
-            label={`Ajouter une page dans « ${doc.title || UNTITLED} »`}
+            label={`Add a page inside “${doc.title || UNTITLED}”`}
             size="sm"
             onClick={() => onCreateChild(doc.id)}
           >
             <Icon name="plus" className="size-3.5" />
           </IconButton>
           <IconButton
-            label={`Supprimer « ${doc.title || UNTITLED} »`}
+            label={`Delete “${doc.title || UNTITLED}”`}
             size="sm"
             onClick={() => onDelete(doc)}
           >

@@ -2,15 +2,15 @@ import { useCallback, useSyncExternalStore } from 'react'
 import type { DocId } from '../../core/model/types'
 
 /**
- * Navigation par fragment d'URL.
+ * Navigation by URL fragment.
  *
- * Le fragment plutôt que `history.pushState` parce que GitHub Pages sert des
- * fichiers statiques : une URL comme `/nook/doc/abc` renverrait un 404 avant
- * même que l'application démarre. Le fragment reste côté client.
+ * The fragment rather than `history.pushState` because GitHub Pages serves
+ * static files: a URL like `/nook/doc/abc` would return a 404 before the
+ * application even starts. The fragment stays client-side.
  *
- * Il ne quitte jamais la machine — un fragment n'est pas envoyé au serveur —
- * mais il apparaît dans l'historique du navigateur, donc il ne contient qu'un
- * identifiant opaque, jamais un titre.
+ * It never leaves the machine — a fragment is not sent to the server — but it
+ * does appear in browser history, so it carries only an opaque identifier,
+ * never a title.
  */
 
 const PREFIX = '#/doc/'

@@ -13,3 +13,6 @@ pnpm-debug.log*
 .vscode/*
 !.vscode/extensions.json
 dev-dist/
+
+# ultrai18n working state (inventory, batches, rulings)
+.ultrai18n/

@@ -1,39 +1,39 @@
 {
- "schemaVersion": 1,
- "batchId": "050",
- "batchDigest": "0a477d6f10a6252a",
- "items": [
-  {
-   "id": "g_ce5e1014c9fc",
-   "text": "error for an identifier that simply no longer exists."
-  },
-  {
-   "id": "g_cea35522149d",
-   "text": "The page tree, in pure functions.\n*\nNothing here touches the disk: these functions take an index and return a\nnew one. That is what makes ordering, moves and cascading deletes testable\nin a few milliseconds, with no database and no browser.\n*\nOrder among siblings is a plain number. Inserting between two neighbours\ntakes the midpoint, which avoids rewriting the whole sibling list on every\ndrag. A floating-point number eventually runs out of precision after some\nfifty insertions at the same spot: when the gap becomes too small,\n`renumber` reassigns clean integers to the sibling list. The case is rare,\nbut it happens, and it is silently destructive if ignored."
-  },
-  {
-   "id": "g_cebdc7b8dcab",
-   "text": "\n  {0} waiver(s) in force:"
-  },
-  {
-   "id": "g_cf6cf0b3efff",
-   "text": "a localStorage key"
-  },
-  {
-   "id": "g_cf7c75d576a7",
-   "text": "Explicit rather than \"anything that is not a put is a delete\":"
-  },
-  {
-   "id": "g_cf7f26290605",
-   "text": "Deliberately loud. If someone re-enables the picker one day, they"
-  },
-  {
-   "id": "g_cfbe8a1f0c02",
-   "text": "Saved"
-  },
-  {
-   "id": "g_cff1d5da8cd2",
-   "text": "the identifier of an existing document, and its parent must then point"
-  }
- ]
+  "schemaVersion": 1,
+  "batchId": "050",
+  "batchDigest": "0a477d6f10a6252a",
+  "items": [
+    {
+      "id": "g_ce5e1014c9fc",
+      "text": "error for an identifier that simply no longer exists."
+    },
+    {
+      "id": "g_cea35522149d",
+      "text": "The page tree, in pure functions.\n*\nNothing here touches the disk: these functions take an index and return a\nnew one. That is what makes ordering, moves and cascading deletes testable\nin a few milliseconds, with no database and no browser.\n*\nOrder among siblings is a plain number. Inserting between two neighbours\ntakes the midpoint, which avoids rewriting the whole sibling list on every\ndrag. A floating-point number eventually runs out of precision after some\nfifty insertions at the same spot: when the gap becomes too small,\n`renumber` reassigns clean integers to the sibling list. The case is rare,\nbut it happens, and it is silently destructive if ignored."
+    },
+    {
+      "id": "g_cebdc7b8dcab",
+      "text": "\n  {0} waiver(s) in force:"
+    },
+    {
+      "id": "g_cf6cf0b3efff",
+      "text": "a localStorage key"
+    },
+    {
+      "id": "g_cf7c75d576a7",
+      "text": "Explicit rather than \"anything that is not a put is a delete\":"
+    },
+    {
+      "id": "g_cf7f26290605",
+      "text": "Deliberately loud. If someone re-enables the picker one day, they"
+    },
+    {
+      "id": "g_cfbe8a1f0c02",
+      "text": "Saved"
+    },
+    {
+      "id": "g_cff1d5da8cd2",
+      "text": "the identifier of an existing document, and its parent must then point"
+    }
+  ]
 }

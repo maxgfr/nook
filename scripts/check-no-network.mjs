@@ -1,23 +1,23 @@
 #!/usr/bin/env node
 /**
- * Garde-fou « zéro réseau ».
+ * The "zero network" guard.
  *
- * La vraie application de la règle est la CSP (`connect-src 'none'`) : même
- * une dépendance malveillante ne peut pas sortir. Ce script est le canari —
- * il fait échouer la CI *au moment où* du code capable d'émettre une requête
- * entre dans le bundle, plutôt qu'au moment où un utilisateur s'en aperçoit.
+ * The rule is really enforced by the CSP (`connect-src 'none'`): not even a
+ * malicious dependency can get out. This script is the canary — it fails CI
+ * *at the moment* code capable of emitting a request enters the bundle,
+ * rather than at the moment a user notices.
  *
- * Il inspecte le build, pas les sources : ce qui compte est ce qui est
- * réellement servi, dépendances comprises.
+ * It inspects the build, not the sources: what matters is what is actually
+ * served, dependencies included.
  *
- * Deux corpus distincts, parce qu'ils n'ont pas les mêmes droits :
- *   - le code applicatif n'a le droit d'appeler aucune API réseau ;
- *   - le service worker, lui, DOIT appeler `fetch` — c'est sa raison d'être —
- *     mais n'a le droit de mentionner aucune origine externe.
+ * Two distinct corpora, because they do not have the same rights:
+ *   - application code may not call any network API;
+ *   - the service worker, on the other hand, MUST call `fetch` — that is its
+ *     whole purpose — but may not mention any external origin.
  *
- * Toute exception passe par ALLOWED et doit porter un motif lisible. Les
- * exceptions retenues sont réaffichées à chaque exécution : une dérogation
- * qu'on ne voit plus est une dérogation qu'on ne réexamine jamais.
+ * Every exception goes through ALLOWED and must carry a readable reason. The
+ * exceptions in force are reprinted on each run: a waiver nobody sees again
+ * is a waiver nobody ever re-examines.
  */
 
 import { readdirSync, readFileSync, existsSync } from 'node:fs'
@@ -25,7 +25,7 @@ import { join, relative, basename } from 'node:path'
 
 const DIST = new URL('../dist/', import.meta.url).pathname
 
-/** APIs capables d'émettre une requête sortante. */
+/** APIs capable of emitting an outgoing request. */
 const NETWORK_APIS = [
   { name: 'fetch()', re: /\bfetch\s*\(/g },
   { name: 'XMLHttpRequest', re: /\bXMLHttpRequest\b/g },
@@ -33,60 +33,58 @@ const NETWORK_APIS = [
   { name: 'EventSource', re: /\bEventSource\s*\(/g },
   { name: 'sendBeacon', re: /\bsendBeacon\s*\(/g },
   { name: 'importScripts()', re: /\bimportScripts\s*\(/g },
-  { name: 'import() d’une URL absolue', re: /\bimport\s*\(\s*["'`]https?:/g },
+  { name: 'import() of an absolute URL', re: /\bimport\s*\(\s*["'`]https?:/g },
 ]
 
-/** URLs absolues dans le code servi. */
+/** Absolute URLs in the served code. */
 const ABSOLUTE_URL = /\bhttps?:\/\/[^\s"'`)<>\\]+/g
 
 /**
- * Espaces de noms XML et adresses de boucle locale : ce sont des
- * identifiants, pas des adresses. Un SVG référence `www.w3.org/2000/svg`
- * sans que rien ne soit jamais téléchargé.
+ * XML namespaces and loopback addresses: these are identifiers, not
+ * addresses. An SVG references `www.w3.org/2000/svg` without anything ever
+ * being downloaded.
  */
 const INERT_HOSTS = ['www.w3.org', 'localhost', '127.0.0.1']
 
 /**
- * Dérogations explicites.
+ * Explicit exemptions.
  *
- * `file` accepte `*`. `match` est la sous-chaîne trouvée. `reason` doit
- * expliquer pourquoi la trouvaille ne peut pas produire de requête — une
- * entrée sans motif est ignorée, donc la vérification échouera.
+ * `file` accepts `*`. `match` is the substring found. `reason` must explain
+ * why the finding cannot produce a request — an entry without a reason is
+ * ignored, so the check will fail.
  */
 const ALLOWED = [
   {
     file: 'assets/*.js',
     match: 'https://react.dev/errors/',
     reason:
-      'Chaîne de caractères d’un message d’erreur minifié de React : l’URL est concaténée puis affichée dans la console, jamais requêtée.',
+      'A string inside a minified React error message: the URL is concatenated then printed to the console, never requested.',
   },
   {
     file: 'assets/*.css',
     match: 'https://tailwindcss.com',
-    reason: 'Bannière de licence, dans un commentaire CSS.',
+    reason: 'A licence banner, inside a CSS comment.',
   },
   {
     file: 'assets/*.js',
     match: 'https://prosemirror.net/docs/guide/',
-    reason:
-      'Lien vers la documentation, à l’intérieur du texte d’une erreur de schéma levée par ProseMirror.',
+    reason: 'A documentation link, inside the text of a schema error raised by ProseMirror.',
   },
   {
     file: 'assets/*.js',
     match: 'https://mantine.dev/theming/colors/',
-    reason:
-      'Lien vers la documentation, à l’intérieur du texte d’un avertissement de configuration de Mantine.',
+    reason: 'A documentation link, inside the text of a Mantine configuration warning.',
   },
   {
     file: 'workbox-*.js',
     match: 'https://bit.ly/wb-precache',
-    reason: 'URL citée dans le texte d’un `console.warn` de Workbox.',
+    reason: 'A URL quoted inside the text of a Workbox `console.warn`.',
   },
   {
     file: 'sw.js',
     match: 'importScripts(',
     reason:
-      'Le service worker charge son propre runtime Workbox, servi depuis la même origine. Le scan des URL absolues de ce même fichier garantit qu’aucune origine externe n’y est référencée.',
+      'The service worker loads its own Workbox runtime, served from the same origin. Scanning this same file for absolute URLs guarantees no external origin is referenced in it.',
   },
 ]
 
@@ -100,7 +98,7 @@ function walk(dir) {
   return out
 }
 
-/** Les attributs HTML sortent du build avec leurs guillemets échappés. */
+/** HTML attributes come out of the build with their quotes escaped. */
 function decodeEntities(html) {
   return html
     .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)))
@@ -124,7 +122,7 @@ function allowanceFor(file, match) {
   return rule
 }
 
-/** Quelques caractères autour d'une trouvaille, pour la rendre jugeable. */
+/** A few characters around a finding, so a human can judge it. */
 function excerpt(source, index, length) {
   const start = Math.max(0, index - 40)
   const end = Math.min(source.length, index + length + 40)
@@ -138,8 +136,8 @@ function scan(file, source, { isServiceWorker }) {
   const name = relative(DIST, file)
 
   for (const api of NETWORK_APIS) {
-    // `fetch` est la raison d'être d'un service worker : c'est par là qu'il
-    // sert les fichiers précachés hors ligne.
+    // `fetch` is the whole point of a service worker: it is how it
+    // serves the precached files offline.
     if (isServiceWorker && api.name === 'fetch()') continue
     for (const m of source.matchAll(api.re)) {
       if (allowanceFor(name, m[0])) continue
@@ -162,7 +160,7 @@ function scan(file, source, { isServiceWorker }) {
 // --------------------------------------------------------------------------
 
 if (!existsSync(DIST)) {
-  console.error('✖ dist/ est absent. Lancez `pnpm build` avant cette vérification.')
+  console.error('✖ dist/ is missing. Run `pnpm build` before this check.')
   process.exit(1)
 }
 
@@ -173,51 +171,53 @@ const findings = files.flatMap((file) =>
   scan(file, readFileSync(file, 'utf8'), { isServiceWorker: isSW(file) }),
 )
 
-// La CSP est la véritable barrière. Si elle disparaît du build, le canari ne
-// vaut plus rien : on échoue même sans aucun appel réseau détecté.
+// The CSP is the real barrier. If it disappears from the build, the canary
+// is worth nothing: we fail even with no network call detected.
 const indexPath = join(DIST, 'index.html')
 const index = existsSync(indexPath) ? decodeEntities(readFileSync(indexPath, 'utf8')) : ''
 const cspProblems = []
 
 if (!/http-equiv=["']Content-Security-Policy["']/i.test(index)) {
-  cspProblems.push('index.html ne contient aucune balise Content-Security-Policy')
+  cspProblems.push('index.html contains no Content-Security-Policy tag')
 } else {
   for (const directive of ["connect-src 'none'", "default-src 'self'", "object-src 'none'"]) {
-    if (!index.includes(directive)) cspProblems.push(`la CSP ne contient pas « ${directive} »`)
+    if (!index.includes(directive)) cspProblems.push(`the CSP does not contain "${directive}"`)
   }
 }
 
-// Un script inline serait de toute façon bloqué par `script-src 'self'`, mais
-// mieux vaut le dire ici que le découvrir sur une page blanche en production.
+// An inline script would be blocked by `script-src 'self'` anyway, but
+// better to say it here than to discover it on a blank page in production.
 if (/<script(?![^>]*\bsrc=)[^>]*>[\s\S]*?\S[\s\S]*?<\/script>/i.test(index)) {
-  cspProblems.push('index.html contient un script inline, que la CSP bloquera')
+  cspProblems.push('index.html contains an inline script, which the CSP will block')
 }
 
 if (findings.length === 0 && cspProblems.length === 0) {
-  console.log(`✔ ${files.length} fichiers servis inspectés, aucune sortie réseau possible.`)
-  console.log("✔ CSP présente, avec connect-src 'none'.")
+  console.log(`✔ ${files.length} served files inspected, no network egress possible.`)
+  console.log("✔ CSP present, with connect-src 'none'.")
   if (used.size > 0) {
-    console.log(`\n  ${used.size} dérogation(s) retenue(s) :`)
+    console.log(`
+  ${used.size} waiver(s) in force:`)
     for (const rule of used) console.log(`  · ${rule.file} — ${rule.match}\n    ${rule.reason}`)
   }
   const unused = ALLOWED.filter((r) => !used.has(r))
   if (unused.length > 0) {
-    console.log('\n  Dérogations devenues inutiles, à supprimer de ALLOWED :')
+    console.log('\n  Waivers that are no longer needed, to remove from ALLOWED:')
     for (const rule of unused) console.log(`  · ${rule.file} — ${rule.match}`)
   }
   process.exit(0)
 }
 
-console.error('\n✖ La promesse « zéro réseau » n’est pas tenue par ce build.\n')
+console.error('\n✖ This build does not keep the "zero network" promise.\n')
 for (const problem of cspProblems) console.error(`  CSP — ${problem}`)
 if (cspProblems.length > 0 && findings.length > 0) console.error('')
 for (const f of findings) {
   console.error(`  ${f.file} — ${f.kind}`)
   console.error(`      ${f.excerpt}`)
 }
-console.error(`\n  ${findings.length} appel(s) réseau, ${cspProblems.length} problème(s) de CSP.`)
+console.error(`
+  ${findings.length} network call(s), ${cspProblems.length} CSP problem(s).`)
 console.error(
-  '  Si une trouvaille ne peut pas produire de requête, déclarez-la dans ALLOWED\n' +
+  '  If a finding cannot produce a request, declare it in ALLOWED\n' +
     '  (scripts/check-no-network.mjs) en expliquant pourquoi.\n',
 )
 process.exit(1)

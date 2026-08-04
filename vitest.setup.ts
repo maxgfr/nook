@@ -1,7 +1,7 @@
 /**
- * Le core parle à IndexedDB et à WebCrypto. Node 20+ fournit WebCrypto sur
- * `globalThis.crypto` ; IndexedDB, non. `fake-indexeddb/auto` installe une
- * implémentation conforme à la spec, ce qui permet de tester le stockage
- * réel plutôt qu'un double de test qui mentirait sur son comportement.
+ * The core talks to IndexedDB and WebCrypto. Node 20+ provides WebCrypto on
+ * `globalThis.crypto`; IndexedDB, it does not. `fake-indexeddb/auto` installs
+ * a spec-compliant implementation, which lets us test the real storage rather
+ * than a test double that would lie about its behaviour.
  */
 import 'fake-indexeddb/auto'

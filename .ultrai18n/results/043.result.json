@@ -1,39 +1,39 @@
 {
- "schemaVersion": 1,
- "batchId": "043",
- "batchDigest": "25bbed569b78f0db",
- "items": [
-  {
-   "id": "g_b29ffa8cccf8",
-   "text": "The service worker loads its own Workbox runtime, served from the same origin. Scanning this same file for absolute URLs guarantees no external origin is referenced in it."
-  },
-  {
-   "id": "g_b46d16de6688",
-   "text": "Opens the vault once for the whole application and makes it available.\n*\nThe subscription goes through `useSyncExternalStore`: the vault reports its\nchanges with a plain callback, knowing nothing about React. That is what\nlets `src/core` stay an ordinary TypeScript library, testable without a\nrender."
-  },
-  {
-   "id": "g_b53295fbbe1c",
-   "text": "A stand-in for `emoji-mart`, substituted at build time.\n*\nThe emoji-picker library fetches its localisation data *and* its images\nfrom a CDN, at runtime. That is incompatible with Nook's promise: the CSP\nwould block those requests, and the picker would be silently broken — the\nworst of the two situations, since the user would see a feature that does\nnot work without knowing why.\n*\nDisabling it with an option was not enough: the code still went into the\nserved files, and would have stayed there at the mercy of a future setting.\nAn alias in `vite.config.ts` therefore replaces it with this module, and\nthe network guard observes its absence.\n*\nWhat is lost: the emoji menu triggered by typing \":\". Emoji typed on the\nsystem keyboard work normally.\n*\nThis module stands in for `emoji-mart` and for `@emoji-mart/data` alike: the\nfirst reads functions, the second a data object, and the empty default\nexport suits both."
-  },
-  {
-   "id": "g_b5f63206459a",
-   "text": "Confirmation of a destructive action.\n*\nBuilt on the native `<dialog>`, which gives — correctly, and for free —\nfocus trapping, Escape to close, an inert backdrop and the right semantics\nfor screen readers. Reimplementing all of that by hand is the shortcut that\nproduces modals nobody can use from a keyboard."
-  },
-  {
-   "id": "g_b64aab5f3c51",
-   "text": "One focus treatment across the whole application. It is visible on light\nand dark backgrounds alike because it uses the accent, never a browser\ndefault hue."
-  },
-  {
-   "id": "g_b6e5f1c73285",
-   "text": "`visibilitychange` is the last reliable signal on mobile: `unload`"
-  },
-  {
-   "id": "g_b6ffea0b6452",
-   "text": "again. It cannot yet link them together, search them, or"
-  },
-  {
-   "id": "g_b710137860af",
-   "text": "orders siblings by ascending rank"
-  }
- ]
+  "schemaVersion": 1,
+  "batchId": "043",
+  "batchDigest": "25bbed569b78f0db",
+  "items": [
+    {
+      "id": "g_b29ffa8cccf8",
+      "text": "The service worker loads its own Workbox runtime, served from the same origin. Scanning this same file for absolute URLs guarantees no external origin is referenced in it."
+    },
+    {
+      "id": "g_b46d16de6688",
+      "text": "Opens the vault once for the whole application and makes it available.\n*\nThe subscription goes through `useSyncExternalStore`: the vault reports its\nchanges with a plain callback, knowing nothing about React. That is what\nlets `src/core` stay an ordinary TypeScript library, testable without a\nrender."
+    },
+    {
+      "id": "g_b53295fbbe1c",
+      "text": "A stand-in for `emoji-mart`, substituted at build time.\n*\nThe emoji-picker library fetches its localisation data *and* its images\nfrom a CDN, at runtime. That is incompatible with Nook's promise: the CSP\nwould block those requests, and the picker would be silently broken — the\nworst of the two situations, since the user would see a feature that does\nnot work without knowing why.\n*\nDisabling it with an option was not enough: the code still went into the\nserved files, and would have stayed there at the mercy of a future setting.\nAn alias in `vite.config.ts` therefore replaces it with this module, and\nthe network guard observes its absence.\n*\nWhat is lost: the emoji menu triggered by typing \":\". Emoji typed on the\nsystem keyboard work normally.\n*\nThis module stands in for `emoji-mart` and for `@emoji-mart/data` alike: the\nfirst reads functions, the second a data object, and the empty default\nexport suits both."
+    },
+    {
+      "id": "g_b5f63206459a",
+      "text": "Confirmation of a destructive action.\n*\nBuilt on the native `<dialog>`, which gives — correctly, and for free —\nfocus trapping, Escape to close, an inert backdrop and the right semantics\nfor screen readers. Reimplementing all of that by hand is the shortcut that\nproduces modals nobody can use from a keyboard."
+    },
+    {
+      "id": "g_b64aab5f3c51",
+      "text": "One focus treatment across the whole application. It is visible on light\nand dark backgrounds alike because it uses the accent, never a browser\ndefault hue."
+    },
+    {
+      "id": "g_b6e5f1c73285",
+      "text": "`visibilitychange` is the last reliable signal on mobile: `unload`"
+    },
+    {
+      "id": "g_b6ffea0b6452",
+      "text": "again. It cannot yet link them together, search them, or"
+    },
+    {
+      "id": "g_b710137860af",
+      "text": "orders siblings by ascending rank"
+    }
+  ]
 }

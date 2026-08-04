@@ -1,5 +1,5 @@
-// `vitest/config` réexporte `defineConfig` de Vite en acceptant en plus la
-// clé `test`, ce qui garde la configuration du projet dans un seul fichier.
+// `vitest/config` re-exports Vite's `defineConfig` while also accepting the
+// `test` key, which keeps the project's configuration in a single file.
 import { defineConfig } from 'vitest/config'
 import type { Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
@@ -7,21 +7,21 @@ import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
 /**
- * Sous-chemin où le site est servi. GitHub Pages sert un repo `nook` sur
- * `/nook/`. Un fork qui renomme le repo n'a que cette ligne à changer
- * (ou la variable d'environnement BASE).
+ * Sub-path the site is served from. GitHub Pages serves a `nook` repository
+ * under `/nook/`. A fork that renames the repository only has this line to
+ * change (or the BASE environment variable).
  */
 const BASE = process.env.BASE ?? '/nook/'
 
 /**
- * Politique de sécurité du contenu.
+ * Content Security Policy.
  *
- * `connect-src 'none'` est le cœur de la promesse du produit : le navigateur
- * refuse toute requête sortante (fetch, XHR, WebSocket, EventSource, beacon).
- * Même si une dépendance tentait d'appeler un serveur, la page ne peut pas.
+ * `connect-src 'none'` is the heart of the product's promise: the browser
+ * refuses every outgoing request (fetch, XHR, WebSocket, EventSource, beacon).
+ * Even if a dependency tried to call a server, the page cannot.
  *
- * Injectée uniquement dans le build de production : le serveur de dev a besoin
- * d'un WebSocket pour le rechargement à chaud.
+ * Injected only into the production build: the dev server needs a WebSocket
+ * for hot reloading.
  */
 const CSP = [
   "default-src 'self'",
@@ -59,11 +59,11 @@ function contentSecurityPolicy(): Plugin {
 }
 
 /**
- * Modules retirés du bundle parce qu'ils émettent des requêtes réseau.
+ * Modules removed from the bundle because they emit network requests.
  *
- * Les désactiver par configuration ne les empêcherait pas d'être servis ;
- * l'alias garantit qu'ils n'existent pas dans ce que le navigateur reçoit.
- * Voir `src/ui/editor/emoji-mart-absent.ts` pour le raisonnement complet.
+ * Disabling them by configuration would not stop them being served; the
+ * alias guarantees they do not exist in what the browser receives. See
+ * `src/ui/editor/emoji-mart-absent.ts` for the full reasoning.
  */
 const OFFLINE_STUB = new URL('./src/ui/editor/emoji-mart-absent.ts', import.meta.url).pathname
 
@@ -83,10 +83,10 @@ export default defineConfig({
       registerType: 'prompt',
       includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
       manifest: {
-        name: 'Nook — notes locales',
+        name: 'Nook — local notes',
         short_name: 'Nook',
-        description: 'Prise de notes local-first. Vos données ne quittent jamais votre machine.',
-        lang: 'fr',
+        description: 'Local-first note taking. Your data never leaves your machine.',
+        lang: 'en',
         start_url: BASE,
         scope: BASE,
         display: 'standalone',
@@ -99,9 +99,9 @@ export default defineConfig({
         ],
       },
       workbox: {
-        // Tout est précaché : l'application doit démarrer sans réseau.
+        // Everything is precached: the application must start with no network.
         globPatterns: ['**/*.{js,css,html,svg,png,woff2}'],
-        // Aucune mise en cache d'exécution : il n'y a rien à aller chercher.
+        // No runtime caching: there is nothing to go and fetch.
         runtimeCaching: [],
         navigateFallback: `${BASE}index.html`,
         cleanupOutdatedCaches: true,
@@ -112,9 +112,9 @@ export default defineConfig({
   build: {
     target: 'es2022',
     sourcemap: true,
-    // Le polyfill de préchargement de modules de Vite appelle `fetch()` pour
-    // les navigateurs sans `modulepreload`. Aucune cible de ce projet n'en a
-    // besoin, et on préfère un bundle où le mot `fetch` n'apparaît nulle part.
+    // Vite's module-preload polyfill calls `fetch()` for
+    // browsers without `modulepreload`. No target of this project needs it,
+    // and we prefer a bundle where the word `fetch` appears nowhere.
     modulePreload: { polyfill: false },
   },
   test: {

@@ -1,115 +1,113 @@
 <div align="center">
   <img src="public/favicon.svg" width="72" height="72" alt="">
   <h1>Nook</h1>
-  <p><strong>Un carnet de notes qui ne parle à personne.</strong></p>
+  <p><strong>A notebook that talks to nobody.</strong></p>
   <p>
-    <a href="https://maxgfr.github.io/nook/">Ouvrir l'application</a> ·
-    <a href="#état-du-projet">État du projet</a> ·
-    <a href="#ce-que-nook-protège-et-ce-quil-ne-protège-pas">Sécurité</a>
+    <a href="https://maxgfr.github.io/nook/">Open the app</a> ·
+    <a href="#project-status">Project status</a> ·
+    <a href="#what-nook-protects-and-what-it-does-not">Security</a>
   </p>
 </div>
 
 ---
 
-Nook est un outil de prise de notes qui tourne entièrement dans votre
-navigateur. Il n'y a pas de compte, pas de serveur, pas de synchronisation.
-Vos notes sont chiffrées et stockées sur votre machine, et la page elle-même
-est configurée pour qu'aucune requête sortante ne soit possible.
+Nook is a note-taking tool that runs entirely inside your browser. No account,
+no server, no synchronisation. Your notes are encrypted on your own machine,
+and the page is configured so that no outgoing request is possible at all.
 
-C'est un site statique servi par GitHub Pages : le serveur envoie des fichiers
-et n'a jamais rien à recevoir en retour.
+It is a static site on GitHub Pages: the server sends files and never has
+anything to receive back.
 
-## La promesse, et comment elle est tenue
+## The promise, and how it is kept
 
-| Promesse                              | Mécanisme                                                                                 |
-| ------------------------------------- | ----------------------------------------------------------------------------------------- |
-| Rien ne sort de votre machine         | `connect-src 'none'` dans la CSP — le navigateur refuse toute requête sortante            |
-| Personne ne l'a désactivé par mégarde | La CI inspecte le bundle publié et échoue si du code réseau y entre ([le garde-fou][cnn]) |
-| Vos notes sont illisibles sur disque  | AES-GCM-256, clé non extractible, jamais exposée à JavaScript                             |
-| Tout peut vraiment être effacé        | Base, caches, service worker et stockages détruits, puis inventaire de ce qui reste       |
-| Ça marche hors connexion              | Application précachée, installable en PWA                                                 |
+| Promise                           | Mechanism                                                                                   |
+| --------------------------------- | ------------------------------------------------------------------------------------------- |
+| Nothing leaves your machine       | `connect-src 'none'` in the CSP — the browser refuses every outgoing request                |
+| Nobody disabled that by accident  | CI inspects the published bundle and fails if network-capable code gets in ([the guard][g]) |
+| Your notes are unreadable on disk | AES-GCM-256 with a non-extractable key, never exposed to JavaScript                         |
+| Everything really can be erased   | Database, caches, service worker and storages destroyed, then an inventory of what remains  |
+| It works offline                  | Precached and installable as a PWA                                                          |
 
-[cnn]: scripts/check-no-network.mjs
+[g]: scripts/check-no-network.mjs
 
-## Ce que Nook protège, et ce qu'il ne protège pas
+## What Nook protects, and what it does not
 
-Par défaut, la clé de chiffrement est générée sur l'appareil et rangée dans le
-navigateur sous une forme que JavaScript ne peut pas lire.
+By default the encryption key is generated on the device and kept in the
+browser in a form JavaScript cannot read.
 
-**Ce que ça protège :** quelqu'un qui copie votre disque, votre profil
-navigateur ou une sauvegarde n'obtient que des octets inexploitables.
+**What that protects:** anyone who copies your disk, your browser profile or a
+backup gets nothing but unusable bytes.
 
-**Ce que ça ne protège pas :** quelqu'un qui ouvre _votre_ navigateur avec
-_votre_ session déverrouillée obtient exactement les mêmes droits que vous. La
-protection par passphrase, qui répond à cette menace, arrive en phase 4.
+**What it does not protect:** anyone who opens _your_ browser with _your_
+unlocked session gets exactly the rights you have. Passphrase protection, which
+answers that threat, is phase 4.
 
-Nous préférons le dire platement plutôt que de laisser croire à une garantie
-que le produit ne donne pas encore.
+We would rather say so plainly than imply a guarantee the product does not give
+yet.
 
-## État du projet
+## Project status
 
-Nook se construit par phases, et chaque phase laisse un dépôt déployable.
+Nook is built in phases, and each one leaves a deployable repository.
 
-| Phase | Contenu                                                                           | État    |
-| :---: | --------------------------------------------------------------------------------- | ------- |
-|  P0   | Fondations, CI, déploiement Pages, garde-fou réseau, jetons de design             | ✅ fait |
-|  P1   | Coffre chiffré : stockage, enveloppes AES-GCM, cycle de vie de la clé, effacement | ✅ fait |
-|  P2   | Éditeur à blocs, arbre de pages, sauvegarde automatique                           | ✅ fait |
-|  P3   | Wikilinks, backlinks, tags, recherche, palette de commandes, notes du jour        | à venir |
-|  P4   | Passphrase, verrouillage automatique, export chiffré                              | à venir |
-|  P5   | Bases de données : propriétés typées, vues table / kanban / calendrier            | à venir |
-|  P6   | Vue graphe, historique de versions, images, impression                            | à venir |
+| Phase | Content                                                            | Status  |
+| :---: | ------------------------------------------------------------------ | ------- |
+|  P0   | Foundations, CI, Pages deployment, network guard, design tokens    | ✅ done |
+|  P1   | Encrypted vault: storage, AES-GCM envelopes, key lifecycle, wiping | ✅ done |
+|  P2   | Block editor, page tree, autosave                                  | ✅ done |
+|  P3   | Wikilinks, backlinks, tags, search, command palette, daily notes   | planned |
+|  P4   | Passphrase, auto-lock, encrypted export                            | planned |
+|  P5   | Databases: typed properties, table / kanban / calendar views       | planned |
+|  P6   | Graph view, version history, images, printing                      | planned |
 
-Aujourd'hui, Nook sait donc créer des pages, les imbriquer, les écrire et les
-retrouver. Il ne sait pas encore les relier entre elles, les chercher, ni les
-protéger par une passphrase.
+Today Nook can create pages, nest them, write in them and find them again. It
+cannot yet link them together, search them, or lock them behind a passphrase.
 
-### Une fonctionnalité retirée volontairement
+### A feature removed on purpose
 
-Le sélecteur d'emoji de l'éditeur télécharge ses données **et ses images**
-depuis un CDN, à l'exécution. La CSP les bloquerait, et le menu serait
-silencieusement vide — le pire des deux mondes. Plutôt que de le désactiver par
-une option, la bibliothèque est [remplacée à la compilation][stub] : le code
-réseau n'est pas seulement inatteignable, il n'est pas servi du tout. Les emoji
-tapés au clavier système fonctionnent normalement.
+The editor's emoji picker downloads its data **and its images** from a CDN at
+runtime. The CSP would block those requests and the menu would be silently
+empty — the worst of both worlds. Rather than switching it off with an option,
+the library is [replaced at build time][stub], so the network code is not
+merely unreachable: it is never served. Emoji typed on the system keyboard work
+as usual.
 
 [stub]: src/ui/editor/emoji-mart-absent.ts
 
 ## Architecture
 
-Deux moitiés, séparées par une règle vérifiée en CI.
+Two halves, separated by a rule that CI enforces.
 
 ```
-src/core/   TypeScript pur — stockage, chiffrement, modèle, recherche
-src/ui/     React — composants, éditeur, mise en page
+src/core/   Plain TypeScript — storage, encryption, model, search
+src/ui/     React — components, editor, layout
 ```
 
-Le core n'importe ni React ni l'éditeur ; l'interface ne touche jamais
-IndexedDB ni WebCrypto. Cette frontière n'est pas une convention de style :
-[un test la fait respecter](src/core/architecture.test.ts) et casse la CI
-quand elle est franchie. Elle permet de tester toute la logique sans
-navigateur, et de refaire l'interface sans toucher aux données.
+The core imports neither React nor the editor; the interface never touches
+IndexedDB or WebCrypto. That boundary is not a style convention —
+[a test enforces it](src/core/architecture.test.ts) and breaks CI when it is
+crossed. It is what lets the whole domain be tested without a browser, and the
+interface be rebuilt without touching the data.
 
-## Développement
+## Development
 
 ```bash
 pnpm install
-pnpm dev        # serveur de développement
-pnpm test       # tests du core, sans navigateur
-pnpm verify     # types, lint, tests, build, garde-fou réseau
-pnpm smoke      # écrit une note dans un vrai navigateur, recharge, vérifie
+pnpm dev        # development server
+pnpm test       # core tests, no browser
+pnpm verify     # types, lint, tests, build, network guard
+pnpm smoke      # writes a note in a real browser, reloads, checks it survived
 ```
 
-`pnpm verify` est exactement ce que la CI exécute.
+`pnpm verify` is exactly what CI runs.
 
-## Héberger le vôtre
+## Host your own
 
-1. Forkez ce dépôt.
-2. Réglages → Pages → Source : **GitHub Actions**.
-3. Poussez sur `main`.
+1. Fork this repository.
+2. Settings → Pages → Source: **GitHub Actions**.
+3. Push to `main`.
 
-Le sous-chemin est déduit du nom du dépôt : renommer votre fork suffit, il n'y
-a rien à modifier dans le code.
+The sub-path is derived from the repository name, so renaming your fork is
+enough — there is nothing to change in the code.
 
 ## Licence
 

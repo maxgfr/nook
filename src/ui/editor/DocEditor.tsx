@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type ComponentProps, type ReactNode } from 'react'
 import { BlockNoteView } from '@blocknote/mantine'
 import { useCreateBlockNote } from '@blocknote/react'
-import { fr } from '@blocknote/core/locales'
+import { en } from '@blocknote/core/locales'
 import type { PartialBlock } from '@blocknote/core'
 import '@blocknote/core/style.css'
 import '@blocknote/mantine/style.css'
@@ -14,13 +14,13 @@ import { useVault, useVaultIndex } from '../app/VaultProvider'
 import { useAutosave, type SaveState } from './useAutosave'
 
 /**
- * L'éditeur d'un document.
+ * A document's editor.
  *
- * Le chargement du contenu est asynchrone — il faut le déchiffrer — donc ce
- * composant sépare deux responsabilités : celui-ci attend le document, et
- * `LoadedEditor` ne s'affiche qu'une fois qu'il est là. La clé `doc.id`
- * garantit qu'ouvrir une autre page reconstruit l'éditeur au lieu de tenter de
- * remplacer son contenu sous le curseur.
+ * Loading the content is asynchronous — it has to be decrypted — so this
+ * component splits two responsibilities: this one waits for the document, and
+ * `LoadedEditor` only renders once it is there. The `doc.id` key guarantees
+ * that opening another page rebuilds the editor rather than trying to swap its
+ * content under the caret.
  */
 export function DocEditor({ docId }: { docId: DocId }) {
   const vault = useVault()
@@ -68,13 +68,13 @@ function LoadedEditor({ doc }: { doc: Doc }) {
 
   const { state, schedule } = useAutosave<DocPatch>((patch) => vault.saveDoc(doc.id, patch))
 
-  // BlockNote refuse un document vide : il lui faut au moins un bloc. La clé
-  // est omise plutôt que passée à `undefined` — avec
-  // `exactOptionalPropertyTypes`, les deux ne sont pas la même chose — et il
-  // crée alors lui-même le paragraphe initial.
+  // BlockNote refuses an empty document: it needs at least one block. The key
+  // is omitted rather than passed as `undefined` — with
+  // `exactOptionalPropertyTypes`, the two are not the same thing — and it
+  // then creates the initial paragraph itself.
   const initialContent = toInitialContent(doc.content)
   const editor = useCreateBlockNote(
-    initialContent ? { initialContent, dictionary: fr } : { dictionary: fr },
+    initialContent ? { initialContent, dictionary: en } : { dictionary: en },
   )
 
   const trail = ancestorsOf(index, doc.id)
@@ -83,7 +83,7 @@ function LoadedEditor({ doc }: { doc: Doc }) {
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <header className="flex h-11 shrink-0 items-center justify-between gap-4 border-b border-line px-6">
-        <nav aria-label="Fil d'Ariane" className="min-w-0 truncate text-xs text-ink-faint">
+        <nav aria-label="Breadcrumbs" className="min-w-0 truncate text-xs text-ink-faint">
           {trail.map((ancestor) => (
             <span key={ancestor.id}>{ancestor.title || UNTITLED} / </span>
           ))}
@@ -98,29 +98,29 @@ function LoadedEditor({ doc }: { doc: Doc }) {
             value={title}
             onChange={(event) => schedule({ title: event.target.value })}
             onKeyDown={(event) => {
-              // Entrée depuis le titre fait descendre dans le corps du texte,
-              // comme dans n'importe quel éditeur de document.
+              // Enter from the title moves down into the body,
+              // as in any document editor.
               if (event.key === 'Enter') {
                 event.preventDefault()
                 editorHost.current?.querySelector<HTMLElement>('[contenteditable=true]')?.focus()
               }
             }}
             placeholder={UNTITLED}
-            aria-label="Titre de la page"
+            aria-label="Page title"
             className="w-full border-0 bg-transparent p-0 text-3xl font-semibold tracking-tight text-ink outline-none placeholder:text-ink-faint"
           />
 
           <div ref={editorHost} className="mt-6">
             <BlockNoteView
-              // Les génériques de schéma de BlockNote ne satisfont pas
-              // `exactOptionalPropertyTypes`, que le reste du projet garde
-              // activé. La conversion est confinée à cette unique frontière
-              // avec la bibliothèque plutôt que payée par tout le code.
+              // BlockNote's schema generics do not satisfy
+              // `exactOptionalPropertyTypes`, which the rest of the project keeps
+              // enabled. The cast is confined to this single boundary
+              // with the library rather than paid for by all the code.
               editor={editor as unknown as BlockNoteViewEditor}
-              // Nos jetons pilotent déjà les couleurs des deux schémas ; ce
-              // choix fixe n'évite qu'un recalcul inutile côté bibliothèque.
+              // Our tokens already drive the colours of both schemes; this
+              // fixed choice only avoids a pointless recalculation inside the library.
               theme="light"
-              // Retiré du bundle : voir `emoji-mart-absent.ts`.
+              // Removed from the bundle: see `emoji-mart-absent.ts`.
               emojiPicker={false}
               onChange={() => schedule({ content: editor.document as JsonValue })}
             />
@@ -136,17 +136,17 @@ function toInitialContent(content: JsonValue): PartialBlock[] | undefined {
 }
 
 const LABELS: Record<SaveState, string> = {
-  saved: 'Enregistré',
-  pending: 'Modifications en attente',
-  saving: 'Enregistrement…',
-  error: 'Échec de l’enregistrement',
+  saved: 'Saved',
+  pending: 'Unsaved changes',
+  saving: 'Saving…',
+  error: 'Could not save',
 }
 
 function SaveIndicator({ state }: { state: SaveState }) {
   return (
     <span
-      // `polite` : l'information est utile mais ne doit pas interrompre la
-      // frappe en cours pour l'annoncer.
+      // `polite`: the information is useful but must not interrupt the
+      // typing in progress in order to announce it.
       aria-live="polite"
       className={`shrink-0 text-xs ${state === 'error' ? 'text-danger' : 'text-ink-faint'}`}
     >
@@ -160,9 +160,11 @@ function EditorSkeleton() {
     <div className="flex min-h-0 flex-1 flex-col" aria-busy="true">
       <div className="h-11 shrink-0 border-b border-line" />
       <div className="mx-auto w-full max-w-(--nook-measure) px-6 py-10">
-        {/* Des blocs à la place du texte plutôt qu'un tourniquet : la page
-            garde sa forme, et le passage au contenu réel ne fait pas sauter
-            la mise en page. */}
+        {/*
+Blocks in place of text rather than a spinner: the page
+            keeps its shape, and switching to the real content does not make
+            the layout jump. 
+*/}
         <div className="h-9 w-2/3 rounded-sm bg-hover" />
         <div className="mt-8 space-y-3">
           <div className="h-4 w-full rounded-sm bg-hover" />

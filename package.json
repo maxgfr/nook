@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Notes local-first. Vos données restent sur votre machine.",
+  "description": "Local-first notes. Your data stays on your machine.",
   "license": "MIT",
   "packageManager": "pnpm@10.33.0",
   "engines": {

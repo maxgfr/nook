@@ -1,39 +1,39 @@
 {
- "schemaVersion": 1,
- "batchId": "045",
- "batchDigest": "6755879e15f77570",
- "items": [
-  {
-   "id": "g_bb84ba7a9893",
-   "text": "moves a document and remembers it"
-  },
-  {
-   "id": "g_bb8c20a70658",
-   "text": "does not let the plain text show through the envelope"
-  },
-  {
-   "id": "g_bbd8aba80c30",
-   "text": "A documentation link, inside the text of a Mantine configuration warning."
-  },
-  {
-   "id": "g_bbdf2cf38799",
-   "text": "✖ No Chrome found. Set CHROME_PATH."
-  },
-  {
-   "id": "g_bbf0d8484477",
-   "text": "lists the keys and values of a store"
-  },
-  {
-   "id": "g_bc28a2fc9ee9",
-   "text": "Redraws the component on every change to the index."
-  },
-  {
-   "id": "g_bc89a290602d",
-   "text": "Storage and encryption go through the core, never through a component."
-  },
-  {
-   "id": "g_bca56f9ab43c",
-   "text": "Application precached, installable as a PWA"
-  }
- ]
+  "schemaVersion": 1,
+  "batchId": "045",
+  "batchDigest": "6755879e15f77570",
+  "items": [
+    {
+      "id": "g_bb84ba7a9893",
+      "text": "moves a document and remembers it"
+    },
+    {
+      "id": "g_bb8c20a70658",
+      "text": "does not let the plain text show through the envelope"
+    },
+    {
+      "id": "g_bbd8aba80c30",
+      "text": "A documentation link, inside the text of a Mantine configuration warning."
+    },
+    {
+      "id": "g_bbdf2cf38799",
+      "text": "✖ No Chrome found. Set CHROME_PATH."
+    },
+    {
+      "id": "g_bbf0d8484477",
+      "text": "lists the keys and values of a store"
+    },
+    {
+      "id": "g_bc28a2fc9ee9",
+      "text": "Redraws the component on every change to the index."
+    },
+    {
+      "id": "g_bc89a290602d",
+      "text": "Storage and encryption go through the core, never through a component."
+    },
+    {
+      "id": "g_bca56f9ab43c",
+      "text": "Application precached, installable as a PWA"
+    }
+  ]
 }

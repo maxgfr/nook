@@ -1,13 +1,13 @@
 @import 'tailwindcss';
 @import './ui/design/tokens.css';
 
-/**
- * Les jetons deviennent des utilitaires Tailwind. `inline` fait émettre
- * `var(--nook-…)` dans les classes plutôt que la valeur littérale : une classe
- * `bg-surface` suit donc la bascule de thème sans être recompilée.
- *
- * Les couleurs de texte s'appellent `ink` et non `text`, sinon `text-muted`
- * entrerait en collision avec l'espace de noms des tailles de police.
+/*
+ * The tokens become Tailwind utilities. `inline` makes the classes emit
+ * `var(--nook-…)` rather than the literal value: a `bg-surface` class
+ * therefore follows the theme switch without being recompiled.
+ * 
+ * Text colours are called `ink` rather than `text`, otherwise `text-muted`
+ * would collide with the font-size namespace.
  */
 @theme inline {
   --color-surface: var(--nook-surface);
@@ -75,9 +75,11 @@
     overscroll-behavior: none;
   }
 
-  /* Un seul traitement du focus dans toute l'application. Il est visible sur
-   * fond clair comme sombre parce qu'il utilise l'accent, jamais une teinte
-   * de navigateur. */
+  /*
+   * One focus treatment across the whole application. It is visible on light
+   * and dark backgrounds alike because it uses the accent, never a browser
+   * default hue.
+   */
   :focus-visible {
     outline: 2px solid var(--nook-accent);
     outline-offset: 2px;
@@ -88,7 +90,7 @@
     color: var(--nook-text);
   }
 
-  /* Les chiffres alignés verticalement dans les listes et les tableaux. */
+  /* Digits aligned vertically in lists and tables. */
   table,
   time,
   [data-numeric] {

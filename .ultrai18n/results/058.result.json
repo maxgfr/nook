@@ -1,39 +1,39 @@
 {
- "schemaVersion": 1,
- "batchId": "058",
- "batchDigest": "bb9de4a1a353c68b",
- "items": [
-  {
-   "id": "g_ee19392aa369",
-   "text": "useVault must be called inside a <VaultProvider>."
-  },
-  {
-   "id": "g_ee3ea6351222",
-   "text": "A remapping pass first: an imported document may carry"
-  },
-  {
-   "id": "g_ee83ce5820b0",
-   "text": "renumbers the sibling list when room runs out"
-  },
-  {
-   "id": "g_ef6e9ed4756b",
-   "text": "creates a document and reads it back"
-  },
-  {
-   "id": "g_ef9020c9cda7",
-   "text": "Menus and floating bubbles take our elevation, to stay consistent with the\ndialogs and the palette."
-  },
-  {
-   "id": "g_efc79532fefd",
-   "text": "A random nonce on every write. AES-GCM tolerates roughly 2³² encryptions"
-  },
-  {
-   "id": "g_f07543a964f7",
-   "text": "AES-GCM requires a 96-bit nonce; it is also the only recommended size."
-  },
-  {
-   "id": "g_f163019b43a3",
-   "text": "Destroys everything, then returns an inventory of what actually remains."
-  }
- ]
+  "schemaVersion": 1,
+  "batchId": "058",
+  "batchDigest": "bb9de4a1a353c68b",
+  "items": [
+    {
+      "id": "g_ee19392aa369",
+      "text": "useVault must be called inside a <VaultProvider>."
+    },
+    {
+      "id": "g_ee3ea6351222",
+      "text": "A remapping pass first: an imported document may carry"
+    },
+    {
+      "id": "g_ee83ce5820b0",
+      "text": "renumbers the sibling list when room runs out"
+    },
+    {
+      "id": "g_ef6e9ed4756b",
+      "text": "creates a document and reads it back"
+    },
+    {
+      "id": "g_ef9020c9cda7",
+      "text": "Menus and floating bubbles take our elevation, to stay consistent with the\ndialogs and the palette."
+    },
+    {
+      "id": "g_efc79532fefd",
+      "text": "A random nonce on every write. AES-GCM tolerates roughly 2³² encryptions"
+    },
+    {
+      "id": "g_f07543a964f7",
+      "text": "AES-GCM requires a 96-bit nonce; it is also the only recommended size."
+    },
+    {
+      "id": "g_f163019b43a3",
+      "text": "Destroys everything, then returns an inventory of what actually remains."
+    }
+  ]
 }

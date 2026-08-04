@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 /**
- * Génère les PNG de l'application à partir de la marque SVG.
+ * Generates the application's PNGs from the SVG mark.
  *
- * Aucune bibliothèque de rastérisation n'est ajoutée au projet pour ça : on
- * emprunte le moteur de rendu d'un navigateur déjà installé, le temps d'une
- * capture. Le script n'est lancé qu'à la main, quand la marque change — les
- * PNG produits sont versionnés, donc ni la CI ni un contributeur n'ont besoin
- * de Chrome pour construire le projet.
+ * No rasterisation library is added to the project for this: we borrow the
+ * rendering engine of a browser that is already installed, for the length of
+ * one screenshot. The script is only run by hand, when the mark changes — the
+ * PNGs it produces are committed, so neither CI nor a contributor needs
+ * Chrome to build the project.
  *
  *   node scripts/make-icons.mjs
  */
@@ -28,15 +28,15 @@ const CHROME_CANDIDATES = [
 
 const chrome = CHROME_CANDIDATES.find((path) => existsSync(path))
 if (!chrome) {
-  console.error('✖ Aucun navigateur Chromium trouvé pour rastériser les icônes.')
-  console.error('  Les PNG existants sont versionnés : ce script ne sert qu’à les régénérer.')
+  console.error('✖ No Chromium browser found to rasterise the icons.')
+  console.error('  The existing PNGs are committed: this script only regenerates them.')
   process.exit(1)
 }
 
 /**
- * `safe` réserve une marge autour de la marque. Android rogne les icônes
- * « maskable » selon une forme qu'il choisit lui-même ; sans cette marge, les
- * angles du carré seraient coupés.
+ * `safe` reserves a margin around the mark. Android crops "maskable" icons
+ * to a shape it picks itself; without that margin, the corners of the square
+ * would be cut off.
  */
 const ICONS = [
   { file: 'pwa-192.png', size: 192, safe: 0 },

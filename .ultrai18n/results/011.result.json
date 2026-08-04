@@ -1,39 +1,39 @@
 {
- "schemaVersion": 1,
- "batchId": "011",
- "batchDigest": "bc32ff377ebc3f08",
- "items": [
-  {
-   "id": "g_2ef33a64e429",
-   "text": "The site is served under the repository name. A fork that renames it has"
-  },
-  {
-   "id": "g_2f437a43d002",
-   "text": "document.body.innerText.includes('survive a reload')"
-  },
-  {
-   "id": "g_3062b6321d6a",
-   "text": "the child, and not the original child."
-  },
-  {
-   "id": "g_30ce67e56967",
-   "text": "refuses an envelope from another version of the format"
-  },
-  {
-   "id": "g_316bf7a7e878",
-   "text": "remain, nor deny it; the interface must say what it knows, and the"
-  },
-  {
-   "id": "g_31c964adb0a4",
-   "text": "breaks a tie between siblings of equal order by creation date"
-  },
-  {
-   "id": "g_31d3b56fdd7d",
-   "text": "creates every expected store"
-  },
-  {
-   "id": "g_32119eaef84a",
-   "text": "`test` key, which keeps the project's configuration in a single file."
-  }
- ]
+  "schemaVersion": 1,
+  "batchId": "011",
+  "batchDigest": "bc32ff377ebc3f08",
+  "items": [
+    {
+      "id": "g_2ef33a64e429",
+      "text": "The site is served under the repository name. A fork that renames it has"
+    },
+    {
+      "id": "g_2f437a43d002",
+      "text": "document.body.innerText.includes('survive a reload')"
+    },
+    {
+      "id": "g_3062b6321d6a",
+      "text": "the child, and not the original child."
+    },
+    {
+      "id": "g_30ce67e56967",
+      "text": "refuses an envelope from another version of the format"
+    },
+    {
+      "id": "g_316bf7a7e878",
+      "text": "remain, nor deny it; the interface must say what it knows, and the"
+    },
+    {
+      "id": "g_31c964adb0a4",
+      "text": "breaks a tie between siblings of equal order by creation date"
+    },
+    {
+      "id": "g_31d3b56fdd7d",
+      "text": "creates every expected store"
+    },
+    {
+      "id": "g_32119eaef84a",
+      "text": "`test` key, which keeps the project's configuration in a single file."
+    }
+  ]
 }

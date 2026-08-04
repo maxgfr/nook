@@ -1,10 +1,10 @@
 /**
- * Thème clair / sombre.
+ * Light / dark theme.
  *
- * Le rendu ne dépend pas de ce module : `tokens.css` suit déjà le système via
- * `light-dark()`, donc la page est correctement peinte avant même que React
- * démarre. Ce module ne sert qu'à *forcer* un thème, en posant `data-theme`
- * sur <html>, ce qui redéfinit `color-scheme` et rien d'autre.
+ * Rendering does not depend on this module: `tokens.css` already follows the
+ * system via `light-dark()`, so the page is painted correctly before React
+ * even starts. This module exists only to *force* a theme, by setting
+ * `data-theme` on <html>, which redefines `color-scheme` and nothing else.
  */
 
 export type Theme = 'system' | 'light' | 'dark'
@@ -20,17 +20,17 @@ export function readTheme(): Theme {
     const stored = localStorage.getItem(STORAGE_KEY)
     return isTheme(stored) ? stored : 'system'
   } catch {
-    // Mode navigation privée, stockage bloqué : le thème système fera l'affaire.
+    // Private browsing, storage blocked: the system theme will do.
     return 'system'
   }
 }
 
 /**
- * Le thème réellement peint, une fois « système » résolu.
+ * The theme actually painted, once "system" is resolved.
  *
- * Les jetons CSS n'ont pas besoin de cette information — `light-dark()` s'en
- * charge. Elle sert aux composants tiers qui, eux, réclament un mot : c'est le
- * cas de l'éditeur, qui attend `"light"` ou `"dark"` en propriété.
+ * The CSS tokens do not need this information — `light-dark()` handles it. It
+ * is for third-party components that do want a word: the editor is one, and
+ * expects `"light"` or `"dark"` as a prop.
  */
 export function resolveTheme(theme: Theme): 'light' | 'dark' {
   if (theme !== 'system') return theme
@@ -52,6 +52,6 @@ export function applyTheme(theme: Theme): void {
     if (theme === 'system') localStorage.removeItem(STORAGE_KEY)
     else localStorage.setItem(STORAGE_KEY, theme)
   } catch {
-    // Le thème reste appliqué pour la session, simplement pas mémorisé.
+    // The theme stays applied for the session, simply not remembered.
   }
 }

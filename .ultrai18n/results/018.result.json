@@ -1,39 +1,39 @@
 {
- "schemaVersion": 1,
- "batchId": "018",
- "batchDigest": "2d6bff5a1380fb02",
- "items": [
-  {
-   "id": "g_497cbc7dd226",
-   "text": "Opens an existing vault. Returns `undefined` when no vault exists yet —\nthe caller then decides whether to create one."
-  },
-  {
-   "id": "g_4a72cf59a3d4",
-   "text": "Create the first one"
-  },
-  {
-   "id": "g_4aeeb2b68358",
-   "text": "Opens this device's vault, or creates it on the very first launch."
-  },
-  {
-   "id": "g_4b769b94c6ec",
-   "text": "A component, not a render function: an arrow function written in the\nparent's JSX would create a brand-new component type on every render, and\nReact would remount its whole subtree each time. "
-  },
-  {
-   "id": "g_4bdc9e3b7b45",
-   "text": "---------------------------------------------------------------- Motion\n120–220 ms. Motion signals a change of state; it does not narrate."
-  },
-  {
-   "id": "g_4c41c231b067",
-   "text": "The theme stays applied for the session, simply not remembered."
-  },
-  {
-   "id": "g_4cc6b0e55f8f",
-   "text": "and never has anything to receive back."
-  },
-  {
-   "id": "g_4d7a5a459096",
-   "text": "A URL quoted inside the text of a Workbox `console.warn`."
-  }
- ]
+  "schemaVersion": 1,
+  "batchId": "018",
+  "batchDigest": "2d6bff5a1380fb02",
+  "items": [
+    {
+      "id": "g_497cbc7dd226",
+      "text": "Opens an existing vault. Returns `undefined` when no vault exists yet —\nthe caller then decides whether to create one."
+    },
+    {
+      "id": "g_4a72cf59a3d4",
+      "text": "Create the first one"
+    },
+    {
+      "id": "g_4aeeb2b68358",
+      "text": "Opens this device's vault, or creates it on the very first launch."
+    },
+    {
+      "id": "g_4b769b94c6ec",
+      "text": "A component, not a render function: an arrow function written in the\nparent's JSX would create a brand-new component type on every render, and\nReact would remount its whole subtree each time. "
+    },
+    {
+      "id": "g_4bdc9e3b7b45",
+      "text": "---------------------------------------------------------------- Motion\n120–220 ms. Motion signals a change of state; it does not narrate."
+    },
+    {
+      "id": "g_4c41c231b067",
+      "text": "The theme stays applied for the session, simply not remembered."
+    },
+    {
+      "id": "g_4cc6b0e55f8f",
+      "text": "and never has anything to receive back."
+    },
+    {
+      "id": "g_4d7a5a459096",
+      "text": "A URL quoted inside the text of a Workbox `console.warn`."
+    }
+  ]
 }

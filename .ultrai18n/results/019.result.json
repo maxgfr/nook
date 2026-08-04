@@ -1,39 +1,39 @@
 {
- "schemaVersion": 1,
- "batchId": "019",
- "batchDigest": "70a143c728671852",
- "items": [
-  {
-   "id": "g_4e75142dcf7b",
-   "text": "orphan key and no vault — a detectable, repairable state. The reverse"
-  },
-  {
-   "id": "g_4e9d3cf41a92",
-   "text": "browser profile or a backup gets nothing but unusable bytes."
-  },
-  {
-   "id": "g_4f3d9d8c0baa",
-   "text": "Our tokens already drive the colours of both schemes; this"
-  },
-  {
-   "id": "g_4fb9ada8ec06",
-   "text": "someone who opens the browser's database."
-  },
-  {
-   "id": "g_50214d692d55",
-   "text": "Could not save"
-  },
-  {
-   "id": "g_50437cc79369",
-   "text": "Nook's vocabulary.\n*\nOne decision carries all the rest: **the core does not know the format of a\ndocument's content**. It stores it, encrypts it, extracts text from it for\nsearch, but does not know what a level-2 heading or a checkbox is. Content\nis opaque JSON.\n*\nThe benefit is direct: changing editor — or supporting two — does not touch\na line of storage, encryption or search."
-  },
-  {
-   "id": "g_513f24307219",
-   "text": "Your notes are unreadable on disk"
-  },
-  {
-   "id": "g_515d5d432405",
-   "text": "a database left by an earlier version would contain notes."
-  }
- ]
+  "schemaVersion": 1,
+  "batchId": "019",
+  "batchDigest": "70a143c728671852",
+  "items": [
+    {
+      "id": "g_4e75142dcf7b",
+      "text": "orphan key and no vault — a detectable, repairable state. The reverse"
+    },
+    {
+      "id": "g_4e9d3cf41a92",
+      "text": "browser profile or a backup gets nothing but unusable bytes."
+    },
+    {
+      "id": "g_4f3d9d8c0baa",
+      "text": "Our tokens already drive the colours of both schemes; this"
+    },
+    {
+      "id": "g_4fb9ada8ec06",
+      "text": "someone who opens the browser's database."
+    },
+    {
+      "id": "g_50214d692d55",
+      "text": "Could not save"
+    },
+    {
+      "id": "g_50437cc79369",
+      "text": "Nook's vocabulary.\n*\nOne decision carries all the rest: **the core does not know the format of a\ndocument's content**. It stores it, encrypts it, extracts text from it for\nsearch, but does not know what a level-2 heading or a checkbox is. Content\nis opaque JSON.\n*\nThe benefit is direct: changing editor — or supporting two — does not touch\na line of storage, encryption or search."
+    },
+    {
+      "id": "g_513f24307219",
+      "text": "Your notes are unreadable on disk"
+    },
+    {
+      "id": "g_515d5d432405",
+      "text": "a database left by an earlier version would contain notes."
+    }
+  ]
 }

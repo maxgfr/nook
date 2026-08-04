@@ -11,15 +11,11 @@
       "roleClass": "ui-long",
       "status": "pending",
       "max": null,
-      "holes": [
-        0
-      ],
+      "holes": [0],
       "holeGloss": {
         "0": "files length"
       },
-      "sites": [
-        "ul_05b16700f09c"
-      ],
+      "sites": ["ul_05b16700f09c"],
       "mirrors": []
     },
     {
@@ -31,9 +27,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_afca83918288"
-      ],
+      "sites": ["ul_afca83918288"],
       "mirrors": []
     },
     {
@@ -45,9 +39,7 @@
       "max": 27,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_4a1de07d01a0"
-      ],
+      "sites": ["ul_4a1de07d01a0"],
       "mirrors": []
     },
     {
@@ -59,9 +51,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_523ec3870c12"
-      ],
+      "sites": ["ul_523ec3870c12"],
       "mirrors": []
     },
     {
@@ -73,9 +63,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_044e2f7ce48d"
-      ],
+      "sites": ["ul_044e2f7ce48d"],
       "mirrors": []
     },
     {
@@ -87,9 +75,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_494292df0510"
-      ],
+      "sites": ["ul_494292df0510"],
       "mirrors": []
     },
     {
@@ -101,9 +87,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_a5b8984ac3a3"
-      ],
+      "sites": ["ul_a5b8984ac3a3"],
       "mirrors": []
     },
     {
@@ -115,9 +99,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_618f3c0d16af"
-      ],
+      "sites": ["ul_618f3c0d16af"],
       "mirrors": []
     },
     {
@@ -129,9 +111,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_f09aa68fb65b"
-      ],
+      "sites": ["ul_f09aa68fb65b"],
       "mirrors": []
     },
     {
@@ -143,9 +123,7 @@
       "max": 54,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_23dc6e0f5ab3"
-      ],
+      "sites": ["ul_23dc6e0f5ab3"],
       "mirrors": []
     },
     {
@@ -157,9 +135,7 @@
       "max": 37,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_2d2fa0564852"
-      ],
+      "sites": ["ul_2d2fa0564852"],
       "mirrors": []
     },
     {
@@ -169,15 +145,11 @@
       "roleClass": "ui-short",
       "status": "pending",
       "max": 60,
-      "holes": [
-        0
-      ],
+      "holes": [0],
       "holeGloss": {
         "0": "entries length"
       },
-      "sites": [
-        "ul_01601766b6d1"
-      ],
+      "sites": ["ul_01601766b6d1"],
       "mirrors": []
     },
     {
@@ -189,9 +161,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ea7dfd2b9057"
-      ],
+      "sites": ["ul_ea7dfd2b9057"],
       "mirrors": []
     },
     {
@@ -203,9 +173,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b3376391f965"
-      ],
+      "sites": ["ul_b3376391f965"],
       "mirrors": []
     },
     {
@@ -217,9 +185,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_919865417bc3"
-      ],
+      "sites": ["ul_919865417bc3"],
       "mirrors": []
     },
     {
@@ -231,9 +197,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_9839d865d4d1"
-      ],
+      "sites": ["ul_9839d865d4d1"],
       "mirrors": []
     },
     {
@@ -245,9 +209,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b89997f933dc"
-      ],
+      "sites": ["ul_b89997f933dc"],
       "mirrors": []
     },
     {
@@ -257,15 +219,11 @@
       "roleClass": "ui-short",
       "status": "pending",
       "max": 57,
-      "holes": [
-        0
-      ],
+      "holes": [0],
       "holeGloss": {
         "0": "why"
       },
-      "sites": [
-        "ul_4d51bebb17ec"
-      ],
+      "sites": ["ul_4d51bebb17ec"],
       "mirrors": []
     },
     {
@@ -277,9 +235,7 @@
       "max": 11,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_1a704f1968b0"
-      ],
+      "sites": ["ul_1a704f1968b0"],
       "mirrors": []
     },
     {
@@ -291,9 +247,7 @@
       "max": 29,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_6a610f126adc"
-      ],
+      "sites": ["ul_6a610f126adc"],
       "mirrors": []
     },
     {
@@ -305,9 +259,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_45b4dd76ecdf"
-      ],
+      "sites": ["ul_45b4dd76ecdf"],
       "mirrors": []
     },
     {
@@ -319,9 +271,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_3daebfeeec6a"
-      ],
+      "sites": ["ul_3daebfeeec6a"],
       "mirrors": []
     },
     {
@@ -333,9 +283,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_386bc3baa51b"
-      ],
+      "sites": ["ul_386bc3baa51b"],
       "mirrors": []
     },
     {
@@ -347,9 +295,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_9222d024a382"
-      ],
+      "sites": ["ul_9222d024a382"],
       "mirrors": []
     },
     {
@@ -361,9 +307,7 @@
       "max": 44,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_df34ab212879"
-      ],
+      "sites": ["ul_df34ab212879"],
       "mirrors": []
     },
     {
@@ -375,9 +319,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_5d3cf75cadf5"
-      ],
+      "sites": ["ul_5d3cf75cadf5"],
       "mirrors": []
     },
     {
@@ -389,9 +331,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_21bc60c0db30"
-      ],
+      "sites": ["ul_21bc60c0db30"],
       "mirrors": []
     },
     {
@@ -403,9 +343,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_35b55e08da9b"
-      ],
+      "sites": ["ul_35b55e08da9b"],
       "mirrors": []
     },
     {
@@ -417,9 +355,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_50d379aa13ee"
-      ],
+      "sites": ["ul_50d379aa13ee"],
       "mirrors": []
     },
     {
@@ -431,9 +367,7 @@
       "max": 34,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_3e2bc1570741"
-      ],
+      "sites": ["ul_3e2bc1570741"],
       "mirrors": []
     },
     {
@@ -445,9 +379,7 @@
       "max": 41,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_f0fe1510bded"
-      ],
+      "sites": ["ul_f0fe1510bded"],
       "mirrors": []
     },
     {
@@ -459,9 +391,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_7b1691b6e4e5"
-      ],
+      "sites": ["ul_7b1691b6e4e5"],
       "mirrors": []
     },
     {
@@ -473,9 +403,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_a8e8faa9e6d1"
-      ],
+      "sites": ["ul_a8e8faa9e6d1"],
       "mirrors": []
     },
     {
@@ -487,9 +415,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_44b64534e8e1"
-      ],
+      "sites": ["ul_44b64534e8e1"],
       "mirrors": []
     },
     {
@@ -501,9 +427,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_fa29cc86d4b5"
-      ],
+      "sites": ["ul_fa29cc86d4b5"],
       "mirrors": []
     },
     {
@@ -515,9 +439,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_8a510c7190e7"
-      ],
+      "sites": ["ul_8a510c7190e7"],
       "mirrors": []
     },
     {
@@ -529,9 +451,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_7e2b2b06d287"
-      ],
+      "sites": ["ul_7e2b2b06d287"],
       "mirrors": []
     },
     {
@@ -543,9 +463,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_cd9416308dcf"
-      ],
+      "sites": ["ul_cd9416308dcf"],
       "mirrors": []
     },
     {
@@ -557,9 +475,7 @@
       "max": 57,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_9d163acdc2b8"
-      ],
+      "sites": ["ul_9d163acdc2b8"],
       "mirrors": []
     },
     {
@@ -571,9 +487,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_a2a00a939bd9"
-      ],
+      "sites": ["ul_a2a00a939bd9"],
       "mirrors": []
     },
     {
@@ -585,9 +499,7 @@
       "max": 26,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_d80b110cf28c"
-      ],
+      "sites": ["ul_d80b110cf28c"],
       "mirrors": []
     },
     {
@@ -599,9 +511,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_973c8463424f"
-      ],
+      "sites": ["ul_973c8463424f"],
       "mirrors": []
     },
     {
@@ -613,9 +523,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_929ff8a66564"
-      ],
+      "sites": ["ul_929ff8a66564"],
       "mirrors": []
     },
     {
@@ -627,9 +535,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_a15954cf65bc"
-      ],
+      "sites": ["ul_a15954cf65bc"],
       "mirrors": []
     },
     {
@@ -641,9 +547,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_2ef1eb27b53a"
-      ],
+      "sites": ["ul_2ef1eb27b53a"],
       "mirrors": []
     },
     {
@@ -655,12 +559,8 @@
       "max": 25,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_9ea044d35e13"
-      ],
-      "mirrors": [
-        "ul_b44998cacac4"
-      ]
+      "sites": ["ul_9ea044d35e13"],
+      "mirrors": ["ul_b44998cacac4"]
     },
     {
       "id": "g_188f7667e682",
@@ -671,9 +571,7 @@
       "max": 46,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_99f6163490d4"
-      ],
+      "sites": ["ul_99f6163490d4"],
       "mirrors": []
     },
     {
@@ -685,9 +583,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_46611a7cd97d"
-      ],
+      "sites": ["ul_46611a7cd97d"],
       "mirrors": []
     },
     {
@@ -699,9 +595,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_127f2ec60418"
-      ],
+      "sites": ["ul_127f2ec60418"],
       "mirrors": []
     },
     {
@@ -713,9 +607,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_940837cdd63b"
-      ],
+      "sites": ["ul_940837cdd63b"],
       "mirrors": []
     },
     {
@@ -727,9 +619,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_551fdbe2835e"
-      ],
+      "sites": ["ul_551fdbe2835e"],
       "mirrors": []
     },
     {
@@ -741,9 +631,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_d9bc78aab631"
-      ],
+      "sites": ["ul_d9bc78aab631"],
       "mirrors": []
     },
     {
@@ -755,9 +643,7 @@
       "max": 42,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_8a5c50db1ee0"
-      ],
+      "sites": ["ul_8a5c50db1ee0"],
       "mirrors": []
     },
     {
@@ -769,9 +655,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_a4dd5c8e007d"
-      ],
+      "sites": ["ul_a4dd5c8e007d"],
       "mirrors": []
     },
     {
@@ -781,16 +665,11 @@
       "roleClass": "ui-short",
       "status": "pending",
       "max": 36,
-      "holes": [
-        0
-      ],
+      "holes": [0],
       "holeGloss": {
         "0": "store"
       },
-      "sites": [
-        "ul_974690b8b81a",
-        "ul_cfb49a3c00ef"
-      ],
+      "sites": ["ul_974690b8b81a", "ul_cfb49a3c00ef"],
       "mirrors": []
     },
     {
@@ -802,9 +681,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_0092964e089f"
-      ],
+      "sites": ["ul_0092964e089f"],
       "mirrors": []
     },
     {
@@ -816,9 +693,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b8ca32e11804"
-      ],
+      "sites": ["ul_b8ca32e11804"],
       "mirrors": []
     },
     {
@@ -830,9 +705,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_4421f88d37a7"
-      ],
+      "sites": ["ul_4421f88d37a7"],
       "mirrors": []
     },
     {
@@ -842,17 +715,12 @@
       "roleClass": "ui-short",
       "status": "pending",
       "max": 30,
-      "holes": [
-        0,
-        1
-      ],
+      "holes": [0, 1],
       "holeGloss": {
         "0": "store",
         "1": "key"
       },
-      "sites": [
-        "ul_94055f455827"
-      ],
+      "sites": ["ul_94055f455827"],
       "mirrors": []
     },
     {
@@ -864,9 +732,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_41b99c4eff96"
-      ],
+      "sites": ["ul_41b99c4eff96"],
       "mirrors": []
     },
     {
@@ -878,9 +744,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_e73e68a33f93"
-      ],
+      "sites": ["ul_e73e68a33f93"],
       "mirrors": []
     },
     {
@@ -892,9 +756,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_e06f4324216f"
-      ],
+      "sites": ["ul_e06f4324216f"],
       "mirrors": []
     },
     {
@@ -906,9 +768,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_60fb7b89fdf6"
-      ],
+      "sites": ["ul_60fb7b89fdf6"],
       "mirrors": []
     },
     {
@@ -920,9 +780,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_52e635c3d421"
-      ],
+      "sites": ["ul_52e635c3d421"],
       "mirrors": []
     },
     {
@@ -934,9 +792,7 @@
       "max": 40,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_bd36d0786c9f"
-      ],
+      "sites": ["ul_bd36d0786c9f"],
       "mirrors": []
     },
     {
@@ -948,9 +804,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_194ff82a041d"
-      ],
+      "sites": ["ul_194ff82a041d"],
       "mirrors": []
     },
     {
@@ -962,9 +816,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_2b347f863717"
-      ],
+      "sites": ["ul_2b347f863717"],
       "mirrors": []
     },
     {
@@ -976,9 +828,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_74821ee4cd2d"
-      ],
+      "sites": ["ul_74821ee4cd2d"],
       "mirrors": []
     },
     {
@@ -990,9 +840,7 @@
       "max": 64,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_46fa72d8b439"
-      ],
+      "sites": ["ul_46fa72d8b439"],
       "mirrors": []
     },
     {
@@ -1004,9 +852,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_4fd6e58597e9"
-      ],
+      "sites": ["ul_4fd6e58597e9"],
       "mirrors": []
     },
     {
@@ -1018,9 +864,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_31d1425624e2"
-      ],
+      "sites": ["ul_31d1425624e2"],
       "mirrors": []
     },
     {
@@ -1032,9 +876,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_7c429b68157c"
-      ],
+      "sites": ["ul_7c429b68157c"],
       "mirrors": []
     },
     {
@@ -1046,9 +888,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_57a3e6f679c1"
-      ],
+      "sites": ["ul_57a3e6f679c1"],
       "mirrors": []
     },
     {
@@ -1060,9 +900,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b09c73a2e941"
-      ],
+      "sites": ["ul_b09c73a2e941"],
       "mirrors": []
     },
     {
@@ -1074,9 +912,7 @@
       "max": 46,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ff7a2344ea93"
-      ],
+      "sites": ["ul_ff7a2344ea93"],
       "mirrors": []
     },
     {
@@ -1088,9 +924,7 @@
       "max": 13,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_9c2d573a017f"
-      ],
+      "sites": ["ul_9c2d573a017f"],
       "mirrors": []
     },
     {
@@ -1102,9 +936,7 @@
       "max": 52,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_83df43aaaf26"
-      ],
+      "sites": ["ul_83df43aaaf26"],
       "mirrors": []
     },
     {
@@ -1116,9 +948,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ac1f6f816ea1"
-      ],
+      "sites": ["ul_ac1f6f816ea1"],
       "mirrors": []
     },
     {
@@ -1130,9 +960,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_1269e6fd05f5"
-      ],
+      "sites": ["ul_1269e6fd05f5"],
       "mirrors": []
     },
     {
@@ -1144,9 +972,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_64e2c600e5b2"
-      ],
+      "sites": ["ul_64e2c600e5b2"],
       "mirrors": []
     },
     {
@@ -1158,9 +984,7 @@
       "max": 58,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_59a9fbc2c4ed"
-      ],
+      "sites": ["ul_59a9fbc2c4ed"],
       "mirrors": []
     },
     {
@@ -1172,9 +996,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_d655cbaccaff"
-      ],
+      "sites": ["ul_d655cbaccaff"],
       "mirrors": []
     },
     {
@@ -1186,9 +1008,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_a50b03347ac5"
-      ],
+      "sites": ["ul_a50b03347ac5"],
       "mirrors": []
     },
     {
@@ -1200,9 +1020,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_13bf277c2f4c"
-      ],
+      "sites": ["ul_13bf277c2f4c"],
       "mirrors": []
     },
     {
@@ -1214,9 +1032,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_24e2a70b2374"
-      ],
+      "sites": ["ul_24e2a70b2374"],
       "mirrors": []
     },
     {
@@ -1228,9 +1044,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_4ab6df242b8d"
-      ],
+      "sites": ["ul_4ab6df242b8d"],
       "mirrors": []
     },
     {
@@ -1242,9 +1056,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_66c1258dafca"
-      ],
+      "sites": ["ul_66c1258dafca"],
       "mirrors": []
     },
     {
@@ -1256,9 +1068,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_beb1b0fd906e"
-      ],
+      "sites": ["ul_beb1b0fd906e"],
       "mirrors": []
     },
     {
@@ -1270,9 +1080,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_1253c186470b"
-      ],
+      "sites": ["ul_1253c186470b"],
       "mirrors": []
     },
     {
@@ -1284,9 +1092,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_c7749f905161"
-      ],
+      "sites": ["ul_c7749f905161"],
       "mirrors": []
     },
     {
@@ -1298,9 +1104,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_e623c6fcbbb4"
-      ],
+      "sites": ["ul_e623c6fcbbb4"],
       "mirrors": []
     },
     {
@@ -1312,9 +1116,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ee7bf5720662"
-      ],
+      "sites": ["ul_ee7bf5720662"],
       "mirrors": []
     },
     {
@@ -1326,9 +1128,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_59231dcb9817"
-      ],
+      "sites": ["ul_59231dcb9817"],
       "mirrors": []
     },
     {
@@ -1340,9 +1140,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_050b22db249f"
-      ],
+      "sites": ["ul_050b22db249f"],
       "mirrors": []
     },
     {
@@ -1354,9 +1152,7 @@
       "max": 46,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_505308aa640a"
-      ],
+      "sites": ["ul_505308aa640a"],
       "mirrors": []
     },
     {
@@ -1368,9 +1164,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_55f28525bbb6"
-      ],
+      "sites": ["ul_55f28525bbb6"],
       "mirrors": []
     },
     {
@@ -1382,9 +1176,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_3afd5345f4db"
-      ],
+      "sites": ["ul_3afd5345f4db"],
       "mirrors": []
     },
     {
@@ -1396,9 +1188,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_2c45c47d3aff"
-      ],
+      "sites": ["ul_2c45c47d3aff"],
       "mirrors": []
     },
     {
@@ -1410,9 +1200,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ce9ee4a6ecc3"
-      ],
+      "sites": ["ul_ce9ee4a6ecc3"],
       "mirrors": []
     },
     {
@@ -1424,9 +1212,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_f830a840ac5b"
-      ],
+      "sites": ["ul_f830a840ac5b"],
       "mirrors": []
     },
     {
@@ -1438,9 +1224,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_5883b927dd6e"
-      ],
+      "sites": ["ul_5883b927dd6e"],
       "mirrors": []
     },
     {
@@ -1452,9 +1236,7 @@
       "max": 21,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_389e9a685ba8"
-      ],
+      "sites": ["ul_389e9a685ba8"],
       "mirrors": []
     },
     {
@@ -1466,12 +1248,8 @@
       "max": 45,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_d1f42c113951"
-      ],
-      "mirrors": [
-        "ul_606c130098d6"
-      ]
+      "sites": ["ul_d1f42c113951"],
+      "mirrors": ["ul_606c130098d6"]
     },
     {
       "id": "g_3778bea16185",
@@ -1482,9 +1260,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_35ffe12df895"
-      ],
+      "sites": ["ul_35ffe12df895"],
       "mirrors": []
     },
     {
@@ -1496,9 +1272,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_20d85efac65a"
-      ],
+      "sites": ["ul_20d85efac65a"],
       "mirrors": []
     },
     {
@@ -1510,9 +1284,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_da2c11f8b176"
-      ],
+      "sites": ["ul_da2c11f8b176"],
       "mirrors": []
     },
     {
@@ -1524,12 +1296,8 @@
       "max": 26,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_71c3aef3dc50"
-      ],
-      "mirrors": [
-        "ul_975e8fccfb6f"
-      ]
+      "sites": ["ul_71c3aef3dc50"],
+      "mirrors": ["ul_975e8fccfb6f"]
     },
     {
       "id": "g_3a09ae2bab8b",
@@ -1540,9 +1308,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_c02fe62c80b2"
-      ],
+      "sites": ["ul_c02fe62c80b2"],
       "mirrors": []
     },
     {
@@ -1554,9 +1320,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_9189a5eee596"
-      ],
+      "sites": ["ul_9189a5eee596"],
       "mirrors": []
     },
     {
@@ -1568,9 +1332,7 @@
       "max": 160,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_91b2463d1e09"
-      ],
+      "sites": ["ul_91b2463d1e09"],
       "mirrors": []
     },
     {
@@ -1582,9 +1344,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_bc98b665d8a9"
-      ],
+      "sites": ["ul_bc98b665d8a9"],
       "mirrors": []
     },
     {
@@ -1596,9 +1356,7 @@
       "max": 58,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_c3b10270cc5a"
-      ],
+      "sites": ["ul_c3b10270cc5a"],
       "mirrors": []
     },
     {
@@ -1610,9 +1368,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_20651bd4b04f"
-      ],
+      "sites": ["ul_20651bd4b04f"],
       "mirrors": []
     },
     {
@@ -1624,9 +1380,7 @@
       "max": 57,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_efbb39037b4a"
-      ],
+      "sites": ["ul_efbb39037b4a"],
       "mirrors": []
     },
     {
@@ -1638,9 +1392,7 @@
       "max": 53,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ac86e16fd691"
-      ],
+      "sites": ["ul_ac86e16fd691"],
       "mirrors": []
     },
     {
@@ -1652,9 +1404,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_178c46684532"
-      ],
+      "sites": ["ul_178c46684532"],
       "mirrors": []
     },
     {
@@ -1666,9 +1416,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_bec9eef2816d"
-      ],
+      "sites": ["ul_bec9eef2816d"],
       "mirrors": []
     },
     {
@@ -1680,9 +1428,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_aa7e4f9a7375"
-      ],
+      "sites": ["ul_aa7e4f9a7375"],
       "mirrors": []
     },
     {
@@ -1694,9 +1440,7 @@
       "max": 38,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ea4f4dabb566"
-      ],
+      "sites": ["ul_ea4f4dabb566"],
       "mirrors": []
     },
     {
@@ -1708,9 +1452,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_a60dccfd52d5"
-      ],
+      "sites": ["ul_a60dccfd52d5"],
       "mirrors": []
     },
     {
@@ -1722,9 +1464,7 @@
       "max": 50,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b4ebd06f56b5"
-      ],
+      "sites": ["ul_b4ebd06f56b5"],
       "mirrors": []
     },
     {
@@ -1736,9 +1476,7 @@
       "max": 68,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_644faecf9169"
-      ],
+      "sites": ["ul_644faecf9169"],
       "mirrors": []
     },
     {
@@ -1750,9 +1488,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_98b5549b2795"
-      ],
+      "sites": ["ul_98b5549b2795"],
       "mirrors": []
     },
     {
@@ -1764,9 +1500,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_4c7badf0e901"
-      ],
+      "sites": ["ul_4c7badf0e901"],
       "mirrors": []
     },
     {
@@ -1778,9 +1512,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_fbbf20ec1c98"
-      ],
+      "sites": ["ul_fbbf20ec1c98"],
       "mirrors": []
     },
     {
@@ -1792,9 +1524,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_9819c353373f"
-      ],
+      "sites": ["ul_9819c353373f"],
       "mirrors": []
     },
     {
@@ -1806,9 +1536,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_457e66a796f2"
-      ],
+      "sites": ["ul_457e66a796f2"],
       "mirrors": []
     },
     {
@@ -1820,9 +1548,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_6963f0489700"
-      ],
+      "sites": ["ul_6963f0489700"],
       "mirrors": []
     },
     {
@@ -1834,9 +1560,7 @@
       "max": 26,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_47336184c43f"
-      ],
+      "sites": ["ul_47336184c43f"],
       "mirrors": []
     },
     {
@@ -1848,9 +1572,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_e33b086284de"
-      ],
+      "sites": ["ul_e33b086284de"],
       "mirrors": []
     },
     {
@@ -1862,9 +1584,7 @@
       "max": 41,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_19972eda9f88"
-      ],
+      "sites": ["ul_19972eda9f88"],
       "mirrors": []
     },
     {
@@ -1876,9 +1596,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_20e767c8ffea"
-      ],
+      "sites": ["ul_20e767c8ffea"],
       "mirrors": []
     },
     {
@@ -1890,9 +1608,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b51e5cb9bf32"
-      ],
+      "sites": ["ul_b51e5cb9bf32"],
       "mirrors": []
     },
     {
@@ -1904,9 +1620,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_cecdac909067"
-      ],
+      "sites": ["ul_cecdac909067"],
       "mirrors": []
     },
     {
@@ -1918,9 +1632,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_9ef5417f587d"
-      ],
+      "sites": ["ul_9ef5417f587d"],
       "mirrors": []
     },
     {
@@ -1932,9 +1644,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b73c3be04a07"
-      ],
+      "sites": ["ul_b73c3be04a07"],
       "mirrors": []
     },
     {
@@ -1946,9 +1656,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_d6481b2cb2b4"
-      ],
+      "sites": ["ul_d6481b2cb2b4"],
       "mirrors": []
     },
     {
@@ -1960,9 +1668,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_052f2c76966b"
-      ],
+      "sites": ["ul_052f2c76966b"],
       "mirrors": []
     },
     {
@@ -1974,9 +1680,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_3aa4badf6adf"
-      ],
+      "sites": ["ul_3aa4badf6adf"],
       "mirrors": []
     },
     {
@@ -1988,9 +1692,7 @@
       "max": 53,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_82e274034a64"
-      ],
+      "sites": ["ul_82e274034a64"],
       "mirrors": []
     },
     {
@@ -2002,9 +1704,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_4d03bedea3db"
-      ],
+      "sites": ["ul_4d03bedea3db"],
       "mirrors": []
     },
     {
@@ -2016,9 +1716,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_09b91f74fb73"
-      ],
+      "sites": ["ul_09b91f74fb73"],
       "mirrors": []
     },
     {
@@ -2030,9 +1728,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_10799236b79f"
-      ],
+      "sites": ["ul_10799236b79f"],
       "mirrors": []
     },
     {
@@ -2044,9 +1740,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_844f1f3fde58"
-      ],
+      "sites": ["ul_844f1f3fde58"],
       "mirrors": []
     },
     {
@@ -2058,9 +1752,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_6e2169de1b40"
-      ],
+      "sites": ["ul_6e2169de1b40"],
       "mirrors": []
     },
     {
@@ -2072,9 +1764,7 @@
       "max": 27,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b475af5a4067"
-      ],
+      "sites": ["ul_b475af5a4067"],
       "mirrors": []
     },
     {
@@ -2086,9 +1776,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_46944aee7457"
-      ],
+      "sites": ["ul_46944aee7457"],
       "mirrors": []
     },
     {
@@ -2100,9 +1788,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_95ee79f885c9"
-      ],
+      "sites": ["ul_95ee79f885c9"],
       "mirrors": []
     },
     {
@@ -2114,9 +1800,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b8f6db33e6f2"
-      ],
+      "sites": ["ul_b8f6db33e6f2"],
       "mirrors": []
     },
     {
@@ -2128,9 +1812,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_426ae50f45fb"
-      ],
+      "sites": ["ul_426ae50f45fb"],
       "mirrors": []
     },
     {
@@ -2142,9 +1824,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_0ef136f8648b"
-      ],
+      "sites": ["ul_0ef136f8648b"],
       "mirrors": []
     },
     {
@@ -2156,9 +1836,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_4381f73fa694"
-      ],
+      "sites": ["ul_4381f73fa694"],
       "mirrors": []
     },
     {
@@ -2170,9 +1848,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_2b28def7a64e"
-      ],
+      "sites": ["ul_2b28def7a64e"],
       "mirrors": []
     },
     {
@@ -2184,9 +1860,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_17564b0f864b"
-      ],
+      "sites": ["ul_17564b0f864b"],
       "mirrors": []
     },
     {
@@ -2198,9 +1872,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_491ab73ab452"
-      ],
+      "sites": ["ul_491ab73ab452"],
       "mirrors": []
     },
     {
@@ -2212,9 +1884,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_63fd865e142d"
-      ],
+      "sites": ["ul_63fd865e142d"],
       "mirrors": []
     },
     {
@@ -2226,9 +1896,7 @@
       "max": 38,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_78fdd1af6454"
-      ],
+      "sites": ["ul_78fdd1af6454"],
       "mirrors": []
     },
     {
@@ -2240,9 +1908,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_3543eb9e8b0b"
-      ],
+      "sites": ["ul_3543eb9e8b0b"],
       "mirrors": []
     },
     {
@@ -2254,9 +1920,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_1bb3d9fb1df1"
-      ],
+      "sites": ["ul_1bb3d9fb1df1"],
       "mirrors": []
     },
     {
@@ -2268,9 +1932,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_c7501547000a"
-      ],
+      "sites": ["ul_c7501547000a"],
       "mirrors": []
     },
     {
@@ -2282,9 +1944,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_f7245f0e6b61"
-      ],
+      "sites": ["ul_f7245f0e6b61"],
       "mirrors": []
     },
     {
@@ -2296,9 +1956,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_74ae521c1766"
-      ],
+      "sites": ["ul_74ae521c1766"],
       "mirrors": []
     },
     {
@@ -2310,9 +1968,7 @@
       "max": 63,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_c24c93269709"
-      ],
+      "sites": ["ul_c24c93269709"],
       "mirrors": []
     },
     {
@@ -2324,9 +1980,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_37fec0c221b4"
-      ],
+      "sites": ["ul_37fec0c221b4"],
       "mirrors": []
     },
     {
@@ -2336,17 +1990,12 @@
       "roleClass": "ui-short",
       "status": "pending",
       "max": 68,
-      "holes": [
-        0,
-        1
-      ],
+      "holes": [0, 1],
       "holeGloss": {
         "0": "findings length",
         "1": "csp problems length"
       },
-      "sites": [
-        "ul_dd3085f82eec"
-      ],
+      "sites": ["ul_dd3085f82eec"],
       "mirrors": []
     },
     {
@@ -2358,9 +2007,7 @@
       "max": 31,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ebae55578c6d"
-      ],
+      "sites": ["ul_ebae55578c6d"],
       "mirrors": []
     },
     {
@@ -2372,9 +2019,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_bb9cf1745b0a"
-      ],
+      "sites": ["ul_bb9cf1745b0a"],
       "mirrors": []
     },
     {
@@ -2386,9 +2031,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_0b82a15878e9"
-      ],
+      "sites": ["ul_0b82a15878e9"],
       "mirrors": []
     },
     {
@@ -2400,9 +2043,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_dbd199ecd5c9"
-      ],
+      "sites": ["ul_dbd199ecd5c9"],
       "mirrors": []
     },
     {
@@ -2414,9 +2055,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_37733d9a3e6a"
-      ],
+      "sites": ["ul_37733d9a3e6a"],
       "mirrors": []
     },
     {
@@ -2428,9 +2067,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_4ba4c43c3bed"
-      ],
+      "sites": ["ul_4ba4c43c3bed"],
       "mirrors": []
     },
     {
@@ -2442,9 +2079,7 @@
       "max": 65,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_af2a5a4d9626"
-      ],
+      "sites": ["ul_af2a5a4d9626"],
       "mirrors": []
     },
     {
@@ -2456,9 +2091,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_351309ad8eea"
-      ],
+      "sites": ["ul_351309ad8eea"],
       "mirrors": []
     },
     {
@@ -2470,9 +2103,7 @@
       "max": 45,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_aaf3f4bda1ee"
-      ],
+      "sites": ["ul_aaf3f4bda1ee"],
       "mirrors": []
     },
     {
@@ -2484,9 +2115,7 @@
       "max": 49,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b62e64e4b7f3"
-      ],
+      "sites": ["ul_b62e64e4b7f3"],
       "mirrors": []
     },
     {
@@ -2498,9 +2127,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_96471cd1168f"
-      ],
+      "sites": ["ul_96471cd1168f"],
       "mirrors": []
     },
     {
@@ -2512,9 +2139,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_d0fbd4898502"
-      ],
+      "sites": ["ul_d0fbd4898502"],
       "mirrors": []
     },
     {
@@ -2526,9 +2151,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b462eced31f6"
-      ],
+      "sites": ["ul_b462eced31f6"],
       "mirrors": []
     },
     {
@@ -2540,9 +2163,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_1bc5998e1056"
-      ],
+      "sites": ["ul_1bc5998e1056"],
       "mirrors": []
     },
     {
@@ -2554,9 +2175,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_86c1761c2f64"
-      ],
+      "sites": ["ul_86c1761c2f64"],
       "mirrors": []
     },
     {
@@ -2568,9 +2187,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_7e106aa852c5"
-      ],
+      "sites": ["ul_7e106aa852c5"],
       "mirrors": []
     },
     {
@@ -2582,9 +2199,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_38671bed5746"
-      ],
+      "sites": ["ul_38671bed5746"],
       "mirrors": []
     },
     {
@@ -2596,9 +2211,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_7ce4055b0408"
-      ],
+      "sites": ["ul_7ce4055b0408"],
       "mirrors": []
     },
     {
@@ -2610,9 +2223,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_1ad3073e356c"
-      ],
+      "sites": ["ul_1ad3073e356c"],
       "mirrors": []
     },
     {
@@ -2624,9 +2235,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_267cebbb2130"
-      ],
+      "sites": ["ul_267cebbb2130"],
       "mirrors": []
     },
     {
@@ -2638,9 +2247,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_33be9f3dee63"
-      ],
+      "sites": ["ul_33be9f3dee63"],
       "mirrors": []
     },
     {
@@ -2652,9 +2259,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ea115d3c867a"
-      ],
+      "sites": ["ul_ea115d3c867a"],
       "mirrors": []
     },
     {
@@ -2666,9 +2271,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_8771f10b40ae"
-      ],
+      "sites": ["ul_8771f10b40ae"],
       "mirrors": []
     },
     {
@@ -2680,9 +2283,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ca3b1af55d25"
-      ],
+      "sites": ["ul_ca3b1af55d25"],
       "mirrors": []
     },
     {
@@ -2694,9 +2295,7 @@
       "max": 57,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_415e3b436d04"
-      ],
+      "sites": ["ul_415e3b436d04"],
       "mirrors": []
     },
     {
@@ -2708,9 +2307,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_0f80b0f3aa91"
-      ],
+      "sites": ["ul_0f80b0f3aa91"],
       "mirrors": []
     },
     {
@@ -2722,9 +2319,7 @@
       "max": 25,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_e4cd9578ebf7"
-      ],
+      "sites": ["ul_e4cd9578ebf7"],
       "mirrors": []
     },
     {
@@ -2736,9 +2331,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ab91a494d731"
-      ],
+      "sites": ["ul_ab91a494d731"],
       "mirrors": []
     },
     {
@@ -2750,9 +2343,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ea04f70b3fc2"
-      ],
+      "sites": ["ul_ea04f70b3fc2"],
       "mirrors": []
     },
     {
@@ -2764,9 +2355,7 @@
       "max": 61,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_278c7262efea"
-      ],
+      "sites": ["ul_278c7262efea"],
       "mirrors": []
     },
     {
@@ -2778,9 +2367,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ba27c6b9e1b5"
-      ],
+      "sites": ["ul_ba27c6b9e1b5"],
       "mirrors": []
     },
     {
@@ -2792,9 +2379,7 @@
       "max": 56,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_d031f19d5a1a"
-      ],
+      "sites": ["ul_d031f19d5a1a"],
       "mirrors": []
     },
     {
@@ -2806,9 +2391,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_56021b2273f9"
-      ],
+      "sites": ["ul_56021b2273f9"],
       "mirrors": []
     },
     {
@@ -2820,9 +2403,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_303a0e14c4ee"
-      ],
+      "sites": ["ul_303a0e14c4ee"],
       "mirrors": []
     },
     {
@@ -2834,9 +2415,7 @@
       "max": 11,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_eb01f8b03c16"
-      ],
+      "sites": ["ul_eb01f8b03c16"],
       "mirrors": []
     },
     {
@@ -2848,9 +2427,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_87891c1b2830"
-      ],
+      "sites": ["ul_87891c1b2830"],
       "mirrors": []
     },
     {
@@ -2862,9 +2439,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_2029aa8210a4"
-      ],
+      "sites": ["ul_2029aa8210a4"],
       "mirrors": []
     },
     {
@@ -2876,9 +2451,7 @@
       "max": 49,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_aa4794e9f019"
-      ],
+      "sites": ["ul_aa4794e9f019"],
       "mirrors": []
     },
     {
@@ -2890,9 +2463,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_90e0bdf38d79"
-      ],
+      "sites": ["ul_90e0bdf38d79"],
       "mirrors": []
     },
     {
@@ -2904,9 +2475,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ee0d7ed9a2ff"
-      ],
+      "sites": ["ul_ee0d7ed9a2ff"],
       "mirrors": []
     },
     {
@@ -2918,9 +2487,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_e47dd38e5e8d"
-      ],
+      "sites": ["ul_e47dd38e5e8d"],
       "mirrors": []
     },
     {
@@ -2932,12 +2499,8 @@
       "max": 23,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_6d88896ba5a2"
-      ],
-      "mirrors": [
-        "ul_0f152d9c1fd8"
-      ]
+      "sites": ["ul_6d88896ba5a2"],
+      "mirrors": ["ul_0f152d9c1fd8"]
     },
     {
       "id": "g_6b89a98c3526",
@@ -2948,9 +2511,7 @@
       "max": 25,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_2ef75e539e59"
-      ],
+      "sites": ["ul_2ef75e539e59"],
       "mirrors": []
     },
     {
@@ -2962,9 +2523,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_be2fa558dc0f"
-      ],
+      "sites": ["ul_be2fa558dc0f"],
       "mirrors": []
     },
     {
@@ -2976,9 +2535,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_3fa4e20420f9"
-      ],
+      "sites": ["ul_3fa4e20420f9"],
       "mirrors": []
     },
     {
@@ -2990,9 +2547,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_fb3537d585b1"
-      ],
+      "sites": ["ul_fb3537d585b1"],
       "mirrors": []
     },
     {
@@ -3004,9 +2559,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ab3ae6943aba"
-      ],
+      "sites": ["ul_ab3ae6943aba"],
       "mirrors": []
     },
     {
@@ -3018,9 +2571,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_49cbc84d477c"
-      ],
+      "sites": ["ul_49cbc84d477c"],
       "mirrors": []
     },
     {
@@ -3032,10 +2583,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_7a5be3bf3077",
-        "ul_3f2c5db1cf36"
-      ],
+      "sites": ["ul_7a5be3bf3077", "ul_3f2c5db1cf36"],
       "mirrors": []
     },
     {
@@ -3047,9 +2595,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_aaf501e88e5e"
-      ],
+      "sites": ["ul_aaf501e88e5e"],
       "mirrors": []
     },
     {
@@ -3061,9 +2607,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_9c06ba75a0a9"
-      ],
+      "sites": ["ul_9c06ba75a0a9"],
       "mirrors": []
     },
     {
@@ -3075,9 +2619,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_0762068dbba5"
-      ],
+      "sites": ["ul_0762068dbba5"],
       "mirrors": []
     },
     {
@@ -3089,9 +2631,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_d5b6a179055d"
-      ],
+      "sites": ["ul_d5b6a179055d"],
       "mirrors": []
     },
     {
@@ -3103,9 +2643,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_a6cb6eb36cd1"
-      ],
+      "sites": ["ul_a6cb6eb36cd1"],
       "mirrors": []
     },
     {
@@ -3117,9 +2655,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_23aa1dcf0ff3"
-      ],
+      "sites": ["ul_23aa1dcf0ff3"],
       "mirrors": []
     },
     {
@@ -3131,9 +2667,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_8d31039d6942"
-      ],
+      "sites": ["ul_8d31039d6942"],
       "mirrors": []
     },
     {
@@ -3145,9 +2679,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_291cd2eaa8ab"
-      ],
+      "sites": ["ul_291cd2eaa8ab"],
       "mirrors": []
     },
     {
@@ -3159,9 +2691,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ce37cfaf3886"
-      ],
+      "sites": ["ul_ce37cfaf3886"],
       "mirrors": []
     },
     {
@@ -3173,9 +2703,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_acaede029d58"
-      ],
+      "sites": ["ul_acaede029d58"],
       "mirrors": []
     },
     {
@@ -3187,9 +2715,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_cc4132f76c5a"
-      ],
+      "sites": ["ul_cc4132f76c5a"],
       "mirrors": []
     },
     {
@@ -3201,9 +2727,7 @@
       "max": 37,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_c0721205caf4"
-      ],
+      "sites": ["ul_c0721205caf4"],
       "mirrors": []
     },
     {
@@ -3215,10 +2739,7 @@
       "max": 11,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_7f93393c44de",
-        "ul_d70d66b981f5"
-      ],
+      "sites": ["ul_7f93393c44de", "ul_d70d66b981f5"],
       "mirrors": []
     },
     {
@@ -3230,9 +2751,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_faba853f4f67"
-      ],
+      "sites": ["ul_faba853f4f67"],
       "mirrors": []
     },
     {
@@ -3244,9 +2763,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_342ae9154251"
-      ],
+      "sites": ["ul_342ae9154251"],
       "mirrors": []
     },
     {
@@ -3258,9 +2775,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_c487f3b12488"
-      ],
+      "sites": ["ul_c487f3b12488"],
       "mirrors": []
     },
     {
@@ -3272,9 +2787,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_d742873fad86"
-      ],
+      "sites": ["ul_d742873fad86"],
       "mirrors": []
     },
     {
@@ -3286,9 +2799,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_c996d03a0169"
-      ],
+      "sites": ["ul_c996d03a0169"],
       "mirrors": []
     },
     {
@@ -3300,9 +2811,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_6d175756bdf1"
-      ],
+      "sites": ["ul_6d175756bdf1"],
       "mirrors": []
     },
     {
@@ -3314,9 +2823,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_5cf2aad51e50"
-      ],
+      "sites": ["ul_5cf2aad51e50"],
       "mirrors": []
     },
     {
@@ -3328,9 +2835,7 @@
       "max": 21,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_08724dc661b5"
-      ],
+      "sites": ["ul_08724dc661b5"],
       "mirrors": []
     },
     {
@@ -3342,9 +2847,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_0302cbdeeb3b"
-      ],
+      "sites": ["ul_0302cbdeeb3b"],
       "mirrors": []
     },
     {
@@ -3356,9 +2859,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_8aeb79f28225"
-      ],
+      "sites": ["ul_8aeb79f28225"],
       "mirrors": []
     },
     {
@@ -3370,9 +2871,7 @@
       "max": 42,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_154fc1f2980a"
-      ],
+      "sites": ["ul_154fc1f2980a"],
       "mirrors": []
     },
     {
@@ -3384,9 +2883,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_947be1042a80"
-      ],
+      "sites": ["ul_947be1042a80"],
       "mirrors": []
     },
     {
@@ -3398,9 +2895,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ef27747f9a17"
-      ],
+      "sites": ["ul_ef27747f9a17"],
       "mirrors": []
     },
     {
@@ -3412,9 +2907,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_899d23215311"
-      ],
+      "sites": ["ul_899d23215311"],
       "mirrors": []
     },
     {
@@ -3426,9 +2919,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_93474afd8ead"
-      ],
+      "sites": ["ul_93474afd8ead"],
       "mirrors": []
     },
     {
@@ -3440,9 +2931,7 @@
       "max": 49,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_6e7daf529507"
-      ],
+      "sites": ["ul_6e7daf529507"],
       "mirrors": []
     },
     {
@@ -3454,9 +2943,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_99cc5cdc18bc"
-      ],
+      "sites": ["ul_99cc5cdc18bc"],
       "mirrors": []
     },
     {
@@ -3468,9 +2955,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_4c0dc976dbea"
-      ],
+      "sites": ["ul_4c0dc976dbea"],
       "mirrors": []
     },
     {
@@ -3482,9 +2967,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_9d4d3e1587e6"
-      ],
+      "sites": ["ul_9d4d3e1587e6"],
       "mirrors": []
     },
     {
@@ -3496,9 +2979,7 @@
       "max": 10,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_703621df137f"
-      ],
+      "sites": ["ul_703621df137f"],
       "mirrors": []
     },
     {
@@ -3510,9 +2991,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_bb026f4cb0ae"
-      ],
+      "sites": ["ul_bb026f4cb0ae"],
       "mirrors": []
     },
     {
@@ -3524,9 +3003,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_9ca59ce0978a"
-      ],
+      "sites": ["ul_9ca59ce0978a"],
       "mirrors": []
     },
     {
@@ -3538,9 +3015,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_d7b10627a013"
-      ],
+      "sites": ["ul_d7b10627a013"],
       "mirrors": []
     },
     {
@@ -3552,9 +3027,7 @@
       "max": 40,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_16b4ad9c9d4b"
-      ],
+      "sites": ["ul_16b4ad9c9d4b"],
       "mirrors": []
     },
     {
@@ -3566,9 +3039,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_a643caaf5437"
-      ],
+      "sites": ["ul_a643caaf5437"],
       "mirrors": []
     },
     {
@@ -3580,9 +3051,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_db0f75393794"
-      ],
+      "sites": ["ul_db0f75393794"],
       "mirrors": []
     },
     {
@@ -3594,9 +3063,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_c692a4c84cf9"
-      ],
+      "sites": ["ul_c692a4c84cf9"],
       "mirrors": []
     },
     {
@@ -3608,9 +3075,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_f5bbe9da5cac"
-      ],
+      "sites": ["ul_f5bbe9da5cac"],
       "mirrors": []
     },
     {
@@ -3622,9 +3087,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_9f1d0e8d3bd9"
-      ],
+      "sites": ["ul_9f1d0e8d3bd9"],
       "mirrors": []
     },
     {
@@ -3636,9 +3099,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_94bfdb21b06a"
-      ],
+      "sites": ["ul_94bfdb21b06a"],
       "mirrors": []
     },
     {
@@ -3648,15 +3109,11 @@
       "roleClass": "ui-long",
       "status": "pending",
       "max": null,
-      "holes": [
-        0
-      ],
+      "holes": [0],
       "holeGloss": {
         "0": "meta schema"
       },
-      "sites": [
-        "ul_35f3e48b19e1"
-      ],
+      "sites": ["ul_35f3e48b19e1"],
       "mirrors": []
     },
     {
@@ -3668,9 +3125,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_a2d017c9e2a8"
-      ],
+      "sites": ["ul_a2d017c9e2a8"],
       "mirrors": []
     },
     {
@@ -3680,17 +3135,12 @@
       "roleClass": "ui-long",
       "status": "pending",
       "max": null,
-      "holes": [
-        0,
-        1
-      ],
+      "holes": [0, 1],
       "holeGloss": {
         "0": "envelope v",
         "1": "envelope_version"
       },
-      "sites": [
-        "ul_9c6bf9e43782"
-      ],
+      "sites": ["ul_9c6bf9e43782"],
       "mirrors": []
     },
     {
@@ -3702,9 +3152,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_850182e644e5"
-      ],
+      "sites": ["ul_850182e644e5"],
       "mirrors": []
     },
     {
@@ -3716,9 +3164,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_af0f38671483"
-      ],
+      "sites": ["ul_af0f38671483"],
       "mirrors": []
     },
     {
@@ -3730,9 +3176,7 @@
       "max": 52,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_7f38bd698a25"
-      ],
+      "sites": ["ul_7f38bd698a25"],
       "mirrors": []
     },
     {
@@ -3744,9 +3188,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ea60cc9ce978"
-      ],
+      "sites": ["ul_ea60cc9ce978"],
       "mirrors": []
     },
     {
@@ -3758,9 +3200,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_fa329272cfc8"
-      ],
+      "sites": ["ul_fa329272cfc8"],
       "mirrors": []
     },
     {
@@ -3772,9 +3212,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_4116afde6cce"
-      ],
+      "sites": ["ul_4116afde6cce"],
       "mirrors": []
     },
     {
@@ -3786,9 +3224,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_1b2ab68fbafa"
-      ],
+      "sites": ["ul_1b2ab68fbafa"],
       "mirrors": []
     },
     {
@@ -3800,9 +3236,7 @@
       "max": 29,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_88e5cfe29612"
-      ],
+      "sites": ["ul_88e5cfe29612"],
       "mirrors": []
     },
     {
@@ -3814,9 +3248,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_e6e274916527"
-      ],
+      "sites": ["ul_e6e274916527"],
       "mirrors": []
     },
     {
@@ -3828,9 +3260,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_c3965ff3b92c"
-      ],
+      "sites": ["ul_c3965ff3b92c"],
       "mirrors": []
     },
     {
@@ -3842,9 +3272,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_aeedc4155133"
-      ],
+      "sites": ["ul_aeedc4155133"],
       "mirrors": []
     },
     {
@@ -3856,9 +3284,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_dbb871d06989"
-      ],
+      "sites": ["ul_dbb871d06989"],
       "mirrors": []
     },
     {
@@ -3870,9 +3296,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_43013c5a2a46"
-      ],
+      "sites": ["ul_43013c5a2a46"],
       "mirrors": []
     },
     {
@@ -3884,9 +3308,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_6d2b58218956"
-      ],
+      "sites": ["ul_6d2b58218956"],
       "mirrors": []
     },
     {
@@ -3898,9 +3320,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_dfc715c2d47a"
-      ],
+      "sites": ["ul_dfc715c2d47a"],
       "mirrors": []
     },
     {
@@ -3912,9 +3332,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_f4b951d22d01"
-      ],
+      "sites": ["ul_f4b951d22d01"],
       "mirrors": []
     },
     {
@@ -3926,9 +3344,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ac7d62d59058"
-      ],
+      "sites": ["ul_ac7d62d59058"],
       "mirrors": []
     },
     {
@@ -3940,9 +3356,7 @@
       "max": 30,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_dc46a3e55e61"
-      ],
+      "sites": ["ul_dc46a3e55e61"],
       "mirrors": []
     },
     {
@@ -3954,9 +3368,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_26f573ca5a77"
-      ],
+      "sites": ["ul_26f573ca5a77"],
       "mirrors": []
     },
     {
@@ -3968,9 +3380,7 @@
       "max": 42,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_8a5f114a22db"
-      ],
+      "sites": ["ul_8a5f114a22db"],
       "mirrors": []
     },
     {
@@ -3980,15 +3390,11 @@
       "roleClass": "ui-short",
       "status": "pending",
       "max": 48,
-      "holes": [
-        0
-      ],
+      "holes": [0],
       "holeGloss": {
         "0": "failed length"
       },
-      "sites": [
-        "ul_8afed2895390"
-      ],
+      "sites": ["ul_8afed2895390"],
       "mirrors": []
     },
     {
@@ -4000,9 +3406,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_dfc81633b21b"
-      ],
+      "sites": ["ul_dfc81633b21b"],
       "mirrors": []
     },
     {
@@ -4014,9 +3418,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_25b82ca50a25"
-      ],
+      "sites": ["ul_25b82ca50a25"],
       "mirrors": []
     },
     {
@@ -4026,17 +3428,12 @@
       "roleClass": "ui-short",
       "status": "pending",
       "max": 52,
-      "holes": [
-        0,
-        1
-      ],
+      "holes": [0, 1],
       "holeGloss": {
         "0": "string(unknown op)",
         "1": "unknown store"
       },
-      "sites": [
-        "ul_ae19588fdafb"
-      ],
+      "sites": ["ul_ae19588fdafb"],
       "mirrors": []
     },
     {
@@ -4048,9 +3445,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_03830f5e1d19"
-      ],
+      "sites": ["ul_03830f5e1d19"],
       "mirrors": []
     },
     {
@@ -4062,9 +3457,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b13ccefa4cbe"
-      ],
+      "sites": ["ul_b13ccefa4cbe"],
       "mirrors": []
     },
     {
@@ -4076,9 +3469,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_4f909708e6a5"
-      ],
+      "sites": ["ul_4f909708e6a5"],
       "mirrors": []
     },
     {
@@ -4088,17 +3479,12 @@
       "roleClass": "ui-short",
       "status": "pending",
       "max": 41,
-      "holes": [
-        0,
-        1
-      ],
+      "holes": [0, 1],
       "holeGloss": {
         "0": "what",
         "1": "url"
       },
-      "sites": [
-        "ul_1df6a3492cbe"
-      ],
+      "sites": ["ul_1df6a3492cbe"],
       "mirrors": []
     },
     {
@@ -4110,9 +3496,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b5d22fce3fa4"
-      ],
+      "sites": ["ul_b5d22fce3fa4"],
       "mirrors": []
     },
     {
@@ -4124,9 +3508,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_42a5089c6d0b"
-      ],
+      "sites": ["ul_42a5089c6d0b"],
       "mirrors": []
     },
     {
@@ -4138,9 +3520,7 @@
       "max": 46,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_8ba5443a2afa"
-      ],
+      "sites": ["ul_8ba5443a2afa"],
       "mirrors": []
     },
     {
@@ -4152,9 +3532,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_247dcd209ca3"
-      ],
+      "sites": ["ul_247dcd209ca3"],
       "mirrors": []
     },
     {
@@ -4166,9 +3544,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_efdd13fb5bf1"
-      ],
+      "sites": ["ul_efdd13fb5bf1"],
       "mirrors": []
     },
     {
@@ -4180,9 +3556,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_44146bac821b"
-      ],
+      "sites": ["ul_44146bac821b"],
       "mirrors": []
     },
     {
@@ -4194,9 +3568,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_55275de2019a"
-      ],
+      "sites": ["ul_55275de2019a"],
       "mirrors": []
     },
     {
@@ -4208,9 +3580,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b47a4b841647"
-      ],
+      "sites": ["ul_b47a4b841647"],
       "mirrors": []
     },
     {
@@ -4222,9 +3592,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_19c4d8d167d7"
-      ],
+      "sites": ["ul_19c4d8d167d7"],
       "mirrors": []
     },
     {
@@ -4236,9 +3604,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_d2ebe57ee749"
-      ],
+      "sites": ["ul_d2ebe57ee749"],
       "mirrors": []
     },
     {
@@ -4250,9 +3616,7 @@
       "max": 67,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b214f57aeac0"
-      ],
+      "sites": ["ul_b214f57aeac0"],
       "mirrors": []
     },
     {
@@ -4264,9 +3628,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_a2b3e0d67459"
-      ],
+      "sites": ["ul_a2b3e0d67459"],
       "mirrors": []
     },
     {
@@ -4278,9 +3640,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_594679c31d11"
-      ],
+      "sites": ["ul_594679c31d11"],
       "mirrors": []
     },
     {
@@ -4292,9 +3652,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_59ea1467fc89"
-      ],
+      "sites": ["ul_59ea1467fc89"],
       "mirrors": []
     },
     {
@@ -4306,9 +3664,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_84838b749865"
-      ],
+      "sites": ["ul_84838b749865"],
       "mirrors": []
     },
     {
@@ -4320,9 +3676,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_dc9c3ea54e26"
-      ],
+      "sites": ["ul_dc9c3ea54e26"],
       "mirrors": []
     },
     {
@@ -4334,9 +3688,7 @@
       "max": 63,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_74493c9c8158"
-      ],
+      "sites": ["ul_74493c9c8158"],
       "mirrors": []
     },
     {
@@ -4346,15 +3698,11 @@
       "roleClass": "ui-short",
       "status": "pending",
       "max": 69,
-      "holes": [
-        0
-      ],
+      "holes": [0],
       "holeGloss": {
         "0": "results length"
       },
-      "sites": [
-        "ul_3231dd318836"
-      ],
+      "sites": ["ul_3231dd318836"],
       "mirrors": []
     },
     {
@@ -4366,9 +3714,7 @@
       "max": 63,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_0fb323ab8ec1"
-      ],
+      "sites": ["ul_0fb323ab8ec1"],
       "mirrors": []
     },
     {
@@ -4380,12 +3726,8 @@
       "max": 53,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_7add5f3bead1"
-      ],
-      "mirrors": [
-        "ul_464cdc5091d1"
-      ]
+      "sites": ["ul_7add5f3bead1"],
+      "mirrors": ["ul_464cdc5091d1"]
     },
     {
       "id": "g_9bd51804024d",
@@ -4396,9 +3738,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_d1d42ced6e37"
-      ],
+      "sites": ["ul_d1d42ced6e37"],
       "mirrors": []
     },
     {
@@ -4410,9 +3750,7 @@
       "max": 23,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_be30435b1764"
-      ],
+      "sites": ["ul_be30435b1764"],
       "mirrors": []
     },
     {
@@ -4424,9 +3762,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_deca9977b5c5"
-      ],
+      "sites": ["ul_deca9977b5c5"],
       "mirrors": []
     },
     {
@@ -4438,9 +3774,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_cebaf1b866d2"
-      ],
+      "sites": ["ul_cebaf1b866d2"],
       "mirrors": []
     },
     {
@@ -4452,9 +3786,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_c009a831627f"
-      ],
+      "sites": ["ul_c009a831627f"],
       "mirrors": []
     },
     {
@@ -4466,9 +3798,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_d0871066d3e5"
-      ],
+      "sites": ["ul_d0871066d3e5"],
       "mirrors": []
     },
     {
@@ -4480,9 +3810,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_5f1a6fce8cdc"
-      ],
+      "sites": ["ul_5f1a6fce8cdc"],
       "mirrors": []
     },
     {
@@ -4494,9 +3822,7 @@
       "max": 31,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_34d3c5adb5ef"
-      ],
+      "sites": ["ul_34d3c5adb5ef"],
       "mirrors": []
     },
     {
@@ -4508,9 +3834,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_d97e4f153a1a"
-      ],
+      "sites": ["ul_d97e4f153a1a"],
       "mirrors": []
     },
     {
@@ -4522,9 +3846,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_6886a9932fc0"
-      ],
+      "sites": ["ul_6886a9932fc0"],
       "mirrors": []
     },
     {
@@ -4536,9 +3858,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_067601816109"
-      ],
+      "sites": ["ul_067601816109"],
       "mirrors": []
     },
     {
@@ -4550,9 +3870,7 @@
       "max": 61,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_d733890f455f"
-      ],
+      "sites": ["ul_d733890f455f"],
       "mirrors": []
     },
     {
@@ -4564,9 +3882,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_4ba4cc0747f2"
-      ],
+      "sites": ["ul_4ba4cc0747f2"],
       "mirrors": []
     },
     {
@@ -4578,9 +3894,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_25bac0baa2b1"
-      ],
+      "sites": ["ul_25bac0baa2b1"],
       "mirrors": []
     },
     {
@@ -4592,9 +3906,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_a3cc2e52b6fa"
-      ],
+      "sites": ["ul_a3cc2e52b6fa"],
       "mirrors": []
     },
     {
@@ -4606,9 +3918,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_1859060a76a5"
-      ],
+      "sites": ["ul_1859060a76a5"],
       "mirrors": []
     },
     {
@@ -4620,9 +3930,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_820e79814df6"
-      ],
+      "sites": ["ul_820e79814df6"],
       "mirrors": []
     },
     {
@@ -4634,9 +3942,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_8f8ba67eaf70"
-      ],
+      "sites": ["ul_8f8ba67eaf70"],
       "mirrors": []
     },
     {
@@ -4648,9 +3954,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b0c7f67bcd47"
-      ],
+      "sites": ["ul_b0c7f67bcd47"],
       "mirrors": []
     },
     {
@@ -4662,9 +3966,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_088785010a3a"
-      ],
+      "sites": ["ul_088785010a3a"],
       "mirrors": []
     },
     {
@@ -4676,9 +3978,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_0dcc32f558e6"
-      ],
+      "sites": ["ul_0dcc32f558e6"],
       "mirrors": []
     },
     {
@@ -4690,9 +3990,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_eecee7348550"
-      ],
+      "sites": ["ul_eecee7348550"],
       "mirrors": []
     },
     {
@@ -4704,9 +4002,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_cc63ad00a30e"
-      ],
+      "sites": ["ul_cc63ad00a30e"],
       "mirrors": []
     },
     {
@@ -4716,15 +4012,11 @@
       "roleClass": "ui-short",
       "status": "pending",
       "max": 45,
-      "holes": [
-        0
-      ],
+      "holes": [0],
       "holeGloss": {
         "0": "directive"
       },
-      "sites": [
-        "ul_863dbc28c3d0"
-      ],
+      "sites": ["ul_863dbc28c3d0"],
       "mirrors": []
     },
     {
@@ -4736,9 +4028,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_27e9033beadd"
-      ],
+      "sites": ["ul_27e9033beadd"],
       "mirrors": []
     },
     {
@@ -4750,9 +4040,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_4535a90a19a9"
-      ],
+      "sites": ["ul_4535a90a19a9"],
       "mirrors": []
     },
     {
@@ -4764,9 +4052,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_79ae6fa6d01d"
-      ],
+      "sites": ["ul_79ae6fa6d01d"],
       "mirrors": []
     },
     {
@@ -4778,9 +4064,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b4d51740f1c9"
-      ],
+      "sites": ["ul_b4d51740f1c9"],
       "mirrors": []
     },
     {
@@ -4792,9 +4076,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_19fe501e8001"
-      ],
+      "sites": ["ul_19fe501e8001"],
       "mirrors": []
     },
     {
@@ -4806,9 +4088,7 @@
       "max": 22,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_bfdf1fdb6170"
-      ],
+      "sites": ["ul_bfdf1fdb6170"],
       "mirrors": []
     },
     {
@@ -4820,9 +4100,7 @@
       "max": 61,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_35a03cbeab91"
-      ],
+      "sites": ["ul_35a03cbeab91"],
       "mirrors": []
     },
     {
@@ -4834,9 +4112,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_601c1b677348"
-      ],
+      "sites": ["ul_601c1b677348"],
       "mirrors": []
     },
     {
@@ -4848,9 +4124,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_4c002d16a454"
-      ],
+      "sites": ["ul_4c002d16a454"],
       "mirrors": []
     },
     {
@@ -4862,9 +4136,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_874e3b795390"
-      ],
+      "sites": ["ul_874e3b795390"],
       "mirrors": []
     },
     {
@@ -4876,9 +4148,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_9b60e82477ae"
-      ],
+      "sites": ["ul_9b60e82477ae"],
       "mirrors": []
     },
     {
@@ -4890,9 +4160,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_686b6882dbaa"
-      ],
+      "sites": ["ul_686b6882dbaa"],
       "mirrors": []
     },
     {
@@ -4904,9 +4172,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_e10c59a217de"
-      ],
+      "sites": ["ul_e10c59a217de"],
       "mirrors": []
     },
     {
@@ -4918,9 +4184,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_9d15bb71cf60"
-      ],
+      "sites": ["ul_9d15bb71cf60"],
       "mirrors": []
     },
     {
@@ -4932,9 +4196,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_2e0c75d7381a"
-      ],
+      "sites": ["ul_2e0c75d7381a"],
       "mirrors": []
     },
     {
@@ -4946,9 +4208,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_3ae5cebf8232"
-      ],
+      "sites": ["ul_3ae5cebf8232"],
       "mirrors": []
     },
     {
@@ -4960,9 +4220,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ccbf600c4a82"
-      ],
+      "sites": ["ul_ccbf600c4a82"],
       "mirrors": []
     },
     {
@@ -4974,9 +4232,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b19859816b9a"
-      ],
+      "sites": ["ul_b19859816b9a"],
       "mirrors": []
     },
     {
@@ -4988,9 +4244,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_9db906f681de"
-      ],
+      "sites": ["ul_9db906f681de"],
       "mirrors": []
     },
     {
@@ -5002,9 +4256,7 @@
       "max": 53,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_cd1c60553a59"
-      ],
+      "sites": ["ul_cd1c60553a59"],
       "mirrors": []
     },
     {
@@ -5016,9 +4268,7 @@
       "max": 22,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_eed3cad32a07"
-      ],
+      "sites": ["ul_eed3cad32a07"],
       "mirrors": []
     },
     {
@@ -5030,9 +4280,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_f7923b2732fb"
-      ],
+      "sites": ["ul_f7923b2732fb"],
       "mirrors": []
     },
     {
@@ -5044,9 +4292,7 @@
       "max": 61,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b8dd9673d6c5"
-      ],
+      "sites": ["ul_b8dd9673d6c5"],
       "mirrors": []
     },
     {
@@ -5058,9 +4304,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_21d3d02e6809"
-      ],
+      "sites": ["ul_21d3d02e6809"],
       "mirrors": []
     },
     {
@@ -5072,9 +4316,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_7b4c8431ff84"
-      ],
+      "sites": ["ul_7b4c8431ff84"],
       "mirrors": []
     },
     {
@@ -5086,9 +4328,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_99f25c25a185"
-      ],
+      "sites": ["ul_99f25c25a185"],
       "mirrors": []
     },
     {
@@ -5100,9 +4340,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_5366f532c7a6"
-      ],
+      "sites": ["ul_5366f532c7a6"],
       "mirrors": []
     },
     {
@@ -5114,9 +4352,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_70ba6a2b8f18"
-      ],
+      "sites": ["ul_70ba6a2b8f18"],
       "mirrors": []
     },
     {
@@ -5128,9 +4364,7 @@
       "max": 49,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_68482c187af9"
-      ],
+      "sites": ["ul_68482c187af9"],
       "mirrors": []
     },
     {
@@ -5142,9 +4376,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_7a0e5ff47aa9"
-      ],
+      "sites": ["ul_7a0e5ff47aa9"],
       "mirrors": []
     },
     {
@@ -5156,9 +4388,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_96e5d106a845"
-      ],
+      "sites": ["ul_96e5d106a845"],
       "mirrors": []
     },
     {
@@ -5170,9 +4400,7 @@
       "max": 67,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_f6e4d166007e"
-      ],
+      "sites": ["ul_f6e4d166007e"],
       "mirrors": []
     },
     {
@@ -5184,9 +4412,7 @@
       "max": 61,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_09068d20e91a"
-      ],
+      "sites": ["ul_09068d20e91a"],
       "mirrors": []
     },
     {
@@ -5198,9 +4424,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_349d4dbd3be4"
-      ],
+      "sites": ["ul_349d4dbd3be4"],
       "mirrors": []
     },
     {
@@ -5212,9 +4436,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_952037c2e4c5"
-      ],
+      "sites": ["ul_952037c2e4c5"],
       "mirrors": []
     },
     {
@@ -5226,9 +4448,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_4b3ec7f0bafe"
-      ],
+      "sites": ["ul_4b3ec7f0bafe"],
       "mirrors": []
     },
     {
@@ -5240,9 +4460,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_44b0fb761a03"
-      ],
+      "sites": ["ul_44b0fb761a03"],
       "mirrors": []
     },
     {
@@ -5254,9 +4472,7 @@
       "max": 60,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b3b96db809ca"
-      ],
+      "sites": ["ul_b3b96db809ca"],
       "mirrors": []
     },
     {
@@ -5268,9 +4484,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ea9dd81174cf"
-      ],
+      "sites": ["ul_ea9dd81174cf"],
       "mirrors": []
     },
     {
@@ -5282,9 +4496,7 @@
       "max": 44,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_64206ce8453c"
-      ],
+      "sites": ["ul_64206ce8453c"],
       "mirrors": []
     },
     {
@@ -5296,9 +4508,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_735495ec5a0a"
-      ],
+      "sites": ["ul_735495ec5a0a"],
       "mirrors": []
     },
     {
@@ -5310,9 +4520,7 @@
       "max": 56,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_12db701f6def"
-      ],
+      "sites": ["ul_12db701f6def"],
       "mirrors": []
     },
     {
@@ -5324,9 +4532,7 @@
       "max": 61,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ce6056830d61"
-      ],
+      "sites": ["ul_ce6056830d61"],
       "mirrors": []
     },
     {
@@ -5338,9 +4544,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_d1ac4d446b60"
-      ],
+      "sites": ["ul_d1ac4d446b60"],
       "mirrors": []
     },
     {
@@ -5352,9 +4556,7 @@
       "max": 65,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_17159a1dcba3"
-      ],
+      "sites": ["ul_17159a1dcba3"],
       "mirrors": []
     },
     {
@@ -5366,9 +4568,7 @@
       "max": 7,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_5eace249d582"
-      ],
+      "sites": ["ul_5eace249d582"],
       "mirrors": []
     },
     {
@@ -5380,9 +4580,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_74401cf90d45"
-      ],
+      "sites": ["ul_74401cf90d45"],
       "mirrors": []
     },
     {
@@ -5394,9 +4592,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_fb853bf3e3a7"
-      ],
+      "sites": ["ul_fb853bf3e3a7"],
       "mirrors": []
     },
     {
@@ -5408,9 +4604,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_7e7aff33fffd"
-      ],
+      "sites": ["ul_7e7aff33fffd"],
       "mirrors": []
     },
     {
@@ -5422,9 +4616,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_9375bc6250f0"
-      ],
+      "sites": ["ul_9375bc6250f0"],
       "mirrors": []
     },
     {
@@ -5436,9 +4628,7 @@
       "max": 49,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_221f66cdd407"
-      ],
+      "sites": ["ul_221f66cdd407"],
       "mirrors": []
     },
     {
@@ -5450,9 +4640,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_7f946cca4b13"
-      ],
+      "sites": ["ul_7f946cca4b13"],
       "mirrors": []
     },
     {
@@ -5464,9 +4652,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ec81d6a96e07"
-      ],
+      "sites": ["ul_ec81d6a96e07"],
       "mirrors": []
     },
     {
@@ -5478,9 +4664,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_97ad3146d3a6"
-      ],
+      "sites": ["ul_97ad3146d3a6"],
       "mirrors": []
     },
     {
@@ -5492,9 +4676,7 @@
       "max": 50,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b806c8505feb"
-      ],
+      "sites": ["ul_b806c8505feb"],
       "mirrors": []
     },
     {
@@ -5506,9 +4688,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_eada76998162"
-      ],
+      "sites": ["ul_eada76998162"],
       "mirrors": []
     },
     {
@@ -5520,9 +4700,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_98a2d4709122"
-      ],
+      "sites": ["ul_98a2d4709122"],
       "mirrors": []
     },
     {
@@ -5534,9 +4712,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_d1c95e299344"
-      ],
+      "sites": ["ul_d1c95e299344"],
       "mirrors": []
     },
     {
@@ -5548,9 +4724,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_60f72586741f"
-      ],
+      "sites": ["ul_60f72586741f"],
       "mirrors": []
     },
     {
@@ -5562,10 +4736,7 @@
       "max": 19,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_164f12034434",
-        "ul_9014c7bd48ba"
-      ],
+      "sites": ["ul_164f12034434", "ul_9014c7bd48ba"],
       "mirrors": []
     },
     {
@@ -5577,9 +4748,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_d988cbd0aba8"
-      ],
+      "sites": ["ul_d988cbd0aba8"],
       "mirrors": []
     },
     {
@@ -5591,9 +4760,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_7fb953a0106b"
-      ],
+      "sites": ["ul_7fb953a0106b"],
       "mirrors": []
     },
     {
@@ -5605,9 +4772,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_931d6b6f6752"
-      ],
+      "sites": ["ul_931d6b6f6752"],
       "mirrors": []
     },
     {
@@ -5619,9 +4784,7 @@
       "max": 52,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ed3d2820fa09"
-      ],
+      "sites": ["ul_ed3d2820fa09"],
       "mirrors": []
     },
     {
@@ -5633,9 +4796,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ada4737a6176"
-      ],
+      "sites": ["ul_ada4737a6176"],
       "mirrors": []
     },
     {
@@ -5647,9 +4808,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_715ba8829d15"
-      ],
+      "sites": ["ul_715ba8829d15"],
       "mirrors": []
     },
     {
@@ -5661,9 +4820,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_eea625f0e26e"
-      ],
+      "sites": ["ul_eea625f0e26e"],
       "mirrors": []
     },
     {
@@ -5675,9 +4832,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_e31345610ae2"
-      ],
+      "sites": ["ul_e31345610ae2"],
       "mirrors": []
     },
     {
@@ -5689,9 +4844,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_c07419f122c1"
-      ],
+      "sites": ["ul_c07419f122c1"],
       "mirrors": []
     },
     {
@@ -5703,9 +4856,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_0e5607ef26ff"
-      ],
+      "sites": ["ul_0e5607ef26ff"],
       "mirrors": []
     },
     {
@@ -5715,15 +4866,11 @@
       "roleClass": "ui-short",
       "status": "pending",
       "max": 49,
-      "holes": [
-        0
-      ],
+      "holes": [0],
       "holeGloss": {
         "0": "used size"
       },
-      "sites": [
-        "ul_dd09f3b369e1"
-      ],
+      "sites": ["ul_dd09f3b369e1"],
       "mirrors": []
     },
     {
@@ -5735,9 +4882,7 @@
       "max": 36,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ac1e12aa576a"
-      ],
+      "sites": ["ul_ac1e12aa576a"],
       "mirrors": []
     },
     {
@@ -5749,9 +4894,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_1c2120f03b06"
-      ],
+      "sites": ["ul_1c2120f03b06"],
       "mirrors": []
     },
     {
@@ -5763,9 +4906,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_0a3f57e462d8"
-      ],
+      "sites": ["ul_0a3f57e462d8"],
       "mirrors": []
     },
     {
@@ -5777,9 +4918,7 @@
       "max": 18,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_f9dc26f0cdf5"
-      ],
+      "sites": ["ul_f9dc26f0cdf5"],
       "mirrors": []
     },
     {
@@ -5791,9 +4930,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_d326a23c93f9"
-      ],
+      "sites": ["ul_d326a23c93f9"],
       "mirrors": []
     },
     {
@@ -5805,9 +4942,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_abe29901aaf4"
-      ],
+      "sites": ["ul_abe29901aaf4"],
       "mirrors": []
     },
     {
@@ -5819,9 +4954,7 @@
       "max": 26,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_5b4657cc9b11"
-      ],
+      "sites": ["ul_5b4657cc9b11"],
       "mirrors": []
     },
     {
@@ -5833,9 +4966,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_77515aff0963"
-      ],
+      "sites": ["ul_77515aff0963"],
       "mirrors": []
     },
     {
@@ -5847,9 +4978,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_2f53ffee3500"
-      ],
+      "sites": ["ul_2f53ffee3500"],
       "mirrors": []
     },
     {
@@ -5861,9 +4990,7 @@
       "max": 19,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_3d2b7c1ae391"
-      ],
+      "sites": ["ul_3d2b7c1ae391"],
       "mirrors": []
     },
     {
@@ -5875,9 +5002,7 @@
       "max": 26,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b5560204f383"
-      ],
+      "sites": ["ul_b5560204f383"],
       "mirrors": []
     },
     {
@@ -5889,9 +5014,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_d18de6b6de19"
-      ],
+      "sites": ["ul_d18de6b6de19"],
       "mirrors": []
     },
     {
@@ -5903,9 +5026,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_45cb109dcf76"
-      ],
+      "sites": ["ul_45cb109dcf76"],
       "mirrors": []
     },
     {
@@ -5917,9 +5038,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b7a57855c2da"
-      ],
+      "sites": ["ul_b7a57855c2da"],
       "mirrors": []
     },
     {
@@ -5931,9 +5050,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_a36a06063936"
-      ],
+      "sites": ["ul_a36a06063936"],
       "mirrors": []
     },
     {
@@ -5945,9 +5062,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_9e2124ed5978"
-      ],
+      "sites": ["ul_9e2124ed5978"],
       "mirrors": []
     },
     {
@@ -5959,9 +5074,7 @@
       "max": 52,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_13986076a9b1"
-      ],
+      "sites": ["ul_13986076a9b1"],
       "mirrors": []
     },
     {
@@ -5973,9 +5086,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_31c3a7aa9494"
-      ],
+      "sites": ["ul_31c3a7aa9494"],
       "mirrors": []
     },
     {
@@ -5987,9 +5098,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_8e237ebbf38b"
-      ],
+      "sites": ["ul_8e237ebbf38b"],
       "mirrors": []
     },
     {
@@ -6001,9 +5110,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_c612b46dccfe"
-      ],
+      "sites": ["ul_c612b46dccfe"],
       "mirrors": []
     },
     {
@@ -6015,9 +5122,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_6776cad4c456"
-      ],
+      "sites": ["ul_6776cad4c456"],
       "mirrors": []
     },
     {
@@ -6029,9 +5134,7 @@
       "max": 34,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_58cac0e47506"
-      ],
+      "sites": ["ul_58cac0e47506"],
       "mirrors": []
     },
     {
@@ -6043,9 +5146,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_7a12cc9bf735"
-      ],
+      "sites": ["ul_7a12cc9bf735"],
       "mirrors": []
     },
     {
@@ -6057,9 +5158,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_9fb3bf96adfa"
-      ],
+      "sites": ["ul_9fb3bf96adfa"],
       "mirrors": []
     },
     {
@@ -6071,9 +5170,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_93e487bb1c4c"
-      ],
+      "sites": ["ul_93e487bb1c4c"],
       "mirrors": []
     },
     {
@@ -6083,15 +5180,11 @@
       "roleClass": "a11y",
       "status": "pending",
       "max": null,
-      "holes": [
-        0
-      ],
+      "holes": [0],
       "holeGloss": {
         "0": "doc title || untitled"
       },
-      "sites": [
-        "ul_709936969e40"
-      ],
+      "sites": ["ul_709936969e40"],
       "mirrors": []
     },
     {
@@ -6103,9 +5196,7 @@
       "max": 49,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_da10d9ba45f8"
-      ],
+      "sites": ["ul_da10d9ba45f8"],
       "mirrors": []
     },
     {
@@ -6115,15 +5206,11 @@
       "roleClass": "ui-short",
       "status": "pending",
       "max": 33,
-      "holes": [
-        0
-      ],
+      "holes": [0],
       "holeGloss": {
         "0": "what"
       },
-      "sites": [
-        "ul_428505797c99"
-      ],
+      "sites": ["ul_428505797c99"],
       "mirrors": []
     },
     {
@@ -6135,9 +5222,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_4be263ef2931"
-      ],
+      "sites": ["ul_4be263ef2931"],
       "mirrors": []
     },
     {
@@ -6149,9 +5234,7 @@
       "max": 56,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_689ae5da0c6a"
-      ],
+      "sites": ["ul_689ae5da0c6a"],
       "mirrors": []
     },
     {
@@ -6163,9 +5246,7 @@
       "max": 61,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_2e3efb5bd9d2"
-      ],
+      "sites": ["ul_2e3efb5bd9d2"],
       "mirrors": []
     },
     {
@@ -6177,10 +5258,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ebdf56b987ec",
-        "ul_af9b9b5e7865"
-      ],
+      "sites": ["ul_ebdf56b987ec", "ul_af9b9b5e7865"],
       "mirrors": [],
       "decidedBy": "agent"
     },
@@ -6193,9 +5271,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_11ac5cf5b1a6"
-      ],
+      "sites": ["ul_11ac5cf5b1a6"],
       "mirrors": []
     },
     {
@@ -6207,9 +5283,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_3c81be987848"
-      ],
+      "sites": ["ul_3c81be987848"],
       "mirrors": []
     },
     {
@@ -6221,9 +5295,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_e5685e056c59"
-      ],
+      "sites": ["ul_e5685e056c59"],
       "mirrors": []
     },
     {
@@ -6235,9 +5307,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_a93f421767e4"
-      ],
+      "sites": ["ul_a93f421767e4"],
       "mirrors": []
     },
     {
@@ -6249,9 +5319,7 @@
       "max": 34,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_c68ec72d0e26"
-      ],
+      "sites": ["ul_c68ec72d0e26"],
       "mirrors": []
     },
     {
@@ -6263,9 +5331,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_a215c4d183b2"
-      ],
+      "sites": ["ul_a215c4d183b2"],
       "mirrors": []
     },
     {
@@ -6277,9 +5343,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_87aa97462335"
-      ],
+      "sites": ["ul_87aa97462335"],
       "mirrors": []
     },
     {
@@ -6291,9 +5355,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_cfa5c93b7f32"
-      ],
+      "sites": ["ul_cfa5c93b7f32"],
       "mirrors": []
     },
     {
@@ -6305,9 +5367,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_6866231f3653"
-      ],
+      "sites": ["ul_6866231f3653"],
       "mirrors": []
     },
     {
@@ -6319,9 +5379,7 @@
       "max": 52,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_bb72f951a067"
-      ],
+      "sites": ["ul_bb72f951a067"],
       "mirrors": []
     },
     {
@@ -6333,9 +5391,7 @@
       "max": 49,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_240c92aa1281"
-      ],
+      "sites": ["ul_240c92aa1281"],
       "mirrors": []
     },
     {
@@ -6347,9 +5403,7 @@
       "max": 37,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_fff5896e04b8"
-      ],
+      "sites": ["ul_fff5896e04b8"],
       "mirrors": []
     },
     {
@@ -6361,9 +5415,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_5b31f5c39b4c"
-      ],
+      "sites": ["ul_5b31f5c39b4c"],
       "mirrors": []
     },
     {
@@ -6375,9 +5427,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_a8d5e4b0f3a9"
-      ],
+      "sites": ["ul_a8d5e4b0f3a9"],
       "mirrors": []
     },
     {
@@ -6389,9 +5439,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_febd9ebff175"
-      ],
+      "sites": ["ul_febd9ebff175"],
       "mirrors": []
     },
     {
@@ -6403,9 +5451,7 @@
       "max": 27,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_73819208999b"
-      ],
+      "sites": ["ul_73819208999b"],
       "mirrors": []
     },
     {
@@ -6417,9 +5463,7 @@
       "max": 18,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_4f5bb793143d"
-      ],
+      "sites": ["ul_4f5bb793143d"],
       "mirrors": []
     },
     {
@@ -6431,9 +5475,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b41856aaadce"
-      ],
+      "sites": ["ul_b41856aaadce"],
       "mirrors": []
     },
     {
@@ -6445,9 +5487,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_cb968f5ddffc"
-      ],
+      "sites": ["ul_cb968f5ddffc"],
       "mirrors": []
     },
     {
@@ -6457,15 +5497,11 @@
       "roleClass": "ui-short",
       "status": "pending",
       "max": 68,
-      "holes": [
-        0
-      ],
+      "holes": [0],
       "holeGloss": {
         "0": "summary title || untitled"
       },
-      "sites": [
-        "ul_76c5715d8e0d"
-      ],
+      "sites": ["ul_76c5715d8e0d"],
       "mirrors": []
     },
     {
@@ -6477,9 +5513,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b7e4e6809938"
-      ],
+      "sites": ["ul_b7e4e6809938"],
       "mirrors": []
     },
     {
@@ -6491,9 +5525,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_45d3f2eb87f5"
-      ],
+      "sites": ["ul_45d3f2eb87f5"],
       "mirrors": []
     },
     {
@@ -6505,9 +5537,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_a4dfdf031969"
-      ],
+      "sites": ["ul_a4dfdf031969"],
       "mirrors": []
     },
     {
@@ -6519,9 +5549,7 @@
       "max": 41,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_0348352fc32a"
-      ],
+      "sites": ["ul_0348352fc32a"],
       "mirrors": []
     },
     {
@@ -6533,9 +5561,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_4333ad9b0177"
-      ],
+      "sites": ["ul_4333ad9b0177"],
       "mirrors": []
     },
     {
@@ -6547,9 +5573,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_050379f6c011"
-      ],
+      "sites": ["ul_050379f6c011"],
       "mirrors": []
     },
     {
@@ -6561,9 +5585,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_5288d7088423"
-      ],
+      "sites": ["ul_5288d7088423"],
       "mirrors": []
     },
     {
@@ -6575,9 +5597,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_5e256b8e0688"
-      ],
+      "sites": ["ul_5e256b8e0688"],
       "mirrors": []
     },
     {
@@ -6589,9 +5609,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_3661ca3e04c9"
-      ],
+      "sites": ["ul_3661ca3e04c9"],
       "mirrors": []
     },
     {
@@ -6603,9 +5621,7 @@
       "max": 23,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_e03bd75e0fb1"
-      ],
+      "sites": ["ul_e03bd75e0fb1"],
       "mirrors": []
     },
     {
@@ -6617,9 +5633,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_315eef0e886d"
-      ],
+      "sites": ["ul_315eef0e886d"],
       "mirrors": []
     },
     {
@@ -6631,9 +5645,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_894f6aa515ef"
-      ],
+      "sites": ["ul_894f6aa515ef"],
       "mirrors": []
     },
     {
@@ -6645,9 +5657,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_0d1884f3cef8"
-      ],
+      "sites": ["ul_0d1884f3cef8"],
       "mirrors": []
     },
     {
@@ -6659,9 +5669,7 @@
       "max": 42,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_0b714840a7b7"
-      ],
+      "sites": ["ul_0b714840a7b7"],
       "mirrors": []
     },
     {
@@ -6673,9 +5681,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_355bcfd47afd"
-      ],
+      "sites": ["ul_355bcfd47afd"],
       "mirrors": []
     },
     {
@@ -6687,9 +5693,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_c67e0cbf5c83"
-      ],
+      "sites": ["ul_c67e0cbf5c83"],
       "mirrors": []
     },
     {
@@ -6701,9 +5705,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_5ef03edc082b"
-      ],
+      "sites": ["ul_5ef03edc082b"],
       "mirrors": []
     },
     {
@@ -6715,9 +5717,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_6d60bc6b4b97"
-      ],
+      "sites": ["ul_6d60bc6b4b97"],
       "mirrors": []
     },
     {
@@ -6729,9 +5729,7 @@
       "max": 52,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_476fcbae8a83"
-      ],
+      "sites": ["ul_476fcbae8a83"],
       "mirrors": []
     },
     {
@@ -6743,9 +5741,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_50e76345652a"
-      ],
+      "sites": ["ul_50e76345652a"],
       "mirrors": []
     },
     {
@@ -6757,9 +5753,7 @@
       "max": 56,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_c6e597b15093"
-      ],
+      "sites": ["ul_c6e597b15093"],
       "mirrors": []
     },
     {
@@ -6771,9 +5765,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_4e72606dd526"
-      ],
+      "sites": ["ul_4e72606dd526"],
       "mirrors": []
     },
     {
@@ -6785,9 +5777,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_11101dfc2f92"
-      ],
+      "sites": ["ul_11101dfc2f92"],
       "mirrors": []
     },
     {
@@ -6799,9 +5789,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_03e600e22e39"
-      ],
+      "sites": ["ul_03e600e22e39"],
       "mirrors": []
     },
     {
@@ -6813,9 +5801,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_006cb398386b"
-      ],
+      "sites": ["ul_006cb398386b"],
       "mirrors": []
     },
     {
@@ -6827,9 +5813,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_d82c6144fc4b"
-      ],
+      "sites": ["ul_d82c6144fc4b"],
       "mirrors": []
     },
     {
@@ -6841,9 +5825,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_42435d15ca21"
-      ],
+      "sites": ["ul_42435d15ca21"],
       "mirrors": []
     },
     {
@@ -6855,9 +5837,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_16246e6a3455"
-      ],
+      "sites": ["ul_16246e6a3455"],
       "mirrors": []
     },
     {
@@ -6869,9 +5849,7 @@
       "max": 23,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_3b2578e232a3"
-      ],
+      "sites": ["ul_3b2578e232a3"],
       "mirrors": []
     },
     {
@@ -6883,9 +5861,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_23ad4d8ab49f"
-      ],
+      "sites": ["ul_23ad4d8ab49f"],
       "mirrors": []
     },
     {
@@ -6897,9 +5873,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_8fd0caf0cd43"
-      ],
+      "sites": ["ul_8fd0caf0cd43"],
       "mirrors": []
     },
     {
@@ -6911,9 +5885,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_2017222aef09"
-      ],
+      "sites": ["ul_2017222aef09"],
       "mirrors": []
     },
     {
@@ -6925,9 +5897,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_57901338385f"
-      ],
+      "sites": ["ul_57901338385f"],
       "mirrors": []
     },
     {
@@ -6939,9 +5909,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_3d347b792294"
-      ],
+      "sites": ["ul_3d347b792294"],
       "mirrors": []
     },
     {
@@ -6953,9 +5921,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_b32a5bef912c"
-      ],
+      "sites": ["ul_b32a5bef912c"],
       "mirrors": []
     },
     {
@@ -6967,9 +5933,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_8ccc1caa9939"
-      ],
+      "sites": ["ul_8ccc1caa9939"],
       "mirrors": []
     },
     {
@@ -6981,9 +5945,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_bd2c60b8d572"
-      ],
+      "sites": ["ul_bd2c60b8d572"],
       "mirrors": []
     },
     {
@@ -6995,9 +5957,7 @@
       "max": 36,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_803aa5197446"
-      ],
+      "sites": ["ul_803aa5197446"],
       "mirrors": []
     },
     {
@@ -7009,9 +5969,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_5ea5ebf92a23"
-      ],
+      "sites": ["ul_5ea5ebf92a23"],
       "mirrors": []
     },
     {
@@ -7023,9 +5981,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_856af2c2c3d4"
-      ],
+      "sites": ["ul_856af2c2c3d4"],
       "mirrors": []
     },
     {
@@ -7037,9 +5993,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_614de30eea07"
-      ],
+      "sites": ["ul_614de30eea07"],
       "mirrors": []
     },
     {
@@ -7051,9 +6005,7 @@
       "max": 54,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ea1752d3e08a"
-      ],
+      "sites": ["ul_ea1752d3e08a"],
       "mirrors": []
     },
     {
@@ -7065,9 +6017,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_7a9e65642064"
-      ],
+      "sites": ["ul_7a9e65642064"],
       "mirrors": []
     },
     {
@@ -7079,9 +6029,7 @@
       "max": null,
       "holes": [],
       "holeGloss": {},
-      "sites": [
-        "ul_ae73a387f906"
-      ],
+      "sites": ["ul_ae73a387f906"],
       "mirrors": []
     }
   ],

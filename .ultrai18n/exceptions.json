@@ -15,14 +15,6 @@
       "contentHash": "a1a5e2de",
       "pin": true,
       "decidedBy": "adjudicator"
-    },
-    {
-      "siteKey": "src/core/crypto/keys.test.ts#describe()/it()/expect(await readVaultMeta(db)).toEqual()/createdAt",
-      "reason": "test-fixture",
-      "justification": "Not copy: an ISO-8601 timestamp and a BlockNote block-type identifier, both asserted by tests and unaffected by the language swap.",
-      "contentHash": "5bd724d2",
-      "pin": true,
-      "decidedBy": "adjudicator"
     }
   ]
 }

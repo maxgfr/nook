@@ -12,12 +12,12 @@ import { Vault } from '../../core/vault'
 import type { VaultIndex } from '../../core/model/types'
 
 /**
- * Ouvre le coffre une fois pour toute l'application et le met à disposition.
+ * Opens the vault once for the whole application and makes it available.
  *
- * L'abonnement passe par `useSyncExternalStore` : le coffre notifie ses
- * changements avec un simple callback, sans rien connaître de React. C'est ce
- * qui permet à `src/core` de rester une bibliothèque TypeScript ordinaire,
- * testable sans rendu.
+ * The subscription goes through `useSyncExternalStore`: the vault reports its
+ * changes with a plain callback, knowing nothing about React. That is what
+ * lets `src/core` stay an ordinary TypeScript library, testable without a
+ * render.
  */
 
 type State =
@@ -25,7 +25,7 @@ type State =
   | { readonly status: 'ready'; readonly vault: Vault }
   | { readonly status: 'failed'; readonly error: Error }
 
-/** Ce que voit l'application tant que le coffre n'est pas ouvert. */
+/** What the application shows while the vault is not open yet. */
 export type BootState = Exclude<State, { status: 'ready' }>
 
 const VaultContext = createContext<Vault | null>(null)
@@ -35,9 +35,11 @@ export function VaultProvider({
   fallback: Fallback,
 }: {
   children: ReactNode
-  /** Composant, et non fonction de rendu : une fonction fléchée écrite dans
-   * le JSX du parent créerait un type de composant neuf à chaque rendu, et
-   * React remonterait tout son sous-arbre à chaque fois. */
+  /**
+   * A component, not a render function: an arrow function written in the
+   * parent's JSX would create a brand-new component type on every render, and
+   * React would remount its whole subtree each time.
+   */
   fallback: ComponentType<{ state: BootState }>
 }) {
   const [state, setState] = useState<State>({ status: 'opening' })
@@ -47,9 +49,9 @@ export function VaultProvider({
 
     Vault.open()
       .then((vault) => {
-        // En mode strict, React monte l'effet deux fois : la première
-        // ouverture est annulée et doit être refermée, sinon deux connexions
-        // à la base restent ouvertes et bloquent toute migration.
+        // In strict mode React mounts the effect twice: the first
+        // opening is cancelled and must be closed, otherwise two
+        // connections to the database stay open and block any migration.
         if (cancelled) return vault.close()
         setState({ status: 'ready', vault })
       })
@@ -74,11 +76,11 @@ export function VaultProvider({
 
 export function useVault(): Vault {
   const vault = useContext(VaultContext)
-  if (!vault) throw new Error('useVault doit être appelé sous un <VaultProvider>.')
+  if (!vault) throw new Error('useVault must be called inside a <VaultProvider>.')
   return vault
 }
 
-/** Redessine le composant à chaque modification de l'index. */
+/** Redraws the component on every change to the index. */
 export function useVaultIndex(): VaultIndex {
   const vault = useVault()
   return useSyncExternalStore(

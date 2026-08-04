@@ -1,10 +1,9 @@
 import type { SVGProps } from 'react'
 
 /**
- * Les icônes de l'application, dessinées ici plutôt que chargées d'une
- * bibliothèque : elles sont peu nombreuses, et une famille cohérente (même
- * grille de 24, même épaisseur de trait, mêmes terminaisons arrondies) vaut
- * mieux qu'un assortiment.
+ * The application's icons, drawn here rather than pulled from a library:
+ * there are few of them, and one coherent family (same 24 grid, same stroke
+ * weight, same rounded terminals) beats an assortment.
  */
 
 const paths = {

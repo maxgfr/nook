@@ -1,12 +1,12 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
 
 /**
- * Le seul bouton de l'application.
+ * The application's only button.
  *
- * Un composant unique plutôt que des classes recopiées : quand la même action
- * a deux apparences selon l'écran, l'une des deux est un défaut. Les états
- * (survol, focus, actif, désactivé) sont définis une fois ici et valent
- * partout.
+ * One component rather than copied-around classes: when the same action has
+ * two appearances depending on the screen, one of them is a defect. The
+ * states (hover, focus, active, disabled) are defined once here and hold
+ * everywhere.
  */
 
 type Tone = 'neutral' | 'primary' | 'danger'
@@ -45,9 +45,9 @@ export function Button({ tone = 'neutral', size = 'md', className, ...props }: B
 }
 
 /**
- * Bouton carré ne portant qu'une icône. `label` n'est pas optionnel : une
- * icône seule n'a pas de nom accessible, et un lecteur d'écran annoncerait
- * « bouton » sans plus de précision.
+ * A square button carrying only an icon. `label` is not optional: an icon on
+ * its own has no accessible name, and a screen reader would announce
+ * "button" and nothing more.
  */
 export function IconButton({
   label,

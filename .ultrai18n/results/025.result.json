@@ -1,39 +1,39 @@
 {
- "schemaVersion": 1,
- "batchId": "025",
- "batchDigest": "61369486b42b0acd",
- "items": [
-  {
-   "id": "g_67aefb353ace",
-   "text": "The application's empty state.\n*\nIt teaches the interface instead of noting its emptiness: the one useful\naction is offered, and the product's promise is restated where it is put to\nthe test — on first launch, when you decide whether to trust it."
-  },
-  {
-   "id": "g_67c5533921b1",
-   "text": "silently empty — the worst of both worlds. Rather than disabling it with"
-  },
-  {
-   "id": "g_687eba7f99c3",
-   "text": "#root not found in index.html"
-  },
-  {
-   "id": "g_696a97a8b8ac",
-   "text": "without recreating `flush`, whose stability the effect cleanup depends on."
-  },
-  {
-   "id": "g_6a66e34aca16",
-   "text": "No room left between the two neighbours: first reattach the page to the right"
-  },
-  {
-   "id": "g_6b0b6336c20a",
-   "text": "two positions ends up below the precision threshold, and the sibling list must"
-  },
-  {
-   "id": "g_6b79a59d4787",
-   "text": "yesterday's note"
-  },
-  {
-   "id": "g_6b89a98c3526",
-   "text": "page tree"
-  }
- ]
+  "schemaVersion": 1,
+  "batchId": "025",
+  "batchDigest": "61369486b42b0acd",
+  "items": [
+    {
+      "id": "g_67aefb353ace",
+      "text": "The application's empty state.\n*\nIt teaches the interface instead of noting its emptiness: the one useful\naction is offered, and the product's promise is restated where it is put to\nthe test — on first launch, when you decide whether to trust it."
+    },
+    {
+      "id": "g_67c5533921b1",
+      "text": "silently empty — the worst of both worlds. Rather than disabling it with"
+    },
+    {
+      "id": "g_687eba7f99c3",
+      "text": "#root not found in index.html"
+    },
+    {
+      "id": "g_696a97a8b8ac",
+      "text": "without recreating `flush`, whose stability the effect cleanup depends on."
+    },
+    {
+      "id": "g_6a66e34aca16",
+      "text": "No room left between the two neighbours: first reattach the page to the right"
+    },
+    {
+      "id": "g_6b0b6336c20a",
+      "text": "two positions ends up below the precision threshold, and the sibling list must"
+    },
+    {
+      "id": "g_6b79a59d4787",
+      "text": "yesterday's note"
+    },
+    {
+      "id": "g_6b89a98c3526",
+      "text": "page tree"
+    }
+  ]
 }

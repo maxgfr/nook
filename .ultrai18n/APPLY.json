@@ -1,5 +1,5 @@
 {
-  "write": false,
+  "write": true,
   "ok": true,
   "sites": {
     "total": 507,
@@ -3265,5 +3265,49 @@
     "recovered": 0,
     "files": []
   },
-  "backups": []
+  "backups": [
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/.github/workflows/ci.yml",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/.github/workflows/deploy.yml",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/README.md",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/index.html",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/package.json",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/scripts/check-no-network.mjs",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/scripts/make-icons.mjs",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/scripts/smoke.mjs",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/core/architecture.test.ts",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/core/crypto/envelope.test.ts",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/core/crypto/envelope.ts",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/core/crypto/keys.test.ts",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/core/crypto/keys.ts",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/core/model/tree.test.ts",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/core/model/tree.ts",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/core/model/types.ts",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/core/storage/idb.test.ts",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/core/storage/idb.ts",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/core/storage/wipe.test.ts",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/core/storage/wipe.ts",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/core/vault.test.ts",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/core/vault.ts",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/main.tsx",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/styles.css",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/ui/app/App.tsx",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/ui/app/VaultProvider.tsx",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/ui/app/router.ts",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/ui/app/theme.ts",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/ui/design/Button.tsx",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/ui/design/ConfirmDialog.tsx",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/ui/design/Icon.tsx",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/ui/design/blocknote.css",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/ui/design/tokens.css",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/ui/editor/DocEditor.tsx",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/ui/editor/emoji-mart-absent.ts",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/ui/editor/useAutosave.ts",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/src/ui/sidebar/Sidebar.tsx",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/vite.config.ts",
+    "/Users/maxime/Downloads/nook/.ultrai18n/backup/vitest.setup.ts"
+  ],
+  "vcs": {
+    "state": "clean",
+    "bypassedBy": null
+  }
 }

@@ -1,39 +1,39 @@
 {
- "schemaVersion": 1,
- "batchId": "002",
- "batchDigest": "f52384c6c364b9b7",
- "items": [
-  {
-   "id": "g_099e7a7d545c",
-   "text": "The GCM tag was verified: the content really is ours. Invalid JSON here"
-  },
-  {
-   "id": "g_09b2ae396233",
-   "text": "The core must stay independent of {0}."
-  },
-  {
-   "id": "g_0aabd28a8509",
-   "text": "Types"
-  },
-  {
-   "id": "g_0b74686e46ad",
-   "text": "sealed envelope"
-  },
-  {
-   "id": "g_0c28914e64dc",
-   "text": "is configured so that no outgoing request is possible."
-  },
-  {
-   "id": "g_0c377a37c3a1",
-   "text": "nothing to change in the code."
-  },
-  {
-   "id": "g_0c90c314e746",
-   "text": "It works offline"
-  },
-  {
-   "id": "g_0c9a43f1725c",
-   "text": "refuses a vault written by a newer version"
-  }
- ]
+  "schemaVersion": 1,
+  "batchId": "002",
+  "batchDigest": "f52384c6c364b9b7",
+  "items": [
+    {
+      "id": "g_099e7a7d545c",
+      "text": "The GCM tag was verified: the content really is ours. Invalid JSON here"
+    },
+    {
+      "id": "g_09b2ae396233",
+      "text": "The core must stay independent of {0}."
+    },
+    {
+      "id": "g_0aabd28a8509",
+      "text": "Types"
+    },
+    {
+      "id": "g_0b74686e46ad",
+      "text": "sealed envelope"
+    },
+    {
+      "id": "g_0c28914e64dc",
+      "text": "is configured so that no outgoing request is possible."
+    },
+    {
+      "id": "g_0c377a37c3a1",
+      "text": "nothing to change in the code."
+    },
+    {
+      "id": "g_0c90c314e746",
+      "text": "It works offline"
+    },
+    {
+      "id": "g_0c9a43f1725c",
+      "text": "refuses a vault written by a newer version"
+    }
+  ]
 }

@@ -39,15 +39,15 @@ jobs:
       - name: Build
         run: pnpm build
 
-      # La promesse centrale du produit. Cette étape inspecte le bundle
-      # réellement servi et échoue si du code capable d'émettre une requête
-      # sortante y est entré, ou si la CSP a disparu de index.html.
-      - name: Zéro réseau
+      # The product's central promise. This step inspects the bundle
+      # actually served and fails if code capable of emitting a request
+      # has got in, or if the CSP has disappeared from index.html.
+      - name: Zero network
         run: pnpm check:network
 
-  # Séparé de `verify` volontairement : ce test pilote un vrai navigateur et
-  # comporte des attentes temporelles. Un aléa d'ordonnancement sur le runner
-  # ne doit pas masquer le signal des types, du lint et des tests unitaires.
+  # Deliberately separate from `verify`: this test drives a real browser and
+  # involves waiting on time. A scheduling fluke on the runner
+  # must not mask the signal from types, lint and unit tests.
   smoke:
     runs-on: ubuntu-latest
     steps:
@@ -61,9 +61,9 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
 
-      # Écrit une note dans un vrai navigateur, recharge, et vérifie qu'elle
-      # est toujours là — et que le disque ne contient que du chiffré.
-      - name: Bout en bout
+      # Writes a note in a real browser, reloads, and checks that it
+      # is still there — and that the disk holds nothing but ciphertext.
+      - name: End to end
         run: pnpm smoke
         env:
           CHROME_PATH: /usr/bin/google-chrome

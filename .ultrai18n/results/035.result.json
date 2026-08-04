@@ -1,39 +1,39 @@
 {
- "schemaVersion": 1,
- "batchId": "035",
- "batchDigest": "5fd26c42cd2d7664",
- "items": [
-  {
-   "id": "g_8e27cb22b613",
-   "text": "\n✖ {0} check(s) failed."
-  },
-  {
-   "id": "g_8e397fceb733",
-   "text": "The core imports neither React nor the editor; the interface never touches"
-  },
-  {
-   "id": "g_8e79792e5186",
-   "text": "  If a finding cannot produce a request, declare it in ALLOWED\n"
-  },
-  {
-   "id": "g_8edb579cf0f5",
-   "text": "Unknown operation \"{0}\" on {1}."
-  },
-  {
-   "id": "g_8f04c50d88b1",
-   "text": "Unreadable record: this is not a Nook envelope."
-  },
-  {
-   "id": "g_8f3277b9b0eb",
-   "text": "a test enforces it"
-  },
-  {
-   "id": "g_8f3eaad20f47",
-   "text": "Development"
-  },
-  {
-   "id": "g_8f744ec0d03a",
-   "text": "{0} did not answer on {1}"
-  }
- ]
+  "schemaVersion": 1,
+  "batchId": "035",
+  "batchDigest": "5fd26c42cd2d7664",
+  "items": [
+    {
+      "id": "g_8e27cb22b613",
+      "text": "\n✖ {0} check(s) failed."
+    },
+    {
+      "id": "g_8e397fceb733",
+      "text": "The core imports neither React nor the editor; the interface never touches"
+    },
+    {
+      "id": "g_8e79792e5186",
+      "text": "  If a finding cannot produce a request, declare it in ALLOWED\n"
+    },
+    {
+      "id": "g_8edb579cf0f5",
+      "text": "Unknown operation \"{0}\" on {1}."
+    },
+    {
+      "id": "g_8f04c50d88b1",
+      "text": "Unreadable record: this is not a Nook envelope."
+    },
+    {
+      "id": "g_8f3277b9b0eb",
+      "text": "a test enforces it"
+    },
+    {
+      "id": "g_8f3eaad20f47",
+      "text": "Development"
+    },
+    {
+      "id": "g_8f744ec0d03a",
+      "text": "{0} did not answer on {1}"
+    }
+  ]
 }

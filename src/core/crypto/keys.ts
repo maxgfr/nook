@@ -1,40 +1,39 @@
 /**
- * Cycle de vie de la clé maîtresse.
+ * Lifecycle of the master key.
  *
- * Toutes les données de l'utilisateur sont chiffrées avec une unique clé
- * maîtresse AES-GCM-256. Ce module décide comment cette clé est protégée au
- * repos, et rien d'autre.
+ * All user data is encrypted with a single AES-GCM-256 master key. This
+ * module decides how that key is protected at rest, and nothing else.
  *
- * Une décision structurante : **la clé maîtresse n'est jamais extractible**.
- * Le navigateur la manipule sans jamais laisser JavaScript lire ses octets.
- * Le prix à payer est explicite — on ne peut pas la ré-enrober pour passer
- * d'un mode de protection à un autre. Changer de protection imposera donc de
- * générer une nouvelle clé et de rechiffrer les données (phase 4). Ce n'est
- * pas un contournement : faire tourner la clé quand la protection change est
- * exactement ce qu'on veut, puisque l'ancienne clé disparaît avec elle.
+ * One structural decision: **the master key is never extractable**. The
+ * browser handles it without ever letting JavaScript read its bytes. The
+ * price is explicit — it cannot be re-wrapped to move from one protection
+ * mode to another. Changing protection will therefore mean generating a new
+ * key and re-encrypting the data (phase 4). That is not a workaround:
+ * rotating the key when protection changes is exactly what we want, since
+ * the old key disappears with it.
  *
- * Ce que le mode « device » protège, et ce qu'il ne protège pas :
- *   ✔ la copie brute du profil ou du disque — les enregistrements sont
- *     inexploitables sans la clé, qui n'existe nulle part sous forme lisible ;
- *   ✘ quelqu'un qui lance *votre* navigateur avec *votre* session — il obtient
- *     la même clé que vous. Seule une passphrase répond à cette menace.
- * L'interface doit dire les deux, sans arrondir.
+ * What "device" mode protects, and what it does not:
+ *   ✔ a raw copy of the profile or the disk — the records are unusable
+ *     without the key, which exists nowhere in readable form;
+ *   ✘ someone who launches *your* browser with *your* session — they get
+ *     the same key you do. Only a passphrase answers that threat.
+ * The interface must say both, without rounding off.
  */
 
 import { read, write, type StoreName } from '../storage/idb'
 
 const META_STORE: StoreName = 'meta'
 
-/** Enregistrement décrivant la protection du coffre. Lisible sans secret. */
+/** Record describing the vault's protection. Readable without the secret. */
 const META_KEY = 'vault'
 
-/** La `CryptoKey` non-extractible elle-même, en mode « device ». */
+/** The non-extractable `CryptoKey` itself, in "device" mode. */
 const DEVICE_KEY = 'deviceKey'
 
 /**
- * La phase 4 ajoutera une variante `{ kind: 'passphrase'; kdf; wrappedKey }`.
- * L'union à une seule branche existe pour que cet ajout soit purement
- * additif, sans migration du format de `meta`.
+ * Phase 4 will add a `{ kind: 'passphrase'; kdf; wrappedKey }` variant. The
+ * single-branch union exists so that addition is purely additive, with no
+ * migration of the `meta` format.
  */
 export type Protection = { readonly kind: 'device' }
 
@@ -57,15 +56,15 @@ export function readVaultMeta(db: IDBDatabase): Promise<VaultMeta | undefined> {
 }
 
 /**
- * Crée le coffre au tout premier lancement.
+ * Creates the vault on the very first launch.
  *
- * Échoue si un coffre existe déjà : écraser la clé maîtresse rendrait toutes
- * les notes existantes définitivement illisibles, et c'est précisément le
- * genre d'accident qu'un appel involontaire pourrait provoquer.
+ * Fails if a vault already exists: overwriting the master key would make
+ * every existing note permanently unreadable, and that is precisely the kind
+ * of accident an unintended call could cause.
  */
 export async function createVault(db: IDBDatabase, now: Date = new Date()): Promise<CryptoKey> {
   if (await readVaultMeta(db)) {
-    throw new VaultError('Un coffre existe déjà sur cet appareil.')
+    throw new VaultError('A vault already exists on this device.')
   }
 
   const key = await generateMasterKey()
@@ -75,18 +74,18 @@ export async function createVault(db: IDBDatabase, now: Date = new Date()): Prom
     createdAt: now.toISOString(),
   }
 
-  // La clé d'abord : si l'écriture de `meta` échoue, on se retrouve avec une
-  // clé orpheline et aucun coffre — état détectable et réparable. L'ordre
-  // inverse produirait un coffre déclaré mais sans clé, donc des données
-  // futures non déchiffrables.
+  // The key first: if writing `meta` fails, we end up with an
+  // orphan key and no vault — a detectable, repairable state. The reverse
+  // reverse order would produce a vault that is declared but has no key, so
+  // future data that cannot be decrypted.
   await write(db, META_STORE, DEVICE_KEY, key)
   await write(db, META_STORE, META_KEY, meta)
   return key
 }
 
 /**
- * Ouvre un coffre existant. Renvoie `undefined` si aucun coffre n'existe
- * encore — l'appelant décide alors d'en créer un.
+ * Opens an existing vault. Returns `undefined` when no vault exists yet —
+ * the caller then decides whether to create one.
  */
 export async function openVault(db: IDBDatabase): Promise<CryptoKey | undefined> {
   const meta = await readVaultMeta(db)
@@ -94,14 +93,14 @@ export async function openVault(db: IDBDatabase): Promise<CryptoKey | undefined>
 
   if (meta.schema !== 1) {
     throw new VaultError(
-      `Ce coffre a été créé par une version plus récente de Nook (schéma ${meta.schema}).`,
+      `This vault was created by a newer version of Nook (schema ${meta.schema}).`,
     )
   }
 
   const key = await read<CryptoKey>(db, META_STORE, DEVICE_KEY)
   if (!key) {
     throw new VaultError(
-      'Le coffre est déclaré mais sa clé est introuvable. Les notes de cet appareil sont irrécupérables ; restaurez un export.',
+      'The vault is declared but its key is missing. The notes on this device are unrecoverable; restore an export.',
     )
   }
   return key

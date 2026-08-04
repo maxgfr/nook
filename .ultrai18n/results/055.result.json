@@ -1,39 +1,39 @@
 {
- "schemaVersion": 1,
- "batchId": "055",
- "batchDigest": "30dd96badf107c7e",
- "items": [
-  {
-   "id": "g_e55e696410c6",
-   "text": "The index is authoritative for metadata: it is what"
-  },
-  {
-   "id": "g_e57895599e73",
-   "text": "Wikilinks, backlinks, tags, search, command palette, daily notes"
-  },
-  {
-   "id": "g_e6244902ceb6",
-   "text": "15px — editor body"
-  },
-  {
-   "id": "g_e685558ac074",
-   "text": "the empty state greets the user"
-  },
-  {
-   "id": "g_e690c8a6d133",
-   "text": "mixes writes and deletes"
-  },
-  {
-   "id": "g_e6f2bcad64b4",
-   "text": "an interface module"
-  },
-  {
-   "id": "g_e70a386ea111",
-   "text": "says plainly what happens when the key has vanished"
-  },
-  {
-   "id": "g_e750b8c06ca5",
-   "text": "Database, caches, service worker and storages destroyed, then an inventory of what remains"
-  }
- ]
+  "schemaVersion": 1,
+  "batchId": "055",
+  "batchDigest": "30dd96badf107c7e",
+  "items": [
+    {
+      "id": "g_e55e696410c6",
+      "text": "The index is authoritative for metadata: it is what"
+    },
+    {
+      "id": "g_e57895599e73",
+      "text": "Wikilinks, backlinks, tags, search, command palette, daily notes"
+    },
+    {
+      "id": "g_e6244902ceb6",
+      "text": "15px — editor body"
+    },
+    {
+      "id": "g_e685558ac074",
+      "text": "the empty state greets the user"
+    },
+    {
+      "id": "g_e690c8a6d133",
+      "text": "mixes writes and deletes"
+    },
+    {
+      "id": "g_e6f2bcad64b4",
+      "text": "an interface module"
+    },
+    {
+      "id": "g_e70a386ea111",
+      "text": "says plainly what happens when the key has vanished"
+    },
+    {
+      "id": "g_e750b8c06ca5",
+      "text": "Database, caches, service worker and storages destroyed, then an inventory of what remains"
+    }
+  ]
 }

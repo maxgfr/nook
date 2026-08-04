@@ -1,27 +1,26 @@
 /**
- * L'arbre des pages, en fonctions pures.
+ * The page tree, in pure functions.
  *
- * Rien ici ne touche au disque : ces fonctions prennent un index et en
- * renvoient un nouveau. C'est ce qui rend l'ordre, les déplacements et les
- * suppressions en cascade testables en quelques millisecondes, sans base ni
- * navigateur.
+ * Nothing here touches the disk: these functions take an index and return a
+ * new one. That is what makes ordering, moves and cascading deletes testable
+ * in a few milliseconds, with no database and no browser.
  *
- * L'ordre entre frères est un simple nombre. Insérer entre deux voisins prend
- * le milieu, ce qui évite de réécrire toute la fratrie à chaque glisser-
- * déposer. Un nombre flottant finit par manquer de précision après une
- * cinquantaine d'insertions au même endroit : quand l'écart devient trop
- * petit, `renumber` réattribue des entiers propres à la fratrie. Le cas est
- * rare, mais il arrive, et il est silencieusement destructeur si on l'ignore.
+ * Order among siblings is a plain number. Inserting between two neighbours
+ * takes the midpoint, which avoids rewriting the whole sibling list on every
+ * drag. A floating-point number eventually runs out of precision after some
+ * fifty insertions at the same spot: when the gap becomes too small,
+ * `renumber` reassigns clean integers to the sibling list. The case is rare,
+ * but it happens, and it is silently destructive if ignored.
  */
 
 import type { DocId, DocSummary, VaultIndex } from './types'
 
-/** En deçà, deux positions ne sont plus distinguables de façon fiable. */
+/** Below this, two positions are no longer reliably distinguishable. */
 const MIN_GAP = 1e-6
 
 export function docOrThrow(index: VaultIndex, id: DocId): DocSummary {
   const doc = index.docs[id]
-  if (!doc) throw new Error(`Document introuvable : ${id}`)
+  if (!doc) throw new Error(`Document not found: ${id}`)
   return doc
 }
 
@@ -31,7 +30,7 @@ export function childrenOf(index: VaultIndex, parentId: DocId | null): DocSummar
     .toSorted((a, b) => a.order - b.order || a.createdAt.localeCompare(b.createdAt))
 }
 
-/** Du plus ancien ancêtre jusqu'au parent direct. */
+/** From the most distant ancestor down to the direct parent. */
 export function ancestorsOf(index: VaultIndex, id: DocId): DocSummary[] {
   const chain: DocSummary[] = []
   const seen = new Set<DocId>([id])
@@ -47,7 +46,7 @@ export function ancestorsOf(index: VaultIndex, id: DocId): DocSummary[] {
   return chain
 }
 
-/** Tous les descendants, en profondeur. N'inclut pas `id`. */
+/** Every descendant, depth first. Does not include `id`. */
 export function descendantIdsOf(index: VaultIndex, id: DocId): DocId[] {
   const out: DocId[] = []
   const queue: DocId[] = [id]
@@ -82,12 +81,12 @@ export function removeAll(index: VaultIndex, ids: readonly DocId[]): VaultIndex 
 }
 
 /**
- * Déplace un document sous un nouveau parent, à la position demandée.
+ * Moves a document under a new parent, at the requested position.
  *
- * @param position Rang souhaité parmi les frères, `undefined` pour la fin.
- * @throws si le déplacement créerait un cycle — glisser une page dans sa
- *   propre sous-arborescence détacherait toute la branche de l'arbre, et elle
- *   deviendrait invisible sans jamais être supprimée.
+ * @param position Desired rank among siblings, `undefined` for the end.
+ * @throws if the move would create a cycle — dragging a page into its own
+ *   subtree would detach the whole branch from the tree, and it would become
+ *   invisible without ever being deleted.
  */
 export function moveDoc(
   index: VaultIndex,
@@ -99,7 +98,7 @@ export function moveDoc(
   if (parentId !== null) {
     docOrThrow(index, parentId)
     if (parentId === id || descendantIdsOf(index, id).includes(parentId)) {
-      throw new Error('Impossible de déplacer une page dans sa propre sous-arborescence.')
+      throw new Error('A page cannot be moved into its own subtree.')
     }
   }
 
@@ -111,8 +110,8 @@ export function moveDoc(
   const order = orderBetween(before?.order, after?.order)
   if (order !== null) return upsert(index, { ...doc, parentId, order })
 
-  // Plus de place entre les deux voisins : on rattache d'abord la page au bon
-  // parent, puis on réattribue des entiers propres à toute la fratrie.
+  // No room left between the two neighbours: first reattach the page to the right
+  // parent, then reassign clean integers to the whole sibling list.
   const rehomed = upsert(index, { ...doc, parentId, order: before?.order ?? 0 })
   return renumber(rehomed, parentId, id, at)
 }
@@ -121,11 +120,11 @@ function orderBetween(before: number | undefined, after: number | undefined): nu
   if (before === undefined && after === undefined) return 0
   if (before === undefined) return (after as number) - 1
   if (after === undefined) return before + 1
-  // Plus assez de place entre les deux : on demande une renumérotation.
+  // Not enough room left between the two: we ask for a renumbering.
   return after - before < MIN_GAP ? null : (before + after) / 2
 }
 
-/** Réattribue 0, 1, 2… à une fratrie, en insérant `id` au rang `at`. */
+/** Reassigns 0, 1, 2… to a sibling list, inserting `id` at rank `at`. */
 function renumber(index: VaultIndex, parentId: DocId | null, id: DocId, at: number): VaultIndex {
   const others = childrenOf(index, parentId).filter((sibling) => sibling.id !== id)
   const ordered = [...others.slice(0, at), docOrThrow(index, id), ...others.slice(at)]

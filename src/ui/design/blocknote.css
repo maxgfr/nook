@@ -1,15 +1,14 @@
-/**
- * L'éditeur, habillé aux couleurs de Nook.
- *
- * BlockNote expose ses couleurs sous forme de variables CSS. On les redéfinit
- * à partir de nos propres jetons, dans les deux schémas à la fois : nos jetons
- * basculent déjà seuls entre clair et sombre, donc pointer les deux vers les
- * mêmes variables suffit et évite d'entretenir deux palettes.
- *
- * On ne touche qu'aux couleurs, aux rayons et à la typographie. Les
- * comportements de l'éditeur — poignée de déplacement, menu slash, sélection
- * multi-blocs — restent ceux de la bibliothèque : les réécrire produirait
- * exactement les affordances bancales que l'on cherche à éviter.
+/*
+ * The editor, dressed in Nook's colours.
+ * 
+ * BlockNote exposes its colours as CSS variables. We redefine them from our
+ * own tokens, for both schemes at once: our tokens already switch between
+ * light and dark on their own, so pointing both at the same variables is
+ * enough and saves maintaining two palettes.
+ * 
+ * We touch only colours, radii and typography. The editor's behaviours — drag
+ * handle, slash menu, multi-block selection — stay the library's: rewriting
+ * them would produce exactly the wobbly affordances we are trying to avoid.
  */
 
 .bn-container,
@@ -43,22 +42,28 @@
   --bn-colors-shadow: color-mix(in oklab, var(--nook-text) 12%, transparent);
 }
 
-/* L'éditeur occupe toute la largeur de la colonne de lecture ; c'est le
-   conteneur parent qui fixe la mesure, pas la bibliothèque. */
+/*
+The editor fills the whole width of the reading column; it is the parent
+container that sets the measure, not the library.
+*/
 .bn-container .bn-editor {
   padding-inline: 0;
   font-size: var(--nook-text-base);
 }
 
-/* Le texte des blocs de code garde la même famille monospace que le reste de
-   l'application, plutôt que celle de la bibliothèque. */
+/*
+Code-block text keeps the same monospace family as the rest of the
+application, rather than the library's.
+*/
 .bn-container code,
 .bn-container pre {
   font-family: var(--nook-font-mono);
 }
 
-/* Les menus et bulles flottantes prennent notre élévation, pour rester
-   cohérents avec les dialogues et la palette. */
+/*
+Menus and floating bubbles take our elevation, to stay consistent with the
+dialogs and the palette.
+*/
 .bn-container .bn-popover-content,
 .bn-container .mantine-Menu-dropdown {
   box-shadow: var(--nook-shadow-menu);

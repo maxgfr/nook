@@ -1,39 +1,39 @@
 {
- "schemaVersion": 1,
- "batchId": "033",
- "batchDigest": "e8bcf296b5dd54ac",
- "items": [
-  {
-   "id": "g_88a35a34fe52",
-   "text": "Local-first notes. Your data stays on your machine."
-  },
-  {
-   "id": "g_88e02e70dce2",
-   "text": "Moves a document under a new parent, at the requested position.\n*\n@param position Desired rank among siblings, `undefined` for the end.\n@throws if the move would create a cycle — dragging a page into its own\n  subtree would detach the whole branch from the tree, and it would become\n  invisible without ever being deleted."
-  },
-  {
-   "id": "g_8971a9d39040",
-   "text": "The \"zero network\" guard.\n*\nThe rule is really enforced by the CSP (`connect-src 'none'`): not even a\nmalicious dependency can get out. This script is the canary — it fails CI\n*at the moment* code capable of emitting a request enters the bundle,\nrather than at the moment a user notices.\n*\nIt inspects the build, not the sources: what matters is what is actually\nserved, dependencies included.\n*\nTwo distinct corpora, because they do not have the same rights:\n  - application code may not call any network API;\n  - the service worker, on the other hand, MUST call `fetch` — that is its\n    whole purpose — but may not mention any external origin.\n*\nEvery exception goes through ALLOWED and must carry a readable reason. The\nexceptions in force are reprinted on each run: a waiver nobody sees again\nis a waiver nobody ever re-examines."
-  },
-  {
-   "id": "g_8a07bb18caf9",
-   "text": "must not be found"
-  },
-  {
-   "id": "g_8a1e9158ddcf",
-   "text": "Security"
-  },
-  {
-   "id": "g_8adfef5640ad",
-   "text": "someone inspecting IndexedDB or copying the browser profile."
-  },
-  {
-   "id": "g_8bc63cb93dbe",
-   "text": "This file destroys all the storage in its environment. Vitest isolates each\ntest file, so the wipe does not spill over into the others — but that is\nprecisely why these tests live alone here."
-  },
-  {
-   "id": "g_8c0431ea93f7",
-   "text": "has got in, or if the CSP has disappeared from index.html."
-  }
- ]
+  "schemaVersion": 1,
+  "batchId": "033",
+  "batchDigest": "e8bcf296b5dd54ac",
+  "items": [
+    {
+      "id": "g_88a35a34fe52",
+      "text": "Local-first notes. Your data stays on your machine."
+    },
+    {
+      "id": "g_88e02e70dce2",
+      "text": "Moves a document under a new parent, at the requested position.\n*\n@param position Desired rank among siblings, `undefined` for the end.\n@throws if the move would create a cycle — dragging a page into its own\n  subtree would detach the whole branch from the tree, and it would become\n  invisible without ever being deleted."
+    },
+    {
+      "id": "g_8971a9d39040",
+      "text": "The \"zero network\" guard.\n*\nThe rule is really enforced by the CSP (`connect-src 'none'`): not even a\nmalicious dependency can get out. This script is the canary — it fails CI\n*at the moment* code capable of emitting a request enters the bundle,\nrather than at the moment a user notices.\n*\nIt inspects the build, not the sources: what matters is what is actually\nserved, dependencies included.\n*\nTwo distinct corpora, because they do not have the same rights:\n  - application code may not call any network API;\n  - the service worker, on the other hand, MUST call `fetch` — that is its\n    whole purpose — but may not mention any external origin.\n*\nEvery exception goes through ALLOWED and must carry a readable reason. The\nexceptions in force are reprinted on each run: a waiver nobody sees again\nis a waiver nobody ever re-examines."
+    },
+    {
+      "id": "g_8a07bb18caf9",
+      "text": "must not be found"
+    },
+    {
+      "id": "g_8a1e9158ddcf",
+      "text": "Security"
+    },
+    {
+      "id": "g_8adfef5640ad",
+      "text": "someone inspecting IndexedDB or copying the browser profile."
+    },
+    {
+      "id": "g_8bc63cb93dbe",
+      "text": "This file destroys all the storage in its environment. Vitest isolates each\ntest file, so the wipe does not spill over into the others — but that is\nprecisely why these tests live alone here."
+    },
+    {
+      "id": "g_8c0431ea93f7",
+      "text": "has got in, or if the CSP has disappeared from index.html."
+    }
+  ]
 }

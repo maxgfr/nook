@@ -1,20 +1,20 @@
 /**
- * Le coffre — la seule API que l'interface consomme.
+ * The vault — the only API the interface consumes.
  *
- * Tout ce qui est en dessous (IndexedDB, AES-GCM, l'arbre, les migrations)
- * est un détail que `src/ui` n'a pas le droit de connaître. Un test le fait
- * respecter : voir `core/architecture.test.ts`.
+ * Everything underneath (IndexedDB, AES-GCM, the tree, the migrations) is a
+ * detail `src/ui` is not allowed to know. A test enforces it: see
+ * `core/architecture.test.ts`.
  *
- * Deux garanties tenues ici, et nulle part ailleurs :
+ * Two guarantees are kept here, and nowhere else:
  *
- * 1. **L'index et les documents ne divergent jamais.** Chaque mutation
- *    chiffre ce qu'elle doit écrire, *puis* écrit le document et l'index dans
- *    une seule transaction. Une coupure au mauvais moment laisse l'état
- *    d'avant, jamais un index qui référence un document absent.
+ * 1. **The index and the documents never diverge.** Every mutation encrypts
+ *    what it must write, *then* writes the document and the index in a
+ *    single transaction. A crash at the wrong moment leaves the previous
+ *    state, never an index referencing a missing document.
  *
- * 2. **L'index vit en mémoire, déchiffré une seule fois.** La barre latérale,
- *    la palette et les fils d'Ariane n'ont donc jamais à déchiffrer un
- *    document pour s'afficher.
+ * 2. **The index lives in memory, decrypted once.** The sidebar, the command
+ *    palette and the breadcrumbs therefore never have to decrypt a document
+ *    in order to render.
  */
 
 import { openJson, sealJson, type Envelope } from './crypto/envelope'
@@ -51,7 +51,7 @@ const INDEX_KEY = 'index'
 const indexContext = () => `index/${INDEX_KEY}`
 const docContext = (id: DocId) => `docs/${id}`
 
-/** Contenu d'un document neuf : un paragraphe vide, prêt à recevoir le curseur. */
+/** Content of a fresh document: an empty paragraph, ready for the caret. */
 const EMPTY_CONTENT: JsonValue = []
 
 export type VaultExport = {
@@ -62,17 +62,17 @@ export type VaultExport = {
 }
 
 /**
- * `replace` efface le coffre avant d'importer ; `merge` conserve l'existant et
- * réattribue un identifiant aux documents qui entreraient en collision. Aucun
- * mode par défaut : écraser des notes doit toujours être un choix explicite.
+ * `replace` erases the vault before importing; `merge` keeps what is there and
+ * reassigns an identifier to documents that would collide. There is no default
+ * mode: overwriting notes must always be an explicit choice.
  */
 export type ImportMode = 'replace' | 'merge'
 
 export class Vault {
-  // Champs déclarés puis affectés plutôt que des propriétés de constructeur :
-  // `erasableSyntaxOnly` interdit ces dernières, parce qu'elles produisent du
-  // code à l'exécution et ne peuvent donc pas être simplement effacées par un
-  // transpileur qui ne fait que retirer les types.
+  // Fields declared then assigned rather than constructor properties:
+  // `erasableSyntaxOnly` forbids the latter, because they produce
+  // code at runtime and therefore cannot simply be erased by a transpiler
+  // transpiler that only strips types.
   readonly #db: IDBDatabase
   readonly #key: CryptoKey
   #index: VaultIndex
@@ -84,10 +84,10 @@ export class Vault {
     this.#index = index
   }
 
-  /** Ouvre le coffre de cet appareil, ou le crée au tout premier lancement. */
+  /** Opens this device's vault, or creates it on the very first launch. */
   static async open(databaseName?: string): Promise<Vault> {
-    // Demandée dès l'ouverture, avant toute écriture : un refus n'empêche rien,
-    // il rend seulement les notes évinçables après une longue inactivité.
+    // Requested as soon as we open, before any write: a refusal blocks nothing,
+    // it only makes the notes evictable after a long spell of inactivity.
     void requestPersistentStorage()
 
     const db = await openDatabase(databaseName)
@@ -103,7 +103,7 @@ export class Vault {
     return this.#index
   }
 
-  /** Prévient l'interface qu'il faut se redessiner. Renvoie la désinscription. */
+  /** Tells the interface it must redraw. Returns the unsubscribe function. */
   subscribe(listener: () => void): () => void {
     this.#listeners.add(listener)
     return () => this.#listeners.delete(listener)
@@ -136,11 +136,11 @@ export class Vault {
     const summary = docOrThrow(this.#index, id)
     const stored = await read<Envelope>(this.#db, 'docs', id)
     if (!stored) {
-      throw new Error(`Le contenu du document « ${summary.title || UNTITLED} » est introuvable.`)
+      throw new Error(`The content of document "${summary.title || UNTITLED}" cannot be found.`)
     }
     const doc = await openJson<Doc>(this.#key, stored, docContext(id))
-    // L'index fait autorité sur les métadonnées : c'est lui que les
-    // déplacements et renommages mettent à jour.
+    // The index is authoritative for metadata: it is what
+    // moves and renames update.
     return { ...doc, ...summary }
   }
 
@@ -169,9 +169,9 @@ export class Vault {
   }
 
   /**
-   * Supprime un document et toute sa descendance. Sans la cascade, les pages
-   * filles resteraient dans la base en référençant un parent disparu, donc
-   * invisibles et jamais récupérables.
+   * Deletes a document and its whole subtree. Without the cascade, child
+   * pages would stay in the database referencing a parent that no longer
+   * exists, invisible and never recoverable.
    */
   async deleteDoc(id: DocId): Promise<DocId[]> {
     docOrThrow(this.#index, id)
@@ -196,7 +196,7 @@ export class Vault {
 
   async importAll(data: VaultExport, mode: ImportMode): Promise<number> {
     if (data?.format !== 'nook-export' || data.version !== 1) {
-      throw new Error('Ce fichier n’est pas un export Nook lisible par cette version.')
+      throw new Error('This file is not a Nook export this version can read.')
     }
 
     let index = mode === 'replace' ? EMPTY_INDEX : this.#index
@@ -208,9 +208,9 @@ export class Vault {
       }
     }
 
-    // Une passe de remappage d'abord : un document importé peut porter
-    // l'identifiant d'un document existant, et son parent doit alors pointer
-    // vers le nouvel identifiant, pas vers l'ancien homonyme.
+    // A remapping pass first: an imported document may carry
+    // the identifier of an existing document, and its parent must then point
+    // at the new identifier, not at the old namesake.
     const remap = new Map<DocId, DocId>()
     for (const doc of data.docs) {
       remap.set(doc.id, mode === 'merge' && index.docs[doc.id] ? newId() : doc.id)
@@ -229,7 +229,7 @@ export class Vault {
     return data.docs.length
   }
 
-  /** Détruit tout, puis renvoie l'inventaire de ce qui subsiste réellement. */
+  /** Destroys everything, then returns an inventory of what actually remains. */
   async wipe(): Promise<StorageSurvey> {
     this.#db.close()
     const remaining = await wipeEverything()
@@ -248,10 +248,9 @@ export class Vault {
   }
 
   /**
-   * Chiffre, écrit en une transaction, puis seulement alors publie le nouvel
-   * index en mémoire. Si l'écriture échoue, l'état visible reste celui d'avant
-   * — l'interface ne montre jamais une modification qui n'a pas atteint le
-   * disque.
+   * Encrypts, writes in one transaction, and only then publishes the new index
+   * in memory. If the write fails, the visible state stays the previous one —
+   * the interface never shows a change that did not reach the disk.
    */
   async #commit(index: VaultIndex, writes: readonly BatchEntry[]): Promise<void> {
     const entries: BatchEntry[] = []

@@ -1,39 +1,39 @@
 {
- "schemaVersion": 1,
- "batchId": "059",
- "batchDigest": "684d500ce8936166",
- "items": [
-  {
-   "id": "g_f21a19102624",
-   "text": "refuses to overwrite an existing vault"
-  },
-  {
-   "id": "g_f2fc4478f7a6",
-   "text": "The point that matters: the copy of the parent really picked up the copy of"
-  },
-  {
-   "id": "g_f300c43f809c",
-   "text": "the editor, loaded on demand, arrives"
-  },
-  {
-   "id": "g_f31ab9af15f4",
-   "text": "@param context Location of the record, for example `docs/<id>`.\n  The same value will have to be supplied when decrypting."
-  },
-  {
-   "id": "g_f38b9cca0806",
-   "text": "browser, and to rebuild the interface without touching the data."
-  },
-  {
-   "id": "g_f390643e68bf",
-   "text": "emulation, any simulated typing would go nowhere."
-  },
-  {
-   "id": "g_f69594a2ac9e",
-   "text": "Without this guard, every test below would pass against an"
-  },
-  {
-   "id": "g_f70e89196d2d",
-   "text": "browsers without `modulepreload`. No target of this project needs it,"
-  }
- ]
+  "schemaVersion": 1,
+  "batchId": "059",
+  "batchDigest": "684d500ce8936166",
+  "items": [
+    {
+      "id": "g_f21a19102624",
+      "text": "refuses to overwrite an existing vault"
+    },
+    {
+      "id": "g_f2fc4478f7a6",
+      "text": "The point that matters: the copy of the parent really picked up the copy of"
+    },
+    {
+      "id": "g_f300c43f809c",
+      "text": "the editor, loaded on demand, arrives"
+    },
+    {
+      "id": "g_f31ab9af15f4",
+      "text": "@param context Location of the record, for example `docs/<id>`.\n  The same value will have to be supplied when decrypting."
+    },
+    {
+      "id": "g_f38b9cca0806",
+      "text": "browser, and to rebuild the interface without touching the data."
+    },
+    {
+      "id": "g_f390643e68bf",
+      "text": "emulation, any simulated typing would go nowhere."
+    },
+    {
+      "id": "g_f69594a2ac9e",
+      "text": "Without this guard, every test below would pass against an"
+    },
+    {
+      "id": "g_f70e89196d2d",
+      "text": "browsers without `modulepreload`. No target of this project needs it,"
+    }
+  ]
 }

@@ -12,20 +12,20 @@ import {
 } from './idb'
 
 /**
- * fake-indexeddb partage une origine unique entre tous les tests : chaque test
- * ouvre donc sa propre base pour qu'aucun ne dépende de l'ordre d'exécution.
+ * fake-indexeddb shares a single origin across all tests: each test therefore
+ * opens its own database so that none depends on execution order.
  */
 let counter = 0
 const freshDatabase = () => openDatabase(`nook-test-${++counter}`)
 
 describe('base locale', () => {
-  it('crée tous les magasins attendus', async () => {
+  it('creates every expected store', async () => {
     const db = await freshDatabase()
 
     expect([...db.objectStoreNames].toSorted()).toEqual(['blobs', 'docs', 'index', 'meta'])
   })
 
-  it('relit ce qu’on a écrit', async () => {
+  it('reads back what was written', async () => {
     const db = await freshDatabase()
 
     await write(db, 'docs', 'a', { titre: 'Note A' })
@@ -33,26 +33,26 @@ describe('base locale', () => {
     expect(await read(db, 'docs', 'a')).toEqual({ titre: 'Note A' })
   })
 
-  it('renvoie undefined pour une clé absente', async () => {
+  it('returns undefined for a missing key', async () => {
     const db = await freshDatabase()
 
-    expect(await read(db, 'docs', 'fantôme')).toBeUndefined()
+    expect(await read(db, 'docs', 'ghost')).toBeUndefined()
   })
 
-  it('conserve les octets bruts intacts', async () => {
+  it('keeps the raw bytes intact', async () => {
     const db = await freshDatabase()
     const enveloppe = { v: 1, iv: new Uint8Array([1, 2, 3]), ct: new Uint8Array([9, 8, 7]) }
 
     await write(db, 'docs', 'a', enveloppe)
     const back = await read<typeof enveloppe>(db, 'docs', 'a')
 
-    // Si le clonage structuré dégradait les Uint8Array, tout le chiffrement
-    // s'effondrerait en silence : ce test verrouille cette hypothèse.
+    // If structured cloning degraded Uint8Array, the whole encryption scheme
+    // would collapse in silence: this test locks that assumption down.
     expect(back?.iv).toBeInstanceOf(Uint8Array)
     expect([...(back?.ct ?? [])]).toEqual([9, 8, 7])
   })
 
-  it('liste les clés et les valeurs d’un magasin', async () => {
+  it('lists the keys and values of a store', async () => {
     const db = await freshDatabase()
 
     await write(db, 'docs', 'b', 2)
@@ -65,7 +65,7 @@ describe('base locale', () => {
     ])
   })
 
-  it('supprime une clé', async () => {
+  it('deletes a key', async () => {
     const db = await freshDatabase()
     await write(db, 'docs', 'a', 1)
 
@@ -74,7 +74,7 @@ describe('base locale', () => {
     expect(await read(db, 'docs', 'a')).toBeUndefined()
   })
 
-  it('vide un magasin sans toucher aux autres', async () => {
+  it('clears one store without touching the others', async () => {
     const db = await freshDatabase()
     await write(db, 'docs', 'a', 1)
     await write(db, 'meta', 'vault', { schema: 1 })
@@ -85,8 +85,8 @@ describe('base locale', () => {
     expect(await read(db, 'meta', 'vault')).toEqual({ schema: 1 })
   })
 
-  describe('écriture groupée', () => {
-    it('écrit dans plusieurs magasins d’un seul geste', async () => {
+  describe('batched write', () => {
+    it('writes to several stores in one go', async () => {
       const db = await freshDatabase()
 
       await writeBatch(db, [
@@ -98,7 +98,7 @@ describe('base locale', () => {
       expect(await read(db, 'index', 'arbre')).toEqual(['a'])
     })
 
-    it('mélange écritures et suppressions', async () => {
+    it('mixes writes and deletes', async () => {
       const db = await freshDatabase()
       await write(db, 'docs', 'ancien', 1)
 
@@ -110,18 +110,18 @@ describe('base locale', () => {
       expect(await listKeys(db, 'docs')).toEqual(['nouveau'])
     })
 
-    it('ne fait rien sur un lot vide', async () => {
+    it('does nothing on an empty batch', async () => {
       const db = await freshDatabase()
 
       await expect(writeBatch(db, [])).resolves.toBeUndefined()
     })
   })
 
-  it('supprime la base sans broncher si elle n’existe pas', async () => {
+  it('deletes the database without complaining when it does not exist', async () => {
     await expect(deleteDatabase('nook-test-inexistante')).resolves.toBeUndefined()
   })
 
-  it('supprime réellement une base existante', async () => {
+  it('really deletes an existing database', async () => {
     const name = `nook-test-jetable-${++counter}`
     const db = await openDatabase(name)
     await write(db, 'docs', 'a', 1)
@@ -129,7 +129,7 @@ describe('base locale', () => {
 
     await deleteDatabase(name)
 
-    // Rouvrir recrée une base vide : la preuve que l'ancienne a disparu.
+    // Reopening creates an empty database: proof the old one is gone.
     const reopened = await openDatabase(name)
     expect(await listKeys(reopened, 'docs')).toEqual([])
   })

@@ -1,20 +1,20 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 /**
- * Sauvegarde automatique, temporisée.
+ * Debounced autosave.
  *
- * Il n'y a pas de bouton « Enregistrer » dans Nook, donc c'est ce module qui
- * porte la promesse de ne rien perdre. Trois moments comptent, et les oublier
- * est la façon habituelle de perdre le dernier paragraphe écrit :
+ * There is no "Save" button in Nook, so this module carries the promise of
+ * losing nothing. Three moments matter, and forgetting them is the usual way
+ * to lose the last paragraph written:
  *
- *   - après une pause dans la frappe (le cas courant) ;
- *   - quand l'onglet passe en arrière-plan ou se ferme, car une temporisation
- *     en attente ne se déclenchera jamais ;
- *   - au démontage, typiquement en changeant de page.
+ *   - after a pause in typing (the common case);
+ *   - when the tab goes to the background or closes, because a pending timer
+ *     will never fire;
+ *   - on unmount, typically when changing page.
  *
- * En cas d'échec, les modifications sont remises dans la file plutôt que
- * jetées : la frappe suivante réessaiera, et l'état passe à `error` pour que
- * l'interface puisse le dire.
+ * On failure, the changes go back into the queue rather than being thrown
+ * away: the next keystroke will retry, and the state moves to `error` so the
+ * interface can say so.
  */
 
 export type SaveState = 'saved' | 'pending' | 'saving' | 'error'
@@ -27,8 +27,8 @@ export function useAutosave<Patch extends object>(
   const queued = useRef<Partial<Patch>>({})
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  // La sauvegarde change d'identité à chaque rendu ; on garde la dernière sans
-  // recréer `flush`, dont la stabilité est indispensable au nettoyage d'effet.
+  // The save function changes identity on every render; we keep the latest one
+  // without recreating `flush`, whose stability the effect cleanup depends on.
   const saveRef = useRef(save)
   saveRef.current = save
 
@@ -44,12 +44,12 @@ export function useAutosave<Patch extends object>(
     setState('saving')
     try {
       await saveRef.current(patch as Patch)
-      // Une frappe pendant l'écriture a pu remplir la file à nouveau : ne pas
-      // annoncer « enregistré » tant qu'il reste quelque chose en attente.
+      // A keystroke during the write may have refilled the queue: do not
+      // report "saved" while something is still queued.
       setState(Object.keys(queued.current).length > 0 ? 'pending' : 'saved')
     } catch {
-      // Ce qui vient d'arriver est plus récent que ce qu'on tentait d'écrire :
-      // la file garde la priorité sur le patch remis dedans.
+      // What has just arrived is newer than what we were trying to write:
+      // the queue takes priority over the patch put back into it.
       queued.current = { ...patch, ...queued.current }
       setState('error')
     }
@@ -67,8 +67,8 @@ export function useAutosave<Patch extends object>(
 
   useEffect(() => {
     const onHidden = () => {
-      // `visibilitychange` est le dernier signal fiable sur mobile : `unload`
-      // n'y est pas garanti quand le système referme l'onglet.
+      // `visibilitychange` is the last reliable signal on mobile: `unload`
+      // is not guaranteed there when the system closes the tab.
       if (document.visibilityState === 'hidden') void flush()
     }
     const onPageHide = () => void flush()

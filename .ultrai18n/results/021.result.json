@@ -1,39 +1,39 @@
 {
- "schemaVersion": 1,
- "batchId": "021",
- "batchDigest": "f8a5c05f1a679116",
- "items": [
-  {
-   "id": "g_5713ca736823",
-   "text": "walks the ancestor chain, from the most distant down to the direct parent"
-  },
-  {
-   "id": "g_57a84fa9c374",
-   "text": "permanently unreadable. It must fail loudly."
-  },
-  {
-   "id": "g_581b5c2fd7f6",
-   "text": "`fetch` is the whole point of a service worker: it is how it"
-  },
-  {
-   "id": "g_58c112437803",
-   "text": "writes to several stores in one go"
-  },
-  {
-   "id": "g_58c349312749",
-   "text": "the dialog itself, not an element inside it."
-  },
-  {
-   "id": "g_594c4a2f546b",
-   "text": "The preview server"
-  },
-  {
-   "id": "g_59a01a86926f",
-   "text": "the address points at the open page"
-  },
-  {
-   "id": "g_5ae8401a9c05",
-   "text": "_your_ unlocked session gets exactly the same rights you do. The"
-  }
- ]
+  "schemaVersion": 1,
+  "batchId": "021",
+  "batchDigest": "f8a5c05f1a679116",
+  "items": [
+    {
+      "id": "g_5713ca736823",
+      "text": "walks the ancestor chain, from the most distant down to the direct parent"
+    },
+    {
+      "id": "g_57a84fa9c374",
+      "text": "permanently unreadable. It must fail loudly."
+    },
+    {
+      "id": "g_581b5c2fd7f6",
+      "text": "`fetch` is the whole point of a service worker: it is how it"
+    },
+    {
+      "id": "g_58c112437803",
+      "text": "writes to several stores in one go"
+    },
+    {
+      "id": "g_58c349312749",
+      "text": "the dialog itself, not an element inside it."
+    },
+    {
+      "id": "g_594c4a2f546b",
+      "text": "The preview server"
+    },
+    {
+      "id": "g_59a01a86926f",
+      "text": "the address points at the open page"
+    },
+    {
+      "id": "g_5ae8401a9c05",
+      "text": "_your_ unlocked session gets exactly the same rights you do. The"
+    }
+  ]
 }

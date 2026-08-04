@@ -1,24 +1,25 @@
-/**
- * Jetons de design de Nook.
- *
- * Un seul endroit définit une valeur. Les couleurs utilisent `light-dark()` :
- * la valeur claire et la valeur sombre vivent côte à côte, et c'est
- * `color-scheme` qui tranche. Conséquence importante : le thème suit le
- * système dès le premier pixel peint, sans JavaScript.
- *
- * C'est une contrainte, pas une préférence — la CSP du produit interdit les
- * scripts inline, donc l'astuce habituelle du petit script anti-flash dans le
- * <head> est impossible ici. La bascule manuelle se fait en posant
- * `data-theme` sur <html>, qui ne fait que redéfinir `color-scheme`.
+/*
+ * Nook's design tokens.
+ * 
+ * One place defines a value. The colours use `light-dark()`: the light value
+ * and the dark value live side by side, and `color-scheme` decides. One
+ * important consequence: the theme follows the system from the first pixel
+ * painted, with no JavaScript.
+ * 
+ * That is a constraint, not a preference — the product's CSP forbids inline
+ * scripts, so the usual trick of a small anti-flash script in the <head> is
+ * impossible here. Switching manually is done by setting `data-theme` on
+ * <html>, which does nothing but redefine `color-scheme`.
  */
 
 :root {
   color-scheme: light dark;
 
-  /* ---------------------------------------------------------------- Surfaces
-   * Deux couches de neutres : le contenu est la surface la plus claire (en
-   * clair) ou la plus haute (en sombre), les chrome et panneaux reculent.
-   * Teinte légèrement chaude — du papier, pas de l'écran.
+  /*
+   * ---------------------------------------------------------------- Surfaces
+   * Two layers of neutrals: the content is the lightest surface (in light
+   * mode) or the highest one (in dark), while chrome and panels recede. A
+   * slightly warm cast — paper, not screen.
    */
   --nook-surface: light-dark(oklch(99% 0.004 85), oklch(19.5% 0.005 70));
   --nook-surface-sunken: light-dark(oklch(96.4% 0.006 85), oklch(15.5% 0.005 70));
@@ -29,28 +30,31 @@
   --nook-border: light-dark(oklch(90% 0.006 85), oklch(27.5% 0.006 70));
   --nook-border-strong: light-dark(oklch(83% 0.008 85), oklch(36% 0.008 70));
 
-  /* -------------------------------------------------------------------- Texte
-   * Trois niveaux suffisent. `faint` est réservé aux métadonnées qu'on ne lit
-   * pas activement (compteurs, horodatages) et ne porte jamais d'information
-   * indispensable, puisqu'il frôle le seuil de contraste.
+  /*
+   * -------------------------------------------------------------------- Text
+   * Three levels are enough. `faint` is reserved for metadata nobody reads
+   * actively (counters, timestamps) and never carries essential information,
+   * since it sits close to the contrast threshold.
    */
   --nook-text: light-dark(oklch(23% 0.012 60), oklch(93% 0.005 80));
   --nook-text-muted: light-dark(oklch(47% 0.011 60), oklch(70% 0.007 80));
   --nook-text-faint: light-dark(oklch(62% 0.009 60), oklch(56% 0.007 80));
 
-  /* ------------------------------------------------------------------ Accent
-   * Une seule couleur d'accent, en terre cuite. Elle ne sert qu'à trois
-   * choses : l'action primaire, la sélection courante, l'anneau de focus.
-   * Jamais décorative.
+  /*
+   * ------------------------------------------------------------------ Accent
+   * A single accent colour, in terracotta. It serves exactly three things:
+   * the primary action, the current selection, the focus ring. Never
+   * decorative.
    */
   --nook-accent: light-dark(oklch(55% 0.135 42), oklch(70% 0.125 45));
   --nook-accent-hover: light-dark(oklch(49% 0.14 42), oklch(76% 0.12 45));
   --nook-accent-contrast: light-dark(oklch(99% 0.004 85), oklch(18% 0.02 45));
   --nook-accent-soft: light-dark(oklch(94.5% 0.028 45), oklch(28% 0.045 45));
 
-  /* --------------------------------------------------------------- Sémantique
-   * Vocabulaire d'états standardisé. Chaque composant interactif pioche ici
-   * plutôt que d'inventer sa propre teinte.
+  /*
+   * --------------------------------------------------------------- Semantics
+   * A standardised vocabulary of states. Every interactive component draws
+   * from here rather than inventing its own hue.
    */
   --nook-success: light-dark(oklch(52% 0.115 150), oklch(72% 0.11 150));
   --nook-warning: light-dark(oklch(60% 0.125 75), oklch(78% 0.12 80));
@@ -58,14 +62,15 @@
   --nook-danger-soft: light-dark(oklch(95% 0.03 27), oklch(27% 0.06 27));
   --nook-info: light-dark(oklch(55% 0.105 250), oklch(72% 0.1 250));
 
-  /* ------------------------------------------------------------ Typographie
-   * Une seule famille pour tout : titres, labels, corps, données. Pile
-   * système, qui est le choix natif en UI produit et le seul qui garantisse
-   * zéro octet chargé depuis le réseau.
-   *
-   * Échelle en rem fixes, ratio ~1.12. Pas de `clamp()` : l'utilisateur lit à
-   * une densité constante, et un titre fluide qui rétrécit dans un panneau
-   * étroit est un défaut, pas une adaptation.
+  /*
+   * ------------------------------------------------------------ Typography
+   * One family for everything: headings, labels, body, data. The system
+   * stack, which is the native choice for product UI and the only one that
+   * guarantees zero bytes fetched from the network.
+   * 
+   * Fixed rem scale, ratio ~1.12. No `clamp()`: the reader works at a
+   * constant density, and a fluid heading that shrinks inside a narrow panel
+   * is a defect, not an adaptation.
    */
   --nook-font-sans:
     ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
@@ -74,27 +79,28 @@
     ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
 
   --nook-text-2xs: 0.6875rem; /* 11px — compteurs, raccourcis */
-  --nook-text-xs: 0.75rem; /* 12px — métadonnées */
-  --nook-text-sm: 0.8125rem; /* 13px — défaut de l'interface */
-  --nook-text-base: 0.9375rem; /* 15px — corps de l'éditeur */
+  --nook-text-xs: 0.75rem; /* 12px — metadata */
+  --nook-text-sm: 0.8125rem; /* 13px — interface default */
+  --nook-text-base: 0.9375rem; /* 15px — editor body */
   --nook-text-md: 1.0625rem; /* 17px */
   --nook-text-lg: 1.1875rem; /* 19px */
   --nook-text-xl: 1.375rem; /* 22px */
   --nook-text-2xl: 1.625rem; /* 26px */
   --nook-text-3xl: 2rem; /* 32px — titre de document */
 
-  /* -------------------------------------------------------------- Géométrie */
+  /* -------------------------------------------------------------- Geometry */
   --nook-radius-sm: 0.25rem;
   --nook-radius: 0.375rem;
   --nook-radius-lg: 0.625rem;
   --nook-radius-xl: 0.875rem;
 
   --nook-sidebar-width: 16rem;
-  --nook-measure: 42rem; /* ~68 caractères dans l'éditeur */
+  --nook-measure: 42rem; /* ~68 characters in the editor */
 
-  /* ---------------------------------------------------------------- Élévation
-   * Deux ombres seulement, et elles ne servent qu'à sortir un élément du flux
-   * (menu, dialogue). Rien de décoratif ne porte d'ombre.
+  /*
+   * ---------------------------------------------------------------- Elevation
+   * Two shadows only, and they exist purely to lift an element out of the flow
+   * (menu, dialog). Nothing decorative carries a shadow.
    */
   --nook-shadow-menu:
     0 1px 2px light-dark(oklch(0% 0 0 / 0.06), oklch(0% 0 0 / 0.3)),
@@ -103,8 +109,9 @@
     0 2px 4px light-dark(oklch(0% 0 0 / 0.06), oklch(0% 0 0 / 0.35)),
     0 16px 48px -12px light-dark(oklch(0% 0 0 / 0.18), oklch(0% 0 0 / 0.6));
 
-  /* ---------------------------------------------------------------- Mouvement
-   * 120–220 ms. Le mouvement signale un changement d'état, il ne raconte rien.
+  /*
+   * ---------------------------------------------------------------- Motion
+   * 120–220 ms. Motion signals a change of state; it does not narrate.
    */
   --nook-ease: cubic-bezier(0.2, 0, 0, 1);
   --nook-dur-fast: 120ms;
@@ -112,8 +119,10 @@
   --nook-dur-slow: 220ms;
 }
 
-/* La bascule manuelle ne fait que forcer `color-scheme` : toutes les valeurs
- * `light-dark()` ci-dessus suivent automatiquement. */
+/*
+ * Switching manually only forces `color-scheme`: every `light-dark()` value
+ * above follows automatically.
+ */
 :root[data-theme='light'] {
   color-scheme: light;
 }

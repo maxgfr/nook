@@ -1,39 +1,39 @@
 {
- "schemaVersion": 1,
- "batchId": "023",
- "batchDigest": "154ce3193a8b5655",
- "items": [
-  {
-   "id": "g_60f2ef56bfb4",
-   "text": "is created with a usable key and a readable description"
-  },
-  {
-   "id": "g_613543259738",
-   "text": "Navigation by URL fragment.\n*\nThe fragment rather than `history.pushState` because GitHub Pages serves\nstatic files: a URL like `/nook/doc/abc` would return a 404 before the\napplication even starts. The fragment stays client-side.\n*\nIt never leaves the machine — a fragment is not sent to the server — but it\ndoes appear in browser history, so it carries only an opaque identifier,\nnever a title."
-  },
-  {
-   "id": "g_61936ac41aea",
-   "text": "Switching manually only forces `color-scheme`: every `light-dark()` value\nabove follows automatically."
-  },
-  {
-   "id": "g_6194ea6135ba",
-   "text": "and a loading message that flashes is worse than nothing."
-  },
-  {
-   "id": "g_6197648dcf4a",
-   "text": "involves waiting on time. A scheduling fluke on the runner"
-  },
-  {
-   "id": "g_622e1fa76b4f",
-   "text": "A vault already exists on this device."
-  },
-  {
-   "id": "g_62d73f8c65e4",
-   "text": "exfiltrate the key's bytes."
-  },
-  {
-   "id": "g_632b797ecf51",
-   "text": "Review the quote"
-  }
- ]
+  "schemaVersion": 1,
+  "batchId": "023",
+  "batchDigest": "154ce3193a8b5655",
+  "items": [
+    {
+      "id": "g_60f2ef56bfb4",
+      "text": "is created with a usable key and a readable description"
+    },
+    {
+      "id": "g_613543259738",
+      "text": "Navigation by URL fragment.\n*\nThe fragment rather than `history.pushState` because GitHub Pages serves\nstatic files: a URL like `/nook/doc/abc` would return a 404 before the\napplication even starts. The fragment stays client-side.\n*\nIt never leaves the machine — a fragment is not sent to the server — but it\ndoes appear in browser history, so it carries only an opaque identifier,\nnever a title."
+    },
+    {
+      "id": "g_61936ac41aea",
+      "text": "Switching manually only forces `color-scheme`: every `light-dark()` value\nabove follows automatically."
+    },
+    {
+      "id": "g_6194ea6135ba",
+      "text": "and a loading message that flashes is worse than nothing."
+    },
+    {
+      "id": "g_6197648dcf4a",
+      "text": "involves waiting on time. A scheduling fluke on the runner"
+    },
+    {
+      "id": "g_622e1fa76b4f",
+      "text": "A vault already exists on this device."
+    },
+    {
+      "id": "g_62d73f8c65e4",
+      "text": "exfiltrate the key's bytes."
+    },
+    {
+      "id": "g_632b797ecf51",
+      "text": "Review the quote"
+    }
+  ]
 }

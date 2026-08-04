@@ -1,39 +1,39 @@
 {
- "schemaVersion": 1,
- "batchId": "044",
- "batchDigest": "91c5f28c0b3ae36b",
- "items": [
-  {
-   "id": "g_b73fe4688832",
-   "text": "Agenda"
-  },
-  {
-   "id": "g_b7f567fe07c2",
-   "text": "Encrypts, writes in one transaction, and only then publishes the new index\nin memory. If the write fails, the visible state stays the previous one —\nthe interface never shows a change that did not reach the disk."
-  },
-  {
-   "id": "g_b8c93e9b00d0",
-   "text": "the disk holds no plain text"
-  },
-  {
-   "id": "g_b937c6afc7b9",
-   "text": "Fields declared then assigned rather than constructor properties:"
-  },
-  {
-   "id": "g_b94f71df28c9",
-   "text": "Removed from the bundle: see `emoji-mart-absent.ts`."
-  },
-  {
-   "id": "g_b9b299cb50ed",
-   "text": "the entire point of binding the envelope to its position."
-  },
-  {
-   "id": "g_ba3c2bb01846",
-   "text": "releases it; treating that as a failure would make the caller panic"
-  },
-  {
-   "id": "g_baace00c8ba8",
-   "text": "`polite`: the information is useful but must not interrupt the"
-  }
- ]
+  "schemaVersion": 1,
+  "batchId": "044",
+  "batchDigest": "91c5f28c0b3ae36b",
+  "items": [
+    {
+      "id": "g_b73fe4688832",
+      "text": "Agenda"
+    },
+    {
+      "id": "g_b7f567fe07c2",
+      "text": "Encrypts, writes in one transaction, and only then publishes the new index\nin memory. If the write fails, the visible state stays the previous one —\nthe interface never shows a change that did not reach the disk."
+    },
+    {
+      "id": "g_b8c93e9b00d0",
+      "text": "the disk holds no plain text"
+    },
+    {
+      "id": "g_b937c6afc7b9",
+      "text": "Fields declared then assigned rather than constructor properties:"
+    },
+    {
+      "id": "g_b94f71df28c9",
+      "text": "Removed from the bundle: see `emoji-mart-absent.ts`."
+    },
+    {
+      "id": "g_b9b299cb50ed",
+      "text": "the entire point of binding the envelope to its position."
+    },
+    {
+      "id": "g_ba3c2bb01846",
+      "text": "releases it; treating that as a failure would make the caller panic"
+    },
+    {
+      "id": "g_baace00c8ba8",
+      "text": "`polite`: the information is useful but must not interrupt the"
+    }
+  ]
 }

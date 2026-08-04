@@ -1,39 +1,39 @@
 {
- "schemaVersion": 1,
- "batchId": "041",
- "batchDigest": "cea596241c03f2ee",
- "items": [
-  {
-   "id": "g_a94d945e93fd",
-   "text": "accepts an out-of-range position without complaining"
-  },
-  {
-   "id": "g_aac793ab2f9c",
-   "text": "AES-GCM-256, a non-extractable key, never exposed to JavaScript"
-  },
-  {
-   "id": "g_aad6dec73660",
-   "text": "Everything is precached: the application must start with no network."
-  },
-  {
-   "id": "g_ab67692baa61",
-   "text": "the CSP does not contain \"{0}\""
-  },
-  {
-   "id": "g_acecbe06df52",
-   "text": "a promise. The interface can therefore show it as is."
-  },
-  {
-   "id": "g_ae6cec349e1d",
-   "text": "writes nothing but sealed envelopes to disk"
-  },
-  {
-   "id": "g_ae74c12b5a57",
-   "text": "Firefox refuses to enumerate databases. We can then neither claim any"
-  },
-  {
-   "id": "g_af0dca39c2a3",
-   "text": "treats \"I cannot know\" as nothing to report"
-  }
- ]
+  "schemaVersion": 1,
+  "batchId": "041",
+  "batchDigest": "cea596241c03f2ee",
+  "items": [
+    {
+      "id": "g_a94d945e93fd",
+      "text": "accepts an out-of-range position without complaining"
+    },
+    {
+      "id": "g_aac793ab2f9c",
+      "text": "AES-GCM-256, a non-extractable key, never exposed to JavaScript"
+    },
+    {
+      "id": "g_aad6dec73660",
+      "text": "Everything is precached: the application must start with no network."
+    },
+    {
+      "id": "g_ab67692baa61",
+      "text": "the CSP does not contain \"{0}\""
+    },
+    {
+      "id": "g_acecbe06df52",
+      "text": "a promise. The interface can therefore show it as is."
+    },
+    {
+      "id": "g_ae6cec349e1d",
+      "text": "writes nothing but sealed envelopes to disk"
+    },
+    {
+      "id": "g_ae74c12b5a57",
+      "text": "Firefox refuses to enumerate databases. We can then neither claim any"
+    },
+    {
+      "id": "g_af0dca39c2a3",
+      "text": "treats \"I cannot know\" as nothing to report"
+    }
+  ]
 }

@@ -2,12 +2,12 @@ import { useEffect, useRef, type ReactNode } from 'react'
 import { Button } from './Button'
 
 /**
- * Confirmation d'une action destructrice.
+ * Confirmation of a destructive action.
  *
- * Bâti sur `<dialog>` natif, ce qui donne gratuitement — et correctement — le
- * piégeage du focus, la fermeture par Échap, le fond inerte et la bonne
- * sémantique pour les lecteurs d'écran. Réimplémenter tout cela à la main est
- * le raccourci qui produit les modales inutilisables au clavier.
+ * Built on the native `<dialog>`, which gives — correctly, and for free —
+ * focus trapping, Escape to close, an inert backdrop and the right semantics
+ * for screen readers. Reimplementing all of that by hand is the shortcut that
+ * produces modals nobody can use from a keyboard.
  */
 export function ConfirmDialog({
   open,
@@ -41,9 +41,9 @@ export function ConfirmDialog({
         onCancel()
       }}
       onClick={(event) => {
-        // Un clic sur le fond ferme. `<dialog>` reçoit l'événement pour toute
-        // la surface, y compris le backdrop : on ne ferme que si la cible est
-        // le dialogue lui-même, pas un élément à l'intérieur.
+        // A click on the backdrop closes. `<dialog>` receives the event for all of
+        // the surface, backdrop included: we only close when the target is
+        // the dialog itself, not an element inside it.
         if (event.target === ref.current) onCancel()
       }}
       className="m-auto w-[min(28rem,calc(100vw-2rem))] rounded-lg border border-line bg-raised p-0 text-ink shadow-modal backdrop:bg-black/35"
@@ -53,7 +53,7 @@ export function ConfirmDialog({
         <div className="mt-2 text-sm text-ink-muted">{children}</div>
       </div>
       <div className="flex justify-end gap-2 border-t border-line px-5 py-3">
-        <Button onClick={onCancel}>Annuler</Button>
+        <Button onClick={onCancel}>Cancel</Button>
         <Button tone="danger" onClick={onConfirm} autoFocus>
           {confirmLabel}
         </Button>

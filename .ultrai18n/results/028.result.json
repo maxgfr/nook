@@ -1,39 +1,39 @@
 {
- "schemaVersion": 1,
- "batchId": "028",
- "batchDigest": "99bf89634a85fffe",
- "items": [
-  {
-   "id": "g_72c26f74563e",
-   "text": "would be ignored by ProseMirror."
-  },
-  {
-   "id": "g_73106d80f07f",
-   "text": "{ this is not JSON"
-  },
-  {
-   "id": "g_7480486cafc0",
-   "text": "Build"
-  },
-  {
-   "id": "g_7535ec03208d",
-   "text": "✖ dist/ is missing. Run `pnpm build` before this check."
-  },
-  {
-   "id": "g_7682e6eb9398",
-   "text": "Everything really can be erased"
-  },
-  {
-   "id": "g_76b8fb2361d9",
-   "text": "Digits aligned vertically in lists and tables."
-  },
-  {
-   "id": "g_774a0a1d1c8c",
-   "text": "browser. There is no account, no server, no synchronisation."
-  },
-  {
-   "id": "g_77578ba9bff0",
-   "text": "moves and renames update."
-  }
- ]
+  "schemaVersion": 1,
+  "batchId": "028",
+  "batchDigest": "99bf89634a85fffe",
+  "items": [
+    {
+      "id": "g_72c26f74563e",
+      "text": "would be ignored by ProseMirror."
+    },
+    {
+      "id": "g_73106d80f07f",
+      "text": "{ this is not JSON"
+    },
+    {
+      "id": "g_7480486cafc0",
+      "text": "Build"
+    },
+    {
+      "id": "g_7535ec03208d",
+      "text": "✖ dist/ is missing. Run `pnpm build` before this check."
+    },
+    {
+      "id": "g_7682e6eb9398",
+      "text": "Everything really can be erased"
+    },
+    {
+      "id": "g_76b8fb2361d9",
+      "text": "Digits aligned vertically in lists and tables."
+    },
+    {
+      "id": "g_774a0a1d1c8c",
+      "text": "browser. There is no account, no server, no synchronisation."
+    },
+    {
+      "id": "g_77578ba9bff0",
+      "text": "moves and renames update."
+    }
+  ]
 }

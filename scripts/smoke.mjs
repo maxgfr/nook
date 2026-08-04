@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 /**
- * Vérification de bout en bout, sur le build réellement servi.
+ * End-to-end check, against the build that is actually served.
  *
- * Les tests unitaires couvrent le core sans navigateur ; celui-ci fait la
- * chose que seul un vrai navigateur peut prouver : on écrit une note, on
- * recharge la page, et elle est toujours là — tout en n'ayant laissé sur le
- * disque que des octets illisibles.
+ * The unit tests cover the core without a browser; this one does the thing
+ * only a real browser can prove: you write a note, you reload the page, and
+ * it is still there — while having left nothing but unreadable bytes on
+ * disk.
  *
- * Il pilote Chrome par CDP. Node 24 fournit un client WebSocket natif, donc
- * aucune dépendance de test navigateur n'entre dans le projet.
+ * It drives Chrome over CDP. Node 24 ships a native WebSocket client, so no
+ * browser-testing dependency enters the project.
  *
  *   pnpm build && pnpm smoke
  */
@@ -32,24 +32,24 @@ const CHROME_CANDIDATES = [
 
 const chromePath = CHROME_CANDIDATES.find((path) => existsSync(path))
 if (!chromePath) {
-  console.error('✖ Aucun Chrome trouvé. Définissez CHROME_PATH.')
+  console.error('✖ No Chrome found. Set CHROME_PATH.')
   process.exit(1)
 }
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
-/** Attend qu'une URL réponde, plutôt que de parier sur un délai fixe. */
+/** Waits for a URL to answer, rather than betting on a fixed delay. */
 async function waitFor(url, what) {
   for (let attempt = 0; attempt < 80; attempt++) {
     try {
       const response = await fetch(url)
       if (response.ok) return response
     } catch {
-      /* pas encore prêt */
+      /* not ready yet */
     }
     await sleep(250)
   }
-  throw new Error(`${what} n’a pas répondu sur ${url}`)
+  throw new Error(`${what} did not answer on ${url}`)
 }
 
 const preview = spawn('npx', ['vite', 'preview', '--port', String(PORT)], { stdio: 'ignore' })
@@ -75,7 +75,7 @@ const check = (name, ok, detail = '') => {
 }
 
 try {
-  await waitFor(BASE, 'Le serveur de prévisualisation')
+  await waitFor(BASE, 'The preview server')
   const version = await waitFor(`http://localhost:${DEBUG_PORT}/json/version`, 'Chrome')
   const socket = new WebSocket((await version.json()).webSocketDebuggerUrl)
   await new Promise((resolve, reject) => {
@@ -122,67 +122,70 @@ try {
   }
 
   await goto(BASE)
-  check('la page se charge', (await evaluate('document.title')) === 'Nook')
+  check('the page loads', (await evaluate('document.title')) === 'Nook')
   check(
-    'l’état vide accueille l’utilisateur',
-    await evaluate(`document.body.innerText.includes('Aucune page ouverte')`),
+    'the empty state greets the user',
+    await evaluate(`document.body.innerText.includes('No page open')`),
   )
 
   await evaluate(
-    `[...document.querySelectorAll('button')].find((b) => b.textContent.trim() === 'Nouvelle page').click()`,
+    `[...document.querySelectorAll('button')].find((b) => b.textContent.trim() === 'New page').click()`,
   )
   await sleep(2500)
 
   check(
-    'l’éditeur, chargé à la demande, arrive',
+    'the editor, loaded on demand, arrives',
     await evaluate(`!!document.querySelector('.bn-editor')`),
   )
-  check('l’adresse désigne la page ouverte', (await evaluate('location.hash')).startsWith('#/doc/'))
+  check(
+    'the address points at the open page',
+    (await evaluate('location.hash')).startsWith('#/doc/'),
+  )
 
   await evaluate(`
     (() => {
-      const input = document.querySelector('input[aria-label="Titre de la page"]')
+      const input = document.querySelector('input[aria-label="Page title"]')
       const setValue = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set
-      setValue.call(input, 'Note de recette')
+      setValue.call(input, 'Recipe note')
       input.dispatchEvent(new Event('input', { bubbles: true }))
     })()
   `)
 
-  // Une page headless se croit en arrière-plan et refuse le focus : sans cette
-  // émulation, toute saisie simulée partirait dans le vide.
+  // A headless page believes it is in the background and refuses focus: without
+  // emulation, any simulated typing would go nowhere.
   await send('Emulation.setFocusEmulationEnabled', { enabled: true })
   await evaluate(`document.querySelector('.bn-editor[contenteditable=true]').focus()`)
-  // `Input.insertText` emprunte le chemin d'une vraie saisie ; un `keyDown` nu
-  // serait ignoré par ProseMirror.
-  await send('Input.insertText', { text: 'Le texte doit survivre au rechargement.' })
+  // `Input.insertText` takes the path of real typing; a bare `keyDown`
+  // would be ignored by ProseMirror.
+  await send('Input.insertText', { text: 'This text must survive a reload.' })
   await sleep(500)
 
   check(
-    'la frappe atteint l’éditeur',
-    (await evaluate(`document.querySelector('.bn-editor').innerText`)).includes('survivre'),
+    'typing reaches the editor',
+    (await evaluate(`document.querySelector('.bn-editor').innerText`)).includes('survive'),
   )
 
-  // Laisse la sauvegarde automatique se déclencher.
+  // Let autosave fire.
   await sleep(1500)
 
   await goto(BASE)
   check(
-    'le titre est retrouvé après rechargement',
-    await evaluate(`document.body.innerText.includes('Note de recette')`),
+    'the title is found again after a reload',
+    await evaluate(`document.body.innerText.includes('Recipe note')`),
   )
 
   await evaluate(
-    `[...document.querySelectorAll('button')].find((b) => b.textContent.includes('Note de recette')).click()`,
+    `[...document.querySelectorAll('button')].find((b) => b.textContent.includes('Recipe note')).click()`,
   )
   await sleep(2500)
 
   check(
-    'le contenu est retrouvé après rechargement',
-    await evaluate(`document.body.innerText.includes('survivre au rechargement')`),
+    'the content is found again after a reload',
+    await evaluate(`document.body.innerText.includes('survive a reload')`),
   )
 
-  // La promesse la plus difficile à vérifier autrement : ce que verrait
-  // quelqu'un qui ouvre la base du navigateur.
+  // The promise hardest to verify any other way: what would be seen by
+  // someone who opens the browser's database.
   const onDisk = await evaluate(`
     new Promise((resolve) => {
       const request = indexedDB.open('nook')
@@ -193,9 +196,9 @@ try {
     })
   `)
   check(
-    'le disque ne contient aucun texte en clair',
-    !onDisk.includes('recette') && !onDisk.includes('survivre'),
-    `${onDisk.length} octets illisibles`,
+    'the disk holds no plain text',
+    !onDisk.includes('Recipe') && !onDisk.includes('survive'),
+    `${onDisk.length} unreadable bytes`,
   )
 
   socket.close()
@@ -206,7 +209,9 @@ try {
 
 const failed = results.filter((result) => !result.ok)
 if (failed.length > 0) {
-  console.error(`\n✖ ${failed.length} vérification(s) en échec.`)
+  console.error(`
+✖ ${failed.length} check(s) failed.`)
   process.exit(1)
 }
-console.log(`\n✔ ${results.length} vérifications passées sur le build servi.`)
+console.log(`
+✔ ${results.length} checks passed against the served build.`)

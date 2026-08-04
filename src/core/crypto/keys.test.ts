@@ -6,21 +6,21 @@ import { open, seal } from './envelope'
 let counter = 0
 const freshDatabase = () => openDatabase(`nook-keys-${++counter}`)
 
-/** Horodatage figé : la date de création doit être celle qu'on a fournie. */
+/** Frozen timestamp: the creation date must be the one we supplied. */
 const CREATED_AT = '2026-08-04T10:00:00.000Z'
 
 const bytes = (text: string) => new TextEncoder().encode(text)
 const text = (data: Uint8Array) => new TextDecoder().decode(data)
 
 describe('coffre', () => {
-  it('n’existe pas avant d’avoir été créé', async () => {
+  it('does not exist before it has been created', async () => {
     const db = await freshDatabase()
 
     expect(await openVault(db)).toBeUndefined()
     expect(await readVaultMeta(db)).toBeUndefined()
   })
 
-  it('se crée avec une clé utilisable et une description lisible', async () => {
+  it('is created with a usable key and a readable description', async () => {
     const db = await freshDatabase()
 
     const key = await createVault(db, new Date(CREATED_AT))
@@ -33,59 +33,59 @@ describe('coffre', () => {
     expect(text(await open(key, await seal(key, bytes('test'), 'docs/a'), 'docs/a'))).toBe('test')
   })
 
-  it('produit une clé que JavaScript ne peut pas lire', async () => {
+  it('produces a key JavaScript cannot read', async () => {
     const db = await freshDatabase()
 
     const key = await createVault(db)
 
-    // Le cœur de la promesse : même du code exécuté dans la page ne peut pas
-    // exfiltrer les octets de la clé.
+    // The heart of the promise: not even code running inside the page can
+    // exfiltrate the key's bytes.
     expect(key.extractable).toBe(false)
     await expect(crypto.subtle.exportKey('raw', key)).rejects.toThrow()
   })
 
-  it('refuse d’écraser un coffre existant', async () => {
+  it('refuses to overwrite an existing vault', async () => {
     const db = await freshDatabase()
     await createVault(db)
 
-    // Un second appel réinitialiserait la clé et rendrait toutes les notes
-    // définitivement illisibles. Il doit échouer bruyamment.
+    // A second call would reset the key and make every note
+    // permanently unreadable. It must fail loudly.
     await expect(createVault(db)).rejects.toThrow(VaultError)
   })
 
-  it('rouvre le coffre avec la même clé', async () => {
+  it('reopens the vault with the same key', async () => {
     const db = await freshDatabase()
     const created = await createVault(db)
-    const sealed = await seal(created, bytes('la note d’hier'), 'docs/a')
+    const sealed = await seal(created, bytes("yesterday's note"), 'docs/a')
 
     const reopened = await openVault(db)
 
     expect(reopened).toBeDefined()
-    expect(text(await open(reopened!, sealed, 'docs/a'))).toBe('la note d’hier')
+    expect(text(await open(reopened!, sealed, 'docs/a'))).toBe("yesterday's note")
   })
 
-  it('dit clairement ce qui se passe si la clé a disparu', async () => {
+  it('says plainly what happens when the key has vanished', async () => {
     const db = await freshDatabase()
     await createVault(db)
 
     await remove(db, 'meta', 'deviceKey')
 
-    // Cas irrécupérable : le message doit orienter vers un export plutôt que
-    // laisser croire à un incident passager.
-    await expect(openVault(db)).rejects.toThrow(/irrécupérables|export/)
+    // Unrecoverable case: the message must point towards an export rather than
+    // suggest a passing incident.
+    await expect(openVault(db)).rejects.toThrow(/unrecoverable|export/)
   })
 
-  it('refuse un coffre écrit par une version plus récente', async () => {
+  it('refuses a vault written by a newer version', async () => {
     const db = await freshDatabase()
     await createVault(db)
 
     const meta = await read<Record<string, unknown>>(db, 'meta', 'vault')
     await write(db, 'meta', 'vault', { ...meta, schema: 2 })
 
-    await expect(openVault(db)).rejects.toThrow(/plus récente/)
+    await expect(openVault(db)).rejects.toThrow(/newer version/)
   })
 
-  it('sépare les coffres de deux appareils', async () => {
+  it("keeps two devices' vaults apart", async () => {
     const appareilA = await freshDatabase()
     const appareilB = await freshDatabase()
     const keyA = await createVault(appareilA)

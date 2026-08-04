@@ -1,24 +1,24 @@
 /**
- * Accès à IndexedDB.
+ * Access to IndexedDB.
  *
- * Volontairement étroit : ouvrir, lire, écrire, effacer. Aucune notion de
- * document, de chiffrement ou d'interface n'entre ici — ce module ne sait
- * manipuler que des paires clé/valeur opaques.
+ * Deliberately narrow: open, read, write, erase. No notion of a document, of
+ * encryption or of the interface gets in here — this module only knows how to
+ * handle opaque key/value pairs.
  *
- * Une contrainte d'IndexedDB gouverne la forme de cette API : une transaction
- * s'auto-referme dès que la file de microtâches se vide sans requête en
- * attente. Attendre une promesse non-IndexedDB au milieu d'une transaction la
- * tue donc silencieusement. C'est pour cette raison qu'il n'existe pas ici de
- * `transact(db, fn)` générique : le chiffrement, qui est asynchrone, doit être
- * terminé *avant* d'ouvrir la transaction. `writeBatch` est la seule primitive
- * atomique offerte, et elle ne prend que des valeurs déjà prêtes.
+ * One IndexedDB constraint governs the shape of this API: a transaction
+ * auto-closes as soon as the microtask queue drains with no request pending.
+ * Awaiting a non-IndexedDB promise in the middle of a transaction therefore
+ * kills it silently. That is why there is no generic `transact(db, fn)` here:
+ * encryption, being asynchronous, must be finished *before* the transaction
+ * opens. `writeBatch` is the only atomic primitive on offer, and it takes
+ * only values that are already prepared.
  */
 
 /*
- * `IDBRequest` expose ses résultats par des propriétés `on*` : c'est l'API
- * canonique d'IndexedDB, et chaque requête est à usage unique, donc les
- * arguments habituels en faveur de `addEventListener` (plusieurs abonnés,
- * `{ once: true }`) ne s'appliquent pas ici.
+ * `IDBRequest` exposes its results through `on*` properties: that is the
+ * canonical IndexedDB API, and each request is single-use, so the usual
+ * arguments in favour of `addEventListener` (several subscribers,
+ * `{ once: true }`) do not apply here.
  */
 /* oxlint-disable unicorn/prefer-add-event-listener */
 
@@ -26,21 +26,21 @@ export const DB_NAME = 'nook'
 export const DB_VERSION = 1
 
 /**
- * - `meta`   : version de schéma, sel de dérivation, clé maîtresse enveloppée.
- *              Le seul magasin lisible sans déverrouillage — il ne contient
- *              rien d'exploitable sans le secret.
- * - `index`  : un unique enregistrement chiffré (arbre, titres, tags, liens,
- *              index de recherche). Déchiffré au déverrouillage.
- * - `docs`   : un enregistrement chiffré par document.
- * - `blobs`  : un enregistrement chiffré par image ou pièce jointe.
+ * - `meta`   : schema version, derivation salt, wrapped master key.
+ *              The only store readable without unlocking — it holds nothing
+ *              usable without the secret.
+ * - `index`  : a single encrypted record (tree, titles, tags, links, search
+ *              index). Decrypted on unlock.
+ * - `docs`   : one encrypted record per document.
+ * - `blobs`  : one encrypted record per image or attachment.
  */
 export const STORES = ['meta', 'index', 'docs', 'blobs'] as const
 export type StoreName = (typeof STORES)[number]
 
 /**
- * Migrations, indexées par version cible. L'entrée 0 fait passer à la v1.
- * Ajouter une version = ajouter une fonction ici et incrémenter DB_VERSION ;
- * les bases existantes rejouent uniquement les étapes qui leur manquent.
+ * Migrations, indexed by target version. Entry 0 moves to v1. Adding a
+ * version means adding a function here and bumping DB_VERSION; existing
+ * databases replay only the steps they are missing.
  */
 const MIGRATIONS: readonly ((db: IDBDatabase) => void)[] = [
   function toVersion1(db) {
@@ -57,15 +57,15 @@ export class StorageError extends Error {
 function promisify<T>(req: IDBRequest<T>, what: string): Promise<T> {
   return new Promise((resolve, reject) => {
     req.onsuccess = () => resolve(req.result)
-    req.onerror = () => reject(new StorageError(`${what} a échoué.`, { cause: req.error }))
+    req.onerror = () => reject(new StorageError(`${what} failed.`, { cause: req.error }))
   })
 }
 
 function settled(tx: IDBTransaction, what: string): Promise<void> {
   return new Promise((resolve, reject) => {
     tx.oncomplete = () => resolve()
-    tx.onerror = () => reject(new StorageError(`${what} a échoué.`, { cause: tx.error }))
-    tx.onabort = () => reject(new StorageError(`${what} a été interrompu.`, { cause: tx.error }))
+    tx.onerror = () => reject(new StorageError(`${what} failed.`, { cause: tx.error }))
+    tx.onabort = () => reject(new StorageError(`${what} was aborted.`, { cause: tx.error }))
   })
 }
 
@@ -81,25 +81,25 @@ export function openDatabase(name: string = DB_NAME): Promise<IDBDatabase> {
       }
     }
 
-    // Un autre onglet garde une version antérieure ouverte. Sans ce message,
-    // l'utilisateur voit une application qui ne démarre jamais, sans raison.
+    // Another tab is holding an older version open. Without this message,
+    // the user sees an application that never starts, with no explanation.
     req.onblocked = () =>
       reject(
         new StorageError(
-          'Une autre fenêtre de Nook utilise une version antérieure de la base. Fermez-la puis rechargez.',
+          'Another Nook window is using an older version of the database. Close it, then reload.',
         ),
       )
 
     req.onsuccess = () => {
       const db = req.result
-      // Si un autre onglet réclame une mise à niveau, on libère la base plutôt
-      // que de le bloquer indéfiniment.
+      // If another tab asks for an upgrade, we release the database rather
+      // than block it indefinitely.
       db.onversionchange = () => db.close()
       resolve(db)
     }
 
     req.onerror = () =>
-      reject(new StorageError('Impossible d’ouvrir la base locale.', { cause: req.error }))
+      reject(new StorageError('Could not open the local database.', { cause: req.error }))
   })
 }
 
@@ -119,7 +119,7 @@ export async function readAll<T>(
   const tx = db.transaction(store, 'readonly')
   const objectStore = tx.objectStore(store)
   const [keys, values] = await Promise.all([
-    promisify(objectStore.getAllKeys(), `Lecture des clés de ${store}`),
+    promisify(objectStore.getAllKeys(), `Reading the keys of ${store}`),
     promisify<T[]>(objectStore.getAll(), `Lecture de ${store}`),
   ])
   return keys.map((key, i) => ({ key: String(key), value: values[i] as T }))
@@ -127,7 +127,7 @@ export async function readAll<T>(
 
 export async function listKeys(db: IDBDatabase, store: StoreName): Promise<string[]> {
   const tx = db.transaction(store, 'readonly')
-  const keys = await promisify(tx.objectStore(store).getAllKeys(), `Lecture des clés de ${store}`)
+  const keys = await promisify(tx.objectStore(store).getAllKeys(), `Reading the keys of ${store}`)
   return keys.map(String)
 }
 
@@ -139,7 +139,7 @@ export async function write(
 ): Promise<void> {
   const tx = db.transaction(store, 'readwrite')
   tx.objectStore(store).put(value, key)
-  return settled(tx, `Écriture de ${store}/${key}`)
+  return settled(tx, `Writing ${store}/${key}`)
 }
 
 export type BatchEntry =
@@ -147,11 +147,11 @@ export type BatchEntry =
   | { op: 'delete'; store: StoreName; key: string }
 
 /**
- * Écrit ou supprime plusieurs enregistrements en une seule transaction.
+ * Writes or deletes several records in a single transaction.
  *
- * C'est la primitive qui garantit qu'un document et l'index qui le référence
- * ne peuvent pas diverger : soit les deux sont écrits, soit aucun. Toutes les
- * valeurs doivent déjà être chiffrées — voir la note en tête de fichier.
+ * This is the primitive that guarantees a document and the index referencing
+ * it cannot diverge: either both are written, or neither. Every value must
+ * already be encrypted — see the note at the top of this file.
  */
 export async function writeBatch(db: IDBDatabase, entries: readonly BatchEntry[]): Promise<void> {
   if (entries.length === 0) return
@@ -159,8 +159,8 @@ export async function writeBatch(db: IDBDatabase, entries: readonly BatchEntry[]
   const tx = db.transaction(stores, 'readwrite')
   for (const entry of entries) {
     const objectStore = tx.objectStore(entry.store)
-    // Explicite plutôt que « tout ce qui n'est pas un put est un delete » :
-    // une entrée malformée doit faire du bruit, pas effacer une donnée.
+    // Explicit rather than "anything that is not a put is a delete":
+    // a malformed entry must make noise, not erase data.
     switch (entry.op) {
       case 'put':
         objectStore.put(entry.value, entry.key)
@@ -171,11 +171,11 @@ export async function writeBatch(db: IDBDatabase, entries: readonly BatchEntry[]
       default: {
         const unknown = entry as BatchEntry
         tx.abort()
-        throw new StorageError(`Opération inconnue « ${String(unknown.op)} » sur ${unknown.store}.`)
+        throw new StorageError(`Unknown operation "${String(unknown.op)}" on ${unknown.store}.`)
       }
     }
   }
-  return settled(tx, `Écriture groupée de ${entries.length} enregistrement(s)`)
+  return settled(tx, `Batched write of ${entries.length} record(s)`)
 }
 
 export async function remove(db: IDBDatabase, store: StoreName, key: string): Promise<void> {
@@ -191,12 +191,12 @@ export async function clearStore(db: IDBDatabase, store: StoreName): Promise<voi
 }
 
 /**
- * Demande au navigateur de ne pas évincer nos données.
+ * Ask the browser not to evict our data.
  *
- * Sans cela, Safari efface le stockage d'une origine restée inactive quelques
- * semaines — un carnet de notes qu'on n'ouvre pas pendant les vacances peut
- * donc disparaître. La demande peut être refusée sans explication ; l'appelant
- * doit s'en servir pour inciter à l'export, pas pour paniquer.
+ * Without this, Safari clears the storage of an origin left idle for a few
+ * weeks — a notebook you don't open over the holidays can therefore vanish.
+ * The request may be denied without explanation; the caller should use that
+ * to encourage exporting, not to panic.
  */
 export async function requestPersistentStorage(): Promise<boolean> {
   try {
@@ -211,11 +211,11 @@ export function deleteDatabase(name: string = DB_NAME): Promise<void> {
   return new Promise((resolve, reject) => {
     const req = indexedDB.deleteDatabase(name)
     req.onsuccess = () => resolve()
-    // Une base bloquée finit par être supprimée quand le dernier onglet la
-    // relâche ; considérer cela comme un échec ferait paniquer l'appelant à
-    // tort, alors qu'il vient de demander une destruction.
+    // A blocked database is eventually deleted once the last tab
+    // releases it; treating that as a failure would make the caller panic
+    // wrongly, when they have just asked for a destruction.
     req.onblocked = () => resolve()
     req.onerror = () =>
-      reject(new StorageError('Impossible de supprimer la base locale.', { cause: req.error }))
+      reject(new StorageError('Could not delete the local database.', { cause: req.error }))
   })
 }

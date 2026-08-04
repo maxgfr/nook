@@ -7,10 +7,10 @@ import { Button } from '../design/Button'
 import { Icon } from '../design/Icon'
 
 /**
- * L'éditeur pèse à lui seul l'essentiel du poids de l'application. Le sortir
- * du chargement initial fait apparaître la barre latérale immédiatement, et
- * son morceau n'est cherché qu'à l'ouverture d'une page. Le service worker
- * l'ayant précaché, l'application reste utilisable hors connexion.
+ * The editor alone accounts for most of the application's weight. Taking it
+ * out of the initial load makes the sidebar appear immediately, and its
+ * chunk is only fetched when a page is opened. The service worker having
+ * precached it, the application stays usable offline.
  */
 const DocEditor = lazy(() =>
   import('../editor/DocEditor').then((module) => ({ default: module.DocEditor })),
@@ -32,9 +32,9 @@ function Workspace({ theme, onThemeChange }: { theme: Theme; onThemeChange: (t: 
   const navigate = useNavigate()
   const index = useVaultIndex()
 
-  // Une page supprimée dans un autre onglet, ou une adresse partagée qui ne
-  // correspond à rien : on retombe sur l'accueil plutôt que d'afficher une
-  // erreur pour un identifiant qui n'existe simplement plus.
+  // A page deleted in another tab, or a shared address matching nothing:
+  // we fall back to the home screen rather than showing an
+  // error for an identifier that simply no longer exists.
   const current = openId && index.docs[openId] ? openId : null
 
   return (
@@ -55,11 +55,11 @@ function Workspace({ theme, onThemeChange }: { theme: Theme; onThemeChange: (t: 
 }
 
 /**
- * État vide de l'application.
+ * The application's empty state.
  *
- * Il enseigne l'interface au lieu de constater son vide : la seule action
- * utile est proposée, et la promesse du produit est rappelée là où elle se
- * vérifie — au premier lancement, quand on décide de faire confiance.
+ * It teaches the interface instead of noting its emptiness: the one useful
+ * action is offered, and the product's promise is restated where it is put to
+ * the test — on first launch, when you decide whether to trust it.
  */
 function Welcome() {
   const vault = useVault()
@@ -68,17 +68,17 @@ function Welcome() {
   return (
     <div className="flex flex-1 flex-col items-center justify-center px-6 text-center">
       <Icon name="page" className="size-7 text-ink-faint" />
-      <h1 className="mt-4 text-lg font-semibold tracking-tight">Aucune page ouverte</h1>
+      <h1 className="mt-4 text-lg font-semibold tracking-tight">No page open</h1>
       <p className="mt-2 max-w-sm text-sm text-ink-muted">
-        Vos pages sont chiffrées et rangées sur cet appareil. Rien n'est envoyé nulle part — la page
-        s'interdit toute requête sortante.
+        Your pages are encrypted and kept on this device. Nothing is sent anywhere — the page
+        forbids itself any outgoing request.
       </p>
       <Button
         tone="primary"
         className="mt-6"
         onClick={() => void vault.createDoc().then((doc) => navigate(doc.id))}
       >
-        Nouvelle page
+        New page
       </Button>
     </div>
   )
@@ -88,15 +88,15 @@ function Boot({ state }: { state: BootState }) {
   return (
     <div className="flex h-full items-center justify-center px-6 text-center">
       {state.status === 'opening' ? (
-        // Volontairement muet : ouvrir le coffre prend quelques millisecondes,
-        // et un message de chargement qui clignote est pire que rien.
-        <span className="sr-only">Ouverture du coffre…</span>
+        // Deliberately silent: opening the vault takes a few milliseconds,
+        // and a loading message that flashes is worse than nothing.
+        <span className="sr-only">Opening the vault…</span>
       ) : (
         <div className="max-w-md">
-          <h1 className="text-md font-semibold tracking-tight">Le coffre n'a pas pu s'ouvrir</h1>
+          <h1 className="text-md font-semibold tracking-tight">The vault could not be opened</h1>
           <p className="mt-2 text-sm text-ink-muted">{state.error.message}</p>
           <p className="mt-4 text-xs text-ink-faint">
-            Si une autre fenêtre de Nook est ouverte, fermez-la puis rechargez.
+            If another Nook window is open, close it and reload.
           </p>
         </div>
       )}
@@ -105,16 +105,16 @@ function Boot({ state }: { state: BootState }) {
 }
 
 const THEMES: readonly { value: Theme; label: string }[] = [
-  { value: 'system', label: 'Système' },
-  { value: 'light', label: 'Clair' },
-  { value: 'dark', label: 'Sombre' },
+  { value: 'system', label: 'System' },
+  { value: 'light', label: 'Light' },
+  { value: 'dark', label: 'Dark' },
 ]
 
 function ThemePicker({ value, onChange }: { value: Theme; onChange: (theme: Theme) => void }) {
   return (
     <div
       role="radiogroup"
-      aria-label="Thème"
+      aria-label="Theme"
       className="fixed right-3 bottom-3 flex items-center gap-0.5 rounded-lg border border-line bg-raised/90 p-0.5 backdrop-blur-sm"
     >
       {THEMES.map((option) => {
