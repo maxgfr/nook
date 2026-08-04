@@ -75,7 +75,15 @@ function LoadedEditor({ doc }: { doc: Doc }) {
   const { state, schedule } = useAutosave<DocPatch>((patch) => vault.saveDoc(doc.id, patch))
 
   const trail = ancestorsOf(index, doc.id)
-  const title = index.docs[doc.id]?.title ?? doc.title
+
+  // The title field owns what it shows while the page is open.
+  //
+  // Binding it to the index instead looks like lag and is worse than lag: the
+  // index only changes once the debounced save lands, so React rewrites the
+  // old value into the input after every keystroke and the field appears
+  // frozen. `LoadedEditor` is keyed by `doc.id`, so opening another page
+  // remounts this with the right seed.
+  const [title, setTitle] = useState(doc.title)
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
@@ -96,7 +104,10 @@ function LoadedEditor({ doc }: { doc: Doc }) {
         <div className="mx-auto w-full max-w-(--nook-measure) px-6 py-10">
           <input
             value={title}
-            onChange={(event) => schedule({ title: event.target.value })}
+            onChange={(event) => {
+              setTitle(event.target.value)
+              schedule({ title: event.target.value })
+            }}
             placeholder={UNTITLED}
             aria-label="Page title"
             className="w-full border-0 bg-transparent p-0 text-3xl font-semibold tracking-tight text-ink outline-none placeholder:text-ink-faint"

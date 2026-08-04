@@ -142,18 +142,22 @@ try {
     (await evaluate('location.hash')).startsWith('#/doc/'),
   )
 
-  await evaluate(`
-    (() => {
-      const input = document.querySelector('input[aria-label="Page title"]')
-      const setValue = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set
-      setValue.call(input, 'Recipe note')
-      input.dispatchEvent(new Event('input', { bubbles: true }))
-    })()
-  `)
-
-  // A headless page believes it is in the background and refuses focus: without
-  // emulation, any simulated typing would go nowhere.
+  // Typed key by key rather than assigned. Setting `.value` directly would
+  // bypass the very defect worth catching: a controlled input bound to a value
+  // that only changes after the debounced save rewrites the old text after
+  // every keystroke, so the field looks frozen.
   await send('Emulation.setFocusEmulationEnabled', { enabled: true })
+  await evaluate(`document.querySelector('input[aria-label="Page title"]').focus()`)
+  await send('Input.insertText', { text: 'Recipe note' })
+  await sleep(400)
+  check(
+    'the title field shows what is typed into it',
+    await evaluate(
+      `document.querySelector('input[aria-label="Page title"]').value === 'Recipe note'`,
+    ),
+  )
+  await sleep(1200)
+
   await evaluate(`document.querySelector('.bn-editor[contenteditable=true]').focus()`)
   // `Input.insertText` takes the path of real typing; a bare `keyDown`
   // would be ignored by ProseMirror.
