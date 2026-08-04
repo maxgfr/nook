@@ -4,7 +4,7 @@
   <p><strong>A notebook that talks to nobody.</strong></p>
   <p>
     <a href="https://maxgfr.github.io/nook/">Open the app</a> ·
-    <a href="#project-status">Project status</a> ·
+    <a href="#what-it-does">Features</a> ·
     <a href="#what-nook-protects-and-what-it-does-not">Security</a>
   </p>
 </div>
@@ -30,10 +30,46 @@ anything to receive back.
 
 [g]: scripts/check-no-network.mjs
 
+## What it does
+
+- **Write.** A block editor with a slash menu, drag handles, headings, lists,
+  checkboxes, code and tables. There is no Save button; edits are written after
+  a pause in typing, when the tab goes to the background, and when you leave the
+  page.
+- **Organise.** Pages nest to any depth. Every page keeps a bounded history you
+  can walk back through and restore from.
+- **Connect.** `[[Wikilinks]]` resolve by title, and every page lists what links
+  to it. A link to a page you have not written yet is offered as a page to
+  create rather than reported as an error. `#tags` work anywhere.
+- **Find.** `⌘K` searches titles, tags and the text inside pages, and doubles as
+  a command palette — new page, new database, today's note.
+- **Structure.** Databases with typed columns (text, number, select, date,
+  checkbox, URL), shown as a table, a board or a calendar. The three are views
+  of one set of rows, with their own filters and sorts.
+- **See the whole thing.** A map places every page on a plane you can pan and
+  zoom, draws a line for every link, and remembers where you drag a card.
+- **Print.** The reading column, without the application around it, with link
+  destinations spelled out.
+- **Leave.** Export everything as plain JSON, import it back, or destroy the lot
+  and read the storage back to check.
+
+Attaching images to a page is the one thing this does **not** do.
+
+### A feature removed on purpose
+
+The editor's emoji picker downloads its data **and its images** from a CDN at
+runtime. The CSP would block those requests and the menu would be silently
+empty — the worst of both worlds. Rather than switching it off with an option,
+the library is [replaced at build time][stub], so the network code is not merely
+unreachable: it is never served. Emoji typed on the system keyboard work as
+usual.
+
+[stub]: src/ui/editor/emoji-mart-absent.ts
+
 ## What Nook protects, and what it does not
 
-By default the encryption key is generated on the device and kept in the
-browser in a form JavaScript cannot read.
+By default the encryption key is generated on the device and kept in the browser
+in a form JavaScript cannot read.
 
 **What that protects:** anyone who copies your disk, your browser profile or a
 backup gets nothing but unusable bytes.
@@ -43,43 +79,16 @@ unlocked session gets exactly the rights you have.
 
 **Turning on a passphrase closes that gap.** Everything is re-encrypted under a
 new key derived with Argon2id, the old key is destroyed, and the vault locks
-itself after 15 idle minutes. There is no recovery — no server holds a copy —
-so Nook makes you export before it will let you switch.
+itself after 15 idle minutes. There is no recovery — no server holds a copy — so
+Nook makes you export before it will let you switch.
 
-## Project status
-
-Nook is built in phases, and each one leaves a deployable repository.
-
-| Phase | Content                                                            | Status  |
-| :---: | ------------------------------------------------------------------ | ------- |
-|  P0   | Foundations, CI, Pages deployment, network guard, design tokens    | ✅ done |
-|  P1   | Encrypted vault: storage, AES-GCM envelopes, key lifecycle, wiping | ✅ done |
-|  P2   | Block editor, page tree, autosave                                  | ✅ done |
-|  P3   | Wikilinks, backlinks, tags, search, command palette, daily notes   | planned |
-|  P4   | Passphrase, auto-lock, encrypted export                            | planned |
-|  P5   | Databases: typed properties, table / kanban / calendar views       | planned |
-|  P6   | Graph view, version history, images, printing                      | planned |
-
-Today Nook can create pages, nest them, write in them, link them with
-`[[wikilinks]]`, tag them, find any of them from `⌘K` — including by a word
-buried in the text — lock the whole vault behind a passphrase, keep structured
-databases with table, board and calendar views, walk back through a page's
-history, print a note without the application around it, see the whole notebook
-as a map you can pan and rearrange, and erase itself in a way you can check.
-
-The one thing on the original plan that is **not** built is attaching images to
-a page. Everything else is.
-
-### A feature removed on purpose
-
-The editor's emoji picker downloads its data **and its images** from a CDN at
-runtime. The CSP would block those requests and the menu would be silently
-empty — the worst of both worlds. Rather than switching it off with an option,
-the library is [replaced at build time][stub], so the network code is not
-merely unreachable: it is never served. Emoji typed on the system keyboard work
-as usual.
-
-[stub]: src/ui/editor/emoji-mart-absent.ts
+One directive is worth naming, because it looks like a compromise and is not.
+`script-src` allows `'wasm-unsafe-eval'`: Chrome refuses to compile a
+WebAssembly module without it, and Argon2id is one. It permits WebAssembly and
+nothing else — not `eval()`, not `new Function()` — and the no-network promise
+rests on `connect-src`, which is untouched. Falling back to PBKDF2 would have
+traded real resistance to GPU cracking for a directive that buys nothing here.
+The build gate fails if plain `'unsafe-eval'` ever appears.
 
 ## Architecture
 
@@ -96,6 +105,11 @@ IndexedDB or WebCrypto. That boundary is not a style convention —
 crossed. It is what lets the whole domain be tested without a browser, and the
 interface be rebuilt without touching the data.
 
+The core also does not know what a document's content _is_. It stores, encrypts
+and indexes opaque JSON, which is why a database is simply a document with a
+different shape inside — and why it inherits encryption, search, history and
+export without a line of storage code of its own.
+
 ## Development
 
 ```bash
@@ -103,10 +117,14 @@ pnpm install
 pnpm dev        # development server
 pnpm test       # core tests, no browser
 pnpm verify     # types, lint, tests, build, network guard
-pnpm smoke      # writes a note in a real browser, reloads, checks it survived
+pnpm smoke      # drives a real browser through the whole product
 ```
 
-`pnpm verify` is exactly what CI runs.
+`pnpm verify` is exactly what CI runs. `pnpm smoke` writes a note, links it,
+searches it, maps it, locks the vault behind a passphrase and unlocks it again —
+against the built bundle, because some defects only exist once the code is
+served. It caught the CSP blocking WebAssembly, and a title field that looked
+like it lagged.
 
 ## Host your own
 
