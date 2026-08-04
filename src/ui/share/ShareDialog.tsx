@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { MIN_PASSPHRASE_LENGTH } from '../../core/crypto/kdf'
+import { SUGGESTION_BITS, suggestPassphrase } from '../../core/crypto/wordlist'
 import {
   encodeShare,
   fitsInLink,
@@ -48,6 +49,7 @@ export function ShareDialog({
   const [error, setError] = useState<string | null>(null)
   const [ready, setReady] = useState<Ready | null>(null)
   const [copied, setCopied] = useState(false)
+  const [suggested, setSuggested] = useState(false)
 
   useEffect(() => {
     const element = dialog.current
@@ -60,12 +62,31 @@ export function ShareDialog({
       setError(null)
       setReady(null)
       setCopied(false)
+      setSuggested(false)
       element.showModal()
     }
     if (!open && element.open) element.close()
   }, [open])
 
-  const matching = passphrase.length >= MIN_PASSPHRASE_LENGTH && passphrase === confirmation
+  /**
+   * A passphrase is recommended, not required.
+   *
+   * Leaving it empty makes an unencrypted share, which is a reasonable choice
+   * for a shopping list and a bad one for anything else — so it is allowed,
+   * and said out loud rather than made impossible. What is *not* allowed is a
+   * short passphrase: that looks like protection without being any, which is
+   * the one state worse than either.
+   */
+  const unprotected = passphrase === '' && confirmation === ''
+  const canBuild =
+    unprotected || (passphrase.length >= MIN_PASSPHRASE_LENGTH && passphrase === confirmation)
+
+  const suggest = () => {
+    const suggestion = suggestPassphrase()
+    setPassphrase(suggestion)
+    setConfirmation(suggestion)
+    setSuggested(true)
+  }
 
   const build = async () => {
     setBusy(true)
@@ -121,23 +142,42 @@ export function ShareDialog({
           ask.
         </p>
         <p className="mt-2">
-          The passphrase is the only thing keeping it shut, so send it by some other route than the
-          link itself. The link will also sit in your reader’s browser history, and in whatever
-          carried it.
+          A passphrase is the only thing that can keep it shut. If you set one, send it by some
+          other route than the link itself. The link will also sit in your reader’s browser history,
+          and in whatever carried it.
         </p>
 
         {ready === null ? (
           <>
-            <Field label="Passphrase">
-              <input
-                type="password"
-                autoComplete="new-password"
-                value={passphrase}
-                onChange={(event) => setPassphrase(event.target.value)}
-                aria-label="Passphrase for this share"
-                placeholder={`At least ${MIN_PASSPHRASE_LENGTH} characters`}
-                className="h-8 w-full rounded-sm border border-line bg-surface px-2.5 text-sm outline-none placeholder:text-ink-faint"
-              />
+            <Field label="Passphrase (recommended)">
+              <div className="flex flex-wrap items-center gap-2">
+                <input
+                  type={suggested ? 'text' : 'password'}
+                  autoComplete="new-password"
+                  value={passphrase}
+                  onChange={(event) => {
+                    setPassphrase(event.target.value)
+                    setSuggested(false)
+                  }}
+                  aria-label="Passphrase for this share"
+                  placeholder={`At least ${MIN_PASSPHRASE_LENGTH} characters, or leave empty`}
+                  className="h-8 min-w-56 flex-1 rounded-sm border border-line bg-surface px-2.5 font-mono text-sm outline-none placeholder:font-sans placeholder:text-ink-faint"
+                />
+                <Button size="sm" className="border border-line" onClick={suggest}>
+                  Suggest one
+                </Button>
+              </div>
+              {suggested && (
+                // Shown rather than hidden behind dots: a suggestion you cannot
+                // read is a suggestion you cannot write down or pass on, and it
+                // has to leave this screen by some other route than the link.
+                <p className="mt-1 text-xs text-ink-faint">
+                  Six words drawn at random — {SUGGESTION_BITS} bits, from{' '}
+                  <code className="font-mono">crypto.getRandomValues</code>. Copy it somewhere
+                  before you close this: Nook keeps no record of it, and cannot open the share
+                  without it.
+                </p>
+              )}
             </Field>
 
             <Field label="Passphrase again">
@@ -152,7 +192,21 @@ export function ShareDialog({
               {confirmation !== '' && passphrase !== confirmation && (
                 <p className="mt-1 text-xs text-warning">These two do not match.</p>
               )}
+              {passphrase !== '' && passphrase.length < MIN_PASSPHRASE_LENGTH && (
+                <p className="mt-1 text-xs text-warning">
+                  Too short. A short passphrase looks like protection without being any — either
+                  make it longer, or leave both boxes empty on purpose.
+                </p>
+              )}
             </Field>
+
+            {unprotected && (
+              <p className="mt-3 rounded-sm border border-warning/40 bg-warning/5 px-3 py-2 text-xs text-warning">
+                With both boxes empty the page travels <strong>unencrypted</strong>. Anyone who ends
+                up with the link — forwarded, in a history, in a server log that captured it — can
+                read it. That is a fine choice for a shopping list and a poor one for anything else.
+              </p>
+            )}
 
             <Field label="A line for your reader (optional)">
               <input
@@ -180,8 +234,12 @@ export function ShareDialog({
             </Field>
 
             <div className="mt-4">
-              <Button tone="primary" disabled={!matching || busy} onClick={() => void build()}>
-                {busy ? 'Encrypting…' : 'Prepare the share'}
+              <Button tone="primary" disabled={!canBuild || busy} onClick={() => void build()}>
+                {busy
+                  ? 'Encrypting…'
+                  : unprotected
+                    ? 'Prepare it unencrypted'
+                    : 'Prepare the share'}
               </Button>
             </div>
           </>

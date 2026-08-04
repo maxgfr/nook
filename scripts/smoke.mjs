@@ -400,15 +400,54 @@ try {
   await sleep(2000)
 
   check(
-    'history appears as soon as an edit replaces something, with no reload',
-    await evaluate(`/show history \\(\\d+\\)/i.test(document.body.innerText)`),
+    'snapshots appear as soon as an edit replaces something, with no reload',
+    await evaluate(`/show snapshots \\(\\d+\\)/i.test(document.body.innerText)`),
+  )
+
+  // --- Keeping a version by hand -----------------------------------------
+
+  const snapshotCount = async () =>
+    evaluate(`Number(/show snapshots \\((\\d+)\\)/i.exec(document.body.innerText)?.[1] ?? 0)`)
+
+  const before = await snapshotCount()
+  await evaluate(`document.querySelector('.bn-editor[contenteditable=true]').focus()`)
+  await send('Input.insertText', { text: ' A second line worth keeping.' })
+  await sleep(1200)
+  await clickButton('Snapshot')
+  await sleep(2000)
+
+  check(
+    'the Snapshot button keeps a version straight away',
+    (await snapshotCount()) === before + 1,
+    `${before} → ${await snapshotCount()}`,
+  )
+  check(
+    'and says so rather than pretending',
+    await evaluate(`document.body.innerText.includes('Kept')`),
+  )
+
+  await clickButton('Snapshot')
+  await sleep(2000)
+  check(
+    'pressing it again with nothing changed spends no slot',
+    (await snapshotCount()) === before + 1 &&
+      (await evaluate(`document.body.innerText.includes('Nothing new to keep')`)),
   )
 
   // --- Embedding a page inside another -----------------------------------
 
+  await evaluate(`document.querySelector('.bn-editor[contenteditable=true]').focus()`)
   await pressKey('\r')
   await pressKey('/')
   await sleep(800)
+
+  // The emoji picker is not in this build, so the menu must not offer it: an
+  // entry that opens nothing is the failure its removal existed to avoid.
+  check(
+    'the slash menu does not offer the emoji picker that is not in this build',
+    !(await evaluate(`/\\bEmoji\\b/.test(document.body.innerText)`)),
+  )
+
   await typeKeys('embed')
   await sleep(800)
   check(
@@ -718,8 +757,12 @@ try {
     await evaluate(`document.body.innerText.includes('Recipe note')`),
   )
   check(
-    'and the reader is told it is holding a copy',
-    await evaluate(`document.body.innerText.includes('It is a copy')`),
+    'and the reader is told it is a read-only copy, with a way to import it',
+    await evaluate(`
+      /read-only/i.test(document.body.innerText) &&
+      /\\bcopy\\b/i.test(document.body.innerText) &&
+      [...document.querySelectorAll('button')].some((b) => /import into my notebook/i.test(b.textContent))
+    `),
   )
 
   // --- The policy, and the two documents it lives in ---------------------

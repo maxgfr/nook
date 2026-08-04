@@ -12,9 +12,14 @@
  *   reader will decline to render past it — but it is a request made of the
  *   reader, not a lock. Anyone holding the bytes and the passphrase can read
  *   them whenever they like, with this program or another one.
- * - **The passphrase is the only real protection**, and it is mandatory. It is
- *   the same Argon2id and the same AES-GCM that protect the vault, so a share
- *   is exactly as strong as the words chosen for it.
+ * - **The passphrase is the only real protection**, and it is recommended
+ *   rather than required. With one, a share is exactly as strong as the words
+ *   chosen for it — the same Argon2id and the same AES-GCM that protect the
+ *   vault. Without one it is not protected at all, and `kdf: null` says so in
+ *   the payload so that both ends can tell the reader which they are holding.
+ *   A *short* passphrase is the one thing refused outright: it looks like
+ *   protection without being any, which is worse than choosing to send a page
+ *   in the clear on purpose.
  *
  * The envelope's context is a constant rather than a record location. Everywhere
  * else, binding an envelope to `docs/<id>` is what stops an attacker moving one
@@ -67,19 +72,35 @@ export type SharedPage = {
   readonly note?: string
 }
 
+export type ShareKdf = {
+  readonly algorithm: 'argon2id'
+  readonly salt: string
+  readonly memoryKiB: number
+  readonly iterations: number
+  readonly parallelism: number
+}
+
 /** What actually travels: the parameters needed to derive the key, and the box. */
 export type SharePayload = {
   readonly format: typeof SHARE_FORMAT
   readonly version: typeof SHARE_VERSION
-  readonly kdf: {
-    readonly algorithm: 'argon2id'
-    readonly salt: string
-    readonly memoryKiB: number
-    readonly iterations: number
-    readonly parallelism: number
-  }
-  readonly iv: string
+  /**
+   * `null` when the share was made without a passphrase.
+   *
+   * The contents are then **in the clear** — base64 is an encoding, not a
+   * lock, and anyone holding the link can read the page. That is a legitimate
+   * choice for a shopping list and a bad one for anything else, so the shape
+   * says which it is rather than leaving the reader to infer it, and the
+   * interface is required to say so on both ends.
+   */
+  readonly kdf: ShareKdf | null
+  readonly iv?: string
   readonly ct: string
+}
+
+/** Whether opening this share needs a passphrase at all. */
+export function isSealed(payload: SharePayload): boolean {
+  return payload.kdf !== null
 }
 
 export class ShareError extends Error {
@@ -88,7 +109,22 @@ export class ShareError extends Error {
 
 const CONTEXT = `share/v${SHARE_VERSION}`
 
+/**
+ * @param passphrase An empty string makes an **unencrypted** share: the page
+ *   travels in the clear and anyone holding the link can read it. Anything
+ *   else must pass `checkPassphrase`, because a short passphrase is worse than
+ *   none — it looks like protection and is not.
+ */
 export async function packShare(page: SharedPage, passphrase: string): Promise<SharePayload> {
+  if (passphrase === '') {
+    return {
+      format: SHARE_FORMAT,
+      version: SHARE_VERSION,
+      kdf: null,
+      ct: toBase64(new TextEncoder().encode(JSON.stringify(page))),
+    }
+  }
+
   // Before the work, not after: refusing a four-character passphrase should
   // not cost a second of key derivation first.
   checkPassphrase(passphrase)
@@ -124,11 +160,21 @@ export async function unpackShare(payload: SharePayload, passphrase: string): Pr
     )
   }
 
+  if (!isSealed(payload)) {
+    // No key was ever involved, so there is nothing to check and no passphrase
+    // to be wrong. Whoever made this chose to send a page in the clear.
+    try {
+      return JSON.parse(new TextDecoder().decode(bytesFrom(payload.ct, 'contents'))) as SharedPage
+    } catch {
+      throw new ShareError('This share is damaged and cannot be read.')
+    }
+  }
+
   const kdf = kdfFrom(payload)
   const key = await deriveWrappingKey(passphrase, kdf)
   const envelope: Envelope = {
     v: SHARE_VERSION,
-    iv: bytesFrom(payload.iv, 'iv'),
+    iv: bytesFrom(payload.iv ?? '', 'iv'),
     ct: bytesFrom(payload.ct, 'contents'),
   }
 

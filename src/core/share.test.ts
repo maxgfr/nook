@@ -4,10 +4,12 @@ import {
   encodeShare,
   fitsInLink,
   isPastNotAfter,
+  isSealed,
   LINK_LIMIT_BYTES,
   packShare,
   ShareError,
   unpackShare,
+  type ShareKdf,
   type SharedPage,
 } from './share'
 import { DecryptionError } from './crypto/envelope'
@@ -60,7 +62,7 @@ describe('packing and unpacking a share', () => {
     // crack every share ever made with that passphrase.
     const first = await packShare(PAGE, PASSPHRASE)
     const second = await packShare(PAGE, PASSPHRASE)
-    expect(first.kdf.salt).not.toBe(second.kdf.salt)
+    expect(first.kdf?.salt).not.toBe(second.kdf?.salt)
     expect(first.ct).not.toBe(second.ct)
   })
 })
@@ -80,7 +82,7 @@ describe('refusing to open', () => {
 
   it('rejects a payload whose derivation parameters were altered', async () => {
     const packed = await packShare(PAGE, PASSPHRASE)
-    const weakened = { ...packed, kdf: { ...packed.kdf, iterations: 1 } }
+    const weakened = { ...packed, kdf: { ...(packed.kdf as ShareKdf), iterations: 1 } }
     await expect(unpackShare(weakened, PASSPHRASE)).rejects.toThrow(DecryptionError)
   })
 
@@ -92,10 +94,48 @@ describe('refusing to open', () => {
     await expect(unpackShare(payload as never, PASSPHRASE)).rejects.toThrow(ShareError)
   })
 
-  it('refuses to make a share nobody could keep shut', async () => {
-    // The passphrase is the only protection a copy has. A share without one
-    // would be plain text in a URL, sitting in a browser history.
+  it('refuses a passphrase too short to be one', async () => {
+    // A short passphrase is worse than none: it looks like protection and is
+    // not. Sending nothing at all is a choice someone can make knowingly;
+    // `Password1` is a choice they think they have already made.
     await expect(packShare(PAGE, 'short')).rejects.toThrow(PassphraseError)
+  })
+})
+
+describe('sharing without a passphrase', () => {
+  it('is allowed, and says so in the payload', async () => {
+    const packed = await packShare(PAGE, '')
+
+    // `kdf: null` is how both ends know there is nothing to ask for, and how
+    // the reader knows to say the page arrived unprotected.
+    expect(packed.kdf).toBeNull()
+    expect(isSealed(packed)).toBe(false)
+  })
+
+  it('opens with no passphrase at all', async () => {
+    expect(await unpackShare(await packShare(PAGE, ''), '')).toEqual(PAGE)
+  })
+
+  it('opens whatever anyone types, because nothing is checked', async () => {
+    // Not a defect to fix — a fact to state. There is no key, so there is no
+    // wrong answer, and pretending otherwise would be theatre.
+    expect(await unpackShare(await packShare(PAGE, ''), 'anything at all')).toEqual(PAGE)
+  })
+
+  it('is readable by anyone holding the link', async () => {
+    const encoded = encodeShare(await packShare(PAGE, ''))
+
+    // Base64 is an encoding, not a lock. This test exists so that nobody can
+    // later describe an unsealed share as "obfuscated" and be believed.
+    expect(JSON.stringify(decodeShare(encoded))).toContain(
+      Buffer.from(JSON.stringify(PAGE)).toString('base64').slice(0, 24),
+    )
+  })
+
+  it('still travels as a sealed share when a passphrase is given', async () => {
+    const sealed = await packShare(PAGE, PASSPHRASE)
+    expect(isSealed(sealed)).toBe(true)
+    expect(JSON.stringify(sealed)).not.toContain('agreed on the date')
   })
 })
 

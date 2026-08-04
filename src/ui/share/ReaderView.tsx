@@ -1,5 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { decodeShare, isPastNotAfter, unpackShare, type SharedPage } from '../../core/share'
+import {
+  decodeShare,
+  isPastNotAfter,
+  isSealed,
+  unpackShare,
+  type SharedPage,
+} from '../../core/share'
 import { fromBase64 } from '../../core/base64'
 import { UNTITLED } from '../../core/model/types'
 import { useVault, VaultProvider } from '../app/VaultProvider'
@@ -24,6 +30,24 @@ export function ReaderView({ payload }: { payload: string }) {
   const [page, setPage] = useState<SharedPage | null>(null)
   const [overrideDate, setOverrideDate] = useState(false)
   const [adopting, setAdopting] = useState(false)
+
+  /**
+   * Whether this share needs a passphrase at all.
+   *
+   * Decided from the payload itself, before anything is asked for. A share
+   * made without one has no key and no wrong answer, so putting a passphrase
+   * box in front of it would be asking a question with no meaning — and would
+   * imply a protection that is not there.
+   */
+  const sealed = useMemo(() => {
+    try {
+      return isSealed(decodeShare(payload))
+    } catch {
+      // Unreadable payloads are reported by `open()`, which has somewhere to
+      // put the message. Assume the usual case until then.
+      return true
+    }
+  }, [payload])
 
   const open = async () => {
     setBusy(true)
@@ -54,8 +78,18 @@ export function ReaderView({ payload }: { payload: string }) {
           Someone shared a page with you
         </h1>
         <p className="mt-2">
-          It is encrypted. Nook cannot read it, and neither can anyone who intercepted the link —
-          only the passphrase opens it, and that was sent to you some other way.
+          {sealed ? (
+            <>
+              It is encrypted. Nook cannot read it, and neither can anyone who intercepted the link
+              — only the passphrase opens it, and that was sent to you some other way.
+            </>
+          ) : (
+            <>
+              It was shared <strong className="text-ink">without a passphrase</strong>, so there is
+              nothing to type: anyone holding this link can read it, and you may not be the only one
+              who does.
+            </>
+          )}
         </p>
 
         <form
@@ -65,17 +99,19 @@ export function ReaderView({ payload }: { payload: string }) {
             void open()
           }}
         >
-          <input
-            autoFocus
-            type="password"
-            value={passphrase}
-            onChange={(event) => setPassphrase(event.target.value)}
-            aria-label="Passphrase"
-            placeholder="Passphrase"
-            className="h-8 min-w-56 flex-1 rounded-sm border border-line bg-surface px-2.5 text-sm outline-none placeholder:text-ink-faint"
-          />
-          <Button tone="primary" type="submit" disabled={busy || passphrase === ''}>
-            {busy ? 'Opening…' : 'Open'}
+          {sealed && (
+            <input
+              autoFocus
+              type="password"
+              value={passphrase}
+              onChange={(event) => setPassphrase(event.target.value)}
+              aria-label="Passphrase"
+              placeholder="Passphrase"
+              className="h-8 min-w-56 flex-1 rounded-sm border border-line bg-surface px-2.5 text-sm outline-none placeholder:text-ink-faint"
+            />
+          )}
+          <Button tone="primary" type="submit" disabled={busy || (sealed && passphrase === '')}>
+            {busy ? 'Opening…' : sealed ? 'Open' : 'Read it'}
           </Button>
         </form>
 
@@ -128,8 +164,14 @@ export function ReaderView({ payload }: { payload: string }) {
           className="mb-6 rounded-md border border-line bg-sunken px-3 py-2 text-xs text-ink-muted"
         >
           <p>
-            A page shared with you, opened on this machine only. It is a copy: it will keep working
-            whatever the sender does next.
+            A page shared with you, opened on this machine only. It is{' '}
+            <strong className="text-ink">read-only</strong>: there is no server between you and the
+            sender, so two people cannot edit one page — what you have is a copy, and it will keep
+            working whatever the sender does next.
+          </p>
+          <p className="mt-1">
+            Import it to get a page of your own that you can edit. Your changes stay yours; the
+            sender never sees them.
           </p>
           {page.note && <p className="mt-1 text-ink">“{page.note}”</p>}
           {page.notAfter && (
@@ -139,8 +181,8 @@ export function ReaderView({ payload }: { payload: string }) {
             </p>
           )}
           <div className="mt-2">
-            <Button size="sm" className="border border-line" onClick={() => setAdopting(true)}>
-              Save it into my notebook
+            <Button tone="primary" size="sm" onClick={() => setAdopting(true)}>
+              Import into my notebook
             </Button>
           </div>
         </div>
@@ -222,18 +264,18 @@ function AdoptIntoNotebook({ page, onCancel }: { page: SharedPage; onCancel: () 
 
   return (
     <Sheet>
-      <h1 className="text-lg font-semibold tracking-tight text-ink">Save it into your notebook</h1>
+      <h1 className="text-lg font-semibold tracking-tight text-ink">Import into your notebook</h1>
       <p className="mt-2">
         The page is copied in as a new page of your own, at the top level, with its pictures. It
         arrives with no history — it becomes yours from here, not a continuation of the sender’s.
       </p>
 
       {state.kind === 'saved' ? (
-        <p className="mt-4 text-success">Saved. Open Nook to find it at the top level.</p>
+        <p className="mt-4 text-success">Imported. Open Nook to find it at the top level.</p>
       ) : (
         <div className="mt-4 flex flex-wrap gap-2">
           <Button tone="primary" disabled={state.kind === 'saving'} onClick={save}>
-            {state.kind === 'saving' ? 'Saving…' : 'Save it'}
+            {state.kind === 'saving' ? 'Importing…' : 'Import it'}
           </Button>
           <Button onClick={onCancel}>Go back to reading</Button>
         </div>
