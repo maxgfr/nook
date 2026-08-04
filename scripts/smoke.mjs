@@ -22,6 +22,16 @@ const PORT = 4173
 const BASE = process.env.SMOKE_URL ?? `http://localhost:${PORT}/nook/`
 const DEBUG_PORT = 9333
 
+/**
+ * Addresses used only to see whether the policy refuses them.
+ *
+ * Nothing is ever fetched: there is no network in this harness, and the point
+ * of each check is the `securitypolicyviolation` event, which fires before any
+ * request would be made.
+ */
+const REMOTE_IMAGE = 'https://example.com/photo.png'
+const REMOTE_FRAME = 'https://www.youtube-nocookie.com/embed/smoke'
+
 const CHROME_CANDIDATES = [
   process.env.CHROME_PATH,
   '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
@@ -181,6 +191,19 @@ try {
   const typeKeys = async (text) => {
     for (const ch of text) await pressKey(ch)
   }
+
+  /** Presses the button whose label reads exactly `label`. */
+  const clickButton = async (label) =>
+    evaluate(
+      `(() => {
+        const button = [...document.querySelectorAll('button')].find(
+          (b) => b.textContent.trim() === ${JSON.stringify(label)},
+        )
+        if (!button) return false
+        button.click()
+        return true
+      })()`,
+    )
 
   // Run here, right after typing, because the caret is demonstrably in the
   // editor at this point. Restoring focus later proved unreliable, and a test
@@ -360,6 +383,106 @@ try {
     ),
   )
 
+  // --- History, without a reload -----------------------------------------
+  //
+  // The panel hides itself while the list is empty, so a page that gained its
+  // first snapshot while open used to show nothing at all and offer no control
+  // to press. It came back on the next reload, which reads exactly like a save
+  // that did not happen. This asserts it appears on its own.
+
+  await evaluate(
+    `document.querySelector('nav[aria-label="Pages"] button[aria-label="New page"]').click()`,
+  )
+  await sleep(2500)
+  await setTitle('Digest')
+  await evaluate(`document.querySelector('.bn-editor[contenteditable=true]').focus()`)
+  await send('Input.insertText', { text: 'A first line, which supersedes an empty page.' })
+  await sleep(2000)
+
+  check(
+    'history appears as soon as an edit replaces something, with no reload',
+    await evaluate(`/show history \\(\\d+\\)/i.test(document.body.innerText)`),
+  )
+
+  // --- Embedding a page inside another -----------------------------------
+
+  await pressKey('\r')
+  await pressKey('/')
+  await sleep(800)
+  await typeKeys('embed')
+  await sleep(800)
+  check(
+    'the slash menu offers to embed a page',
+    await evaluate(`/embed a page/i.test(document.body.innerText)`),
+  )
+
+  await pressKey('\r')
+  await sleep(800)
+  check(
+    'choosing which page opens a picker',
+    await evaluate(`!!document.querySelector('dialog[aria-label="Choose a page to embed"]')`),
+  )
+  check(
+    'which never offers the page you are already on',
+    await evaluate(
+      `![...document.querySelectorAll('dialog[aria-label="Choose a page to embed"] button')]
+         .some((b) => b.textContent.trim() === 'Digest')`,
+    ),
+  )
+
+  // Clicked rather than typed: `pressKey` reports `key: '\r'`, and the picker
+  // — like every other keyboard handler in the application — listens for
+  // `Enter`. The click is also the path most people take.
+  const pickPage = async (title) =>
+    evaluate(
+      `(() => {
+        const button = [...document.querySelectorAll('dialog[aria-label="Choose a page to embed"] button')]
+          .find((b) => b.textContent.trim() === ${JSON.stringify(title)})
+        if (!button) return false
+        button.click()
+        return true
+      })()`,
+    )
+
+  check('the picker lists the page to embed', await pickPage('Monday'))
+  await sleep(2500)
+
+  check(
+    'the embedded page is shown in place, with its own text',
+    await evaluate(
+      `document.body.innerText.includes('Monday') && document.body.innerText.includes('prepare')`,
+    ),
+  )
+
+  // A embeds B; now make B embed A. Nothing stops someone doing it, and
+  // without the chain guard the two would render each other until the tab died.
+  await evaluate(
+    `[...document.querySelectorAll('nav[aria-label="Pages"] button')].find((b) => b.textContent.trim() === 'Monday').click()`,
+  )
+  await sleep(2500)
+  await evaluate(`document.querySelector('.bn-editor[contenteditable=true]').focus()`)
+  await send('Input.insertText', { text: ' ' })
+  await sleep(400)
+  await pressKey('\r')
+  await pressKey('/')
+  await sleep(800)
+  await typeKeys('embed')
+  await sleep(800)
+  await pressKey('\r')
+  await sleep(800)
+  await pickPage('Digest')
+  await sleep(3000)
+
+  check(
+    'a loop between two embedded pages is caught and named, not recursed into',
+    await evaluate(`/already open further up/i.test(document.body.innerText)`),
+  )
+
+  await evaluate(
+    `[...document.querySelectorAll('nav[aria-label="Pages"] button')].find((b) => b.textContent.trim() === 'Recipe note').click()`,
+  )
+  await sleep(2000)
+
   await send('Input.dispatchKeyEvent', {
     type: 'keyDown',
     key: 'k',
@@ -388,6 +511,51 @@ try {
       `document.querySelector('dialog[aria-label="Search and commands"]').innerText.includes('Monday')`,
     ),
   )
+
+  // --- Databases ---------------------------------------------------------
+  //
+  // A database is a document with a different shape inside, so it inherits
+  // encryption, search, history and export from the same code as a page. What
+  // only a browser can show is that the three views really are views of one set
+  // of rows.
+
+  await evaluate(
+    `(() => {
+      const entry = [...document.querySelectorAll('dialog[aria-label="Search and commands"] button')]
+        .find((b) => /new database|create database/i.test(b.textContent))
+      if (!entry) return false
+      entry.click()
+      return true
+    })()`,
+  )
+  await sleep(2500)
+
+  const views = await evaluate(
+    `[...document.querySelectorAll('[role="tab"]')].map((t) => t.textContent.trim())`,
+  )
+  check(
+    'a database offers its three views of one set of rows',
+    ['Table', 'Board', 'Calendar'].every((name) => views.includes(name)),
+    views.join(', '),
+  )
+
+  // A fresh database shows an empty state rather than an empty grid, so the
+  // table only exists once there is something in it.
+  await clickButton('New row')
+  await sleep(1200)
+  const columns = await evaluate(
+    `[...document.querySelectorAll('table th')].map((th) => th.textContent.trim()).filter(Boolean)`,
+  )
+  check(
+    'and a new row gives it its typed columns',
+    ['Name', 'Status', 'Due'].every((name) => columns.includes(name)),
+    columns.join(', '),
+  )
+
+  await evaluate(
+    `[...document.querySelectorAll('nav[aria-label="Pages"] button')].find((b) => b.textContent.trim() === 'Recipe note').click()`,
+  )
+  await sleep(2000)
 
   // --- Phases 6 & 7: history and the map ---------------------------------
   await evaluate(
@@ -470,6 +638,202 @@ try {
   check(
     'the right passphrase opens the vault again',
     await evaluate(`document.body.innerText.includes('Recipe note')`),
+  )
+
+  // --- Sharing a page ----------------------------------------------------
+  //
+  // The round trip end to end: encrypt a page here, carry it in a fragment,
+  // and open it as a reader would. What it proves that a unit test cannot is
+  // that the fragment survives the trip and that the reader screen never
+  // touches the notebook.
+
+  const SHARE_PASSPHRASE = 'a sentence for the share'
+
+  const fill = async (selector, text) => {
+    await evaluate(`document.querySelector(${JSON.stringify(selector)}).focus()`)
+    await send('Input.insertText', { text })
+    await sleep(150)
+  }
+  // The reload above dropped the fragment, so the workspace is on its empty
+  // state with the page only listed in the sidebar. Open it before sharing it.
+  await evaluate(
+    `(() => {
+      const entry = [...document.querySelectorAll('nav[aria-label="Pages"] button')].find(
+        (b) => b.textContent.trim() === 'Recipe note',
+      )
+      if (!entry) return false
+      entry.click()
+      return true
+    })()`,
+  )
+  await sleep(2500)
+
+  check('a page offers to be shared', await clickButton('Share'))
+  await sleep(400)
+
+  await fill('input[aria-label="Passphrase for this share"]', SHARE_PASSPHRASE)
+  await fill('input[aria-label="Confirm the passphrase"]', SHARE_PASSPHRASE)
+  check(
+    'the dialog says a share cannot be recalled',
+    await evaluate(`document.body.innerText.includes('cannot recall it')`),
+  )
+  check(
+    'and refuses to call the date an expiry',
+    await evaluate(`document.body.innerText.includes('It is not an expiry')`),
+  )
+
+  await clickButton('Prepare the share')
+  // Argon2id is deliberately slow; this is the cost of the protection.
+  await sleep(4000)
+
+  const shareLink = await evaluate(
+    `document.querySelector('input[aria-label="The share link"]')?.value ?? ''`,
+  )
+  check('a share link is produced', shareLink.includes('#/read/'))
+
+  await goto(shareLink)
+  check(
+    'the link opens a reader, not the notebook',
+    (await evaluate(`document.body.innerText.includes('shared a page with you')`)) &&
+      !(await evaluate(`!!document.querySelector('nav[aria-label="Pages"]')`)),
+  )
+
+  await fill('input[aria-label="Passphrase"]', 'not the right words')
+  await clickButton('Open')
+  await sleep(4000)
+  check(
+    'a wrong passphrase does not open the share',
+    await evaluate(`document.body.innerText.includes('does not open this page')`),
+  )
+
+  await evaluate(
+    `(() => { const i = document.querySelector('input[aria-label="Passphrase"]'); i.focus(); i.select(); return true })()`,
+  )
+  await send('Input.insertText', { text: SHARE_PASSPHRASE })
+  await sleep(150)
+  await clickButton('Open')
+  await sleep(4000)
+  check(
+    'the right passphrase renders the shared page',
+    await evaluate(`document.body.innerText.includes('Recipe note')`),
+  )
+  check(
+    'and the reader is told it is holding a copy',
+    await evaluate(`document.body.innerText.includes('It is a copy')`),
+  )
+
+  // --- The policy, and the two documents it lives in ---------------------
+  //
+  // These are the checks the product's central promise rests on, so they are
+  // made against the served build rather than reasoned about. A CSP violation
+  // is observed through `securitypolicyviolation`, which is the only signal
+  // that tells "the policy refused this" apart from "there is no network here"
+  // — and in this harness there is no network.
+
+  const attemptImage = async (url) =>
+    evaluate(`
+      new Promise((resolve) => {
+        let violated = false
+        const onViolation = (event) => {
+          if (event.violatedDirective.startsWith('img-src')) violated = true
+        }
+        document.addEventListener('securitypolicyviolation', onViolation)
+        const img = new Image()
+        const done = () => {
+          document.removeEventListener('securitypolicyviolation', onViolation)
+          resolve(violated)
+        }
+        img.addEventListener('load', done, { once: true })
+        img.addEventListener('error', done, { once: true })
+        img.src = ${JSON.stringify(url)}
+        setTimeout(done, 2500)
+      })
+    `)
+
+  const attemptFrame = async (url) =>
+    evaluate(`
+      new Promise((resolve) => {
+        let violated = false
+        const onViolation = (event) => {
+          if (event.violatedDirective.startsWith('frame-src')) violated = true
+        }
+        document.addEventListener('securitypolicyviolation', onViolation)
+        const frame = document.createElement('iframe')
+        frame.src = ${JSON.stringify(url)}
+        document.body.append(frame)
+        setTimeout(() => {
+          document.removeEventListener('securitypolicyviolation', onViolation)
+          frame.remove()
+          resolve(violated)
+        }, 800)
+      })
+    `)
+
+  const setWebAccess = async (remoteImages, externalEmbeds) =>
+    evaluate(
+      `localStorage.setItem('nook.webAccess', JSON.stringify({ remoteImages: ${remoteImages}, externalEmbeds: ${externalEmbeds} })), true`,
+    )
+
+  check('the default document refuses a picture from the web', await attemptImage(REMOTE_IMAGE))
+  check('the default document refuses a player from the web', await attemptFrame(REMOTE_FRAME))
+
+  // The whole two-document design rests on a policy inserted by script being
+  // enforced. If this ever stopped being true, the settings would silently
+  // stop closing the doors they claim to close.
+  const tightening = await evaluate(`
+    new Promise((resolve) => {
+      const meta = document.createElement('meta')
+      meta.httpEquiv = 'Content-Security-Policy'
+      meta.content = "img-src 'self' data: blob:"
+      document.head.append(meta)
+      let violated = false
+      document.addEventListener('securitypolicyviolation', (event) => {
+        if (event.violatedDirective.startsWith('img-src')) violated = true
+      }, { once: true })
+      const img = new Image()
+      const done = () => resolve(violated)
+      img.addEventListener('load', done, { once: true })
+      img.addEventListener('error', done, { once: true })
+      img.src = 'https://example.com/inserted.png'
+      setTimeout(done, 2500)
+    })
+  `)
+  check('a policy inserted at runtime is enforced', tightening === true)
+
+  await setWebAccess(false, false)
+  await goto(`${BASE}open-web.html`)
+  check(
+    'the relaxed document sends you back when nothing is turned on',
+    !(await evaluate('location.pathname')).includes('open-web'),
+  )
+
+  await setWebAccess(true, false)
+  await goto(BASE)
+  check(
+    'turning on pictures moves to the other document',
+    (await evaluate('location.pathname')).includes('open-web.html'),
+  )
+  check(
+    'and the address bar says which promise is in force',
+    (await evaluate('location.href')).includes('open-web.html'),
+  )
+  check('pictures from the web are now allowed', (await attemptImage(REMOTE_IMAGE)) === false)
+  // The half that was not asked for is closed again at boot. This is what lets
+  // one relaxed document serve two independent switches.
+  check(
+    'but players are still refused, because that switch is off',
+    await attemptFrame(REMOTE_FRAME),
+  )
+
+  await setWebAccess(true, true)
+  await goto(BASE)
+  check('turning on players allows them too', (await attemptFrame(REMOTE_FRAME)) === false)
+
+  await setWebAccess(false, false)
+  await goto(BASE)
+  check(
+    'turning both off comes back to the strict document',
+    !(await evaluate('location.pathname')).includes('open-web'),
   )
 
   socket.close()

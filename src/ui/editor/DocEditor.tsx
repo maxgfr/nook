@@ -1,13 +1,12 @@
-import { useEffect, useRef, useState, type ComponentProps, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { BlockNoteView } from '@blocknote/mantine'
-import { useCreateBlockNote } from '@blocknote/react'
-import { en } from '@blocknote/core/locales'
 import {
-  BlockNoteSchema,
-  createCodeBlockSpec,
-  defaultBlockSpecs,
-  type PartialBlock,
-} from '@blocknote/core'
+  getDefaultReactSlashMenuItems,
+  SuggestionMenuController,
+  useCreateBlockNote,
+} from '@blocknote/react'
+import { en } from '@blocknote/core/locales'
+import { filterSuggestionItems, type PartialBlock } from '@blocknote/core'
 import '@blocknote/core/style.css'
 import '@blocknote/mantine/style.css'
 import '../design/blocknote.css'
@@ -20,11 +19,16 @@ import { useAutosave, type SaveState } from './useAutosave'
 import { Button } from '../design/Button'
 import { Backlinks } from './Backlinks'
 import { History } from './History'
-import { createHighlighter, SUPPORTED_LANGUAGES } from './highlighter'
 import { detectLanguage, looksLikeMarkdown } from '../../core/model/language'
 import { CollectionView } from '../collection/CollectionView'
 import { isCollection, type CollectionContent } from '../../core/model/collection'
 import { useNavigate } from '../app/router'
+import { classifyUrl, isLocalUrl } from '../../core/policy'
+import { NOOK_SCHEMA, useResolveVaultFile, type BlockNoteViewEditor } from './schema'
+import { EmbedChain } from './PageEmbed'
+import { PagePicker } from './PagePicker'
+import { ShareDialog } from '../share/ShareDialog'
+import { download, fileNameFrom } from '../design/download'
 
 /**
  * A document's editor.
@@ -73,28 +77,7 @@ export function DocEditor({ docId }: { docId: DocId }) {
 
 type DocPatch = { title: string; content: JsonValue }
 
-/**
- * The default blocks, with a code block that knows how to colour itself.
- *
- * Highlighting is configured on the block **spec**, not as an editor option —
- * passing `codeBlock` to the editor is silently ignored, which is how a code
- * block can end up permanently grey with nothing in the console to say why.
- */
-const CODE_AWARE_SCHEMA = BlockNoteSchema.create({
-  // Same generics mismatch as `BlockNoteView` below: BlockNote's block specs
-  // do not satisfy `exactOptionalPropertyTypes`, which the rest of the project
-  // keeps on. The cast stays at this one boundary with the library.
-  blockSpecs: {
-    ...defaultBlockSpecs,
-    codeBlock: createCodeBlockSpec({
-      defaultLanguage: 'text',
-      supportedLanguages: SUPPORTED_LANGUAGES,
-      createHighlighter,
-    }),
-  } as unknown as NonNullable<Parameters<typeof BlockNoteSchema.create>[0]>['blockSpecs'],
-})
 export type { CollectionContent }
-type BlockNoteViewEditor = ComponentProps<typeof BlockNoteView>['editor']
 
 function LoadedEditor({ doc }: { doc: Doc }) {
   const vault = useVault()
@@ -113,6 +96,7 @@ function LoadedEditor({ doc }: { doc: Doc }) {
   // frozen. `LoadedEditor` is keyed by `doc.id`, so opening another page
   // remounts this with the right seed.
   const [title, setTitle] = useState(doc.title)
+  const [shareOpen, setShareOpen] = useState(false)
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
@@ -126,7 +110,13 @@ function LoadedEditor({ doc }: { doc: Doc }) {
           ))}
           <span className="text-ink-muted">{title || UNTITLED}</span>
         </nav>
-        <SaveIndicator state={state} />
+        <div className="flex shrink-0 items-center gap-2">
+          <SaveIndicator state={state} />
+          <Button size="sm" onClick={() => setShareOpen(true)}>
+            Share
+          </Button>
+        </div>
+        <ShareDialog docId={doc.id} open={shareOpen} onClose={() => setShareOpen(false)} />
       </header>
 
       <div className="min-h-0 flex-1 overflow-y-auto">
@@ -153,11 +143,17 @@ function LoadedEditor({ doc }: { doc: Doc }) {
               onChange={(next) => schedule({ content: next as unknown as JsonValue })}
             />
           ) : (
-            <RichTextBody
-              content={doc.content}
-              title={title}
-              onChange={(content) => schedule({ content })}
-            />
+            // Seeds the chain of embedded pages with this one, so a page that
+            // embeds itself — however long the way round — is caught rather
+            // than recursed into.
+            <EmbedChain docId={doc.id}>
+              <RichTextBody
+                docId={doc.id}
+                content={doc.content}
+                title={title}
+                onChange={(content) => schedule({ content })}
+              />
+            </EmbedChain>
           )}
 
           <Backlinks docId={doc.id} onOpen={navigate} />
@@ -207,16 +203,20 @@ function CollectionBody({
  * never show.
  */
 function RichTextBody({
+  docId,
   content,
   title,
   onChange,
 }: {
+  docId: DocId
   content: JsonValue
   title: string
   onChange: (content: JsonValue) => void
 }) {
   const vault = useVault()
   const editorHost = useRef<HTMLDivElement>(null)
+  const resolveFileUrl = useResolveVaultFile()
+  const [pickerOpen, setPickerOpen] = useState(false)
 
   // BlockNote refuses an empty document: it needs at least one block. The key
   // is omitted rather than passed as `undefined` — with
@@ -226,7 +226,7 @@ function RichTextBody({
   const editor = useCreateBlockNote({
     ...(initialContent ? { initialContent } : {}),
     dictionary: en,
-    schema: CODE_AWARE_SCHEMA,
+    schema: NOOK_SCHEMA,
     /**
      * Pictures are stored in the vault, encrypted like the notes.
      *
@@ -240,15 +240,7 @@ function RichTextBody({
       const id = await vault.putBlob({ name: file.name, type: file.type, bytes })
       return `nook:${id}`
     },
-    /** Turns a stored reference back into something the browser can display. */
-    resolveFileUrl: async (url: string) => {
-      if (!url.startsWith('nook:')) return url
-      const blob = await vault.readBlob(url.slice('nook:'.length))
-      if (!blob) return url
-      return URL.createObjectURL(
-        new Blob([new Uint8Array(blob.bytes)], { type: blob.type || 'application/octet-stream' }),
-      )
-    },
+    resolveFileUrl,
   })
 
   return (
@@ -295,11 +287,66 @@ function RichTextBody({
         emojiPicker={false}
         onChange={() => {
           applyDetectedLanguages(editor)
+          normalizeRemoteMedia(editor as unknown as RemoteMediaEditor)
           onChange(editor.document as JsonValue)
         }}
+        // Replaced by our own, below, so that "Embed a page" can sit among the
+        // built-in items instead of in a second menu nobody would look in.
+        slashMenu={false}
+      >
+        <SuggestionMenuController
+          triggerCharacter="/"
+          getItems={async (query) =>
+            filterSuggestionItems(
+              [
+                // Same boundary cast as everywhere the editor is handed to the
+                // library: the schema cast above costs it its own generics.
+                ...getDefaultReactSlashMenuItems(editor as unknown as SlashMenuEditor),
+                {
+                  title: 'Embed a page',
+                  subtext: 'Show another page of this notebook here, read-only',
+                  group: 'Basic blocks',
+                  aliases: ['embed', 'transclude', 'include', 'page'],
+                  onItemClick: () => setPickerOpen(true),
+                },
+              ],
+              query,
+            )
+          }
+        />
+      </BlockNoteView>
+
+      <PagePicker
+        open={pickerOpen}
+        exclude={docId}
+        onClose={() => setPickerOpen(false)}
+        onPick={(picked) => insertPageEmbed(editor as unknown as PageEmbedEditor, picked)}
       />
     </div>
   )
+}
+
+type SlashMenuEditor = Parameters<typeof getDefaultReactSlashMenuItems>[0]
+
+/** What inserting an embed needs of the editor. See `RemoteMediaEditor`. */
+type PageEmbedEditor = {
+  getTextCursorPosition: () => { block: { id: string } }
+  insertBlocks: (
+    blocks: { type: 'pageEmbed'; props: { docId: string } }[],
+    reference: { id: string },
+    placement: 'before' | 'after',
+  ) => void
+}
+
+/**
+ * Puts the chosen page after the block the caret is in.
+ *
+ * After rather than in place: the `/` was typed in a paragraph that may hold
+ * other text, and replacing it would delete something nobody asked to lose.
+ */
+function insertPageEmbed(editor: PageEmbedEditor, docId: DocId): void {
+  const { block } = editor.getTextCursorPosition()
+  editor.insertBlocks([{ type: 'pageEmbed', props: { docId } }], block, 'after')
 }
 
 /**
@@ -332,20 +379,90 @@ function applyDetectedLanguages(editor: {
   }
 }
 
+/** The native blocks that hold an address to something the browser will fetch. */
+const MEDIA_BLOCKS = new Set(['image', 'video', 'audio', 'file'])
+
+/**
+ * What this pass needs of the editor.
+ *
+ * Written out rather than taken from BlockNote because the `as unknown as` on
+ * `CODE_AWARE_SCHEMA` above costs the editor its knowledge of the custom
+ * blocks: as far as its own types are concerned, `webEmbed` does not exist. The
+ * cast is confined to the one call, in the same spirit as the one on
+ * `BlockNoteView`, rather than paid for by every line that touches a block.
+ */
+type RemoteMediaEditor = {
+  document: unknown
+  updateBlock: (
+    id: string,
+    update: { type: 'webEmbed'; props: { url: string; kind: 'image' | 'frame' | 'link' } },
+  ) => void
+}
+
+/**
+ * Moves a media block pointing off this machine into `webEmbed`.
+ *
+ * BlockNote's own media blocks take a URL, and under this project's policy a
+ * remote one simply fails to load: a broken frame, nothing in the interface to
+ * say why, and no way to tell it apart from a picture that has been deleted.
+ * Converting the block is what turns that dead end into a statement of what is
+ * there and a choice about it.
+ *
+ * Runs on every change, like the language pass above, and is idempotent for the
+ * same reason: the converted block is no longer one of `MEDIA_BLOCKS`, and a
+ * `nook:` address is local, so neither can be picked up a second time.
+ */
+function normalizeRemoteMedia(editor: RemoteMediaEditor): void {
+  for (const block of editor.document as {
+    type?: string
+    id?: string
+    props?: { url?: string }
+  }[]) {
+    if (!block.id || !block.type || !MEDIA_BLOCKS.has(block.type)) continue
+
+    const url = block.props?.url ?? ''
+    if (url === '' || isLocalUrl(url)) continue
+
+    editor.updateBlock(block.id, {
+      type: 'webEmbed',
+      props: { url, kind: remoteKind(block.type, url) },
+    })
+  }
+}
+
+/**
+ * What a remote address should be treated as.
+ *
+ * The address is asked first, because a provider link is a player whichever
+ * block someone happened to paste it into. Failing that the *block* is asked
+ * before the file extension: an image block holds a picture even when its
+ * address ends in nothing recognisable, which is true of most image URLs that
+ * come out of a CDN.
+ */
+function remoteKind(blockType: string, url: string): 'image' | 'frame' | 'link' {
+  const classified = classifyUrl(url)
+  if (classified === 'frame') return 'frame'
+  return blockType === 'image' || classified === 'image' ? 'image' : 'link'
+}
+
 /**
  * Hands a Markdown file to the browser without touching the network.
  *
  * The conversion is lossy by name and by nature: anything Markdown cannot
  * express — a database, a colour — does not survive. That is the right trade
  * for a format whose whole point is being readable anywhere.
+ *
+ * The title leads the file as a level-1 heading. In Nook it lives in its own
+ * field, outside the blocks, so exporting the blocks alone produced a document
+ * that had lost its name everywhere except the filename — and a filename does
+ * not survive being pasted somewhere else.
  */
 function downloadMarkdown(title: string, markdown: string): void {
-  const url = URL.createObjectURL(new Blob([markdown], { type: 'text/markdown' }))
-  const link = document.createElement('a')
-  link.href = url
-  link.download = `${(title || UNTITLED).replaceAll(/[^\w.-]+/gu, '-')}.md`
-  link.click()
-  URL.revokeObjectURL(url)
+  download(
+    fileNameFrom(title, UNTITLED, '.md'),
+    `# ${title || UNTITLED}\n\n${markdown}`,
+    'text/markdown',
+  )
 }
 
 function toInitialContent(content: JsonValue): PartialBlock[] | undefined {

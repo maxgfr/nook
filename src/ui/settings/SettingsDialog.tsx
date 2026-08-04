@@ -3,7 +3,12 @@ import { useLockControls, useVault, AUTO_LOCK_MINUTES } from '../app/VaultProvid
 import { MIN_PASSPHRASE_LENGTH } from '../../core/crypto/kdf'
 import type { StorageSurvey } from '../../core/storage/wipe'
 import { isEmpty } from '../../core/storage/wipe'
+import { EMBED_PROVIDERS, type WebAccess } from '../../core/policy'
+import { readWebAccess, writeWebAccess } from '../app/webAccess'
 import { Button } from '../design/Button'
+import { ConfirmDialog } from '../design/ConfirmDialog'
+import { Switch } from '../design/Switch'
+import { download } from '../design/download'
 
 /**
  * Settings: how the vault is protected, how to get the data out, and how to
@@ -52,7 +57,11 @@ export function SettingsDialog({ open, onClose }: { open: boolean; onClose: () =
   const exportAll = () =>
     run('export', async () => {
       const data = await vault.exportAll()
-      download(`nook-${data.exportedAt.slice(0, 10)}.json`, JSON.stringify(data, null, 2))
+      download(
+        `nook-${data.exportedAt.slice(0, 10)}.json`,
+        JSON.stringify(data, null, 2),
+        'application/json',
+      )
       setExported(true)
       return `${data.docs.length} page(s) exported.`
     })
@@ -158,6 +167,8 @@ export function SettingsDialog({ open, onClose }: { open: boolean; onClose: () =
           )}
         </Section>
 
+        <WebSection />
+
         <Section title="Your data">
           <p>
             The export is a plain JSON file holding every page. It is readable by anything, so keep
@@ -241,6 +252,127 @@ export function SettingsDialog({ open, onClose }: { open: boolean; onClose: () =
   )
 }
 
+/**
+ * The two switches that let the web in.
+ *
+ * Both are off, and both cost something real. The rule followed here is that a
+ * setting which weakens a promise has to state what it weakens, in the words
+ * someone would use to describe it afterwards — not "may share data with third
+ * parties", but "tells Google you are watching it".
+ *
+ * Turning one **on** goes through a confirmation. Turning one **off** does not:
+ * ceremony belongs on the way out of safety, never on the way back into it.
+ *
+ * Applying a change means reloading, because the policy that allows a picture
+ * from the web is parsed with the document and cannot be widened afterwards.
+ * `ui/app/boot.ts` does the redirecting; here we only have to write the choice
+ * down and reload.
+ */
+function WebSection() {
+  const [access, setAccess] = useState<WebAccess>(readWebAccess)
+  const [pending, setPending] = useState<keyof WebAccess | null>(null)
+  const [refused, setRefused] = useState(false)
+
+  const apply = (next: WebAccess) => {
+    writeWebAccess(next)
+    // Read back rather than trust the write. Private browsing can refuse
+    // storage, and a switch that flips on screen without surviving the reload
+    // would be the interface lying about the policy actually in force.
+    const stored = readWebAccess()
+    if (
+      stored.remoteImages !== next.remoteImages ||
+      stored.externalEmbeds !== next.externalEmbeds
+    ) {
+      setAccess(stored)
+      setRefused(true)
+      return
+    }
+    globalThis.location.reload()
+  }
+
+  const set = (key: keyof WebAccess, value: boolean) => {
+    if (value) {
+      setPending(key)
+      return
+    }
+    apply({ ...access, [key]: false })
+  }
+
+  const providers = EMBED_PROVIDERS.map((provider) => provider.label).join(' and ')
+
+  return (
+    <Section title="The web">
+      <p>
+        By default this page cannot make a request of any kind. These two switches are the only
+        things that change that, and each one changes it in a way you can name.
+      </p>
+
+      <div className="mt-2 -ml-2">
+        <Switch
+          checked={access.remoteImages}
+          onChange={(next) => set('remoteImages', next)}
+          label="Pictures from the web"
+        >
+          Off, Nook only shows pictures it holds itself, encrypted. On, a page may load a picture
+          from the site hosting it — which learns your address and the fact that you are reading
+          that page, every time you open it. Nook will always offer to copy the picture into the
+          vault instead, which asks once and never again.
+        </Switch>
+
+        <Switch
+          checked={access.externalEmbeds}
+          onChange={(next) => set('externalEmbeds', next)}
+          label="Players from the web"
+        >
+          Off, a video block shows where it points and contacts nobody. On, a page may hold a{' '}
+          {providers} player. The page itself still cannot make a request — that part is not a
+          setting — but the player is another document inside it, and that one can. Watching a note
+          will tell them you are watching it.
+        </Switch>
+      </div>
+
+      <p className="mt-2 text-xs text-ink-faint">
+        Each switch changes the address Nook runs at, so the address bar always says which of the
+        two is in force. Erasing everything puts both back to off.
+      </p>
+
+      {refused && (
+        <p role="status" className="mt-2 text-xs text-warning">
+          This browser refused to store the choice, so it could not be applied — a policy Nook
+          cannot remember is one it cannot put in force on the next load. Private browsing is the
+          usual cause.
+        </p>
+      )}
+
+      <ConfirmDialog
+        open={pending !== null}
+        title={pending === 'remoteImages' ? 'Let pictures load from the web?' : 'Let players run?'}
+        confirmLabel="Turn it on"
+        onCancel={() => setPending(null)}
+        onConfirm={() => {
+          const key = pending
+          setPending(null)
+          if (key) apply({ ...access, [key]: true })
+        }}
+      >
+        {pending === 'remoteImages' ? (
+          <p>
+            Nook will stop being able to say that nothing leaves this machine. A site hosting a
+            picture in one of your notes will learn your address and when you read that note. Your
+            notes stay encrypted, and Nook still cannot send them anywhere.
+          </p>
+        ) : (
+          <p>
+            Nook will stop being able to say that nothing leaves this machine. Opening a note with a
+            player in it will tell {providers} that you are opening it. Your notes stay encrypted,
+            and Nook still cannot send them anywhere.
+          </p>
+        )}
+      </ConfirmDialog>
+    </Section>
+  )
+}
+
 function Section({
   title,
   tone,
@@ -260,19 +392,4 @@ function Section({
       <div className="mt-2 text-sm text-ink-muted">{children}</div>
     </section>
   )
-}
-
-/**
- * Hands a file to the browser without touching the network.
- *
- * A `blob:` URL is same-origin by construction, so the CSP that forbids every
- * outgoing request has nothing to object to — the bytes never leave the tab.
- */
-function download(filename: string, contents: string): void {
-  const url = URL.createObjectURL(new Blob([contents], { type: 'application/json' }))
-  const link = document.createElement('a')
-  link.href = url
-  link.download = filename
-  link.click()
-  URL.revokeObjectURL(url)
 }

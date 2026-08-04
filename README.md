@@ -20,15 +20,21 @@ anything to receive back.
 
 ## The promise, and how it is kept
 
-| Promise                           | Mechanism                                                                                   |
-| --------------------------------- | ------------------------------------------------------------------------------------------- |
-| Nothing leaves your machine       | `connect-src 'none'` in the CSP — the browser refuses every outgoing request                |
-| Nobody disabled that by accident  | CI inspects the published bundle and fails if network-capable code gets in ([the guard][g]) |
-| Your notes are unreadable on disk | AES-GCM-256 with a non-extractable key, never exposed to JavaScript                         |
-| Everything really can be erased   | Database, caches, service worker and storages destroyed, then an inventory of what remains  |
-| It works offline                  | Precached and installable as a PWA                                                          |
+| Promise                              | Mechanism                                                                                         |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| The page cannot make a request       | `connect-src 'none'` in the CSP, in every document, always — not a setting                        |
+| Nothing is fetched unless you say so | Two switches, both off, each naming what it costs — see [Letting the web in](#letting-the-web-in) |
+| Nobody disabled that by accident     | CI inspects the published bundle and fails if network-capable code gets in ([the guard][g])       |
+| Your notes are unreadable on disk    | AES-GCM-256 with a non-extractable key, never exposed to JavaScript                               |
+| Everything really can be erased      | Database, caches, service worker and storages destroyed, then an inventory of what remains        |
+| It works offline                     | Precached and installable as a PWA                                                                |
 
 [g]: scripts/check-no-network.mjs
+
+Out of the box, nothing leaves your machine. Two settings can change that, both
+off, both named, and neither can be turned on without a screen telling you what
+it gives away. The one thing they cannot touch is `connect-src 'none'`: Nook
+itself never gains the ability to send anything anywhere.
 
 ## What it does
 
@@ -50,10 +56,14 @@ anything to receive back.
   zoom, draws a line for every link, and remembers where you drag a card.
 - **Print.** The reading column, without the application around it, with link
   destinations spelled out.
+- **Nest.** A page can show another page inside it, read-only, with a link to
+  the real one. Entirely local — it is the same vault and the same key. A page
+  that embeds itself is caught and said so, rather than recursed into.
 - **Leave.** Export everything as plain JSON, import it back, or destroy the lot
   and read the storage back to check.
-
-Attaching images to a page is the one thing this does **not** do.
+- **Share.** A page travels as an encrypted copy, as a link or as a file. See
+  [Sharing](#sharing-a-page), which is mostly about what sharing without a
+  server cannot do.
 
 ### A feature removed on purpose
 
@@ -65,6 +75,73 @@ unreachable: it is never served. Emoji typed on the system keyboard work as
 usual.
 
 [stub]: src/ui/editor/emoji-mart-absent.ts
+
+## Letting the web in
+
+Two things people reasonably want — a picture hosted elsewhere, a video player
+— cannot exist under a policy this strict, because the browser fetches both. So
+each is a switch in Settings, off, and each says what it costs before it moves.
+
+**A policy can only ever be tightened at runtime, never loosened.** A flag in
+memory therefore cannot open `img-src`. So the build emits **two documents**:
+
+| Document        | Pictures from the web | Players from the web |
+| --------------- | --------------------- | -------------------- |
+| `index.html`    | refused               | refused              |
+| `open-web.html` | allowed               | YouTube, Vimeo       |
+
+They are generated from the same bytes and differ in exactly those two
+directives — [the guard][g] fails the build if anything else differs, or if
+`connect-src 'none'` is not identical in both. Turning a switch on moves you to
+the second document, and the application closes back, at boot, whichever half
+you did **not** ask for. The address bar therefore always says which promise is
+in force, and once closed a door cannot be reopened for the life of the page.
+
+What each one actually gives away:
+
+- **Pictures from the web** — the site hosting the picture learns your address
+  and that you are reading that page, every time you open it. Nook always offers
+  to copy the picture into the vault instead, which asks the host once and never
+  again; the note is then self-contained, works offline and travels with an
+  export. Some hosts refuse to be copied, and Nook says so rather than failing
+  quietly.
+- **Players from the web** — opening a note with a player in it tells YouTube or
+  Vimeo that you opened it. The page around it still cannot make a request; the
+  player is a separate document, and that one can.
+
+With both off, a block that points at the web shows what it points at and
+contacts nobody.
+
+One directive is **absent** rather than present-but-useless: `frame-ancestors`.
+A `<meta>` element cannot carry it — the specification excludes it, and Chrome
+ignores it with an error — and a static host cannot set response headers. It
+used to sit in the policy doing nothing while looking like it was doing
+something. The guard now refuses any directive a `<meta>` cannot enforce.
+
+## Sharing a page
+
+There is no server, so a shared page is a **copy**. Everything else follows from
+that, and Nook says it on the screen where you press the button:
+
+- **There is no revocation.** Once it has left, nothing can reach it. No such
+  button is offered, because it could only be a lie.
+- **There is no expiry.** You can ask that a page not be read after a date;
+  Nook shows your reader that request and declines to open the page past it.
+  That is a courtesy applied by the reader's copy of Nook, not a lock, and the
+  reader is told exactly that — with a working button underneath.
+- **The passphrase is the real protection**, and it is required. Argon2id and
+  AES-GCM-256, the same as the vault. Send it by some other route than the link.
+
+A share carries the page, its pictures, and nothing else — in particular **not
+its history**, so the recipient does not receive every draft and every deleted
+sentence. Under about 256 KB it goes as a link, in the URL fragment, which is
+never sent to any server; above that Nook offers a file instead and explains
+why, because long links get truncated in transit and fail at the far end with
+nothing to say why.
+
+Opening a share link does not create a notebook on the reader's machine. The
+reader screen is rendered before the vault is ever opened; storage is touched
+only if they press "Save it into my notebook".
 
 ## What Nook protects, and what it does not
 
@@ -121,10 +198,15 @@ pnpm smoke      # drives a real browser through the whole product
 ```
 
 `pnpm verify` is exactly what CI runs. `pnpm smoke` writes a note, links it,
-searches it, maps it, locks the vault behind a passphrase and unlocks it again —
-against the built bundle, because some defects only exist once the code is
-served. It caught the CSP blocking WebAssembly, and a title field that looked
-like it lagged.
+searches it, maps it, locks the vault behind a passphrase, unlocks it, shares a
+page and opens the share as a stranger would — against the built bundle, because
+some defects only exist once the code is served. It caught the CSP blocking
+WebAssembly, and a title field that looked like it lagged.
+
+It also holds the checks the two-document design rests on, which are the kind of
+claim that is worthless unless a browser is asked: that a policy inserted at
+runtime is really enforced, that turning on pictures leaves players refused, and
+that the strict document refuses both.
 
 ## Host your own
 
