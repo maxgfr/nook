@@ -1,0 +1,59 @@
+name: Déploiement GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un seul déploiement à la fois, sans annuler celui qui est en cours : couper
+# une publication à mi-chemin laisserait le site dans un état incohérent.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build
+        # Le site est servi sous le nom du repo. Un fork qui renomme n'a que
+        # cette variable à changer.
+        run: pnpm build
+        env:
+          BASE: /${{ github.event.repository.name }}/
+
+      # Rien n'est publié tant que le garde-fou n'a pas validé le bundle.
+      - name: Zéro réseau
+        run: pnpm check:network
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

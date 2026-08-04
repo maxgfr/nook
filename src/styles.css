@@ -1,0 +1,101 @@
+@import 'tailwindcss';
+@import './ui/design/tokens.css';
+
+/**
+ * Les jetons deviennent des utilitaires Tailwind. `inline` fait émettre
+ * `var(--nook-…)` dans les classes plutôt que la valeur littérale : une classe
+ * `bg-surface` suit donc la bascule de thème sans être recompilée.
+ *
+ * Les couleurs de texte s'appellent `ink` et non `text`, sinon `text-muted`
+ * entrerait en collision avec l'espace de noms des tailles de police.
+ */
+@theme inline {
+  --color-surface: var(--nook-surface);
+  --color-sunken: var(--nook-surface-sunken);
+  --color-raised: var(--nook-surface-raised);
+  --color-hover: var(--nook-surface-hover);
+  --color-active: var(--nook-surface-active);
+
+  --color-line: var(--nook-border);
+  --color-line-strong: var(--nook-border-strong);
+
+  --color-ink: var(--nook-text);
+  --color-ink-muted: var(--nook-text-muted);
+  --color-ink-faint: var(--nook-text-faint);
+
+  --color-accent: var(--nook-accent);
+  --color-accent-hover: var(--nook-accent-hover);
+  --color-accent-contrast: var(--nook-accent-contrast);
+  --color-accent-soft: var(--nook-accent-soft);
+
+  --color-success: var(--nook-success);
+  --color-warning: var(--nook-warning);
+  --color-danger: var(--nook-danger);
+  --color-danger-soft: var(--nook-danger-soft);
+  --color-info: var(--nook-info);
+
+  --font-sans: var(--nook-font-sans);
+  --font-mono: var(--nook-font-mono);
+
+  --text-2xs: var(--nook-text-2xs);
+  --text-xs: var(--nook-text-xs);
+  --text-sm: var(--nook-text-sm);
+  --text-base: var(--nook-text-base);
+  --text-md: var(--nook-text-md);
+  --text-lg: var(--nook-text-lg);
+  --text-xl: var(--nook-text-xl);
+  --text-2xl: var(--nook-text-2xl);
+  --text-3xl: var(--nook-text-3xl);
+
+  --radius-sm: var(--nook-radius-sm);
+  --radius-DEFAULT: var(--nook-radius);
+  --radius-lg: var(--nook-radius-lg);
+  --radius-xl: var(--nook-radius-xl);
+
+  --shadow-menu: var(--nook-shadow-menu);
+  --shadow-modal: var(--nook-shadow-modal);
+
+  --ease-nook: var(--nook-ease);
+}
+
+@layer base {
+  html {
+    background-color: var(--nook-surface-sunken);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--nook-surface);
+    color: var(--nook-text);
+    font-family: var(--nook-font-sans);
+    font-size: var(--nook-text-sm);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overscroll-behavior: none;
+  }
+
+  /* Un seul traitement du focus dans toute l'application. Il est visible sur
+   * fond clair comme sombre parce qu'il utilise l'accent, jamais une teinte
+   * de navigateur. */
+  :focus-visible {
+    outline: 2px solid var(--nook-accent);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--nook-accent-soft);
+    color: var(--nook-text);
+  }
+
+  /* Les chiffres alignés verticalement dans les listes et les tableaux. */
+  table,
+  time,
+  [data-numeric] {
+    font-variant-numeric: tabular-nums;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+}

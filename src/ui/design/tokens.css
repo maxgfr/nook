@@ -1,0 +1,130 @@
+/**
+ * Jetons de design de Nook.
+ *
+ * Un seul endroit définit une valeur. Les couleurs utilisent `light-dark()` :
+ * la valeur claire et la valeur sombre vivent côte à côte, et c'est
+ * `color-scheme` qui tranche. Conséquence importante : le thème suit le
+ * système dès le premier pixel peint, sans JavaScript.
+ *
+ * C'est une contrainte, pas une préférence — la CSP du produit interdit les
+ * scripts inline, donc l'astuce habituelle du petit script anti-flash dans le
+ * <head> est impossible ici. La bascule manuelle se fait en posant
+ * `data-theme` sur <html>, qui ne fait que redéfinir `color-scheme`.
+ */
+
+:root {
+  color-scheme: light dark;
+
+  /* ---------------------------------------------------------------- Surfaces
+   * Deux couches de neutres : le contenu est la surface la plus claire (en
+   * clair) ou la plus haute (en sombre), les chrome et panneaux reculent.
+   * Teinte légèrement chaude — du papier, pas de l'écran.
+   */
+  --nook-surface: light-dark(oklch(99% 0.004 85), oklch(19.5% 0.005 70));
+  --nook-surface-sunken: light-dark(oklch(96.4% 0.006 85), oklch(15.5% 0.005 70));
+  --nook-surface-raised: light-dark(oklch(100% 0 0), oklch(23.5% 0.006 70));
+  --nook-surface-hover: light-dark(oklch(94.5% 0.007 85), oklch(26% 0.007 70));
+  --nook-surface-active: light-dark(oklch(91.5% 0.008 85), oklch(29% 0.008 70));
+
+  --nook-border: light-dark(oklch(90% 0.006 85), oklch(27.5% 0.006 70));
+  --nook-border-strong: light-dark(oklch(83% 0.008 85), oklch(36% 0.008 70));
+
+  /* -------------------------------------------------------------------- Texte
+   * Trois niveaux suffisent. `faint` est réservé aux métadonnées qu'on ne lit
+   * pas activement (compteurs, horodatages) et ne porte jamais d'information
+   * indispensable, puisqu'il frôle le seuil de contraste.
+   */
+  --nook-text: light-dark(oklch(23% 0.012 60), oklch(93% 0.005 80));
+  --nook-text-muted: light-dark(oklch(47% 0.011 60), oklch(70% 0.007 80));
+  --nook-text-faint: light-dark(oklch(62% 0.009 60), oklch(56% 0.007 80));
+
+  /* ------------------------------------------------------------------ Accent
+   * Une seule couleur d'accent, en terre cuite. Elle ne sert qu'à trois
+   * choses : l'action primaire, la sélection courante, l'anneau de focus.
+   * Jamais décorative.
+   */
+  --nook-accent: light-dark(oklch(55% 0.135 42), oklch(70% 0.125 45));
+  --nook-accent-hover: light-dark(oklch(49% 0.14 42), oklch(76% 0.12 45));
+  --nook-accent-contrast: light-dark(oklch(99% 0.004 85), oklch(18% 0.02 45));
+  --nook-accent-soft: light-dark(oklch(94.5% 0.028 45), oklch(28% 0.045 45));
+
+  /* --------------------------------------------------------------- Sémantique
+   * Vocabulaire d'états standardisé. Chaque composant interactif pioche ici
+   * plutôt que d'inventer sa propre teinte.
+   */
+  --nook-success: light-dark(oklch(52% 0.115 150), oklch(72% 0.11 150));
+  --nook-warning: light-dark(oklch(60% 0.125 75), oklch(78% 0.12 80));
+  --nook-danger: light-dark(oklch(53% 0.175 27), oklch(69% 0.16 27));
+  --nook-danger-soft: light-dark(oklch(95% 0.03 27), oklch(27% 0.06 27));
+  --nook-info: light-dark(oklch(55% 0.105 250), oklch(72% 0.1 250));
+
+  /* ------------------------------------------------------------ Typographie
+   * Une seule famille pour tout : titres, labels, corps, données. Pile
+   * système, qui est le choix natif en UI produit et le seul qui garantisse
+   * zéro octet chargé depuis le réseau.
+   *
+   * Échelle en rem fixes, ratio ~1.12. Pas de `clamp()` : l'utilisateur lit à
+   * une densité constante, et un titre fluide qui rétrécit dans un panneau
+   * étroit est un défaut, pas une adaptation.
+   */
+  --nook-font-sans:
+    ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    system-ui, sans-serif;
+  --nook-font-mono:
+    ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+
+  --nook-text-2xs: 0.6875rem; /* 11px — compteurs, raccourcis */
+  --nook-text-xs: 0.75rem; /* 12px — métadonnées */
+  --nook-text-sm: 0.8125rem; /* 13px — défaut de l'interface */
+  --nook-text-base: 0.9375rem; /* 15px — corps de l'éditeur */
+  --nook-text-md: 1.0625rem; /* 17px */
+  --nook-text-lg: 1.1875rem; /* 19px */
+  --nook-text-xl: 1.375rem; /* 22px */
+  --nook-text-2xl: 1.625rem; /* 26px */
+  --nook-text-3xl: 2rem; /* 32px — titre de document */
+
+  /* -------------------------------------------------------------- Géométrie */
+  --nook-radius-sm: 0.25rem;
+  --nook-radius: 0.375rem;
+  --nook-radius-lg: 0.625rem;
+  --nook-radius-xl: 0.875rem;
+
+  --nook-sidebar-width: 16rem;
+  --nook-measure: 42rem; /* ~68 caractères dans l'éditeur */
+
+  /* ---------------------------------------------------------------- Élévation
+   * Deux ombres seulement, et elles ne servent qu'à sortir un élément du flux
+   * (menu, dialogue). Rien de décoratif ne porte d'ombre.
+   */
+  --nook-shadow-menu:
+    0 1px 2px light-dark(oklch(0% 0 0 / 0.06), oklch(0% 0 0 / 0.3)),
+    0 6px 16px -4px light-dark(oklch(0% 0 0 / 0.1), oklch(0% 0 0 / 0.45));
+  --nook-shadow-modal:
+    0 2px 4px light-dark(oklch(0% 0 0 / 0.06), oklch(0% 0 0 / 0.35)),
+    0 16px 48px -12px light-dark(oklch(0% 0 0 / 0.18), oklch(0% 0 0 / 0.6));
+
+  /* ---------------------------------------------------------------- Mouvement
+   * 120–220 ms. Le mouvement signale un changement d'état, il ne raconte rien.
+   */
+  --nook-ease: cubic-bezier(0.2, 0, 0, 1);
+  --nook-dur-fast: 120ms;
+  --nook-dur: 180ms;
+  --nook-dur-slow: 220ms;
+}
+
+/* La bascule manuelle ne fait que forcer `color-scheme` : toutes les valeurs
+ * `light-dark()` ci-dessus suivent automatiquement. */
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --nook-dur-fast: 0ms;
+    --nook-dur: 0ms;
+    --nook-dur-slow: 0ms;
+  }
+}
