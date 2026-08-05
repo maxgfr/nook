@@ -1,0 +1,13 @@
+# Kept out of the build context: none of it affects the bundle, and all of it
+# would be copied into the builder on every build.
+node_modules/
+dist/
+dev-dist/
+.smoke/
+.git/
+.github/
+.ultrai18n/
+.idea/
+.vscode/
+*.log
+.DS_Store

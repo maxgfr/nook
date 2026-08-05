@@ -44,7 +44,9 @@ itself never gains the ability to send anything anywhere.
   page.
 - **Organise.** Pages nest to any depth. Every page keeps up to twenty past
   versions you can walk back through and restore from — filed automatically on
-  an interval you choose, or kept the moment you press **Snapshot**.
+  an interval you choose, or kept the moment you press **Snapshot**. Any one of
+  them can be restored, or deleted — deleting asks twice, because a version
+  exists nowhere but inside its own page.
 - **Connect.** `[[Wikilinks]]` resolve by title, and every page lists what links
   to it. A link to a page you have not written yet is offered as a page to
   create rather than reported as an error. `#tags` work anywhere.
@@ -206,6 +208,11 @@ pnpm verify     # types, lint, tests, build, network guard
 pnpm smoke      # drives a real browser through the whole product
 ```
 
+`pnpm smoke` writes into `.smoke/`, which is gitignored: the browser profile it
+drives, and the files the application genuinely downloads during the run. Those
+used to land in the user's Downloads folder, which is not somewhere a test gets
+to write.
+
 `pnpm verify` is exactly what CI runs. `pnpm smoke` writes a note, links it,
 searches it, maps it, locks the vault behind a passphrase, unlocks it, shares a
 page and opens the share as a stranger would — against the built bundle, because
@@ -216,6 +223,31 @@ It also holds the checks the two-document design rests on, which are the kind of
 claim that is worthless unless a browser is asked: that a policy inserted at
 runtime is really enforced, that turning on pictures leaves players refused, and
 that the strict document refuses both.
+
+## Run it on your own machine
+
+```bash
+docker compose up      # then open http://localhost:8080
+```
+
+Or without compose:
+
+```bash
+docker build -t nook .
+docker run --rm -p 8080:8080 nook
+```
+
+The image and the published site serve the same files. The security policy
+travels inside the HTML rather than in a response header — it has to, because a
+static host cannot send headers — so the promise holds identically whoever is
+serving it, and [the guard][g] runs inside the build so an image cannot ship a
+bundle without it. What changes is only where the application itself comes from,
+which for a program whose claim is that nothing leaves your machine is a
+reasonable thing to want.
+
+Your notes live in that browser, encrypted, exactly as they would on the
+published site. Stopping the container does not touch them, and neither does
+deleting the image.
 
 ## Host your own
 

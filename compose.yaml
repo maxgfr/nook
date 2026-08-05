@@ -1,0 +1,27 @@
+# Run Nook on your own machine:
+#
+#   docker compose up
+#
+# Then open http://localhost:8080. Your notes live in that browser, encrypted,
+# exactly as they would on the published site — the container serves files and
+# has nothing to receive back. Stopping it does not touch them, and neither
+# does deleting the image.
+
+services:
+  nook:
+    build:
+      context: .
+      # Served at the root here, rather than the `/nook/` sub-path GitHub Pages
+      # uses. Change it if you put this behind a path of your own.
+      args:
+        BASE: /
+    ports:
+      - '8080:8080'
+    restart: unless-stopped
+    # Nothing is written at runtime: the image serves a fixed set of files, and
+    # every byte of user data stays in the browser.
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
