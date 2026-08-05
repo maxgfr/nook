@@ -1,5 +1,6 @@
 // `vitest/config` re-exports Vite's `defineConfig` while also accepting the
 // `test` key, which keeps the project's configuration in a single file.
+import { execSync } from 'node:child_process'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { defineConfig } from 'vitest/config'
@@ -153,7 +154,64 @@ function contentSecurityPolicy(): Plugin {
  */
 const OFFLINE_STUB = new URL('./src/ui/editor/emoji-mart-absent.ts', import.meta.url).pathname
 
+/**
+ * What the built application calls itself.
+ *
+ * An offline application is the one kind that can be months out of date without
+ * anybody noticing: the copy on a phone keeps working, so nothing ever forces
+ * the question. The first thing needed to answer it is for the build to know,
+ * and say, which build it is.
+ *
+ * The number comes from `package.json`, bumped by the release job in
+ * `.github/workflows/deploy.yml` from the commit prefixes. The commit and the
+ * date come from git — and the date is the **commit's**, not the build's. Two
+ * builds of the same commit then produce the same bytes, so re-running a
+ * deployment does not manufacture a version differing from the previous one only
+ * by a timestamp, which every installed copy would announce as an update worth
+ * taking.
+ *
+ * `.dockerignore` keeps `.git/` out of the image build context, so a container
+ * build has no repository to ask. It says so rather than guessing;
+ * `describeVersion` in `src/ui/app/version.ts` renders that case without
+ * claiming a commit it does not have.
+ */
+function identity(): { version: string; commit: string; date: string } {
+  const manifest = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8')) as {
+    version?: string
+  }
+  const version = manifest.version ?? '0.0.0'
+
+  try {
+    return {
+      version,
+      commit: git('rev-parse --short=7 HEAD'),
+      date: git('log -1 --format=%cI'),
+    }
+  } catch {
+    return {
+      version,
+      commit: process.env.GITHUB_SHA?.slice(0, 7) ?? 'unknown',
+      date: new Date().toISOString(),
+    }
+  }
+}
+
+function git(command: string): string {
+  return execSync(`git ${command}`, { stdio: ['ignore', 'pipe', 'ignore'] })
+    .toString()
+    .trim()
+}
+
+const APP = identity()
+
 export default defineConfig({
+  // Read by `src/ui/app/version.ts`, and declared for TypeScript in
+  // `src/globals.d.ts`.
+  define: {
+    __APP_VERSION__: JSON.stringify(APP.version),
+    __APP_COMMIT__: JSON.stringify(APP.commit),
+    __APP_DATE__: JSON.stringify(APP.date),
+  },
   base: BASE,
   resolve: {
     alias: {
@@ -167,6 +225,12 @@ export default defineConfig({
     contentSecurityPolicy(),
     VitePWA({
       registerType: 'prompt',
+      // `src/ui/app/updates.ts` does the registering, so the plugin must not
+      // inject a second registration of its own. Its default (`auto`) emitted a
+      // `registerSW.js` that started the worker and then had no opinion about
+      // the update sitting in `waiting` — which is how an installed copy stayed
+      // months behind while looking perfectly healthy.
+      injectRegister: null,
       includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
       manifest: {
         name: 'Nook — local notes',
@@ -206,6 +270,9 @@ export default defineConfig({
   test: {
     environment: 'node',
     setupFiles: ['./vitest.setup.ts'],
-    include: ['src/**/*.test.ts', 'src/**/*.test.tsx'],
+    // The bump script is included because it decides a number nobody reads back
+    // afterwards: an off-by-one there is only discovered by an interface
+    // claiming a version that was never released.
+    include: ['src/**/*.test.ts', 'src/**/*.test.tsx', 'scripts/**/*.test.mjs'],
   },
 })

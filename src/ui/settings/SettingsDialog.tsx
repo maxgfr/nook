@@ -2,11 +2,13 @@ import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { useLockControls, useVault, AUTO_LOCK_MINUTES } from '../app/VaultProvider'
 import { MIN_PASSPHRASE_LENGTH } from '../../core/crypto/kdf'
 import type { StorageSurvey } from '../../core/storage/wipe'
-import { isEmpty } from '../../core/storage/wipe'
+import { clearAppCache, isEmpty } from '../../core/storage/wipe'
 import { EMBED_PROVIDERS, type WebAccess } from '../../core/policy'
 import { HISTORY_LIMIT } from '../../core/model/types'
 import { readSnapshotPolicy, writeSnapshotPolicy, type SnapshotPolicy } from '../app/snapshots'
 import { readWebAccess, writeWebAccess } from '../app/webAccess'
+import { checkForUpdate, useUpdateState, type UpdateState } from '../app/updates'
+import { describeVersion } from '../app/version'
 import { Button } from '../design/Button'
 import { ConfirmDialog } from '../design/ConfirmDialog'
 import { Switch } from '../design/Switch'
@@ -16,9 +18,10 @@ import { download } from '../design/download'
  * Settings: how the vault is protected, how to get the data out, and how to
  * destroy it.
  *
- * Three sections in that order on purpose. Someone who came here to erase
- * everything walks past the export on the way, which is the one thing they may
- * regret not doing.
+ * The order is on purpose. Someone who came here to erase everything walks past
+ * the export on the way, which is the one thing they may regret not doing — so
+ * nothing may come between those two. Version sits last, below the danger, in
+ * the place people look for it.
  */
 
 const WIPE_WORD = 'ERASE'
@@ -246,6 +249,8 @@ export function SettingsDialog({ open, onClose }: { open: boolean; onClose: () =
           )}
         </Section>
 
+        <VersionSection />
+
         {message && (
           <p role="status" className="mt-4 text-sm text-ink-muted">
             {message}
@@ -443,6 +448,83 @@ function WebSection() {
       </ConfirmDialog>
     </Section>
   )
+}
+
+/**
+ * Which version is running, and the two ways of moving off it.
+ *
+ * An application that works offline is the one kind that can be a year out of
+ * date without anything going wrong enough to notice — the copy on a phone
+ * keeps opening, so nothing ever raises the question. This section raises it.
+ *
+ * The line itself is monospaced and selectable because its purpose is to be
+ * copied: into a bug report, or read aloud to somebody asking what you are
+ * running.
+ *
+ * Two buttons, and they are not the same thing. **Check for updates** asks the
+ * host whether it has anything newer. **Reload** is the repair for the case
+ * where the answer no longer helps — a worker stuck on files it will not let
+ * go of. It throws away the copy of the program and fetches it again, and it
+ * says, on screen, that it leaves the notes alone. A button next to the words
+ * "Erase everything" has to be unambiguous about which of the two it is.
+ */
+function VersionSection() {
+  const update = useUpdateState()
+  const [reloading, setReloading] = useState(false)
+
+  const reload = async () => {
+    setReloading(true)
+    await clearAppCache()
+    globalThis.location.reload()
+  }
+
+  return (
+    <Section title="Version">
+      <p className="font-mono text-sm text-ink select-all">{describeVersion()}</p>
+
+      <p role="status" className="mt-2">
+        {STATUS[update]}
+      </p>
+
+      <div className="mt-3 flex flex-wrap items-center gap-2">
+        <Button
+          size="sm"
+          disabled={update === 'unsupported' || update === 'checking' || reloading}
+          onClick={() => void checkForUpdate()}
+        >
+          {update === 'checking' ? 'Checking…' : 'Check for updates'}
+        </Button>
+        <Button
+          size="sm"
+          tone={update === 'ready' ? 'primary' : 'neutral'}
+          disabled={reloading}
+          onClick={() => void reload()}
+        >
+          {reloading ? 'Reloading…' : 'Reload'}
+        </Button>
+      </div>
+
+      <p className="mt-2 text-xs text-ink-faint">
+        Reload throws away the copy of Nook this browser is holding and fetches it again. Your notes
+        and every setting on this page are untouched — it empties the cache of the program, never of
+        the data.
+      </p>
+      <p className="mt-2 text-xs text-ink-faint">
+        Checking asks the site Nook was loaded from whether it has a newer version. Nothing from a
+        note is involved: it learns that you opened Nook, which serving you the page had already
+        told it.
+      </p>
+    </Section>
+  )
+}
+
+const STATUS: Record<UpdateState, string> = {
+  // Development, or a browser without service workers. Saying nothing at all
+  // here would read as "up to date", which is a claim this build cannot make.
+  unsupported: 'This copy is not watched for updates — it is running without a service worker.',
+  idle: 'Up to date.',
+  checking: 'Asking for a newer version…',
+  ready: 'A new version is ready. Reload to move onto it.',
 }
 
 function Section({

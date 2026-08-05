@@ -11,6 +11,10 @@
  *
  * `surveyStorage()` exists so the interface can *show* what remains afterwards,
  * rather than display a confirmation nobody can verify.
+ *
+ * `clearAppCache()` shares the first two steps and stops there. Keeping the two
+ * in one file is deliberate: the difference between them is the whole notebook,
+ * and it should be readable in one screen rather than inferred from two names.
  */
 
 import { DB_NAME, deleteDatabase } from './idb'
@@ -71,6 +75,35 @@ export async function wipeEverything(): Promise<StorageSurvey> {
   clear(() => sessionStorage)
 
   return surveyStorage()
+}
+
+/**
+ * Throws away the copy of the application, and nothing else.
+ *
+ * The other half of "erase everything": same two first steps, and then it
+ * stops. A browser can end up serving an application from a cache it will not
+ * let go of — a worker that failed to update, a half-written precache — and the
+ * cure is to take away the cache and let the next load fetch the files again.
+ * That is a repair, not a deletion, and confusing it with one would be
+ * catastrophic here: `wipeEverything()` below deletes every database on the
+ * origin, which is the notebook, unrecoverably.
+ *
+ * So this touches neither IndexedDB nor `localStorage`. The notes stay, and so
+ * do the three preferences (`nook.theme`, `nook.webAccess`, `nook.snapshots`) —
+ * the second of which decides the security policy the next load runs under, and
+ * losing it would silently move somebody between the two documents.
+ *
+ * The order is the same as below, for the same reason: the service worker is
+ * the only actor able to write back into a cache while it is being emptied.
+ */
+export async function clearAppCache(): Promise<void> {
+  const registrations = (await navigator.serviceWorker?.getRegistrations?.()) ?? []
+  await Promise.all(registrations.map((registration) => registration.unregister()))
+
+  if (globalThis.caches) {
+    const names = await caches.keys()
+    await Promise.all(names.map((name) => caches.delete(name)))
+  }
 }
 
 async function listDatabases(): Promise<string[] | undefined> {

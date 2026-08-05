@@ -764,6 +764,35 @@ try {
   )
   await sleep(800)
 
+  // --- The version, and the reload that repairs a stuck copy --------------
+  //
+  // An application that works offline can be a year behind without anything
+  // looking wrong, which is why the version is on screen at all.
+  //
+  // The second check is the one worth the seconds it costs. "Reload" empties
+  // the cache of the *program*; a notebook that failed to survive it would be
+  // total data loss wearing the label of a repair, and no unit test can prove
+  // the difference — only a real browser holding a real database can.
+  await evaluate(
+    `[...document.querySelectorAll('button')].find((b) => ${LABEL}(b) === 'Settings').click()`,
+  )
+  await sleep(700)
+  check(
+    'settings name the version that is running',
+    await evaluate(
+      `/\\d+\\.\\d+\\.\\d+/.test(document.querySelector('dialog[aria-label="Settings"]').innerText)`,
+    ),
+  )
+
+  await evaluate(
+    `[...document.querySelectorAll('dialog[aria-label="Settings"] button')].find((b) => b.textContent.trim() === 'Reload').click()`,
+  )
+  await sleep(3500)
+  check(
+    'clearing the application cache reloads onto the same notebook',
+    await evaluate(`document.body.innerText.includes('Recipe note')`),
+  )
+
   // --- Phase 4: passphrase and locking -----------------------------------
   //
   // Argon2id is deliberately slow, so these steps wait seconds rather than

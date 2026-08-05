@@ -28,6 +28,7 @@ anything to receive back.
 | Your notes are unreadable on disk    | AES-GCM-256 with a non-extractable key, never exposed to JavaScript                               |
 | Everything really can be erased      | Database, caches, service worker and storages destroyed, then an inventory of what remains        |
 | It works offline                     | Precached and installable as a PWA                                                                |
+| You can tell which version you have  | Number, commit and date in Settings — with the two buttons that move you off it                   |
 
 [g]: scripts/check-no-network.mjs
 
@@ -35,6 +36,26 @@ Out of the box, nothing leaves your machine. Two settings can change that, both
 off, both named, and neither can be turned on without a screen telling you what
 it gives away. The one thing they cannot touch is `connect-src 'none'`: Nook
 itself never gains the ability to send anything anywhere.
+
+### Staying up to date
+
+An application that works offline is the one kind that can be a year behind
+without anything going wrong enough to notice — the copy on your phone keeps
+opening, so nothing ever raises the question. Settings raises it: it names the
+version you are running, and holds the two ways off it.
+
+**Check for updates** asks the site Nook was loaded from whether it has a newer
+one. That request is made by the browser's own service-worker machinery and not
+by the page, so `connect-src 'none'` is untouched and [the guard][g] never sees
+it go by — which is exactly why it is written down here instead of left to be
+discovered. Nothing from a note is involved. The host learns that you opened
+Nook, which serving you the page had already told it.
+
+**Reload** throws away the copy of the program this browser is holding and
+fetches it again. It is the repair for a service worker stuck on files it will
+not let go of. Your notes and every setting are untouched: it empties the cache
+of the program, never of the data. Erasing everything is a different button, in
+a different section, and it says so.
 
 ## What it does
 
@@ -225,6 +246,34 @@ It also holds the checks the two-document design rests on, which are the kind of
 claim that is worthless unless a browser is asked: that a policy inserted at
 runtime is really enforced, that turning on pictures leaves players refused, and
 that the strict document refuses both.
+
+One thing `pnpm dev` cannot show you: there is no service worker in development,
+so the version banner and everything around updating only exist in a real build.
+Use `pnpm build && pnpm preview`.
+
+### Commits, and the version number
+
+The number in `package.json` is moved by CI, read off the commits, so that the
+version shown in Settings is one nobody had to remember to bump. The sentence
+stays the sentence this project writes — a Conventional Commits prefix goes in
+front of it:
+
+```
+feat: Give Snapshot, Export and Share a key
+fix: Make `verify` run the check that turned CI red
+chore: Keep the files the tests download inside the project
+```
+
+`feat` moves the minor, `fix` and `perf` the patch, a trailing `!` or a
+`BREAKING CHANGE:` paragraph the major — except below 1.0.0, where a break moves
+the minor too, because calling the project stable should be a decision somebody
+makes rather than one an exclamation mark makes for them. Anything else moves
+nothing, and that is deliberate: a commit touching only this file does not
+manufacture a release.
+
+```bash
+node scripts/bump-version.mjs   # what the next deployment would publish
+```
 
 ## Run it on your own machine
 

@@ -16,7 +16,11 @@
     "eqeqeq": "error",
     "no-var": "error",
     "prefer-const": "error",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "no-underscore-dangle": [
+      "error",
+      { "allow": ["__APP_VERSION__", "__APP_COMMIT__", "__APP_DATE__"] }
+    ]
   },
   "overrides": [
     {

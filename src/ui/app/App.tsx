@@ -16,6 +16,7 @@ import { Button, IconButton } from '../design/Button'
 import { Icon } from '../design/Icon'
 import { CommandPalette } from '../search/CommandPalette'
 import { OpenSettingsContext } from './openSettings'
+import { applyUpdate, useUpdateState } from './updates'
 import { shortcutLabel, useShortcut } from './shortcuts'
 import type { SharedPage } from '../../core/share'
 import type { DocId } from '../../core/model/types'
@@ -257,6 +258,45 @@ function Boot({ state, controls }: { state: BootState; controls: LockControls })
   )
 }
 
+/**
+ * The one place a new version announces itself.
+ *
+ * It lives inside the bottom bar rather than as a banner of its own: that row
+ * already wraps (see the comment inside `BottomBar`), so on a laptop this sits
+ * to the left of the pills and on a phone it takes the line above them, with no
+ * new positioning to invent and nothing overlapping the page being written.
+ *
+ * `accent-soft` rather than the solid accent — `tokens.css` reserves the accent
+ * itself for the primary action, and here that is the Reload button, not the
+ * strip around it.
+ *
+ * Dismissal is state, not storage. A version put off is put off for now; it
+ * comes back on the next load, and immediately if a newer one arrives. Making
+ * it permanent would recreate exactly the silence this whole feature exists to
+ * break.
+ */
+function UpdateNotice() {
+  const update = useUpdateState()
+  const [dismissed, setDismissed] = useState(false)
+
+  if (update !== 'ready' || dismissed) return null
+
+  return (
+    <div
+      role="status"
+      className="mr-auto flex min-h-7 flex-wrap items-center gap-1 rounded-lg border border-accent bg-accent-soft py-0.5 pr-0.5 pl-2.5 text-2xs text-ink backdrop-blur-sm"
+    >
+      A new version of Nook is ready.
+      <Button size="sm" tone="primary" onClick={applyUpdate}>
+        Reload
+      </Button>
+      <Button size="sm" onClick={() => setDismissed(true)}>
+        Later
+      </Button>
+    </div>
+  )
+}
+
 const THEMES: readonly { value: Theme; label: string }[] = [
   { value: 'system', label: 'System' },
   { value: 'light', label: 'Light' },
@@ -288,6 +328,7 @@ function BottomBar({
       The bottom inset keeps it clear of a phone's home indicator.
     */
     <div className="pointer-events-none fixed right-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] left-3 flex flex-wrap items-center justify-end gap-1 *:pointer-events-auto">
+      <UpdateNotice />
       <button
         type="button"
         onClick={onOpenPalette}

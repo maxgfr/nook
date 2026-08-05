@@ -17,10 +17,58 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Moves the number in package.json, which the build then prints in the
+  # settings panel. It runs *here*, in front of the build, rather than in a
+  # workflow of its own: a push made with the default GITHUB_TOKEN triggers no
+  # workflow, so a separate release job would commit a version that the deployed
+  # site never saw, and the number on screen would sit one release behind for
+  # ever.
+  version:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      # The commit to build. The one just made when there was a release, the
+      # one that was pushed when there was not.
+      sha: ${{ steps.bump.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          # The tags and the full history: without them there is no previous
+          # release to measure the commits against.
+          fetch-depth: 0
+
+      - id: bump
+        run: |
+          # Empty output means the commits asked for no release. See
+          # scripts/bump-version.mjs.
+          version=$(node scripts/bump-version.mjs --write)
+          if [ -z "$version" ]; then
+            echo "sha=$GITHUB_SHA" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          # `chore` so this commit never bumps anything itself — a second belt,
+          # after the fact that this push triggers no workflow.
+          git commit -am "chore(release): $version"
+          git tag -a "v$version" -m "$version"
+          # Both refs in one call: a tag without its commit, or the reverse,
+          # would leave the next run measuring from the wrong place.
+          git push origin "HEAD:${GITHUB_REF_NAME}" "v$version"
+
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
   build:
+    needs: version
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          # The commit carrying the version just written, which is what makes
+          # the number on screen the number that was published.
+          ref: ${{ needs.version.outputs.sha }}
 
       - uses: pnpm/action-setup@v4
 

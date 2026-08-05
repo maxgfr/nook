@@ -8,6 +8,7 @@ import './ui/app/boot'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { App } from './ui/app/App'
+import { watchForUpdates } from './ui/app/updates'
 import './styles.css'
 
 const root = document.getElementById('root')
@@ -18,3 +19,7 @@ createRoot(root).render(
     <App />
   </StrictMode>,
 )
+
+// After the render, not before: registering the worker is how the *next* visit
+// is served, and it must not delay this one by a millisecond.
+watchForUpdates()
