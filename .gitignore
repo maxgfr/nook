@@ -14,5 +14,10 @@ pnpm-debug.log*
 !.vscode/extensions.json
 dev-dist/
 
+# Working files from `pnpm smoke`: the browser profile it drives, and the
+# exports the application really downloads during the run. They used to land in
+# the user's Downloads folder, which is not somewhere a test gets to write.
+.smoke/
+
 # ultrai18n working state (inventory, batches, rulings)
 .ultrai18n/

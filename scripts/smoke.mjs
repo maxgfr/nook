@@ -14,13 +14,25 @@
  */
 
 import { spawn } from 'node:child_process'
-import { existsSync, mkdtempSync } from 'node:fs'
+import { existsSync, mkdirSync, mkdtempSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
 const PORT = 4173
 const BASE = process.env.SMOKE_URL ?? `http://localhost:${PORT}/nook/`
 const DEBUG_PORT = 9333
+
+/**
+ * Where the files this test downloads are put.
+ *
+ * The application really does download things — a page as Markdown, the whole
+ * notebook as JSON — and those are worth exercising for real rather than
+ * stubbing out. Left to itself Chrome drops them in the user's Downloads
+ * folder, which is where this repository happens to live: every run scattered
+ * `nook-2026-08-05.json` and `Recipe-note.md` next to the source. They go here
+ * instead, gitignored and emptied at the start of each run.
+ */
+const DOWNLOADS = new URL('../.smoke/downloads/', import.meta.url).pathname
 
 /**
  * Addresses used only to see whether the policy refuses them.
@@ -61,6 +73,9 @@ async function waitFor(url, what) {
   }
   throw new Error(`${what} did not answer on ${url}`)
 }
+
+rmSync(DOWNLOADS, { recursive: true, force: true })
+mkdirSync(DOWNLOADS, { recursive: true })
 
 const preview = spawn('npx', ['vite', 'preview', '--port', String(PORT)], { stdio: 'ignore' })
 const profile = mkdtempSync(join(tmpdir(), 'nook-smoke-'))
@@ -111,6 +126,11 @@ try {
       pending.set(id, { resolve, reject })
       socket.send(JSON.stringify({ id, method, params, sessionId }))
     })
+
+  // Sent before attaching to a page, so it reaches the browser target and
+  // applies to every download this run makes. Without it they land in the
+  // user's Downloads folder — see DOWNLOADS above.
+  await send('Browser.setDownloadBehavior', { behavior: 'allow', downloadPath: DOWNLOADS })
 
   const { targetId } = await send('Target.createTarget', { url: 'about:blank' })
   ;({ sessionId } = await send('Target.attachToTarget', { targetId, flatten: true }))
@@ -297,7 +317,7 @@ try {
     })()
   `)
   await evaluate(
-    `[...document.querySelectorAll('button')].find((b) => b.textContent.includes('Export as Markdown')).click()`,
+    `[...document.querySelectorAll('button')].find((b) => b.textContent.trim() === 'Export').click()`,
   )
   await sleep(1000)
   check(
@@ -407,7 +427,10 @@ try {
   // --- Keeping a version by hand -----------------------------------------
 
   const snapshotCount = async () =>
-    evaluate(`Number(/show snapshots \\((\\d+)\\)/i.exec(document.body.innerText)?.[1] ?? 0)`)
+    // Either label: the same control reads "Show" collapsed and "Hide" open.
+    evaluate(
+      `Number(/(?:show|hide) snapshots \\((\\d+)\\)/i.exec(document.body.innerText)?.[1] ?? 0)`,
+    )
 
   const before = await snapshotCount()
   await evaluate(`document.querySelector('.bn-editor[contenteditable=true]').focus()`)
@@ -432,6 +455,56 @@ try {
     'pressing it again with nothing changed spends no slot',
     (await snapshotCount()) === before + 1 &&
       (await evaluate(`document.body.innerText.includes('Nothing new to keep')`)),
+  )
+
+  // --- Dropping a kept version -------------------------------------------
+
+  /**
+   * Scoped to the snapshots panel on purpose.
+   *
+   * A page-wide search for a button reading "Delete" finds the sidebar's
+   * page-deletion confirmation first — it sits in a closed `<dialog>`, so no
+   * person can reach it, but `.click()` does not care. A test that deletes a
+   * page while claiming to delete a snapshot would pass for the wrong reason.
+   */
+  const clickInSnapshots = async (label) =>
+    evaluate(
+      `(() => {
+        const panel = document.querySelector('section[aria-label="Snapshots"]')
+        const button = [...(panel?.querySelectorAll('button') ?? [])].find(
+          (b) => b.textContent.trim() === ${JSON.stringify(label)},
+        )
+        if (!button) return false
+        button.click()
+        return true
+      })()`,
+    )
+
+  await clickInSnapshots(`Show snapshots (${await snapshotCount()})`)
+  await sleep(600)
+  const kept = await snapshotCount()
+
+  check(
+    'a snapshot offers to be deleted',
+    await evaluate(
+      `[...document.querySelectorAll('section[aria-label="Snapshots"] button')]
+         .some((b) => b.textContent.trim() === 'Delete')`,
+    ),
+  )
+
+  const asked = await clickInSnapshots('Delete')
+  await sleep(400)
+  check(
+    'and asks a second time before it does',
+    asked && (await evaluate(`document.body.innerText.includes('Delete for good')`)),
+  )
+
+  await clickInSnapshots('Delete for good')
+  await sleep(1500)
+  check(
+    'deleting one leaves the rest, and the list says so without a reload',
+    (await snapshotCount()) === kept - 1,
+    `${kept} → ${await snapshotCount()}`,
   )
 
   // --- Embedding a page inside another -----------------------------------
