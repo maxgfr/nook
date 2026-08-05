@@ -17,7 +17,7 @@ const survey = (patch: Partial<StorageSurvey> = {}): StorageSurvey => ({
   ...patch,
 })
 
-describe('effacement total', () => {
+describe('erasing everything', () => {
   it('really deletes the databases, and proves it', async () => {
     const db = await openDatabase('nook-a-effacer')
     await write(db, 'docs', 'a', { secret: 'must not be found' })
