@@ -68,3 +68,29 @@ dialogs and the palette.
 .bn-container .mantine-Menu-dropdown {
   box-shadow: var(--nook-shadow-menu);
 }
+
+/*
+Headings sit under the page title, never over it.
+
+The library's own scale starts a level-1 heading at 3em — 45px against this
+editor's 15px body — while the title above it is 36px. The result was a page
+whose first subheading shouted louder than the thing it was a subheading of,
+which is not a matter of taste: it is the outline reading backwards.
+
+So the scale is re-anchored. The title is the largest text on the page by a
+clear step, and the three levels the editor offers descend from it. What the
+editor calls "Heading 1" is the document's *first subheading*, exactly as it is
+in every notebook of this kind — the title is the heading, and these are what
+divide it.
+*/
+.bn-container [data-content-type='heading'] {
+  --level: 1.6em; /* 24px */
+}
+
+.bn-container [data-content-type='heading'][data-level='2'] {
+  --level: 1.35em; /* ~20px */
+}
+
+.bn-container [data-content-type='heading'][data-level='3'] {
+  --level: 1.15em; /* ~17px */
+}
