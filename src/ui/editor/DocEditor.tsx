@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { BlockNoteView } from '@blocknote/mantine'
 import {
   getDefaultReactSlashMenuItems,
@@ -107,6 +107,21 @@ function LoadedEditor({ doc }: { doc: Doc }) {
   const [title, setTitle] = useState(doc.title)
   const [shareOpen, setShareOpen] = useState(false)
 
+  /**
+   * The editor lives in `RichTextBody`, and the button that exports it lives up
+   * here in the header beside the other page actions.
+   *
+   * A ref rather than lifting the whole editor into this component: creating it
+   * here would make a database page pay for building a ProseMirror instance it
+   * never shows, which is the split `RichTextBody` exists to keep.
+   */
+  const exportMarkdown = useRef<(() => void) | null>(null)
+  // Stable, so the body re-registers when the title changes and not on every
+  // render of this component.
+  const registerExport = useCallback((run: () => void) => {
+    exportMarkdown.current = run
+  }, [])
+
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <header
@@ -122,6 +137,20 @@ function LoadedEditor({ doc }: { doc: Doc }) {
         <div className="flex shrink-0 items-center gap-2">
           <SaveIndicator state={state} />
           <SnapshotButton docId={doc.id} flush={flush} />
+          {/*
+            Only for prose. A database has no Markdown to export — the table,
+            its filters and its views have no equivalent — and a button that
+            produces an empty file is worse than no button.
+          */}
+          {!isCollection(doc.content) && (
+            <Button
+              size="sm"
+              title="Export this page as Markdown"
+              onClick={() => exportMarkdown.current?.()}
+            >
+              Export
+            </Button>
+          )}
           <Button size="sm" onClick={() => setShareOpen(true)}>
             Share
           </Button>
@@ -162,6 +191,7 @@ function LoadedEditor({ doc }: { doc: Doc }) {
                 content={doc.content}
                 title={title}
                 onChange={(content) => schedule({ content })}
+                registerExport={registerExport}
               />
             </EmbedChain>
           )}
@@ -217,11 +247,14 @@ function RichTextBody({
   content,
   title,
   onChange,
+  registerExport,
 }: {
   docId: DocId
   content: JsonValue
   title: string
   onChange: (content: JsonValue) => void
+  /** Hands the header a way to export what this editor is holding. */
+  registerExport: (run: () => void) => void
 }) {
   const vault = useVault()
   const editorHost = useRef<HTMLDivElement>(null)
@@ -253,6 +286,17 @@ function RichTextBody({
     resolveFileUrl,
   })
 
+  /**
+   * Hands the header something to call.
+   *
+   * Re-registered when the title changes, because the title leads the exported
+   * file and is held by the component above — a closure captured once would
+   * export the name the page had when it was opened.
+   */
+  useEffect(() => {
+    registerExport(() => downloadMarkdown(title, editor.blocksToMarkdownLossy()))
+  }, [registerExport, title, editor])
+
   return (
     <div
       ref={editorHost}
@@ -279,11 +323,6 @@ function RichTextBody({
         editor.replaceBlocks([block], blocks)
       }}
     >
-      <div data-print-hide className="mb-1 flex justify-end">
-        <Button size="sm" onClick={() => downloadMarkdown(title, editor.blocksToMarkdownLossy())}>
-          Export as Markdown
-        </Button>
-      </div>
       <BlockNoteView
         // BlockNote's schema generics do not satisfy
         // `exactOptionalPropertyTypes`, which the rest of the project keeps
