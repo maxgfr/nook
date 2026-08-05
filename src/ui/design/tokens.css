@@ -106,8 +106,21 @@
     0 1px 2px light-dark(oklch(0% 0 0 / 0.06), oklch(0% 0 0 / 0.3)),
     0 6px 16px -4px light-dark(oklch(0% 0 0 / 0.1), oklch(0% 0 0 / 0.45));
   --nook-shadow-modal:
-    0 2px 4px light-dark(oklch(0% 0 0 / 0.06), oklch(0% 0 0 / 0.35)),
-    0 16px 48px -12px light-dark(oklch(0% 0 0 / 0.18), oklch(0% 0 0 / 0.6));
+    0 2px 4px light-dark(oklch(0% 0 0 / 0.06), oklch(0% 0 0 / 0.4)),
+    0 16px 48px -12px light-dark(oklch(0% 0 0 / 0.22), oklch(0% 0 0 / 0.7));
+
+  /*
+   * The veil behind a modal. It has one job, and it is not decoration: while a
+   * dialog is open, nothing behind it may still read as text. A thin wash left
+   * the note underneath perfectly legible, so the page competed with the thing
+   * asking for an answer — the eye had two documents to choose between.
+   *
+   * Darkening alone would need to be near-opaque to do that, which loses the
+   * sense of place. Darkening *and* blurring kills legibility while keeping the
+   * shape of what is behind, so it still reads as your page, waiting.
+   */
+  --nook-scrim: light-dark(oklch(21% 0.012 70 / 0.56), oklch(6% 0.004 70 / 0.55));
+  --nook-scrim-blur: 4px;
 
   /*
    * ---------------------------------------------------------------- Motion

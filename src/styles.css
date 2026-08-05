@@ -90,6 +90,41 @@
     color: var(--nook-text);
   }
 
+  /*
+   * The layer behind every modal, defined once.
+   *
+   * A `<dialog>` opened with `showModal()` lives in the browser's top layer, so
+   * it already sits above everything on the page and no z-index can reach it.
+   * What was missing was underneath: the backdrop only dimmed the page, and a
+   * dimmed page is still a readable one.
+   *
+   * The fallback inside `var()` is the part that matters most. `::backdrop`
+   * only inherits from its dialog in browsers that implement the current spec;
+   * in the others the token is simply unknown, and a `var()` that resolves to
+   * nothing makes the whole declaration invalid — leaving no veil at all, which
+   * is the failure this rule exists to prevent. So the literal is spelled out.
+   */
+  dialog::backdrop {
+    background-color: var(--nook-scrim, oklch(8% 0.004 70 / 0.6));
+    -webkit-backdrop-filter: blur(var(--nook-scrim-blur, 4px));
+    backdrop-filter: blur(var(--nook-scrim-blur, 4px));
+  }
+
+  /*
+   * One veil at a time, and it belongs to the dialog on top.
+   *
+   * A confirmation opened from Settings puts a second dialog above the first,
+   * and each one paints its own backdrop — so the page ended up behind two,
+   * which in dark mode is very nearly black. The one underneath stands down:
+   * the dialog above already covers the whole viewport, Settings included, so
+   * everything behind the question still gets exactly one veil.
+   */
+  dialog:has(dialog[open])::backdrop {
+    background-color: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
   /* Digits aligned vertically in lists and tables. */
   table,
   time,

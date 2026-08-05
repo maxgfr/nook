@@ -89,7 +89,7 @@ export function SettingsDialog({ open, onClose }: { open: boolean; onClose: () =
       onClick={(event) => {
         if (event.target === dialog.current) onClose()
       }}
-      className="m-auto w-[min(34rem,calc(100vw-2rem))] rounded-lg border border-line bg-raised p-0 text-ink shadow-modal backdrop:bg-black/35"
+      className="m-auto w-[min(34rem,calc(100vw-2rem))] rounded-lg border border-line bg-raised p-0 text-ink shadow-modal"
     >
       <header className="flex items-center justify-between border-b border-line px-5 py-3">
         <h2 className="text-md font-semibold tracking-tight">Settings</h2>

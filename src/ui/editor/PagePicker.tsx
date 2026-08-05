@@ -71,7 +71,7 @@ export function PagePicker({
       onClick={(event) => {
         if (event.target === dialog.current) onClose()
       }}
-      className="m-auto w-[min(30rem,calc(100vw-2rem))] rounded-lg border border-line bg-raised p-0 text-ink shadow-modal backdrop:bg-black/35"
+      className="m-auto w-[min(30rem,calc(100vw-2rem))] rounded-lg border border-line bg-raised p-0 text-ink shadow-modal"
     >
       <input
         autoFocus

@@ -117,7 +117,7 @@ export function CommandPalette({
       onClick={(event) => {
         if (event.target === dialog.current) onClose()
       }}
-      className="mx-auto mt-[12vh] w-[min(38rem,calc(100vw-2rem))] rounded-lg border border-line bg-raised p-0 text-ink shadow-modal backdrop:bg-black/35"
+      className="mx-auto mt-[12vh] w-[min(38rem,calc(100vw-2rem))] rounded-lg border border-line bg-raised p-0 text-ink shadow-modal"
     >
       <div className="flex items-center gap-2 border-b border-line px-4">
         <Icon name="page" className="size-4 shrink-0 text-ink-faint" />

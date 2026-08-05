@@ -46,7 +46,7 @@ export function ConfirmDialog({
         // the dialog itself, not an element inside it.
         if (event.target === ref.current) onCancel()
       }}
-      className="m-auto w-[min(28rem,calc(100vw-2rem))] rounded-lg border border-line bg-raised p-0 text-ink shadow-modal backdrop:bg-black/35"
+      className="m-auto w-[min(28rem,calc(100vw-2rem))] rounded-lg border border-line bg-raised p-0 text-ink shadow-modal"
     >
       <div className="p-5">
         <h2 className="text-md font-semibold tracking-tight">{title}</h2>
