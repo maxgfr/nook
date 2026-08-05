@@ -111,6 +111,19 @@ export function VaultProvider({
 
     return () => {
       cancelled = true
+      /*
+       * Closed on the way out, not just when an opening is cancelled.
+       *
+       * This provider used to be mounted once and never removed, so leaking the
+       * connection cost nothing. It is now also mounted by the reader when
+       * someone imports a page they were sent — and importing then moves the
+       * application to that page, which unmounts this one and mounts another.
+       * Two live connections to the same database is not an error in itself,
+       * but IndexedDB blocks a version upgrade while any are open, so the leak
+       * would surface as a migration that hangs on the next release.
+       */
+      vaultRef.current?.close()
+      vaultRef.current = null
     }
   }, [])
 

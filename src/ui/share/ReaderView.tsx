@@ -8,7 +8,8 @@ import {
 } from '../../core/share'
 import { fromBase64 } from '../../core/base64'
 import { UNTITLED } from '../../core/model/types'
-import { useVault, VaultProvider } from '../app/VaultProvider'
+import { useVault } from '../app/VaultProvider'
+import { useNavigate } from '../app/router'
 import { Button } from '../design/Button'
 import { ReadOnlyBlocks } from '../editor/schema'
 
@@ -23,13 +24,28 @@ import { ReadOnlyBlocks } from '../editor/schema'
  * The whole screen runs under the ordinary policy. A share carries its own
  * pictures, so there is nothing to fetch and nothing to allow.
  */
-export function ReaderView({ payload }: { payload: string }) {
+export function ReaderView({
+  payload,
+  onImport,
+}: {
+  payload: string
+  /**
+   * Hands the decrypted page up to `App`, which mounts the vault around the
+   * import step.
+   *
+   * The provider cannot live in here. Importing moves the application to the
+   * page it just created, which unmounts this component — and a vault mounted
+   * inside it would go with it, so a notebook behind a passphrase would ask
+   * for that passphrase a second time on arrival. Owning it one level up lets
+   * the same open vault carry across the change of address.
+   */
+  onImport: (page: SharedPage) => void
+}) {
   const [passphrase, setPassphrase] = useState('')
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [page, setPage] = useState<SharedPage | null>(null)
   const [overrideDate, setOverrideDate] = useState(false)
-  const [adopting, setAdopting] = useState(false)
 
   /**
    * Whether this share needs a passphrase at all.
@@ -148,14 +164,6 @@ export function ReaderView({ payload }: { payload: string }) {
     )
   }
 
-  if (adopting) {
-    return (
-      <VaultProvider fallback={AdoptBoot}>
-        <AdoptIntoNotebook page={page} onCancel={() => setAdopting(false)} />
-      </VaultProvider>
-    )
-  }
-
   return (
     <div className="h-full overflow-y-auto">
       <div className="mx-auto w-full max-w-(--nook-measure) px-6 pt-10 pb-24">
@@ -181,7 +189,7 @@ export function ReaderView({ payload }: { payload: string }) {
             </p>
           )}
           <div className="mt-2">
-            <Button tone="primary" size="sm" onClick={() => setAdopting(true)}>
+            <Button tone="primary" size="sm" onClick={() => onImport(page)}>
               Import into my notebook
             </Button>
           </div>
@@ -241,22 +249,28 @@ function SharedBlocks({ page }: { page: SharedPage }) {
 /**
  * Copying the page in.
  *
- * Mounted inside its own `VaultProvider`, and only once the button is pressed:
- * this is the moment the reader's notebook is opened — or created, if they had
- * none — and it should happen because they asked, not because they clicked a
- * link.
+ * Rendered only once the button has been pressed, and inside the vault `App`
+ * mounts at that moment: this is when the reader's notebook is opened — or
+ * created, if they had none — and it should happen because they asked, not
+ * because they clicked a link.
  */
-function AdoptIntoNotebook({ page, onCancel }: { page: SharedPage; onCancel: () => void }) {
+export function ImportSharedPage({ page, onCancel }: { page: SharedPage; onCancel: () => void }) {
   const vault = useVault()
+  const navigate = useNavigate()
   const [state, setState] = useState<
-    { kind: 'asking' } | { kind: 'saving' } | { kind: 'saved' } | { kind: 'failed'; why: string }
+    { kind: 'asking' } | { kind: 'saving' } | { kind: 'failed'; why: string }
   >({ kind: 'asking' })
 
   const save = () => {
     setState({ kind: 'saving' })
     vault
       .adoptShare({ title: page.title, content: page.content, files: page.files })
-      .then(() => setState({ kind: 'saved' }))
+      // Straight to the page, rather than a line of text telling someone to go
+      // and find it. The address changes from `#/read/…` to `#/doc/…`, which
+      // is what takes the application out of the reader and into the notebook
+      // — and landing on the page is a better confirmation than any sentence
+      // claiming it worked.
+      .then((created) => navigate(created.id))
       .catch((cause: unknown) =>
         setState({ kind: 'failed', why: cause instanceof Error ? cause.message : String(cause) }),
       )
@@ -268,32 +282,21 @@ function AdoptIntoNotebook({ page, onCancel }: { page: SharedPage; onCancel: () 
       <p className="mt-2">
         The page is copied in as a new page of your own, at the top level, with its pictures. It
         arrives with no history — it becomes yours from here, not a continuation of the sender’s.
+        Nook opens it once it is in.
       </p>
 
-      {state.kind === 'saved' ? (
-        <p className="mt-4 text-success">Imported. Open Nook to find it at the top level.</p>
-      ) : (
-        <div className="mt-4 flex flex-wrap gap-2">
-          <Button tone="primary" disabled={state.kind === 'saving'} onClick={save}>
-            {state.kind === 'saving' ? 'Importing…' : 'Import it'}
-          </Button>
-          <Button onClick={onCancel}>Go back to reading</Button>
-        </div>
-      )}
+      <div className="mt-4 flex flex-wrap gap-2">
+        <Button tone="primary" disabled={state.kind === 'saving'} onClick={save}>
+          {state.kind === 'saving' ? 'Importing…' : 'Import it'}
+        </Button>
+        <Button onClick={onCancel}>Go back to reading</Button>
+      </div>
 
       {state.kind === 'failed' && (
         <p role="status" className="mt-3 text-sm text-danger">
           {state.why}
         </p>
       )}
-    </Sheet>
-  )
-}
-
-function AdoptBoot() {
-  return (
-    <Sheet>
-      <p>Opening your notebook…</p>
     </Sheet>
   )
 }

@@ -152,7 +152,9 @@ nothing to say why.
 
 Opening a share link does not create a notebook on the reader's machine. The
 reader screen is rendered before the vault is ever opened; storage is touched
-only if they press "Save it into my notebook".
+only if they press **Import into my notebook** — and then Nook opens the page it
+has just created, so the copy is somewhere you can edit rather than somewhere
+you have been told to go and look for.
 
 ## What Nook protects, and what it does not
 

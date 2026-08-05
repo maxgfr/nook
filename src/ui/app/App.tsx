@@ -16,6 +16,7 @@ import { Button } from '../design/Button'
 import { Icon } from '../design/Icon'
 import { CommandPalette } from '../search/CommandPalette'
 import { OpenSettingsContext } from './openSettings'
+import type { SharedPage } from '../../core/share'
 
 /**
  * The editor alone accounts for most of the application's weight. Taking it
@@ -36,26 +37,48 @@ const ReaderView = lazy(() =>
   import('../share/ReaderView').then((module) => ({ default: module.ReaderView })),
 )
 
+const ImportSharedPage = lazy(() =>
+  import('../share/ReaderView').then((module) => ({ default: module.ImportSharedPage })),
+)
+
 export function App() {
   const [theme, setTheme] = useState<Theme>(readTheme)
   useEffect(() => applyTheme(theme), [theme])
   const route = useRoute()
 
+  /**
+   * The shared page being imported, once its reader has asked for that.
+   *
+   * Held here rather than inside the reader because the vault has to outlive
+   * the reader. Importing ends by opening the page it created, which changes
+   * the address from `#/read/…` to `#/doc/…`; keeping the provider at this one
+   * position across that change is what lets the notebook someone has just
+   * unlocked stay unlocked, instead of asking for the passphrase again on
+   * arrival at their own page.
+   */
+  const [importing, setImporting] = useState<SharedPage | null>(null)
+
   // The share route is answered **before** the vault provider is mounted, and
   // that ordering is the guarantee: opening a link somebody sent must not
   // create an encrypted notebook on the reader's machine. Nothing touches
   // storage until they press the button that says it will.
-  if (route.kind === 'read') {
+  if (route.kind === 'read' && importing === null) {
     return (
       <Suspense fallback={<div className="h-full" aria-busy="true" />}>
-        <ReaderView payload={route.payload} />
+        <ReaderView payload={route.payload} onImport={setImporting} />
       </Suspense>
     )
   }
 
   return (
     <VaultProvider fallback={Boot}>
-      <Workspace theme={theme} onThemeChange={setTheme} />
+      {route.kind === 'read' && importing !== null ? (
+        <Suspense fallback={<div className="h-full" aria-busy="true" />}>
+          <ImportSharedPage page={importing} onCancel={() => setImporting(null)} />
+        </Suspense>
+      ) : (
+        <Workspace theme={theme} onThemeChange={setTheme} />
+      )}
     </VaultProvider>
   )
 }

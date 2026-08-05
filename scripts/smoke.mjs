@@ -838,6 +838,41 @@ try {
     `),
   )
 
+  // --- Importing a shared page into your own notebook --------------------
+  //
+  // The first moment the reader's own vault is touched. This notebook is
+  // behind a passphrase by now, so the import has to ask for it — a screen
+  // that only ever said "Opening your notebook…" would leave anyone with a
+  // protected notebook with nothing to type into.
+
+  await clickButton('Import into my notebook')
+  await sleep(1500)
+  check(
+    'importing asks for the passphrase of the notebook it imports into',
+    await evaluate(`!!document.querySelector('input[aria-label="Passphrase"]')`),
+  )
+
+  await fill('input[aria-label="Passphrase"]', PASSPHRASE)
+  await clickButton('Unlock')
+  await sleep(8000)
+
+  check('and then offers to import', await clickButton('Import it'))
+  await sleep(4000)
+
+  check(
+    'importing opens the page it just created',
+    (await evaluate('location.hash')).startsWith('#/doc/') &&
+      (await evaluate(`!!document.querySelector('.bn-editor')`)),
+    await evaluate('location.hash'),
+  )
+  check(
+    'which is the shared page, now editable and yours',
+    await evaluate(
+      `document.body.innerText.includes('Recipe note') &&
+       !!document.querySelector('.bn-editor[contenteditable=true]')`,
+    ),
+  )
+
   // --- The policy, and the two documents it lives in ---------------------
   //
   // These are the checks the product's central promise rests on, so they are
