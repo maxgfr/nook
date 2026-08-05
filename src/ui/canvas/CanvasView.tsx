@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { normalize } from '../../core/model/facets'
 import { UNTITLED, type DocId, type Point } from '../../core/model/types'
 import { useVault, useVaultIndex } from '../app/VaultProvider'
@@ -66,6 +66,66 @@ export function CanvasView({
     }
     return lines
   }, [docs, index.facets])
+
+  /**
+   * The first view frames what is there.
+   *
+   * Cards sit on a spiral around the origin, so most of them have a negative
+   * coordinate in one axis or the other — and a camera at 0,0 puts that origin
+   * in the *corner* of the screen. Opening the map on a notebook of two pages
+   * showed one of them, cut in half, against an otherwise empty plane: the
+   * layout was right and nobody could see it.
+   *
+   * So the camera opens on the middle of the cards, pulled back far enough to
+   * hold them all. Never past 1, because filling the screen with two enormous
+   * cards is its own kind of useless, and never below 0.35, past which a title
+   * stops being readable and the map stops being a map.
+   *
+   * Once, at the first frame that has something to frame — the notebook may
+   * still be arriving on mount. After that the view is wherever it has been
+   * dragged to, which is a decision worth keeping, so the guard is a ref and
+   * not a dependency: `placed` changes on every drag.
+   */
+  const framed = useRef(false)
+
+  useLayoutEffect(() => {
+    if (framed.current) return
+    const box = surface.current?.getBoundingClientRect()
+    if (!box || box.width === 0 || placed.size === 0) return
+    framed.current = true
+
+    let left = Infinity
+    let top = Infinity
+    let right = -Infinity
+    let bottom = -Infinity
+    for (const point of placed.values()) {
+      left = Math.min(left, point.x)
+      top = Math.min(top, point.y)
+      right = Math.max(right, point.x + CARD_WIDTH)
+      bottom = Math.max(bottom, point.y + CARD_HEIGHT)
+    }
+
+    const margin = 56
+    const zoom = Math.min(
+      1,
+      Math.max(
+        0.35,
+        Math.min(
+          (box.width - margin * 2) / Math.max(right - left, 1),
+          (box.height - margin * 2) / Math.max(bottom - top, 1),
+        ),
+      ),
+    )
+
+    setCamera({
+      zoom,
+      // `scale(zoom) translate(x, y)` from the top left, so a world point lands
+      // at `zoom × (point + camera)`; this puts the middle of the cards in the
+      // middle of the surface.
+      x: box.width / (2 * zoom) - (left + right) / 2,
+      y: box.height / (2 * zoom) - (top + bottom) / 2,
+    })
+  }, [placed])
 
   const toWorld = (clientX: number, clientY: number) => {
     const box = surface.current?.getBoundingClientRect()
