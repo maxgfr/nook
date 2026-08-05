@@ -362,7 +362,7 @@ try {
    * names a key which does nothing is worse than no chip.
    */
   const pressShortcut = async (letter, { shift = false } = {}) => {
-    const modifiers = 4 | (shift ? 8 : 0) // Meta, plus Shift
+    const modifiers = 4 | (shift ? 8 : 0) // 4 is Meta and 8 is Shift
     const code = `Key${letter.toUpperCase()}`
     const vk = letter.toUpperCase().charCodeAt(0)
     await send('Input.dispatchKeyEvent', {

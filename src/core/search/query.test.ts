@@ -25,6 +25,15 @@ function withDoc(index: VaultIndex, id: DocId, title: string, body: string): Vau
 
 const ids = (docs: { id: DocId }[]) => docs.map((d) => d.id)
 
+/*
+ * The French below is the subject, not prose that escaped a translation.
+ *
+ * The interface is in English and the notes are in whatever language they are
+ * written in, which is the whole reason `normalize` exists: without folding
+ * accents away, searching for "evenement" would never find "événement". A test
+ * for that cannot be written in a language that has no accents to fold, so
+ * these strings stay exactly as they are.
+ */
 describe('normalisation', () => {
   it('folds case and accents together', () => {
     expect(normalize('Réunion Été')).toBe('reunion ete')
