@@ -78,19 +78,91 @@ whose first subheading shouted louder than the thing it was a subheading of,
 which is not a matter of taste: it is the outline reading backwards.
 
 So the scale is re-anchored. The title is the largest text on the page by a
-clear step, and the three levels the editor offers descend from it. What the
-editor calls "Heading 1" is the document's *first subheading*, exactly as it is
-in every notebook of this kind — the title is the heading, and these are what
+clear step, and the levels the editor offers descend from it. What the editor
+calls "Heading 1" is the document's *first subheading*, exactly as it is in
+every notebook of this kind — the title is the heading, and these are what
 divide it.
+
+All six, not three. The editor offers six — the slash menu, the block-type
+menu, `#` through `######`, Mod-Alt-1 to 6 — and the first rule below matches
+every one of them, so dressing only levels 2 and 3 left 4, 5 and 6 wearing
+level 1's size: a four-deep outline drawn with three sizes, two of them
+identical.
+
+The steps tighten as they descend — 24, 20, 17, 16, 14, 13 — because a ratio
+that reads as a step at the top of a scale reads as a mistake at the bottom.
+The last two fall below the 15px body, which is right rather than a compromise:
+bold text smaller than the paragraph under it reads as a label, and a label is
+what a sixth-level heading is. The last one says so outright, in capitals and
+in the muted ink.
+
+Weight stays the library's 700 throughout: it is set from a selector two rungs
+more specific than anything here, and outbidding it would cost more than the
+distinction is worth. Case, spacing and colour are set nowhere, so these rules
+carry.
 */
 .bn-container [data-content-type='heading'] {
   --level: 1.6em; /* 24px */
+  padding-top: 28px;
 }
 
 .bn-container [data-content-type='heading'][data-level='2'] {
   --level: 1.35em; /* ~20px */
+  padding-top: 22px;
 }
 
 .bn-container [data-content-type='heading'][data-level='3'] {
   --level: 1.15em; /* ~17px */
+  padding-top: 18px;
+}
+
+.bn-container [data-content-type='heading'][data-level='4'] {
+  --level: 1.05em; /* ~16px */
+  padding-top: 16px;
+}
+
+.bn-container [data-content-type='heading'][data-level='5'] {
+  --level: 0.95em; /* ~14px */
+  padding-top: 14px;
+}
+
+.bn-container [data-content-type='heading'][data-level='6'] {
+  --level: 0.875em; /* ~13px */
+  padding-top: 14px;
+  color: var(--nook-text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/*
+The same scale during a change of block type.
+
+The library keeps a second set of variables, `--prev-level`, which drives the
+size while a block is being turned into something else. Re-anchoring `--level`
+alone left that path on the original 3em, so converting a paragraph to a
+heading flashed the 45px the rules above exist to remove, then settled. Both
+sets say the same thing now.
+*/
+.bn-container [data-prev-level='1'] {
+  --prev-level: 1.6em;
+}
+
+.bn-container [data-prev-level='2'] {
+  --prev-level: 1.35em;
+}
+
+.bn-container [data-prev-level='3'] {
+  --prev-level: 1.15em;
+}
+
+.bn-container [data-prev-level='4'] {
+  --prev-level: 1.05em;
+}
+
+.bn-container [data-prev-level='5'] {
+  --prev-level: 0.95em;
+}
+
+.bn-container [data-prev-level='6'] {
+  --prev-level: 0.875em;
 }

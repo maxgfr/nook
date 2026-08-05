@@ -4,9 +4,27 @@ import { BlockNoteView } from '@blocknote/mantine'
 import { useCreateBlockNote } from '@blocknote/react'
 import type { ComponentProps } from 'react'
 
+/*
+ * The editor's own styling, and ours over it.
+ *
+ * Imported here rather than in `DocEditor` because this module is where blocks
+ * are rendered from — by the editor, by an embedded page, and by the reader for
+ * a page somebody shared. Hanging the stylesheets off the editor alone meant the
+ * reader, which is a separate lazily-loaded chunk, drew real `h1`…`h6` with no
+ * BlockNote stylesheet at all: a shared page fell back to the browser's default
+ * heading sizes, a different and larger hierarchy than the one it was written
+ * in, underneath a 36px title.
+ *
+ * Ours comes last, and has to: it re-anchors the library's variables.
+ */
+import '@blocknote/core/style.css'
+import '@blocknote/mantine/style.css'
+import '../design/blocknote.css'
+
 import type { JsonValue } from '../../core/model/types'
 import { useOptionalVault } from '../app/VaultProvider'
 import { createHighlighter, SUPPORTED_LANGUAGES } from './highlighter'
+import { HEADING_UNDER_TITLE } from './headings'
 import { createPageEmbedSpec } from './PageEmbed'
 import { createWebEmbedSpec } from './WebEmbed'
 
@@ -43,6 +61,9 @@ export const NOOK_SCHEMA = BlockNoteSchema.create({
   // `pageEmbed` cast again at the call site.
   blockSpecs: {
     ...defaultBlockSpecs,
+    // The library's heading, renamed one rung lower on the way out so the page
+    // title stays the only first-level heading of an exported file.
+    heading: HEADING_UNDER_TITLE,
     codeBlock: createCodeBlockSpec({
       defaultLanguage: 'text',
       supportedLanguages: SUPPORTED_LANGUAGES,

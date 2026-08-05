@@ -7,9 +7,6 @@ import {
 } from '@blocknote/react'
 import { en } from '@blocknote/core/locales'
 import { filterSuggestionItems, type PartialBlock } from '@blocknote/core'
-import '@blocknote/core/style.css'
-import '@blocknote/mantine/style.css'
-import '../design/blocknote.css'
 
 import type { Doc, DocId, JsonValue } from '../../core/model/types'
 import { MINUTE_MS, UNTITLED } from '../../core/model/types'
@@ -518,6 +515,11 @@ function remoteKind(blockType: string, url: string): 'image' | 'frame' | 'link' 
  * field, outside the blocks, so exporting the blocks alone produced a document
  * that had lost its name everywhere except the filename — and a filename does
  * not survive being pasted somewhere else.
+ *
+ * It is the *only* level-1 heading in the file. The headings of the body come
+ * out one rung lower than they sit — a "Heading 1" writes `##` — because they
+ * divide the page rather than name it. That happens in the block itself; see
+ * `headings.ts` for why the door is the right place for it.
  */
 function downloadMarkdown(title: string, markdown: string): void {
   download(

@@ -14,7 +14,7 @@
  */
 
 import { spawn } from 'node:child_process'
-import { existsSync, mkdirSync, mkdtempSync, rmSync } from 'node:fs'
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
@@ -294,7 +294,7 @@ try {
     (() => {
       const editable = document.querySelector('.bn-editor[contenteditable=true]')
       const data = new DataTransfer()
-      data.setData('text/plain', '## Pasted heading\\n\\n- one\\n- two')
+      data.setData('text/plain', '# Pasted heading\\n\\n## Pasted subheading\\n\\n- one\\n- two')
       editable.dispatchEvent(new ClipboardEvent('paste', { clipboardData: data, bubbles: true, cancelable: true }))
     })()
   `)
@@ -320,9 +320,27 @@ try {
     `[...document.querySelectorAll('button')].find((b) => b.textContent.trim() === 'Export').click()`,
   )
   await sleep(1000)
+  const exported = await evaluate(`window.__downloaded`)
+  check('a page exports as Markdown', exported?.endsWith?.('.md') === true)
+
+  /*
+   * The exported file's outline.
+   *
+   * Read off the disk rather than out of the tab: this is the artefact the
+   * user actually gets, and the only place the heading levels can be checked
+   * against something that is not Nook.
+   *
+   * The page title is the file's one and only level-1 heading. The headings of
+   * the body sit under it, one rung lower than they are in the editor — the
+   * `#` and the `##` pasted above therefore come back as `##` and `###`. See
+   * `src/ui/editor/headings.ts`.
+   */
+  const markdown = readFileSync(join(DOWNLOADS, exported), 'utf8')
+  check('the exported file has exactly one level-1 heading', markdown.match(/^# /gm)?.length === 1)
+  check('that heading is the page title', markdown.startsWith('# Recipe note\n'))
   check(
-    'a page exports as Markdown',
-    (await evaluate(`window.__downloaded`))?.endsWith?.('.md') === true,
+    'the headings of the body sit under it',
+    /^## Pasted heading$/m.test(markdown) && /^### Pasted subheading$/m.test(markdown),
   )
 
   // Let autosave fire.
@@ -841,6 +859,19 @@ try {
   check(
     'the right passphrase renders the shared page',
     await evaluate(`document.body.innerText.includes('Recipe note')`),
+  )
+  /*
+   * The reader is a chunk of its own, and used to load none of the editor's
+   * stylesheets: a shared page drew real `h1`…`h6` at the browser's default
+   * sizes, a hierarchy nobody had designed, under a 36px title. The heading
+   * pasted into the page above is a level 1, so 24px is the editor's scale
+   * arriving here too, and 32px would be the browser's.
+   */
+  check(
+    'a shared page keeps the heading scale it was written in',
+    await evaluate(`
+      getComputedStyle(document.querySelector('.bn-editor [data-content-type=heading]')).fontSize === '24px'
+    `),
   )
   check(
     'and the reader is told it is a read-only copy, with a way to import it',
