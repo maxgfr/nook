@@ -28,9 +28,9 @@ describe('base locale', () => {
   it('reads back what was written', async () => {
     const db = await freshDatabase()
 
-    await write(db, 'docs', 'a', { titre: 'Note A' })
+    await write(db, 'docs', 'a', { title: 'Note A' })
 
-    expect(await read(db, 'docs', 'a')).toEqual({ titre: 'Note A' })
+    expect(await read(db, 'docs', 'a')).toEqual({ title: 'Note A' })
   })
 
   it('returns undefined for a missing key', async () => {
@@ -90,11 +90,11 @@ describe('base locale', () => {
       const db = await freshDatabase()
 
       await writeBatch(db, [
-        { op: 'put', store: 'docs', key: 'a', value: { titre: 'A' } },
+        { op: 'put', store: 'docs', key: 'a', value: { title: 'A' } },
         { op: 'put', store: 'index', key: 'arbre', value: ['a'] },
       ])
 
-      expect(await read(db, 'docs', 'a')).toEqual({ titre: 'A' })
+      expect(await read(db, 'docs', 'a')).toEqual({ title: 'A' })
       expect(await read(db, 'index', 'arbre')).toEqual(['a'])
     })
 

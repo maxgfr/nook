@@ -59,7 +59,7 @@ describe('core / UI boundary', () => {
     const offenders = coreFiles.flatMap((file) =>
       importsOf(readFileSync(file, 'utf8'))
         .filter((specifier) => pattern.test(specifier))
-        .map((specifier) => `${relative(SRC, file)} importe « ${specifier} »`),
+        .map((specifier) => `${relative(SRC, file)} imports “${specifier}”`),
     )
 
     expect(offenders, `The core must stay independent of ${why}.`).toEqual([])
@@ -79,7 +79,7 @@ describe('core / UI boundary', () => {
       const found: string[] = []
       if (/\bindexedDB\b/.test(source)) found.push('indexedDB')
       if (/\bcrypto\.subtle\b/.test(source)) found.push('crypto.subtle')
-      return found.map((api) => `${relative(SRC, file)} utilise ${api}`)
+      return found.map((api) => `${relative(SRC, file)} uses ${api}`)
     })
 
     expect(
