@@ -145,6 +145,17 @@ try {
     return result.value
   }
 
+  /**
+   * The label a person reads on a button.
+   *
+   * `textContent` now includes the shortcut chip beside the name — `Export⌘S` —
+   * which is `aria-hidden` precisely because it is not part of what the button
+   * is called. Matching on it would tie this test to a decoration, and it did:
+   * adding the chips broke every lookup here at once.
+   */
+  const LABEL =
+    "((el) => [...el.childNodes].filter((n) => n.nodeType !== 1 || n.getAttribute('aria-hidden') !== 'true').map((n) => n.textContent ?? '').join('').trim())"
+
   const goto = async (url) => {
     await send('Page.enable')
     await send('Page.navigate', { url })
@@ -159,7 +170,7 @@ try {
   )
 
   await evaluate(
-    `[...document.querySelectorAll('button')].find((b) => b.textContent.trim() === 'New page').click()`,
+    `[...document.querySelectorAll('button')].find((b) => ${LABEL}(b) === 'New page').click()`,
   )
   await sleep(2500)
 
@@ -217,7 +228,7 @@ try {
     evaluate(
       `(() => {
         const button = [...document.querySelectorAll('button')].find(
-          (b) => b.textContent.trim() === ${JSON.stringify(label)},
+          (b) => ${LABEL}(b) === ${JSON.stringify(label)},
         )
         if (!button) return false
         button.click()
@@ -317,7 +328,7 @@ try {
     })()
   `)
   await evaluate(
-    `[...document.querySelectorAll('button')].find((b) => b.textContent.trim() === 'Export').click()`,
+    `[...document.querySelectorAll('button')].find((b) => ${LABEL}(b) === 'Export').click()`,
   )
   await sleep(1000)
   const exported = await evaluate(`window.__downloaded`)
@@ -341,6 +352,56 @@ try {
   check(
     'the headings of the body sit under it',
     /^## Pasted heading$/m.test(markdown) && /^### Pasted subheading$/m.test(markdown),
+  )
+
+  /*
+   * The same three actions, from the keyboard.
+   *
+   * Worth a check of their own rather than trusting the buttons: the shortcuts
+   * are the reason the header carries a chip beside each name, and a chip that
+   * names a key which does nothing is worse than no chip.
+   */
+  const pressShortcut = async (letter, { shift = false } = {}) => {
+    const modifiers = 4 | (shift ? 8 : 0) // Meta, plus Shift
+    const code = `Key${letter.toUpperCase()}`
+    const vk = letter.toUpperCase().charCodeAt(0)
+    await send('Input.dispatchKeyEvent', {
+      type: 'keyDown',
+      key: shift ? letter.toUpperCase() : letter.toLowerCase(),
+      code,
+      modifiers,
+      windowsVirtualKeyCode: vk,
+      nativeVirtualKeyCode: vk,
+    })
+    await send('Input.dispatchKeyEvent', { type: 'keyUp', key: letter, code, modifiers })
+  }
+
+  await evaluate(`window.__downloaded = null`)
+  await pressShortcut('s')
+  await sleep(1200)
+  check(
+    '⌘S exports the page, as the button does',
+    (await evaluate(`window.__downloaded`))?.endsWith?.('.md') === true,
+  )
+
+  await pressShortcut('l', { shift: true })
+  await sleep(1200)
+  check('⇧⌘L opens the share dialog', await evaluate(`!!document.querySelector('dialog[open]')`))
+  await evaluate(
+    `[...document.querySelectorAll('dialog[open] button')].find((b) => ${LABEL}(b) === 'Close')?.click()`,
+  )
+  await sleep(900)
+
+  const keptBefore = await evaluate(
+    `(() => { const m = document.body.innerText.match(/Show snapshots \\((\\d+)\\)/i); return m ? Number(m[1]) : 0 })()`,
+  )
+  await pressShortcut('s', { shift: true })
+  await sleep(2500)
+  check(
+    '⇧⌘S keeps a version',
+    (await evaluate(
+      `(() => { const m = document.body.innerText.match(/Show snapshots \\((\\d+)\\)/i); return m ? Number(m[1]) : 0 })()`,
+    )) > keptBefore || /kept|nothing new to keep/i.test(await evaluate(`document.body.innerText`)),
   )
 
   // Let autosave fire.
@@ -490,7 +551,7 @@ try {
       `(() => {
         const panel = document.querySelector('section[aria-label="Snapshots"]')
         const button = [...(panel?.querySelectorAll('button') ?? [])].find(
-          (b) => b.textContent.trim() === ${JSON.stringify(label)},
+          (b) => ${LABEL}(b) === ${JSON.stringify(label)},
         )
         if (!button) return false
         button.click()
@@ -506,7 +567,7 @@ try {
     'a snapshot offers to be deleted',
     await evaluate(
       `[...document.querySelectorAll('section[aria-label="Snapshots"] button')]
-         .some((b) => b.textContent.trim() === 'Delete')`,
+         .some((b) => ${LABEL}(b) === 'Delete')`,
     ),
   )
 
@@ -556,7 +617,7 @@ try {
     'which never offers the page you are already on',
     await evaluate(
       `![...document.querySelectorAll('dialog[aria-label="Choose a page to embed"] button')]
-         .some((b) => b.textContent.trim() === 'Digest')`,
+         .some((b) => ${LABEL}(b) === 'Digest')`,
     ),
   )
 
@@ -567,7 +628,7 @@ try {
     evaluate(
       `(() => {
         const button = [...document.querySelectorAll('dialog[aria-label="Choose a page to embed"] button')]
-          .find((b) => b.textContent.trim() === ${JSON.stringify(title)})
+          .find((b) => ${LABEL}(b) === ${JSON.stringify(title)})
         if (!button) return false
         button.click()
         return true
@@ -587,7 +648,7 @@ try {
   // A embeds B; now make B embed A. Nothing stops someone doing it, and
   // without the chain guard the two would render each other until the tab died.
   await evaluate(
-    `[...document.querySelectorAll('nav[aria-label="Pages"] button')].find((b) => b.textContent.trim() === 'Monday').click()`,
+    `[...document.querySelectorAll('nav[aria-label="Pages"] button')].find((b) => ${LABEL}(b) === 'Monday').click()`,
   )
   await sleep(2500)
   await evaluate(`document.querySelector('.bn-editor[contenteditable=true]').focus()`)
@@ -609,7 +670,7 @@ try {
   )
 
   await evaluate(
-    `[...document.querySelectorAll('nav[aria-label="Pages"] button')].find((b) => b.textContent.trim() === 'Recipe note').click()`,
+    `[...document.querySelectorAll('nav[aria-label="Pages"] button')].find((b) => ${LABEL}(b) === 'Recipe note').click()`,
   )
   await sleep(2000)
 
@@ -683,13 +744,13 @@ try {
   )
 
   await evaluate(
-    `[...document.querySelectorAll('nav[aria-label="Pages"] button')].find((b) => b.textContent.trim() === 'Recipe note').click()`,
+    `[...document.querySelectorAll('nav[aria-label="Pages"] button')].find((b) => ${LABEL}(b) === 'Recipe note').click()`,
   )
   await sleep(2000)
 
   // --- Phases 6 & 7: history and the map ---------------------------------
   await evaluate(
-    `[...document.querySelectorAll('button')].find((b) => b.textContent.trim() === 'Map').click()`,
+    `[...document.querySelectorAll('button')].find((b) => ${LABEL}(b) === 'Map').click()`,
   )
   await sleep(1200)
   check(
@@ -699,7 +760,7 @@ try {
     ),
   )
   await evaluate(
-    `[...document.querySelectorAll('button')].find((b) => b.textContent.trim() === 'Close').click()`,
+    `[...document.querySelectorAll('button')].find((b) => ${LABEL}(b) === 'Close').click()`,
   )
   await sleep(800)
 
@@ -719,7 +780,7 @@ try {
     `)
 
   await evaluate(
-    `[...document.querySelectorAll('button')].find((b) => b.textContent.trim() === 'Settings').click()`,
+    `[...document.querySelectorAll('button')].find((b) => ${LABEL}(b) === 'Settings').click()`,
   )
   await sleep(700)
   check(
@@ -752,7 +813,7 @@ try {
 
   await setInput('input[aria-label="Passphrase"]', 'wrong one entirely')
   await evaluate(
-    `[...document.querySelectorAll('button')].find((b) => b.textContent.trim() === 'Unlock').click()`,
+    `[...document.querySelectorAll('button')].find((b) => ${LABEL}(b) === 'Unlock').click()`,
   )
   await sleep(6000)
   check(
@@ -762,7 +823,7 @@ try {
 
   await setInput('input[aria-label="Passphrase"]', PASSPHRASE)
   await evaluate(
-    `[...document.querySelectorAll('button')].find((b) => b.textContent.trim() === 'Unlock').click()`,
+    `[...document.querySelectorAll('button')].find((b) => ${LABEL}(b) === 'Unlock').click()`,
   )
   await sleep(8000)
   check(
@@ -802,7 +863,7 @@ try {
   await evaluate(
     `(() => {
       const entry = [...document.querySelectorAll('nav[aria-label="Pages"] button')].find(
-        (b) => b.textContent.trim() === 'Recipe note',
+        (b) => ${LABEL}(b) === 'Recipe note',
       )
       if (!entry) return false
       entry.click()

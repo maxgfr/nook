@@ -16,6 +16,7 @@ import { Button, IconButton } from '../design/Button'
 import { Icon } from '../design/Icon'
 import { CommandPalette } from '../search/CommandPalette'
 import { OpenSettingsContext } from './openSettings'
+import { shortcutLabel, useShortcut } from './shortcuts'
 import type { SharedPage } from '../../core/share'
 import type { DocId } from '../../core/model/types'
 
@@ -100,17 +101,8 @@ function Workspace({ theme, onThemeChange }: { theme: Theme; onThemeChange: (t: 
   // the page would re-render whenever anything else here changed.
   const openSettings = useCallback(() => setSettingsOpen(true), [])
 
-  useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      // ⌘K on macOS, Ctrl+K elsewhere. The browser reserves neither.
-      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
-        event.preventDefault()
-        setPaletteOpen((current) => !current)
-      }
-    }
-    globalThis.addEventListener('keydown', onKeyDown)
-    return () => globalThis.removeEventListener('keydown', onKeyDown)
-  }, [])
+  // ⌘K on macOS, Ctrl+K elsewhere. The browser reserves neither.
+  useShortcut('k', () => setPaletteOpen((current) => !current))
 
   // A page deleted in another tab, or a shared address matching nothing:
   // we fall back to the home screen rather than showing an
@@ -302,7 +294,9 @@ function BottomBar({
         className="flex h-7 items-center gap-1.5 rounded-lg border border-line bg-raised/90 px-2.5 text-2xs text-ink-faint backdrop-blur-sm transition-colors duration-(--nook-dur-fast) ease-nook hover:text-ink"
       >
         Search
-        <kbd className="rounded-xs border border-line px-1 font-sans max-sm:hidden">⌘K</kbd>
+        <kbd className="rounded-xs border border-line px-1 font-sans max-sm:hidden">
+          {shortcutLabel('k')}
+        </kbd>
       </button>
       <button
         type="button"

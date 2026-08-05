@@ -22,6 +22,7 @@ import { detectLanguage, looksLikeMarkdown } from '../../core/model/language'
 import { CollectionView } from '../collection/CollectionView'
 import { isCollection, type CollectionContent } from '../../core/model/collection'
 import { useNavigate } from '../app/router'
+import { Shortcut, shortcutLabel, useShortcut } from '../app/shortcuts'
 import { classifyUrl, isLocalUrl } from '../../core/policy'
 import { NOOK_SCHEMA, useResolveVaultFile, type BlockNoteViewEditor } from './schema'
 import { EmbedChain } from './PageEmbed'
@@ -127,6 +128,23 @@ function LoadedEditor({ doc, onOpenPages }: { doc: Doc; onOpenPages: () => void 
     exportMarkdown.current = run
   }, [])
 
+  /*
+   * The three things you do to a page, on the keyboard.
+   *
+   * ⌘S is the one people press without deciding to, and in a browser it offers
+   * to write the application's own HTML to disk — a file that is not the note
+   * and cannot be opened as one. Here it means what it means everywhere else:
+   * give me this page as a file.
+   *
+   * The other two follow from it rather than being chosen separately. ⇧⌘S is
+   * the same verb applied to a version instead of a file, and ⇧⌘L is the link,
+   * which is what sharing produces.
+   */
+  const prose = !isCollection(doc.content)
+
+  useShortcut('s', () => exportMarkdown.current?.(), { enabled: prose })
+  useShortcut('l', () => setShareOpen(true), { shift: true })
+
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <header
@@ -159,17 +177,23 @@ function LoadedEditor({ doc, onOpenPages }: { doc: Doc; onOpenPages: () => void 
             its filters and its views have no equivalent — and a button that
             produces an empty file is worse than no button.
           */}
-          {!isCollection(doc.content) && (
+          {prose && (
             <Button
               size="sm"
-              title="Export this page as Markdown"
+              title={`Export this page as Markdown (${shortcutLabel('s')})`}
               onClick={() => exportMarkdown.current?.()}
             >
               Export
+              <Shortcut keys={shortcutLabel('s')} />
             </Button>
           )}
-          <Button size="sm" onClick={() => setShareOpen(true)}>
+          <Button
+            size="sm"
+            title={`Share this page (${shortcutLabel('l', true)})`}
+            onClick={() => setShareOpen(true)}
+          >
             Share
+            <Shortcut keys={shortcutLabel('l', true)} />
           </Button>
         </div>
         <ShareDialog docId={doc.id} open={shareOpen} onClose={() => setShareOpen(false)} />
@@ -594,6 +618,9 @@ function SnapshotButton({ docId, flush }: { docId: DocId; flush: () => Promise<v
     }
   }
 
+  // ⇧⌘S, beside ⌘S: the same verb, applied to a version instead of a file.
+  useShortcut('s', () => void take(), { shift: true, enabled: !busy })
+
   return (
     <>
       {said && (
@@ -601,8 +628,14 @@ function SnapshotButton({ docId, flush }: { docId: DocId; flush: () => Promise<v
           {said}
         </span>
       )}
-      <Button size="sm" disabled={busy} onClick={() => void take()} title="Keep this version">
+      <Button
+        size="sm"
+        disabled={busy}
+        onClick={() => void take()}
+        title={`Keep this version (${shortcutLabel('s', true)})`}
+      >
         {busy ? 'Keeping…' : 'Snapshot'}
+        <Shortcut keys={shortcutLabel('s', true)} />
       </Button>
     </>
   )
