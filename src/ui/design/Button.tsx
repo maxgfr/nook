@@ -12,10 +12,28 @@ import type { ButtonHTMLAttributes, ReactNode } from 'react'
 type Tone = 'neutral' | 'primary' | 'danger'
 type Size = 'sm' | 'md'
 
+/**
+ * A finger is not a cursor.
+ *
+ * The sizes below are drawn for a pointer that lands where it is aimed, and a
+ * 24px control is comfortable with a mouse and a coin-toss with a thumb. Rather
+ * than inflate the interface for everyone, the touch area is grown *past* the
+ * button's own edges on coarse pointers: the drawing stays exactly as dense as
+ * it is on a laptop, and the thing you press is 44px tall on a phone.
+ *
+ * `content-box` on the outset keeps the extra area outside the border, so
+ * nothing shifts and no background grows with it.
+ */
+const TOUCH =
+  'relative pointer-coarse:after:absolute pointer-coarse:after:top-1/2 pointer-coarse:after:left-1/2 ' +
+  'pointer-coarse:after:size-11 pointer-coarse:after:min-h-full pointer-coarse:after:min-w-full ' +
+  'pointer-coarse:after:-translate-x-1/2 pointer-coarse:after:-translate-y-1/2'
+
 const BASE =
   'inline-flex items-center justify-center gap-1.5 rounded-sm font-medium whitespace-nowrap ' +
   'transition-colors duration-(--nook-dur-fast) ease-nook ' +
-  'disabled:pointer-events-none disabled:opacity-45'
+  'disabled:pointer-events-none disabled:opacity-45 ' +
+  TOUCH
 
 const TONES: Record<Tone, string> = {
   neutral: 'bg-transparent text-ink-muted hover:bg-hover hover:text-ink active:bg-active',

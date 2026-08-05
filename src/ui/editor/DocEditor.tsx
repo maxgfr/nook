@@ -14,7 +14,8 @@ import { readSnapshotPolicy } from '../app/snapshots'
 import { ancestorsOf } from '../../core/model/tree'
 import { useVault, useVaultIndex } from '../app/VaultProvider'
 import { useAutosave, type SaveState } from './useAutosave'
-import { Button } from '../design/Button'
+import { Button, IconButton } from '../design/Button'
+import { Icon } from '../design/Icon'
 import { Backlinks } from './Backlinks'
 import { History } from './History'
 import { detectLanguage, looksLikeMarkdown } from '../../core/model/language'
@@ -37,7 +38,14 @@ import { download, fileNameFrom } from '../design/download'
  * that opening another page rebuilds the editor rather than trying to swap its
  * content under the caret.
  */
-export function DocEditor({ docId }: { docId: DocId }) {
+export function DocEditor({
+  docId,
+  onOpenPages,
+}: {
+  docId: DocId
+  /** Opens the page list, which is a drawer below `md`. */
+  onOpenPages: () => void
+}) {
   const vault = useVault()
   const [doc, setDoc] = useState<Doc | null>(null)
   const [error, setError] = useState<Error | null>(null)
@@ -70,14 +78,14 @@ export function DocEditor({ docId }: { docId: DocId }) {
   }
   if (!doc) return <EditorSkeleton />
 
-  return <LoadedEditor key={doc.id} doc={doc} />
+  return <LoadedEditor key={doc.id} doc={doc} onOpenPages={onOpenPages} />
 }
 
 type DocPatch = { title: string; content: JsonValue }
 
 export type { CollectionContent }
 
-function LoadedEditor({ doc }: { doc: Doc }) {
+function LoadedEditor({ doc, onOpenPages }: { doc: Doc; onOpenPages: () => void }) {
   const vault = useVault()
   const index = useVaultIndex()
   const navigate = useNavigate()
@@ -123,14 +131,26 @@ function LoadedEditor({ doc }: { doc: Doc }) {
     <div className="flex min-h-0 flex-1 flex-col">
       <header
         data-print-hide
-        className="flex h-11 shrink-0 items-center justify-between gap-4 border-b border-line px-6"
+        className="flex h-11 shrink-0 items-center justify-between gap-2 border-b border-line px-3 md:gap-4 md:px-6"
       >
-        <nav aria-label="Breadcrumbs" className="min-w-0 truncate text-xs text-ink-faint">
-          {trail.map((ancestor) => (
-            <span key={ancestor.id}>{ancestor.title || UNTITLED} / </span>
-          ))}
-          <span className="text-ink-muted">{title || UNTITLED}</span>
-        </nav>
+        <div className="flex min-w-0 items-center gap-2">
+          <IconButton label="Pages" size="sm" className="md:hidden" onClick={onOpenPages}>
+            <Icon name="sidebar" />
+          </IconButton>
+          {/*
+            The trail is the first thing to go when the row is tight: it says
+            where you are, and on a phone the page's own title is already the
+            largest thing on the screen underneath.
+          */}
+          <nav aria-label="Breadcrumbs" className="min-w-0 truncate text-xs text-ink-faint">
+            {trail.map((ancestor) => (
+              <span key={ancestor.id} className="max-sm:hidden">
+                {ancestor.title || UNTITLED} /{' '}
+              </span>
+            ))}
+            <span className="text-ink-muted">{title || UNTITLED}</span>
+          </nav>
+        </div>
         <div className="flex shrink-0 items-center gap-2">
           <SaveIndicator state={state} />
           <SnapshotButton docId={doc.id} flush={flush} />
@@ -161,7 +181,7 @@ function LoadedEditor({ doc }: { doc: Doc }) {
             below the caret for them to open into, so the slash menu was cut
             off by the scroll container. Room to scroll past the last line is
             what every editor gives you, and it fixes this as a side effect. */}
-        <div className="mx-auto w-full max-w-(--nook-measure) px-6 pt-10 pb-[60vh]">
+        <div className="mx-auto w-full max-w-(--nook-measure) px-4 pt-8 pb-[60vh] md:px-6 md:pt-10">
           <input
             value={title}
             onChange={(event) => {

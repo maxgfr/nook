@@ -12,7 +12,7 @@ import { CanvasView } from '../canvas/CanvasView'
 import { useNavigate, useOpenDocId, useRoute } from './router'
 import { applyTheme, readTheme, type Theme } from './theme'
 import { Sidebar } from '../sidebar/Sidebar'
-import { Button } from '../design/Button'
+import { Button, IconButton } from '../design/Button'
 import { Icon } from '../design/Icon'
 import { CommandPalette } from '../search/CommandPalette'
 import { OpenSettingsContext } from './openSettings'
@@ -91,6 +91,9 @@ function Workspace({ theme, onThemeChange }: { theme: Theme; onThemeChange: (t: 
   const [paletteOpen, setPaletteOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [mapOpen, setMapOpen] = useState(false)
+  // Only consulted below `md`, where the page list is a drawer over the page
+  // rather than a column beside it.
+  const [pagesOpen, setPagesOpen] = useState(false)
 
   // Handed down so a block that has just declined to load something can offer
   // to take you to the switch that would allow it. Stable, or every block in
@@ -130,16 +133,21 @@ function Workspace({ theme, onThemeChange }: { theme: Theme; onThemeChange: (t: 
 
   return (
     <div className="flex h-full">
-      <Sidebar openId={current} onOpen={navigate} />
+      <Sidebar
+        openId={current}
+        onOpen={navigate}
+        open={pagesOpen}
+        onClose={() => setPagesOpen(false)}
+      />
       <main className="flex min-w-0 flex-1 flex-col">
         {current ? (
           <Suspense fallback={<div className="flex-1" aria-busy="true" />}>
             <OpenSettingsContext value={openSettings}>
-              <DocEditor docId={current} />
+              <DocEditor docId={current} onOpenPages={() => setPagesOpen(true)} />
             </OpenSettingsContext>
           </Suspense>
         ) : (
-          <Welcome />
+          <Welcome onOpenPages={() => setPagesOpen(true)} />
         )}
       </main>
       <BottomBar
@@ -200,12 +208,22 @@ function useResumeLastPage(current: DocId | null, navigate: (id: DocId | null) =
  * action is offered, and the product's promise is restated where it is put to
  * the test — on first launch, when you decide whether to trust it.
  */
-function Welcome() {
+function Welcome({ onOpenPages }: { onOpenPages: () => void }) {
   const vault = useVault()
   const navigate = useNavigate()
 
   return (
-    <div className="flex flex-1 flex-col items-center justify-center px-6 text-center">
+    <div className="relative flex flex-1 flex-col items-center justify-center px-6 text-center">
+      {/*
+        Closing a page leaves you here with the notebook still full, and below
+        `md` the page list is behind a drawer — so the way back to it has to
+        exist on this screen too, not only in the editor's header.
+      */}
+      <div className="absolute top-3 left-3 md:hidden">
+        <IconButton label="Pages" onClick={onOpenPages}>
+          <Icon name="sidebar" />
+        </IconButton>
+      </div>
       <Icon name="page" className="size-7 text-ink-faint" />
       <h1 className="mt-4 text-lg font-semibold tracking-tight">No page open</h1>
       <p className="mt-2 max-w-sm text-sm text-ink-muted">
@@ -267,14 +285,24 @@ function BottomBar({
   onOpenMap: () => void
 }) {
   return (
-    <div className="fixed right-3 bottom-3 flex items-center gap-1">
+    /*
+      Right-aligned, and allowed to wrap.
+
+      One row of six controls is 517px wide, which fits a laptop and hangs 127px
+      off the side of a phone — the page scrolled sideways to reach chrome that
+      should never have needed reaching. Wrapping costs a wide screen nothing
+      (the row still fits on one line) and costs a narrow one one extra row.
+
+      The bottom inset keeps it clear of a phone's home indicator.
+    */
+    <div className="pointer-events-none fixed right-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] left-3 flex flex-wrap items-center justify-end gap-1 *:pointer-events-auto">
       <button
         type="button"
         onClick={onOpenPalette}
         className="flex h-7 items-center gap-1.5 rounded-lg border border-line bg-raised/90 px-2.5 text-2xs text-ink-faint backdrop-blur-sm transition-colors duration-(--nook-dur-fast) ease-nook hover:text-ink"
       >
         Search
-        <kbd className="rounded-xs border border-line px-1 font-sans">⌘K</kbd>
+        <kbd className="rounded-xs border border-line px-1 font-sans max-sm:hidden">⌘K</kbd>
       </button>
       <button
         type="button"

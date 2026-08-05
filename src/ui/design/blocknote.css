@@ -103,35 +103,106 @@ carry.
 */
 .bn-container [data-content-type='heading'] {
   --level: 1.6em; /* 24px */
-  padding-top: 28px;
 }
 
 .bn-container [data-content-type='heading'][data-level='2'] {
   --level: 1.35em; /* ~20px */
-  padding-top: 22px;
 }
 
 .bn-container [data-content-type='heading'][data-level='3'] {
   --level: 1.15em; /* ~17px */
-  padding-top: 18px;
 }
 
 .bn-container [data-content-type='heading'][data-level='4'] {
   --level: 1.05em; /* ~16px */
-  padding-top: 16px;
 }
 
 .bn-container [data-content-type='heading'][data-level='5'] {
   --level: 0.95em; /* ~14px */
-  padding-top: 14px;
 }
 
 .bn-container [data-content-type='heading'][data-level='6'] {
   --level: 0.875em; /* ~13px */
-  padding-top: 14px;
   color: var(--nook-text-muted);
   letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+
+/*
+The space above a heading is a margin, not padding — and that is not a
+preference.
+
+The drag handle and the + are placed from the block's own box, so anything
+padded inside that box pushes them away from the text they belong to. The
+library pads a heading by 18px and the handle already sat low on one; giving
+level 1 the 28px its size wants would have made a visible defect worse.
+
+Moved outside the box, the space still separates the sections and the handle
+lands on the words at every level, because every level's box now hugs its text
+exactly as a paragraph's does.
+*/
+/*
+The space above a heading, and the handle that has to line up with it.
+
+These two belong in one place because they are one calculation. The drag handle
+and the + are centred inside a box the library sizes per heading level — 108px
+for a level 1, 84px for a level 2, 67px for a level 3, 30px for everything else
+— and those numbers are tuned to the library's own scale, where a level-1
+heading is 45px tall. Against Nook's 24px one the handle was centred in a box
+three times too tall and sat well below the words it belongs to; levels 4 to 6
+fell off the other way, taking the 30px meant for a line of body text.
+
+So the height is re-derived from the scale above it:
+
+    height = 2 × (padding-top + 0.75 × font-size)
+
+which puts the middle of the handle on the middle of the first line, because
+the line box is 1.5 × the font size and the padding sits above it. Change a
+size or a rhythm above and the matching height here changes with it.
+*/
+.bn-container [data-content-type='heading'] {
+  padding-top: 28px;
+}
+
+.bn-container [data-content-type='heading'][data-level='2'] {
+  padding-top: 22px;
+}
+
+.bn-container [data-content-type='heading'][data-level='3'] {
+  padding-top: 18px;
+}
+
+.bn-container [data-content-type='heading'][data-level='4'] {
+  padding-top: 16px;
+}
+
+.bn-container [data-content-type='heading'][data-level='5'],
+.bn-container [data-content-type='heading'][data-level='6'] {
+  padding-top: 14px;
+}
+
+.bn-side-menu[data-block-type='heading'][data-level='1'] {
+  height: 92px; /* 2 × (28 + 18) */
+}
+
+.bn-side-menu[data-block-type='heading'][data-level='2'] {
+  height: 74px; /* 2 × (22 + 15.2) */
+}
+
+.bn-side-menu[data-block-type='heading'][data-level='3'] {
+  height: 62px; /* 2 × (18 + 12.9) */
+}
+
+.bn-side-menu[data-block-type='heading'][data-level='4'] {
+  height: 56px; /* 2 × (16 + 11.8) */
+}
+
+.bn-side-menu[data-block-type='heading'][data-level='5'] {
+  height: 49px; /* 2 × (14 + 10.7) */
+}
+
+.bn-side-menu[data-block-type='heading'][data-level='6'] {
+  height: 48px; /* 2 × (14 + 9.8) */
 }
 
 /*
