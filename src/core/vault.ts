@@ -359,6 +359,41 @@ export class Vault {
   }
 
   /**
+   * Drops one kept version.
+   *
+   * Genuinely irreversible: a snapshot exists nowhere but inside this
+   * document's own encrypted record, so nothing here or anywhere else can get
+   * it back. The interface makes you say so twice; this does exactly what it
+   * is told and no more.
+   *
+   * Removes one entry rather than every entry sharing that timestamp. Two
+   * snapshots filed in the same millisecond is not a thing that happens, but
+   * "delete one thing" quietly deleting two is not a behaviour worth leaving
+   * available for the day it does.
+   *
+   * Returns `false` when there was nothing there to remove — a second click on
+   * a list the interface has not caught up with, rather than an error worth
+   * putting on screen.
+   */
+  async deleteSnapshot(id: DocId, at: string): Promise<boolean> {
+    const doc = await this.readDoc(id)
+    const history = [...(doc.history ?? [])]
+    const position = history.findIndex((candidate) => candidate.at === at)
+    if (position === -1) return false
+    history.splice(position, 1)
+
+    // Same reasoning as `snapshot`: the stored document changed, so the summary
+    // moves with it and the interface has a signal to redraw from.
+    const updated: Doc = { ...doc, history, updatedAt: new Date().toISOString() }
+    const { content: _content, history: _history, ...summary } = updated
+
+    await this.#commit(upsert(this.#index, summary), [
+      { op: 'put', store: 'docs', key: id, value: updated },
+    ])
+    return true
+  }
+
+  /**
    * Puts a past state back.
    *
    * Restoring is an ordinary edit, so the state being replaced is itself

@@ -20,6 +20,15 @@ export function History({ docId }: { docId: DocId }) {
   const index = useVaultIndex()
   const [open, setOpen] = useState(false)
   const [snapshots, setSnapshots] = useState<readonly Snapshot[]>([])
+  /** The snapshot whose Delete has been pressed once and not yet confirmed. */
+  const [pending, setPending] = useState<string | null>(null)
+
+  const remove = async (at: string) => {
+    setPending(null)
+    await vault.deleteSnapshot(docId, at)
+    // The list re-reads on its own: deleting rewrites the document, which moves
+    // `updatedAt`, which is what the effect above watches.
+  }
 
   /**
    * Re-read whenever this document is written, and only then.
@@ -32,10 +41,16 @@ export function History({ docId }: { docId: DocId }) {
    * it because the panel hides itself when the list is empty. It came back on
    * the next reload, which reads exactly like a save that did not happen.
    *
-   * `updatedAt` rather than the whole index: creating an unrelated page also
-   * replaces the index, and this decrypts a document to answer.
+   * This document's summary rather than the whole index: every commit builds a
+   * new summary object for the document it wrote, and leaves every other one
+   * alone — so this re-reads exactly when this page changes, and creating an
+   * unrelated page does not cost a decryption here.
+   *
+   * The object, not its `updatedAt`. Two writes landing in the same
+   * millisecond produce the same timestamp and would look like no change at
+   * all; the identity cannot collide that way.
    */
-  const updatedAt = index.docs[docId]?.updatedAt
+  const summary = index.docs[docId]
 
   useEffect(() => {
     let cancelled = false
@@ -45,12 +60,15 @@ export function History({ docId }: { docId: DocId }) {
     return () => {
       cancelled = true
     }
-  }, [vault, docId, updatedAt])
+  }, [vault, docId, summary])
 
   if (snapshots.length === 0) return null
 
   return (
-    <section data-print-hide className="mt-8">
+    // Named, so it can be addressed: a screen reader announces the region, and
+    // the end-to-end test can aim at the Delete inside it rather than at the
+    // first button on the page that happens to read "Delete".
+    <section aria-label="Snapshots" data-print-hide className="mt-8">
       <button
         type="button"
         onClick={() => setOpen((current) => !current)}
@@ -85,19 +103,51 @@ export function History({ docId }: { docId: DocId }) {
                   </span>
                 )}
               </span>
-              <Button
-                size="sm"
-                onClick={() =>
-                  void vault
-                    .restore(docId, snapshot.at)
-                    // Reloading is blunt, and it is honest: the editor holds
-                    // its own copy of the document, so replacing the text
-                    // underneath it would leave the two disagreeing.
-                    .then(() => globalThis.location.reload())
-                }
-              >
-                Restore
-              </Button>
+              <span className="flex shrink-0 items-center gap-1">
+                <Button
+                  size="sm"
+                  onClick={() =>
+                    void vault
+                      .restore(docId, snapshot.at)
+                      // Reloading is blunt, and it is honest: the editor holds
+                      // its own copy of the document, so replacing the text
+                      // underneath it would leave the two disagreeing.
+                      .then(() => globalThis.location.reload())
+                  }
+                >
+                  Restore
+                </Button>
+
+                {/*
+                  Two clicks, not a modal.
+
+                  Deleting a version really is irreversible — it exists nowhere
+                  but inside this document — so a stray click must not do it.
+                  But a dialog for one of twenty rows is a tax on the common
+                  case, and the second click is placed exactly where the first
+                  one was, which is what makes it a confirmation rather than a
+                  hunt.
+                */}
+                {pending === snapshot.at ? (
+                  <Button
+                    tone="danger"
+                    size="sm"
+                    autoFocus
+                    onBlur={() => setPending(null)}
+                    onClick={() => void remove(snapshot.at)}
+                  >
+                    Delete for good
+                  </Button>
+                ) : (
+                  <Button
+                    size="sm"
+                    onClick={() => setPending(snapshot.at)}
+                    title="Delete this snapshot"
+                  >
+                    Delete
+                  </Button>
+                )}
+              </span>
             </li>
           ))}
         </ul>

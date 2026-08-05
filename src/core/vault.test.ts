@@ -295,6 +295,60 @@ describe('keeping a version by hand', () => {
   })
 })
 
+describe('dropping a kept version', () => {
+  const twoSnapshots = async () => {
+    const vault = await freshVault()
+    const doc = await vault.createDoc({ title: SURVIVING_TITLE })
+    await vault.saveDoc(doc.id, { content: SURVIVING_CONTENT })
+    await vault.snapshot(doc.id)
+    return { vault, doc }
+  }
+
+  it('removes the one asked for and leaves the rest', async () => {
+    const { vault, doc } = await twoSnapshots()
+    const [newest, oldest] = await vault.history(doc.id)
+
+    expect(await vault.deleteSnapshot(doc.id, newest?.at ?? '')).toBe(true)
+
+    const left = await vault.history(doc.id)
+    expect(left).toHaveLength(1)
+    expect(left[0]?.at).toBe(oldest?.at)
+  })
+
+  it('says so when there was nothing to remove', async () => {
+    const { vault, doc } = await twoSnapshots()
+
+    // A second click on a list the interface has not caught up with — not an
+    // error worth putting on screen.
+    expect(await vault.deleteSnapshot(doc.id, '2020-01-01T00:00:00.000Z')).toBe(false)
+    expect(await vault.history(doc.id)).toHaveLength(2)
+  })
+
+  it('leaves the page itself untouched', async () => {
+    const { vault, doc } = await twoSnapshots()
+    const [newest] = await vault.history(doc.id)
+
+    await vault.deleteSnapshot(doc.id, newest?.at ?? '')
+
+    // Dropping a past version must not touch the present one.
+    expect((await vault.readDoc(doc.id)).content).toEqual(SURVIVING_CONTENT)
+  })
+
+  it('rewrites the index summary, so the interface learns the list changed', async () => {
+    const { vault, doc } = await twoSnapshots()
+    const before = vault.index.docs[doc.id]
+    const [newest] = await vault.history(doc.id)
+
+    await vault.deleteSnapshot(doc.id, newest?.at ?? '')
+
+    // The identity, not the timestamp: two writes in the same millisecond
+    // carry the same `updatedAt`, and the panel watches this object. Without
+    // the rewrite the snapshot would vanish from disk and stay on screen until
+    // the next reload — the defect this panel has already had once.
+    expect(vault.index.docs[doc.id]).not.toBe(before)
+  })
+})
+
 describe('preparing a page to be shared', () => {
   const bytes = new Uint8Array([137, 80, 78, 71, 1, 2, 3])
 
