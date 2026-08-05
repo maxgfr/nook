@@ -111,7 +111,12 @@ export function Sidebar({
             <IconButton label="New page" size="sm" onClick={() => void createChild(null)}>
               <Icon name="plus" />
             </IconButton>
-            <IconButton label="Close the page list" size="sm" className="md:hidden" onClick={onClose}>
+            <IconButton
+              label="Close the page list"
+              size="sm"
+              className="md:hidden"
+              onClick={onClose}
+            >
               <Icon name="sidebar" />
             </IconButton>
           </div>

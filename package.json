@@ -21,7 +21,7 @@
     "test:watch": "vitest",
     "check:network": "node scripts/check-no-network.mjs",
     "smoke": "node scripts/smoke.mjs",
-    "verify": "pnpm typecheck && pnpm lint && pnpm test && pnpm build && pnpm check:network"
+    "verify": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test && pnpm build && pnpm check:network"
   },
   "dependencies": {
     "@blocknote/core": "^0.52.1",
