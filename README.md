@@ -41,7 +41,7 @@ itself never gains the ability to send anything anywhere.
 - **Write.** A block editor with a slash menu, drag handles, headings, lists,
   checkboxes, code and tables. There is no Save button; edits are written after
   a pause in typing, when the tab goes to the background, and when you leave the
-  page.
+  page. Opening Nook puts you back in the page you last wrote in.
 - **Organise.** Pages nest to any depth. Every page keeps up to twenty past
   versions you can walk back through and restore from — filed automatically on
   an interval you choose, or kept the moment you press **Snapshot**. Any one of

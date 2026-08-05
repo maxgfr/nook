@@ -1,4 +1,4 @@
-import { lazy, Suspense, useCallback, useEffect, useState } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import {
   VaultProvider,
   useVault,
@@ -17,6 +17,7 @@ import { Icon } from '../design/Icon'
 import { CommandPalette } from '../search/CommandPalette'
 import { OpenSettingsContext } from './openSettings'
 import type { SharedPage } from '../../core/share'
+import type { DocId } from '../../core/model/types'
 
 /**
  * The editor alone accounts for most of the application's weight. Taking it
@@ -113,6 +114,8 @@ function Workspace({ theme, onThemeChange }: { theme: Theme; onThemeChange: (t: 
   // error for an identifier that simply no longer exists.
   const current = openId && index.docs[openId] ? openId : null
 
+  useResumeLastPage(current, navigate)
+
   if (mapOpen) {
     return (
       <CanvasView
@@ -154,6 +157,40 @@ function Workspace({ theme, onThemeChange }: { theme: Theme; onThemeChange: (t: 
       />
     </div>
   )
+}
+
+/**
+ * Opens the page you were last in, when you arrive with no page named.
+ *
+ * "No page open" is the right thing to show someone who has no pages. Showing
+ * it to someone with two hundred, every time they come back, is asking them to
+ * find their way home each morning — the notebook already knows which page they
+ * were on, because it knows which one they last wrote in.
+ *
+ * **Once per session, and only from the home address.** The guard is not
+ * defensive habit: without it, closing a page would be impossible — the moment
+ * the address became `#/`, this would put you straight back where you came
+ * from. So it runs at startup and then stands aside for good.
+ *
+ * An address naming a page always wins, so a link someone sent, a bookmark, or
+ * a reload of the page you are reading all land where they say they will.
+ */
+function useResumeLastPage(current: DocId | null, navigate: (id: DocId | null) => void) {
+  const index = useVaultIndex()
+  const done = useRef(false)
+
+  useEffect(() => {
+    if (done.current || current !== null) return
+    done.current = true
+
+    const mostRecent = Object.values(index.docs).toSorted((a, b) =>
+      b.updatedAt.localeCompare(a.updatedAt),
+    )[0]
+
+    // No pages at all is the one case the empty state is genuinely for, and it
+    // is the case where it teaches something: it offers the first page.
+    if (mostRecent) navigate(mostRecent.id)
+  }, [current, index, navigate])
 }
 
 /**

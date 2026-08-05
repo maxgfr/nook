@@ -766,8 +766,21 @@ try {
     await send('Input.insertText', { text })
     await sleep(150)
   }
-  // The reload above dropped the fragment, so the workspace is on its empty
-  // state with the page only listed in the sidebar. Open it before sharing it.
+  // The reload above dropped the fragment, so the address named no page. A
+  // notebook that already holds pages opens the one last written in rather than
+  // greeting its owner with an empty state every morning.
+  // The page arrives on demand and has to be decrypted, so give it a moment.
+  // Asserted as "a page, not the empty state" rather than "a prose editor":
+  // the last page edited by this point is the database, which renders a table.
+  await sleep(2500)
+  check(
+    'arriving with no page named opens the last one edited',
+    (await evaluate('location.hash')).startsWith('#/doc/') &&
+      !(await evaluate(`document.body.innerText.includes('No page open')`)),
+    await evaluate('location.hash'),
+  )
+
+  // Then open the one this test is about, by name.
   await evaluate(
     `(() => {
       const entry = [...document.querySelectorAll('nav[aria-label="Pages"] button')].find(
