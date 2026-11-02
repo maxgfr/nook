@@ -60,13 +60,19 @@ export function readSnapshotPolicy(): SnapshotPolicy {
   }
 }
 
-export function writeSnapshotPolicy(policy: SnapshotPolicy): void {
+/**
+ * `false` when the browser refused the write — storage blocked, or full: the
+ * origin's quota is shared with every other site served from it. The choice
+ * then holds for this session only, and the caller says so.
+ */
+export function writeSnapshotPolicy(policy: SnapshotPolicy): boolean {
   try {
     localStorage.setItem(
       STORAGE_KEY,
       JSON.stringify({ automatic: policy.automatic, everyMinutes: clamp(policy.everyMinutes) }),
     )
+    return true
   } catch {
-    // The choice holds for this session and is simply not remembered.
+    return false
   }
 }

@@ -26,7 +26,7 @@ anything to receive back.
 | Nothing is fetched unless you say so | Two switches, both off, each naming what it costs — see [Letting the web in](#letting-the-web-in) |
 | Nobody disabled that by accident     | CI inspects the published bundle and fails if network-capable code gets in ([the guard][g])       |
 | Your notes are unreadable on disk    | AES-GCM-256 with a non-extractable key, never exposed to JavaScript                               |
-| Everything really can be erased      | Database, caches, service worker and storages destroyed, then an inventory of what remains        |
+| Everything really can be erased      | Nook's database, caches, worker and keys erased (not other sites'), then an inventory of the rest |
 | It works offline                     | Precached and installable as a PWA                                                                |
 | You can tell which version you have  | Number, commit and date in Settings — with the two buttons that move you off it                   |
 

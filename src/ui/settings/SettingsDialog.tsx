@@ -207,8 +207,9 @@ export function SettingsDialog({ open, onClose }: { open: boolean; onClose: () =
 
         <Section title="Erase everything" tone="danger">
           <p>
-            This destroys the database, the caches, the service worker and every stored preference,
-            then reads the storage back to show you what is left.
+            This destroys Nook’s database, caches, service worker and stored preferences, then reads
+            the storage back to show you what is left. Other sites served from the same address keep
+            theirs.
           </p>
           <div className="mt-3 flex flex-wrap items-center gap-2">
             <input
@@ -274,10 +275,11 @@ export function SettingsDialog({ open, onClose }: { open: boolean; onClose: () =
  */
 function SnapshotSection() {
   const [policy, setPolicy] = useState<SnapshotPolicy>(readSnapshotPolicy)
+  const [unsaved, setUnsaved] = useState(false)
 
   const update = (next: SnapshotPolicy) => {
     setPolicy(next)
-    writeSnapshotPolicy(next)
+    setUnsaved(!writeSnapshotPolicy(next))
   }
 
   return (
@@ -317,6 +319,12 @@ function SnapshotSection() {
         {describeInterval(policy.everyMinutes)} Nothing is ever deleted to make this faster — the
         interval only decides how far back {HISTORY_LIMIT} versions reach.
       </p>
+      {unsaved && (
+        <p role="status" className="mt-2 text-xs text-warning">
+          This browser refused to store the choice — its storage for this site is full or blocked —
+          so it applies until you reload, then goes back to what it was.
+        </p>
+      )}
     </Section>
   )
 }

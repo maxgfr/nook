@@ -15,6 +15,15 @@
  * `clearAppCache()` shares the first two steps and stops there. Keeping the two
  * in one file is deliberate: the difference between them is the whole notebook,
  * and it should be readable in one screen rather than inferred from two names.
+ *
+ * "Everything" means everything **Nook** owns, and not one byte more. GitHub
+ * Pages serves every project of an account from one origin
+ * (`maxgfr.github.io/nook/`, `maxgfr.github.io/<other>/`…), and storage
+ * belongs to the origin, not the path: the service-worker list, Cache Storage,
+ * IndexedDB and both web storages are shared with every other site there.
+ * Clearing them wholesale would erase other applications' data. So each step
+ * only takes what is provably Nook's — see `isOwn*` below — and the inventory
+ * only counts that.
  */
 
 import { DB_NAME, deleteDatabase } from './idb'
@@ -38,43 +47,38 @@ export function isEmpty(survey: StorageSurvey): boolean {
   )
 }
 
-export async function surveyStorage(): Promise<StorageSurvey> {
+export async function surveyStorage(scope: string = ownScope()): Promise<StorageSurvey> {
   const [databases, cacheNames, registrations] = await Promise.all([
     listDatabases(),
     globalThis.caches ? caches.keys() : Promise.resolve([]),
-    navigator.serviceWorker?.getRegistrations?.() ?? Promise.resolve([]),
+    ownRegistrations(scope),
   ])
 
   return {
-    databases,
-    caches: cacheNames,
+    databases: databases?.filter(isOwnDatabase),
+    caches: cacheNames.filter((name) => isOwnCache(name, scope)),
     serviceWorkers: registrations.length,
-    localStorageKeys: countKeys(() => localStorage),
-    sessionStorageKeys: countKeys(() => sessionStorage),
+    localStorageKeys: ownKeys(() => localStorage).length,
+    sessionStorageKeys: ownKeys(() => sessionStorage).length,
   }
 }
 
-export async function wipeEverything(): Promise<StorageSurvey> {
+export async function wipeEverything(scope: string = ownScope()): Promise<StorageSurvey> {
   // 1. The service worker first: it alone can write back into the caches.
-  const registrations = (await navigator.serviceWorker?.getRegistrations?.()) ?? []
-  await Promise.all(registrations.map((registration) => registration.unregister()))
-
   // 2. The caches, which hold the application itself.
-  if (globalThis.caches) {
-    const names = await caches.keys()
-    await Promise.all(names.map((name) => caches.delete(name)))
-  }
+  await clearAppCache(scope)
 
-  // 3. The databases: Nook's, and any other database on this origin, because
-  //    a database left by an earlier version would contain notes.
-  const databases = (await listDatabases()) ?? [DB_NAME]
+  // 3. The databases: Nook's, and any other `nook-*` database on this origin,
+  //    because a database left by an earlier version would contain notes.
+  const databases = (await listDatabases())?.filter(isOwnDatabase) ?? [DB_NAME]
   await Promise.all(databases.map((name) => deleteDatabase(name)))
 
-  // 4. The simple storages (theme preference, and nothing sensitive).
-  clear(() => localStorage)
-  clear(() => sessionStorage)
+  // 4. The simple storages (theme preference, and nothing sensitive) — Nook's
+  //    keys only: the rest belongs to the other sites of the origin.
+  removeOwnKeys(() => localStorage)
+  removeOwnKeys(() => sessionStorage)
 
-  return surveyStorage()
+  return surveyStorage(scope)
 }
 
 /**
@@ -85,25 +89,59 @@ export async function wipeEverything(): Promise<StorageSurvey> {
  * let go of — a worker that failed to update, a half-written precache — and the
  * cure is to take away the cache and let the next load fetch the files again.
  * That is a repair, not a deletion, and confusing it with one would be
- * catastrophic here: `wipeEverything()` below deletes every database on the
- * origin, which is the notebook, unrecoverably.
+ * catastrophic here: `wipeEverything()` above deletes every Nook database,
+ * which is the notebook, unrecoverably.
  *
  * So this touches neither IndexedDB nor `localStorage`. The notes stay, and so
  * do the three preferences (`nook.theme`, `nook.webAccess`, `nook.snapshots`) —
  * the second of which decides the security policy the next load runs under, and
  * losing it would silently move somebody between the two documents.
  *
- * The order is the same as below, for the same reason: the service worker is
+ * The order is the same as above, for the same reason: the service worker is
  * the only actor able to write back into a cache while it is being emptied.
  */
-export async function clearAppCache(): Promise<void> {
-  const registrations = (await navigator.serviceWorker?.getRegistrations?.()) ?? []
+export async function clearAppCache(scope: string = ownScope()): Promise<void> {
+  const registrations = await ownRegistrations(scope)
   await Promise.all(registrations.map((registration) => registration.unregister()))
 
   if (globalThis.caches) {
-    const names = await caches.keys()
+    const names = (await caches.keys()).filter((name) => isOwnCache(name, scope))
     await Promise.all(names.map((name) => caches.delete(name)))
   }
+}
+
+/** Prefix of Nook's `localStorage` / `sessionStorage` keys (`nook.theme`…). */
+const KEY_PREFIX = `${DB_NAME}.`
+
+/**
+ * The URL Nook's service worker is registered for (`…/nook/`): the directory of
+ * the current document, which is always at the root of the build. Empty outside
+ * a browser, which then matches no registration and no Workbox cache.
+ */
+function ownScope(): string {
+  const href = globalThis.location?.href
+  return href ? new URL('.', href).href : ''
+}
+
+/** Nook's own database, and any `nook-…` one an earlier version left. */
+export function isOwnDatabase(name: string): boolean {
+  return name === DB_NAME || name.startsWith(`${DB_NAME}-`)
+}
+
+/**
+ * Workbox names its caches after the registration scope
+ * (`workbox-precache-v2-https://maxgfr.github.io/nook/`), which is what makes
+ * them recognisable among the other sites' caches; `nook-…` covers anything
+ * named by hand.
+ */
+export function isOwnCache(name: string, scope: string): boolean {
+  return (scope !== '' && name.endsWith(scope)) || name.startsWith(`${DB_NAME}-`)
+}
+
+async function ownRegistrations(scope: string): Promise<readonly ServiceWorkerRegistration[]> {
+  if (scope === '') return []
+  const registrations = (await navigator.serviceWorker?.getRegistrations?.()) ?? []
+  return registrations.filter((registration) => registration.scope === scope)
 }
 
 async function listDatabases(): Promise<string[] | undefined> {
@@ -119,18 +157,25 @@ async function listDatabases(): Promise<string[] | undefined> {
   }
 }
 
-function countKeys(get: () => Storage): number {
+function ownKeys(get: () => Storage): string[] {
   try {
-    return get().length
+    const storage = get()
+    const keys: string[] = []
+    for (let index = 0; index < storage.length; index++) {
+      const key = storage.key(index)
+      if (key?.startsWith(KEY_PREFIX)) keys.push(key)
+    }
+    return keys
   } catch {
     // Storage blocked by the browser: there is nothing to count, and nothing to clear.
-    return 0
+    return []
   }
 }
 
-function clear(get: () => Storage): void {
+function removeOwnKeys(get: () => Storage): void {
   try {
-    get().clear()
+    const storage = get()
+    for (const key of ownKeys(get)) storage.removeItem(key)
   } catch {
     // Same here: nothing to clear if access is denied.
   }
