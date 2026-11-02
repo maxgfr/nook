@@ -13,7 +13,7 @@ import { NO_WEB_ACCESS, type WebAccess } from '../../core/policy'
  * is the right scale anyway — it is a statement about this browser's willingness
  * to make requests, not about the notes.
  *
- * `wipeEverything()` already clears `localStorage`, so erasing everything puts
+ * `wipeEverything()` already removes Nook's `localStorage` keys, so erasing everything puts
  * both switches back to off without a line of code here.
  */
 

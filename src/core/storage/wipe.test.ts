@@ -1,5 +1,13 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { clearAppCache, isEmpty, surveyStorage, wipeEverything, type StorageSurvey } from './wipe'
+import {
+  clearAppCache,
+  isEmpty,
+  isOwnCache,
+  isOwnDatabase,
+  surveyStorage,
+  wipeEverything,
+  type StorageSurvey,
+} from './wipe'
 import { openDatabase, read, write } from './idb'
 
 /**
@@ -7,6 +15,28 @@ import { openDatabase, read, write } from './idb'
  * test file, so the wipe does not spill over into the others — but that is
  * precisely why these tests live alone here.
  */
+
+/** Where Nook is served: one site among many on a shared origin. */
+const SCOPE = 'https://maxgfr.github.io/nook/'
+const OTHER_SCOPE = 'https://maxgfr.github.io/another-app/'
+
+/** A `Storage` holding `entries`, as much of one as the wipe uses. */
+function memoryStorage(entries: Record<string, string>) {
+  const store = new Map(Object.entries(entries))
+  return {
+    store,
+    storage: {
+      get length() {
+        return store.size
+      },
+      key: (index: number) => [...store.keys()][index] ?? null,
+      removeItem: (key: string) => void store.delete(key),
+      clear: () => {
+        throw new Error('the origin is shared: never clear a whole storage')
+      },
+    },
+  }
+}
 
 const survey = (patch: Partial<StorageSurvey> = {}): StorageSurvey => ({
   databases: [],
@@ -18,6 +48,11 @@ const survey = (patch: Partial<StorageSurvey> = {}): StorageSurvey => ({
 })
 
 describe('erasing everything', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals()
+    Reflect.deleteProperty(navigator, 'serviceWorker')
+  })
+
   it('really deletes the databases, and proves it', async () => {
     const db = await openDatabase('nook-a-effacer')
     await write(db, 'docs', 'a', { secret: 'must not be found' })
@@ -25,7 +60,7 @@ describe('erasing everything', () => {
 
     expect((await surveyStorage()).databases).toContain('nook-a-effacer')
 
-    const remaining = await wipeEverything()
+    const remaining = await wipeEverything(SCOPE)
 
     // The returned inventory is read back afterwards: it is an observation, not
     // a promise. The interface can therefore show it as is.
@@ -34,28 +69,91 @@ describe('erasing everything', () => {
   })
 
   it('does not complain when there is nothing to erase', async () => {
-    await expect(wipeEverything()).resolves.toBeDefined()
+    await expect(wipeEverything(SCOPE)).resolves.toBeDefined()
+  })
+
+  it('leaves the other sites of the origin alone, and does not count what is theirs', async () => {
+    const { caches, unregister, unregisterOther } = stubBrowser()
+    const local = memoryStorage({
+      'nook.theme': 'dark',
+      'nook.webAccess': '{"remoteImages":true,"externalEmbeds":false}',
+      theme: 'light',
+      'another-app:settings': '{}',
+    })
+    const session = memoryStorage({ 'nook.draft': 'x', 'another-app:tab': '1' })
+    vi.stubGlobal('localStorage', local.storage)
+    vi.stubGlobal('sessionStorage', session.storage)
+
+    const mine = await openDatabase('nook')
+    mine.close()
+    const theirs = await openDatabase('another-app-db')
+    await write(theirs, 'docs', 'a', { kept: true })
+    theirs.close()
+
+    const remaining = await wipeEverything(SCOPE)
+
+    expect(unregister).toHaveBeenCalledOnce()
+    expect(unregisterOther).not.toHaveBeenCalled()
+    expect([...caches.keys()]).toEqual([`workbox-precache-v2-${OTHER_SCOPE}`, 'another-app-assets'])
+    expect([...local.store.keys()]).toEqual(['theme', 'another-app:settings'])
+    expect([...session.store.keys()]).toEqual(['another-app:tab'])
+
+    const reopened = await openDatabase('another-app-db')
+    expect(await read(reopened, 'docs', 'a')).toEqual({ kept: true })
+    reopened.close()
+
+    // What belongs to the other sites is not "something left" of Nook.
+    expect(remaining.databases).toEqual([])
+    expect(isEmpty({ ...remaining, serviceWorkers: 0 })).toBe(true)
   })
 })
 
-/** A browser's worker and cache storage, as much of them as `clearAppCache` uses. */
+describe("recognising Nook's storage among the origin's", () => {
+  it('owns its database, and the ones earlier versions left', () => {
+    expect(isOwnDatabase('nook')).toBe(true)
+    expect(isOwnDatabase('nook-a-effacer')).toBe(true)
+    expect(isOwnDatabase('keyval-store')).toBe(false)
+    expect(isOwnDatabase('nookbook')).toBe(false)
+  })
+
+  it('owns the Workbox caches named after its scope, and nook-* caches', () => {
+    expect(isOwnCache(`workbox-precache-v2-${SCOPE}`, SCOPE)).toBe(true)
+    expect(isOwnCache('nook-assets', SCOPE)).toBe(true)
+    expect(isOwnCache(`workbox-precache-v2-${OTHER_SCOPE}`, SCOPE)).toBe(false)
+    expect(isOwnCache('workbox-precache-v2-https://maxgfr.github.io/', SCOPE)).toBe(false)
+  })
+})
+
+/**
+ * A browser's worker and cache storage, as much of them as `clearAppCache`
+ * uses — with another site of the same origin registered next to Nook.
+ */
 function stubBrowser() {
   const caches = new Map([
-    ['workbox-precache-v2', {}],
+    [`workbox-precache-v2-${SCOPE}`, {}],
     ['nook-assets', {}],
+    [`workbox-precache-v2-${OTHER_SCOPE}`, {}],
+    ['another-app-assets', {}],
   ])
   const unregister = vi.fn(() => Promise.resolve(true))
+  const unregisterOther = vi.fn(() => Promise.resolve(true))
 
   vi.stubGlobal('caches', {
     keys: () => Promise.resolve([...caches.keys()]),
     delete: (name: string) => Promise.resolve(caches.delete(name)),
   })
   Object.defineProperty(navigator, 'serviceWorker', {
-    value: { getRegistrations: () => Promise.resolve([{ unregister }]) },
+    value: {
+      getRegistrations: () =>
+        Promise.resolve([
+          { scope: SCOPE, unregister },
+          { scope: OTHER_SCOPE, unregister: unregisterOther },
+        ]),
+    },
     configurable: true,
   })
 
-  return { caches, unregister }
+  return { caches, unregister, unregisterOther }
 }
 
 /**
@@ -68,13 +166,14 @@ describe('clearing the application cache', () => {
     Reflect.deleteProperty(navigator, 'serviceWorker')
   })
 
-  it('takes away the worker and the caches', async () => {
-    const { caches, unregister } = stubBrowser()
+  it("takes away Nook's worker and caches, and only those", async () => {
+    const { caches, unregister, unregisterOther } = stubBrowser()
 
-    await clearAppCache()
+    await clearAppCache(SCOPE)
 
     expect(unregister).toHaveBeenCalledOnce()
-    expect(caches.size).toBe(0)
+    expect(unregisterOther).not.toHaveBeenCalled()
+    expect([...caches.keys()]).toEqual([`workbox-precache-v2-${OTHER_SCOPE}`, 'another-app-assets'])
   })
 
   it('leaves the notes and the preferences exactly where they were', async () => {
@@ -93,7 +192,7 @@ describe('clearing the application cache', () => {
     await write(db, 'docs', 'a', { cipher: 'unreadable bytes' })
     db.close()
 
-    await clearAppCache()
+    await clearAppCache(SCOPE)
 
     const reopened = await openDatabase('nook-kept')
     expect(await read(reopened, 'docs', 'a')).toEqual({ cipher: 'unreadable bytes' })
